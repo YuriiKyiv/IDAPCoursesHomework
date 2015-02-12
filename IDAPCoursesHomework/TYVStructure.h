@@ -10,7 +10,7 @@
 #define __IDAPCoursesHomework__TYVStructure__
 
 #include <stdio.h>
-#include "stdbool.h"
+#include <stdbool.h>
 
 struct TYVBasicStucture {
     
@@ -36,7 +36,5 @@ struct TYVBasicStucture {
     char *char1;
     
 };
-
-typedef struct TYVBasicStucture TYVBasicStucture;
 
 #endif /* defined(__IDAPCoursesHomework__TYVStructure__) */
