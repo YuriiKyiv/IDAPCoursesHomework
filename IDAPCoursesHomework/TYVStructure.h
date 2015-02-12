@@ -63,4 +63,36 @@ struct TYVBasicOptimizedStructure {
 
 typedef struct TYVBasicOptimizedStructure TYVBasicOptimizedStructure;
 
+struct TYVBasicUnionStructure {
+    
+    union {
+        struct {
+            bool bool1 : 1;
+            bool bool2 : 1;
+            bool bool3 : 1;
+            bool bool4 : 1;
+            bool bool5 : 1;
+            bool bool6 : 1;
+        } bits;
+        uint8_t flags;
+    } data;
+    
+    float float1;
+    
+    int int1;
+    
+    long long longLong1;
+    
+    short short1;
+    short short2;
+    short short3;
+    
+    double double1;
+    
+    char *char1;
+    
+};
+
+typedef struct TYVBasicUnionStructure TYVBasicUnionStructure;
+
 #endif /* defined(__IDAPCoursesHomework__TYVStructure__) */

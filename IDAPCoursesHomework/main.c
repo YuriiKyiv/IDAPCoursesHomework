@@ -16,6 +16,7 @@ int main(int argc, const char * argv[]) {
     TYVStrucureSizeTest();
     TYVStrucureOptimizedSizeTest();
     TYVFieldSizesTest();
+    TYVBasicUnionStructureTest();
     
     return 0;
 }

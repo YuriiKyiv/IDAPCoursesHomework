@@ -22,8 +22,13 @@ void TYVStrucureOptimizedSizeTest(){
 }
 
 void TYVStructureOffsetofTest(){
-    TYVBasicStructure strucuture;
-    // doesn'n work the offsetof method
+//    TYVBasicStructure strucuture;
+//    doesn't work the offsetof method
+}
+
+void TYVBasicUnionStructureTest(){
+    TYVBasicUnionStructure strucuture;
+    printf("%d\n",strucuture.data.bits.bool1 = 1);
 }
 
 void TYVFieldSizesTest(){

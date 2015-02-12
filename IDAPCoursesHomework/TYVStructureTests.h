@@ -13,7 +13,8 @@
 
 void TYVStrucureSizeTest();
 void TYVStrucureOptimizedSizeTest();
-void TYVStructureOffsetofTest()
+void TYVStructureOffsetofTest();
+void TYVBasicUnionStructureTest();
 void TYVFieldSizesTest();
 
 #endif /* defined(__IDAPCoursesHomework__TYVStructureTests__) */
