@@ -11,5 +11,5 @@
 
 void TYVStrucureSizeTest(){
     TYVBasicStucture strucuture;
-    printf("%lu",sizeof(strucuture));
+    printf("Size of the stucture : %lu",sizeof(strucuture));
 }

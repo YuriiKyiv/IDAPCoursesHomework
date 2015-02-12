@@ -7,10 +7,13 @@
 //
 
 #include <stdio.h>
+#include "TYVStructureTests.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
+    
+    TYVStrucureSizeTest();
     
     return 0;
 }

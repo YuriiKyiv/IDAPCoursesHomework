@@ -11,4 +11,6 @@
 
 #include <stdio.h>
 
+void TYVStrucureSizeTest();
+
 #endif /* defined(__IDAPCoursesHomework__TYVStructureTests__) */
