@@ -9,6 +9,7 @@
 #include "TYVStructureTests.h"
 #include "TYVStructure.h"
 #include <stdbool.h>
+#include <stddef.h>
 
 void TYVStrucureSizeTest(){
     TYVBasicStructure strucuture;
@@ -18,6 +19,11 @@ void TYVStrucureSizeTest(){
 void TYVStrucureOptimizedSizeTest(){
     TYVBasicOptimizedStructure strucuture;
     printf("Size of the optimized stucture : %lu \n",sizeof(strucuture));
+}
+
+void TYVStructureOffsetofTest(){
+    TYVBasicStructure strucuture;
+    // doesn'n work the offsetof method
 }
 
 void TYVFieldSizesTest(){

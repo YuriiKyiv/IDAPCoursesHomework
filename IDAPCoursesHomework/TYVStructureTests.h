@@ -13,6 +13,7 @@
 
 void TYVStrucureSizeTest();
 void TYVStrucureOptimizedSizeTest();
+void TYVStructureOffsetofTest()
 void TYVFieldSizesTest();
 
 #endif /* defined(__IDAPCoursesHomework__TYVStructureTests__) */
