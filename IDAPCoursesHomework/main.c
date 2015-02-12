@@ -13,11 +13,7 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
     
-    TYVStrucureSizeTest();
-    TYVStrucureOptimizedSizeTest();
-    TYVFieldSizesTest();
-    TYVBasicUnionStructureTest();
-    TYVBitCount('a');
+    TYVStuctureTestsRunAll();
     
     return 0;
 }

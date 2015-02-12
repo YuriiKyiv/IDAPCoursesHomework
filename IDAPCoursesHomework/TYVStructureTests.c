@@ -11,6 +11,13 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+void TYVStuctureTestsRunAll(){
+    TYVStrucureSizeTest();
+    TYVStrucureOptimizedSizeTest();
+    TYVFieldSizesTest();
+    TYVBasicUnionStructureTest();
+}
+
 void TYVStrucureSizeTest(){
     TYVBasicStructure strucuture;
     printf("Size of the basic stucture : %lu \n",sizeof(strucuture));

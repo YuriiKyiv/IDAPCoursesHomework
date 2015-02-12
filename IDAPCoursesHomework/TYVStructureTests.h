@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 
+void TYVStuctureTestsRunAll();
 void TYVStrucureSizeTest();
 void TYVStrucureOptimizedSizeTest();
 void TYVStructureOffsetofTest();
