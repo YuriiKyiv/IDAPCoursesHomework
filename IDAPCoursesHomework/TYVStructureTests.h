@@ -12,5 +12,7 @@
 #include <stdio.h>
 
 void TYVStrucureSizeTest();
+void TYVStrucureOptimizedSizeTest();
+void TYVFieldSizesTest();
 
 #endif /* defined(__IDAPCoursesHomework__TYVStructureTests__) */

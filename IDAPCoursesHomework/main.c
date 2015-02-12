@@ -14,6 +14,8 @@ int main(int argc, const char * argv[]) {
     printf("Hello, World!\n");
     
     TYVStrucureSizeTest();
+    TYVStrucureOptimizedSizeTest();
+    TYVFieldSizesTest();
     
     return 0;
 }

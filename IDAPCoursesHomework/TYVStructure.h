@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-struct TYVBasicStucture {
+struct TYVBasicStructure {
     
     bool bool1;
     bool bool2;
@@ -37,6 +37,30 @@ struct TYVBasicStucture {
     
 };
 
-typedef struct TYVBasicStucture TYVBasicStucture;
+typedef struct TYVBasicStructure TYVBasicStructure;
+
+struct TYVBasicOptimizedStructure {
+    
+    char *char1;
+    
+    long long longLong1;
+    double double1;
+    int int1;
+    float float1;
+    
+    short short1;
+    short short2;
+    short short3;
+    
+    bool bool1;
+    bool bool2;
+    bool bool3;
+    bool bool4;
+    bool bool5;
+    bool bool6;
+    
+};
+
+typedef struct TYVBasicOptimizedStructure TYVBasicOptimizedStructure;
 
 #endif /* defined(__IDAPCoursesHomework__TYVStructure__) */
