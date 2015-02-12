@@ -37,4 +37,6 @@ struct TYVBasicStucture {
     
 };
 
+typedef struct TYVBasicStucture TYVBasicStucture;
+
 #endif /* defined(__IDAPCoursesHomework__TYVStructure__) */
