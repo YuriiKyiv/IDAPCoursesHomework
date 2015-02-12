@@ -17,6 +17,7 @@ int main(int argc, const char * argv[]) {
     TYVStrucureOptimizedSizeTest();
     TYVFieldSizesTest();
     TYVBasicUnionStructureTest();
+    TYVBitCount('a');
     
     return 0;
 }
