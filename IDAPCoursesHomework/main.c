@@ -28,7 +28,7 @@ int main(int argc, const char * argv[]) {
 inline
 void TYVOutputMultiplesNumberLoop(int iter){
     for (int iter = 0; iter < iterations; iter++) {
-        printf("Iteration: %d ",iter);
+        printf("Iteration: %d ", iter);
         TYVOutputMultiplesNumber(iter);
         printf("\n");
     }
