@@ -32,5 +32,4 @@ void TYVOutputMultiplesNumberLoop(int iter){
         TYVOutputMultiplesNumber(iter);
         printf("\n");
     }
-    
 }

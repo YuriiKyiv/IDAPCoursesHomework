@@ -12,24 +12,31 @@
 const char say_mama[] = "MAMA";
 const char say_papa[] = "PAPA";
 const char say_mama_papa[] = "MAMAPAPA";
+const char zero = '\0';
+
+enum multiples {mama = 3, papa = 5, mamapapa = 15};
+typedef enum multiples multiples;
+
+enum code {sayMama = 1, sayPapa = 10, sayMamapapa = 100};
+typedef enum code code;
 
 int TYVOutputMultiplesNumber(int number) {
+      
+    int result = zero;
     
-    int result = 0;
-    
-    if (0 == (number % 3)) {
+    if (zero == (number % mama)) {
         printf("%s ", say_mama);
-        result += 1;
+        result += sayMama;
     }
     
-    if (0 == (number % 5)) {
+    if (zero == (number % papa)) {
         printf("%s ", say_papa);
-        result += 10;
+        result += sayPapa;
     }
     
-    if (0 == (number % 15)) {
+    if (zero == (number % mamapapa)) {
         printf("%s ", say_mama_papa);
-        result += 100;
+        result += sayMamapapa;
     }
     
     return result;
