@@ -15,8 +15,9 @@ const char say_mama_papa[] = "MAMAPAPA\n";
 
 int TYVOutputMultiplesNumber(int number) {
     
-    if (number % 3) {
+    if (0 == (number % 3)) {
         printf("%s",say_mama);
     }
+    printf("%s",say_mama);
     return 0;
 }
