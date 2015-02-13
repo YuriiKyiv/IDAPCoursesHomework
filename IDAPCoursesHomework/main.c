@@ -10,6 +10,8 @@
 #include "TYVMultiplesTests.h"
 #include "TYVMultiples.h"
 
+void TYVOutputMultiplesNumberLoop(int iter);
+
 const int iterations = 1000;
 
 int main(int argc, const char * argv[]) {
@@ -18,9 +20,17 @@ int main(int argc, const char * argv[]) {
     
     TYVMultiplesTests();
     
-    for (int iter = 0; iter < iterations; iter++) {
-        TYVOutputMultiplesNumber(iter);
-    }
+    TYVOutputMultiplesNumberLoop(iterations);
     
     return 0;
+}
+
+inline
+void TYVOutputMultiplesNumberLoop(int iter){
+    for (int iter = 0; iter < iterations; iter++) {
+        printf("Iteration: %d ",iter);
+        TYVOutputMultiplesNumber(iter);
+        printf("\n");
+    }
+    
 }
