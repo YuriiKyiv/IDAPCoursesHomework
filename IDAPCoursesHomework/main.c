@@ -8,12 +8,19 @@
 
 #include <stdio.h>
 #include "TYVMultiplesTests.h"
+#include "TYVMultiples.h"
+
+const int iterations = 1000;
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
     
     TYVMultiplesTests();
+    
+    for (int iter = 0; iter < iterations; iter++) {
+        TYVOutputMultiplesNumber(iter);
+    }
     
     return 0;
 }
