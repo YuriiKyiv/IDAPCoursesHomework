@@ -11,4 +11,6 @@
 
 #include <stdio.h>
 
+int TYVOutputMultiplesNumber(int number);
+
 #endif /* defined(__IDAPCoursesHomework__TYVMultiples__) */

@@ -7,3 +7,8 @@
 //
 
 #include "TYVMultiplesTests.h"
+#include "TYVMultiples.h"
+
+void TYVMultiplesTests(){
+    TYVOutputMultiplesNumber(6);
+}

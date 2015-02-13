@@ -7,9 +7,13 @@
 //
 
 #include <stdio.h>
+#include "TYVMultiplesTests.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
+    
+    TYVMultiplesTests();
+    
     return 0;
 }

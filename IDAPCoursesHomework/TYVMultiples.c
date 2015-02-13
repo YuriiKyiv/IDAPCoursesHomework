@@ -7,3 +7,16 @@
 //
 
 #include "TYVMultiples.h"
+#include "stdlib.h"
+
+const char say_mama[] = "MAMA\n";
+const char say_papa[] = "PAPA\n";
+const char say_mama_papa[] = "MAMAPAPA\n";
+
+int TYVOutputMultiplesNumber(int number) {
+    
+    if (number % 3) {
+        printf("%s",say_mama);
+    }
+    return 0;
+}
