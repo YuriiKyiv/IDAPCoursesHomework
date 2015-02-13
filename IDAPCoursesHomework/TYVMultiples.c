@@ -21,9 +21,7 @@ enum code {sayMama = 1, sayPapa = 10, sayMamapapa = 100};
 typedef enum code code;
 
 int TYVOutputMultiplesNumber(int number) {
-      
     int result = zero;
-    
     if (zero == (number % mama)) {
         printf("%s ", say_mama);
         result += sayMama;
