@@ -17,7 +17,18 @@ int TYVOutputMultiplesNumber(int number) {
     
     if (0 == (number % 3)) {
         printf("%s",say_mama);
+        return 1;
     }
-    printf("%s",say_mama);
+    
+    if (0 == (number % 5)) {
+        printf("%s",say_papa);
+        return 2;
+    }
+    
+    if (0 == (number % 15)) {
+        printf("%s",say_mama_papa);
+        return 3;
+    }
+    
     return 0;
 }
