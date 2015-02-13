@@ -11,4 +11,7 @@
 
 void TYVMultiplesTests(){
     TYVOutputMultiplesNumber(6);
+    TYVOutputMultiplesNumber(10);
+    TYVOutputMultiplesNumber(45);
+    
 }
