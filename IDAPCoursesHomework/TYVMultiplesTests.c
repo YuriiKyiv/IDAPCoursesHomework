@@ -10,6 +10,9 @@
 #include "TYVMultiples.h"
 #include "assert.h"
 
+#pragma mark -
+#pragma mark Private Definitions
+
 static
 void TYVSayOnlyMAMA();
 
@@ -19,6 +22,9 @@ void TYVSayOnlyPAPA();
 static
 void TYVSayAll();
 
+#pragma mark -
+#pragma mark Public Implementations
+
 void TYVMultiplesTests(){
     TYVOutputMultiplesNumber(6);
     TYVOutputMultiplesNumber(10);
@@ -27,6 +33,9 @@ void TYVMultiplesTests(){
     TYVSayOnlyPAPA();
     TYVSayAll();
 }
+
+#pragma mark -
+#pragma mark Private Implementations
 
 void TYVSayOnlyMAMA(){
     assert(1 == TYVOutputMultiplesNumber(3));
