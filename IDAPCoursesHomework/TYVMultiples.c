@@ -9,9 +9,9 @@
 #include "TYVMultiples.h"
 #include "stdlib.h"
 
-const char say_mama[] = "MAMA";
-const char say_papa[] = "PAPA";
-const char say_mama_papa[] = "MAMAPAPA";
+const char mamaMessage[] = "MAMA";
+const char papaMessage[] = "PAPA";
+const char mamaPapaMessage[] = "MAMAPAPA";
 const char zero = '\0';
 
 enum multiples {mama = 3, papa = 5, mamapapa = 15};
@@ -23,17 +23,17 @@ typedef enum code code;
 int TYVOutputMultiplesNumber(int number) {
     int result = zero;
     if (zero == (number % mama)) {
-        printf("%s ", say_mama);
+        printf("%s ", mamaMessage);
         result += sayMama;
     }
     
     if (zero == (number % papa)) {
-        printf("%s ", say_papa);
+        printf("%s ", papaMessage);
         result += sayPapa;
     }
     
     if (zero == (number % mamapapa)) {
-        printf("%s ", say_mama_papa);
+        printf("%s ", mamaPapaMessage);
         result += sayMamapapa;
     }
     
