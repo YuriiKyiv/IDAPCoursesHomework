@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 
+extern
 void TYVMultiplesTests();
 
 #endif /* defined(__IDAPCoursesHomework__TYVMultiplesTests__) */

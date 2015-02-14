@@ -10,8 +10,13 @@
 #include "TYVMultiples.h"
 #include "assert.h"
 
+static
 void TYVSayOnlyMAMA();
+
+static
 void TYVSayOnlyPAPA();
+
+static
 void TYVSayAll();
 
 void TYVMultiplesTests(){
