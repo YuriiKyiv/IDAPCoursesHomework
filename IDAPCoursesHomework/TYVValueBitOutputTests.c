@@ -18,5 +18,6 @@ void TYVValueBitOutputTest(){
     int value = 1000;
     TYVValueBitOutput(&zero, sizeof(zero), litleEndian);
     TYVValueBitOutput(&one, sizeof(one), litleEndian);
+    TYVValueBitOutput(&a, sizeof(a), litleEndian);
     TYVValueBitOutput(&value, sizeof(value), litleEndian);
 }
