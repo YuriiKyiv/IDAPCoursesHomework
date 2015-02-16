@@ -9,14 +9,16 @@
 #include "TYVEndian.h"
 #include "stdbool.h"
 
+enum endian {litleEndian = 1, bigEndian = 0};
+
 bool TYVByteOrder() {
     int a = 1;
     char *c = (char *)&a;
     if (1 == *c) {
-        return 1;
+        return litleEndian;
     }
     
     else {
-        return 0;
+        return bigEndian;
     }
 }
