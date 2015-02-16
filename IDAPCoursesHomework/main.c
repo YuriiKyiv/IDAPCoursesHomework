@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define TYVValueGenerate(type, spec) \
+#define TYVValueOutputGenerate(type, spec) \
 type TYVOutput_##type(type value) { \
 printf("%"#spec, value); \
 return value; \
@@ -18,9 +18,9 @@ return value; \
 #define TYVOutputValue(type, value) \
 TYVOutput_##type(value); \
 
-TYVValueGenerate(int, d);
-TYVValueGenerate(long, ld);
-TYVValueGenerate(char, c);
+TYVValueOutputGenerate(int, d);
+TYVValueOutputGenerate(long, ld);
+TYVValueOutputGenerate(char, c);
 
 int main(int argc, const char * argv[]) {
     // insert code here...
