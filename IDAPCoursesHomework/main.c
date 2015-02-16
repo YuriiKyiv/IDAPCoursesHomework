@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include "stdbool.h"
+#include "TYVValueBitOutputTests.h"
 
 extern
 bool TYVByteOrder();
@@ -17,6 +18,8 @@ int main(int argc, const char * argv[]) {
     printf("Hello, World!\n");
     
     printf("%u \n", TYVByteOrder());
+    
+    TYVValueBitOutputTest();
     
     return 0;
 }

@@ -11,7 +11,7 @@
 
 enum endian {litleEndian = 1, bigEndian = 0};
 
-void IDPValueBitOutput(void *valueRef, size_t size, bool endian) {
+void TYVValueBitOutput(void *valueRef, size_t size, bool endian) {
     unsigned char *charValueRef = (unsigned char *)valueRef;
     unsigned char charValue = 0;
     if (bigEndian == endian) {

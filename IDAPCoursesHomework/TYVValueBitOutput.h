@@ -10,5 +10,8 @@
 #define __IDAPCoursesHomework__TYVValueBitOutput__
 
 #include <stdio.h>
+#include "stdbool.h"
+
+void TYVValueBitOutput(void *valueRef, size_t size, bool endian);
 
 #endif /* defined(__IDAPCoursesHomework__TYVValueBitOutput__) */
