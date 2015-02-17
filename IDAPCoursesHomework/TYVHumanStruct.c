@@ -8,6 +8,7 @@
 
 #include "TYVHumanStruct.h"
 #include "stdbool.h"
+#include "stdlib.h"
 
 struct TYVName {
     char *_name;
@@ -32,6 +33,11 @@ struct TYVHumanStruct {
     
 };
 typedef struct TYVHumanStruct TYVHumanStruct;
+
+TYVHumanStruct *TYVHumanStructCreate(){
+    TYVHumanStruct *human = malloc(sizeof(*human));
+    return human;
+}
 
 void TYVHumanStructSetAge(TYVHumanStruct *human, int age){
     human->_age = age;
