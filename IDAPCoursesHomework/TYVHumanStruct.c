@@ -10,35 +10,6 @@
 #include "stdbool.h"
 #include "stdlib.h"
 
-struct TYVName {
-    char *_name;
-    int _lenght;
-};
-typedef struct TYVName TYVName;
-
-struct TYVHumanStructParents {
-    struct TYVHumanStruct *_mather;
-    struct TYVHumanStruct *_father;
-};
-typedef struct TYVHumanStructParents TYVHumanStructParents;
-
-struct TYVHumanStruct {
-    TYVName _name;
-    int _age;
-    int _children;
-    bool _married;
-    struct TYVHumanStruct *_partner;
-    TYVHumanStructParents *parents;
-    struct TYVHumanStruct *_childrenRef[20];
-    
-};
-typedef struct TYVHumanStruct TYVHumanStruct;
-
-TYVHumanStruct *TYVHumanStructCreate(){
-    TYVHumanStruct *human = malloc(sizeof(*human));
-    return human;
-}
-
 void TYVHumanStructSetAge(TYVHumanStruct *human, int age){
     human->_age = age;
 }
