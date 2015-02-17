@@ -9,8 +9,6 @@
 #include "TYVHumanStruct.h"
 #include "stdbool.h"
 
-
-
 struct TYVName {
     char *_name;
     int _lenght;
@@ -55,6 +53,6 @@ void TYVHumanStructSetMarried(TYVHumanStruct *human, bool married){
     human->_married = married;
 }
 
-bool TYVHumanStructGetChildren(TYVHumanStruct *human){
+bool TYVHumanStructGetMarried(TYVHumanStruct *human){
     return human->_married;
 }
