@@ -7,14 +7,10 @@
 //
 
 #include "TYVEndian.h"
-#include "stdbool.h"
-
-enum TYVEndian {litleEndian = 1, bigEndian = 0};
-typedef enum TYVEndian TYVEndian;
 
 TYVEndian TYVByteOrder() {
     int a = 1;
     char *c = (char *)&a;
-    
-    return 1 == *c ? litleEndian : bigEndian;
+    TYVEndian endian = litleEndian;
+    return 1 == *c ? endian : endian;
 }

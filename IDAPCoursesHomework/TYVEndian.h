@@ -10,9 +10,11 @@
 #define __IDAPCoursesHomework__TYVEndian__
 
 #include <stdio.h>
-#include "stdbool.h"
+
+enum TYVEndian {litleEndian = 1, bigEndian = 0};
+typedef enum TYVEndian TYVEndian;
 
 extern
-bool TYVByteOrder();
+TYVEndian TYVByteOrder();
 
 #endif /* defined(__IDAPCoursesHomework__TYVEndian__) */

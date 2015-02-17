@@ -10,11 +10,9 @@
 #define __IDAPCoursesHomework__TYVValueBitOutput__
 
 #include <stdio.h>
-#include "stdbool.h"
-
-enum TYVendian {litleEndian = 1, bigEndian = 0};
+#include "TYVEndian.h"
 
 extern
-void TYVValueBitOutput(void *valueRef, size_t size, bool endian);
+void TYVValueBitOutput(void *valueRef, size_t size, TYVEndian endian);
 
 #endif /* defined(__IDAPCoursesHomework__TYVValueBitOutput__) */

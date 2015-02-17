@@ -7,12 +7,11 @@
 //
 
 #include "TYVValueBitOutput.h"
-#include "stdbool.h"
 
 void TYVBitLoop(unsigned char charValue);
 void TYVByteLoop(unsigned char charValue, unsigned char *charValueRef, size_t size, size_t start, size_t end);
 
-void TYVValueBitOutput(void *valueRef, size_t size, bool endian) {
+void TYVValueBitOutput(void *valueRef, size_t size, TYVEndian endian) {
     unsigned char *charValueRef = (unsigned char *)valueRef;
     unsigned char charValue = 0;
     endian ?
