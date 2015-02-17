@@ -9,11 +9,12 @@
 #include "TYVEndian.h"
 #include "stdbool.h"
 
-enum endian {litleEndian = 1, bigEndian = 0};
+enum TYVEndian {litleEndian = 1, bigEndian = 0};
+typedef enum TYVEndian TYVEndian;
 
-bool TYVByteOrder() {
+TYVEndian TYVByteOrder() {
     int a = 1;
     char *c = (char *)&a;
     
-    return 1 == *c ? litleEndian  : bigEndian;
+    return 1 == *c ? litleEndian : bigEndian;
 }
