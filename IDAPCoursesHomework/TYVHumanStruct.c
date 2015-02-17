@@ -29,7 +29,7 @@ void TYVHumanStructRelease(TYVHumanStruct *human){
 //    DEALLOC
 }
 
-TYVHumanStruct TYVHumanStructDealloc(TYVHumanStruct *human){
+void TYVHumanStructDealloc(TYVHumanStruct *human){
 //    if ((NULL != human->_parents) && NULL != (human->_partner))
 //        Call the dealloc method for parents and parther stucts
     free(human);

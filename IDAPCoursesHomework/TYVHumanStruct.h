@@ -47,7 +47,7 @@ extern
 void TYVHumanStructRelease(TYVHumanStruct *human);
 
 extern
-TYVHumanStruct TYVHumanStructDealloc(TYVHumanStruct *human);
+void TYVHumanStructDealloc(TYVHumanStruct *human);
 
 extern
 void TYVHumanStructSetAge(TYVHumanStruct *human, int age);
