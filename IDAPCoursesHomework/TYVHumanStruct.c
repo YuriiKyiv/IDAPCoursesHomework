@@ -12,20 +12,49 @@
 
 
 struct TYVName {
-    char *name;
-    int lenght;
+    char *_name;
+    int _lenght;
 };
 typedef struct TYVName TYVName;
 
+struct TYVHumanStructParents {
+    struct TYVHumanStruct *_mather;
+    struct TYVHumanStruct *_father;
+};
+typedef struct TYVHumanStructParents TYVHumanStructParents;
+
 struct TYVHumanStruct {
-    TYVName name;
-    int age;
-    int children;
-    bool married;
-    struct TYVHumanStruct *partner;
-    struct TYVHumanStruct *mather;
-    struct TYVHumanStruct *father;
-    struct TYVHumanStruct *childrenRef[20];
+    TYVName _name;
+    int _age;
+    int _children;
+    bool _married;
+    struct TYVHumanStruct *_partner;
+    TYVHumanStructParents *parents;
+    struct TYVHumanStruct *_childrenRef[20];
     
 };
 typedef struct TYVHumanStruct TYVHumanStruct;
+
+void TYVHumanStructSetAge(TYVHumanStruct *human, int age){
+    human->_age = age;
+}
+
+int TYVHumanStructGetAge(TYVHumanStruct *human){
+    return human->_age;
+}
+
+void TYVHumanStructSetChildren(TYVHumanStruct *human, int children){
+    human->_children = children;
+}
+
+int TYVHumanStructGetChildren(TYVHumanStruct *human){
+    return human->_children;
+}
+
+void TYVHumanStructSetMarried(TYVHumanStruct *human, bool married){
+    human->_married = married;
+}
+
+bool TYVHumanStructGetChildren(TYVHumanStruct *human){
+    return human->_married;
+}
