@@ -12,6 +12,9 @@
 #include <stdio.h>
 #include "stdbool.h"
 
+enum TYVendian {litleEndian = 1, bigEndian = 0};
+
+extern
 void TYVValueBitOutput(void *valueRef, size_t size, bool endian);
 
 #endif /* defined(__IDAPCoursesHomework__TYVValueBitOutput__) */

@@ -9,8 +9,6 @@
 #include "TYVValueBitOutputTests.h"
 #include "TYVValueBitOutput.h"
 
-enum endian {litleEndian = 1, bigEndian = 0};
-
 void TYVValueBitOutputTest(){
     char zero = '\0';
     char one = 1;
