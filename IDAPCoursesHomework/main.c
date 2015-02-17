@@ -9,9 +9,7 @@
 #include <stdio.h>
 #include "stdbool.h"
 #include "TYVValueBitOutputTests.h"
-
-extern
-bool TYVByteOrder();
+#include "TYVEndian.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here...

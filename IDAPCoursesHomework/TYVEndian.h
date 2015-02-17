@@ -10,5 +10,9 @@
 #define __IDAPCoursesHomework__TYVEndian__
 
 #include <stdio.h>
+#include "stdbool.h"
+
+extern
+bool TYVByteOrder();
 
 #endif /* defined(__IDAPCoursesHomework__TYVEndian__) */
