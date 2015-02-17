@@ -10,13 +10,13 @@
 #include <assert.h>
 
 #define TYVValueOutputGenerate(type, spec) \
-type TYVOutput_##type(type value) { \
-printf("%"#spec, value); \
-return value; \
-}
+    type TYVOutput_##type(type value) { \
+        printf("%"#spec, value); \
+        return value; \
+    }
 
 #define TYVOutputValue(type, value) \
-TYVOutput_##type(value); \
+    TYVOutput_##type(value);
 
 TYVValueOutputGenerate(int, d);
 TYVValueOutputGenerate(long, ld);
