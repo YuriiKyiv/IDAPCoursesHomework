@@ -12,6 +12,10 @@
 
 TYVHumanStruct *TYVHumanStructCreate(){
     TYVHumanStruct *human = malloc(sizeof(*human));
+    human->_partner = NULL;
+    human->_parents = NULL;
+    human->_referenceCount = 1;
+    
     return human;
 }
 

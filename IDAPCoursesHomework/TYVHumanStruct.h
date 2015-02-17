@@ -30,7 +30,7 @@ struct TYVHumanStruct {
     int _children;
     bool _married;
     struct TYVHumanStruct *_partner;
-    TYVHumanStructParents *parents;
+    TYVHumanStructParents *_parents;
     struct TYVHumanStruct *_childrenRef[20];
     
     uint64_t _referenceCount;
