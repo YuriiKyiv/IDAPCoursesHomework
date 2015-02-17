@@ -19,6 +19,17 @@ TYVHumanStruct *TYVHumanStructCreate(){
     return human;
 }
 
+void TYVHumanStructRetain(TYVHumanStruct *human){
+    human->_referenceCount++;
+}
+
+void TYVHumanStructRelease(TYVHumanStruct *human){
+    human->_referenceCount--;
+//    if ( 0 == human->_referenceCount);
+//    DEALLOC
+}
+
+
 void TYVHumanStructSetAge(TYVHumanStruct *human, int age){
     human->_age = age;
 }
