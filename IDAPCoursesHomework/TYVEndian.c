@@ -14,11 +14,6 @@ enum endian {litleEndian = 1, bigEndian = 0};
 bool TYVByteOrder() {
     int a = 1;
     char *c = (char *)&a;
-    if (1 == *c) {
-        return litleEndian;
-    }
     
-    else {
-        return bigEndian;
-    }
+    return 1 == *c ? litleEndian  : bigEndian;
 }
