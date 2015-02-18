@@ -130,6 +130,8 @@ TYVHuman *TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, 
         TYVHumanRetain(male);
     }
     
+    //TODO make connection with the children array and retain
+    
     return human;
 }
 
