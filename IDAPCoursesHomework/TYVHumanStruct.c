@@ -12,7 +12,7 @@
 #pragma mark -
 #pragma mark Private Declarations
 
-void TYVHumanDealloc(TYVHuman human);
+void TYVHumanDealloc(TYVHuman *human);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -42,6 +42,6 @@ void TYVHumanRelease(TYVHuman *human){
 #pragma mark -
 #pragma mark Private Implementations
 
-void TYVHumanDealloc(TYVHuman human){
+void TYVHumanDealloc(TYVHuman *human){
     
 }
