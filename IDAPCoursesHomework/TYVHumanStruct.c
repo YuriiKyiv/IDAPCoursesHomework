@@ -16,7 +16,7 @@ static
 void TYVHumanDealloc(TYVHuman *human);
 
 static
-void TYVHumanSetMerriedStatus(TYVHuman *human);
+void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarried status);
 
 static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
@@ -78,6 +78,8 @@ void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
         TYVHumanRetain(female);
         TYVHumanSetPartner(male,female);
         TYVHumanSetPartner(female,male);
+        TYVHumanSetMerriedStatus(male, yes);
+        TYVHumanSetMerriedStatus(female, yes);
     }
 }
 
@@ -88,13 +90,14 @@ void TYVHumanDealloc(TYVHuman *human){
     if (yes == TYVHumanGetMerriedStatus(human)){
         TYVHuman *partner = TYVHumanGetPartner(human);
         TYVHumanSetPartner(partner, NULL);
+        TYVHumanSetMerriedStatus(partner, no);
         TYVHumanRelease(partner);
     }
     free(human);
 }
 
-void TYVHumanSetMerriedStatus(TYVHuman *human){
-    human->_married = yes;
+void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarried status){
+    human->_married = status;
 }
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
