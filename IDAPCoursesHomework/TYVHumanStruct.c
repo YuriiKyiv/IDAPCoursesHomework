@@ -117,7 +117,8 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
     }
 }
 
-void TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
+TYVHuman *TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
+    TYVHuman *human = NULL;
     if (TYVHumanIsSamePartners(male, female) && TYVHumanIsDifferentGender(male, female)) {
         TYVHuman *human = TYVHumanCreate(name, age, gender);
         if (TYVmale == TYVHumanGetGender(male)) {
@@ -131,6 +132,8 @@ void TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsig
         TYVHumanRetain(male);
         TYVHumanRetain(male);
     }
+    
+    return human;
 }
 
 #pragma mark -
