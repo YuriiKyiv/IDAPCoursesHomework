@@ -67,6 +67,10 @@ TYVMarried TYVHumanGetMerriedStatus(TYVHuman *human){
     return human->_married;
 }
 
+TYVHuman *TYVHumanGetPartner(TYVHuman *human){
+    return human->_partner;
+}
+
 void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
     if ((TYVHumanGetGender(male) != TYVHumanGetGender(female)) &&
         (TYVHumanGetMerriedStatus(male) == TYVHumanGetMerriedStatus(female)) == no ) {
@@ -81,6 +85,11 @@ void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
 #pragma mark Private Implementations
 
 void TYVHumanDealloc(TYVHuman *human){
+    if (yes == TYVHumanGetMerriedStatus(human)){
+        TYVHuman *partner = TYVHumanGetPartner(human);
+        TYVHumanSetPartner(partner, NULL);
+        TYVHumanRelease(partner);
+    }
     free(human);
 }
 
