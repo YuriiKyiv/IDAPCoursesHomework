@@ -92,7 +92,7 @@ TYVHuman *TYVHumanGetFather(TYVHuman *human){
 
 void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
     if ((TYVHumanGetGender(male) != TYVHumanGetGender(female)) &&
-        (TYVHumanGetMerriedStatus(male) == TYVHumanGetMerriedStatus(female)) == TYVNo ) {
+        ((TYVHumanGetMerriedStatus(male) == TYVNo) && (TYVHumanGetMerriedStatus(female)) == TYVNo) ) {
         TYVHumanRetain(male);
         TYVHumanRetain(female);
         TYVHumanSetPartner(male, female);
