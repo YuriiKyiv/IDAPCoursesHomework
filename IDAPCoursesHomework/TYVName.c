@@ -14,7 +14,7 @@
 #pragma mark Private Declarations
 
 static
-void IDPStringStructStackDealloc(TYVName *name);
+void TYVNameDealloc(TYVName *name);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -34,7 +34,7 @@ void TYVNameRetain(TYVName *name){
 void TYVNameRelease(TYVName *name){
     name->_referenceCount--;
     if (0 == name->_referenceCount) {
-        //Dealloc
+        TYVNameDealloc(name);
     }
 }
 
@@ -62,7 +62,7 @@ char *TYVNameGetName(TYVName *name){
 #pragma mark -
 #pragma mark Private Implementations
 
-void IDPStringStructStackDealloc(TYVName *name) {
+void TYVNameDealloc(TYVName *name) {
     if (NULL != name->_name) {
         free(name->_name);
     }
