@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "TYVName.h"
 
-enum TYVGender {male, female};
+enum TYVGender {TYVmale, TYVfemale};
 typedef enum TYVGender TYVGender;
 
 enum TYVMarried {yes, no};

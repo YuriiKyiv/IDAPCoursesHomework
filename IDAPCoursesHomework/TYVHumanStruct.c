@@ -120,7 +120,16 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
 void TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
     if (TYVHumanIsSamePartners(male, female) && TYVHumanIsDifferentGender(male, female)) {
         TYVHuman *human = TYVHumanCreate(name, age, gender);
-        TYVHumanSetMother(human, )
+        if (TYVmale == TYVHumanGetGender(male)) {
+            TYVHumanSetMother(human, female);
+            TYVHumanSetFather(human, male);
+        } else {
+            TYVHumanSetMother(human, male);
+            TYVHumanSetFather(human, female);
+        }
+        
+        TYVHumanRetain(male);
+        TYVHumanRetain(male);
     }
 }
 
