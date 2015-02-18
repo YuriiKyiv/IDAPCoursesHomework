@@ -22,10 +22,10 @@ typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
     TYVName *_name;
     unsigned int _age;
-//    TYVGender _gender;
+    TYVGender _gender;
 //    unsigned int _childrenCount;
-//    TYVMarried _married;
-//    TYVHuman *_partner;
+    TYVMarried _married;
+    TYVHuman *_partner;
 //    TYVHuman *_mather;
 //    TYVHuman *_father;
 //    TYVHuman *_childrenRef[20];
@@ -34,7 +34,7 @@ struct TYVHuman {
 };
 
 extern
-TYVHuman *TYVHumanStructCreate();
+TYVHuman *TYVHumanStructCreate(TYVName *name, unsigned int age);
 
 extern
 void TYVHumanRetain(TYVHuman *human);
