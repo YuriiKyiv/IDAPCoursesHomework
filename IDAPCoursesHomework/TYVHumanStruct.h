@@ -16,7 +16,7 @@
 enum TYVGender {TYVmale, TYVfemale};
 typedef enum TYVGender TYVGender;
 
-enum TYVMarried {yes, no};
+enum TYVMarried {TYVYes, TYVNo};
 typedef enum TYVMarried TYVMarried;
 
 typedef struct TYVHuman TYVHuman;

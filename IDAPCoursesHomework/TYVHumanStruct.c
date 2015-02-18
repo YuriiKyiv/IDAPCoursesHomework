@@ -92,13 +92,13 @@ TYVHuman *TYVHumanGetFather(TYVHuman *human){
 
 void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
     if ((TYVHumanGetGender(male) != TYVHumanGetGender(female)) &&
-        (TYVHumanGetMerriedStatus(male) == TYVHumanGetMerriedStatus(female)) == no ) {
+        (TYVHumanGetMerriedStatus(male) == TYVHumanGetMerriedStatus(female)) == TYVNo ) {
         TYVHumanRetain(male);
         TYVHumanRetain(female);
         TYVHumanSetPartner(male, female);
         TYVHumanSetPartner(female, male);
-        TYVHumanSetMerriedStatus(male, yes);
-        TYVHumanSetMerriedStatus(female, yes);
+        TYVHumanSetMerriedStatus(male, TYVYes);
+        TYVHumanSetMerriedStatus(female, TYVYes);
     }
 }
 
@@ -120,8 +120,8 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
     if (TYVHumanIsSamePartners(male, female)) {
         TYVHumanSetPartner(male, NULL);
         TYVHumanSetPartner(female, NULL);
-        TYVHumanSetMerriedStatus(male, no);
-        TYVHumanSetMerriedStatus(female, no);
+        TYVHumanSetMerriedStatus(male, TYVNo);
+        TYVHumanSetMerriedStatus(female, TYVNo);
         TYVHumanRelease(male);
         TYVHumanRelease(female);
     }
@@ -130,7 +130,7 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
 TYVHuman *TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
     TYVHuman *human = NULL;
     if (TYVHumanIsSamePartners(male, female) && TYVHumanIsDifferentGender(male, female)) {
-        TYVMarried married = no;
+        TYVMarried married = TYVNo;
         TYVHuman *human = TYVHumanCreate(name, age, gender, married);
         if (TYVmale == TYVHumanGetGender(male)) {
             TYVHumanSetMother(human, female);
@@ -157,10 +157,10 @@ void TYVHumanDealloc(TYVHuman *human){
         TYVNameRelease(human->_name);
     }
     
-    if (yes == TYVHumanGetMerriedStatus(human)){
+    if (TYVYes == TYVHumanGetMerriedStatus(human)){
         TYVHuman *partner = TYVHumanGetPartner(human);
         TYVHumanSetPartner(partner, NULL);
-        TYVHumanSetMerriedStatus(partner, no);
+        TYVHumanSetMerriedStatus(partner, TYVNo);
         TYVHumanRelease(partner);
     }
     
