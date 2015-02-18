@@ -8,6 +8,7 @@
 
 #include "TYVHumanStruct.h"
 #include "stdlib.h"
+#include "stdbool.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -20,6 +21,9 @@ void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarried status);
 
 static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
+
+static
+bool TYVHumanIsSamePartners(TYVHuman *male, TYVHuman *female);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -83,15 +87,19 @@ void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
 }
 
 void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
-    TYVHuman *malePartner = TYVHumanGetPartner(male);
-    TYVHuman *femalePartner = TYVHumanGetPartner(female);
-    if ((malePartner == female) && (femalePartner == male)) {
+    if (TYVHumanIsSamePartners(male, female)) {
         TYVHumanSetPartner(male, NULL);
         TYVHumanSetPartner(female, NULL);
         TYVHumanSetMerriedStatus(male, no);
         TYVHumanSetMerriedStatus(female, no);
         TYVHumanRelease(male);
         TYVHumanRelease(female);
+    }
+}
+
+void TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
+    if (TYVHumanIsSamePartners(male, female)) {
+        TYVHumanCreate(name, age, gender);
     }
 }
 
@@ -118,4 +126,14 @@ void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarried status){
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     human->_partner = partner;
+}
+
+bool TYVHumanIsSamePartners(TYVHuman *male, TYVHuman *female){
+    TYVHuman *malePartner = TYVHumanGetPartner(male);
+    TYVHuman *femalePartner = TYVHumanGetPartner(female);
+    if ((malePartner == female) && (femalePartner == male)) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
