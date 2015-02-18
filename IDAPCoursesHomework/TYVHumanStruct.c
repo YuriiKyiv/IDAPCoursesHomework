@@ -75,8 +75,8 @@ void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
         (TYVHumanGetMerriedStatus(male) == TYVHumanGetMerriedStatus(female)) == no ) {
         TYVHumanRetain(male);
         TYVHumanRetain(female);
-        TYVHumanSetPartner(male,female);
-        TYVHumanSetPartner(female,male);
+        TYVHumanSetPartner(male, female);
+        TYVHumanSetPartner(female, male);
         TYVHumanSetMerriedStatus(male, yes);
         TYVHumanSetMerriedStatus(female, yes);
     }
@@ -86,7 +86,12 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
     TYVHuman *malePartner = TYVHumanGetPartner(male);
     TYVHuman *femalePartner = TYVHumanGetPartner(female);
     if ((malePartner == female) && (femalePartner == male)) {
-        
+        TYVHumanSetPartner(male, NULL);
+        TYVHumanSetPartner(female, NULL);
+        TYVHumanSetMerriedStatus(male, no);
+        TYVHumanSetMerriedStatus(female, no);
+        TYVHumanRelease(male);
+        TYVHumanRelease(female);
     }
 }
 
