@@ -26,8 +26,8 @@ struct TYVHuman {
 //    unsigned int _childrenCount;
     TYVMarried _married;
     TYVHuman *_partner;
-//    TYVHuman *_mather;
-//    TYVHuman *_father;
+    TYVHuman *_mather;
+    TYVHuman *_father;
 //    TYVHuman *_childrenRef[20];
     
     uint64_t _referenceCount;

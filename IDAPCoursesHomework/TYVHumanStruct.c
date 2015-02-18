@@ -25,6 +25,12 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 static
 bool TYVHumanIsSamePartners(TYVHuman *male, TYVHuman *female);
 
+static
+void TYVHumanSetMother(TYVHuman *human, TYVHuman *mather);
+
+static
+void TYVHumanSetFather(TYVHuman *human, TYVHuman *father);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -86,6 +92,20 @@ void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
     }
 }
 
+bool TYVHumanIsSamePartners(TYVHuman *male, TYVHuman *female){
+    TYVHuman *malePartner = TYVHumanGetPartner(male);
+    TYVHuman *femalePartner = TYVHumanGetPartner(female);
+    if ((malePartner == female) && (femalePartner == male)) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+bool TYVHumanIsDifferentGender(TYVHuman *male, TYVHuman *female){
+    return (TYVHumanGetGender(male) != TYVHumanGetGender(female));
+}
+
 void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
     if (TYVHumanIsSamePartners(male, female)) {
         TYVHumanSetPartner(male, NULL);
@@ -98,8 +118,9 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
 }
 
 void TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
-    if (TYVHumanIsSamePartners(male, female)) {
-        TYVHumanCreate(name, age, gender);
+    if (TYVHumanIsSamePartners(male, female) && TYVHumanIsDifferentGender(male, female)) {
+        TYVHuman *human = TYVHumanCreate(name, age, gender);
+        TYVHumanSetMother(human, )
     }
 }
 
@@ -128,12 +149,10 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     human->_partner = partner;
 }
 
-bool TYVHumanIsSamePartners(TYVHuman *male, TYVHuman *female){
-    TYVHuman *malePartner = TYVHumanGetPartner(male);
-    TYVHuman *femalePartner = TYVHumanGetPartner(female);
-    if ((malePartner == female) && (femalePartner == male)) {
-        return 1;
-    } else {
-        return 0;
-    }
+void TYVHumanSetMother(TYVHuman *human, TYVHuman *mather){
+    human->_mather = mather;
+}
+
+void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
+    human->_father = father;
 }
