@@ -19,4 +19,22 @@ struct TYVName {
 };
 typedef struct TYVName TYVName;
 
+extern
+TYVName *TYVNameCreate();
+
+extern
+void TYVNameRetain(TYVName *name);
+
+extern
+void TYVNameRelease(TYVName *name);
+
+extern
+uint64_t TYVNameGetLength(TYVName *name);
+
+extern
+void TYVNameSetLength(TYVName *name, uint64_t length);
+
+extern
+char *TYVNameGetName(TYVName *name);
+
 #endif /* defined(__IDAPCoursesHomework__TYVName__) */

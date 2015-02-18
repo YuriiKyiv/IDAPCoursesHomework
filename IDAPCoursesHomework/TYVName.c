@@ -11,6 +11,12 @@
 #include <string.h>
 
 #pragma mark -
+#pragma mark Private Declarations
+
+static
+void IDPStringStructStackDealloc(TYVName *name);
+
+#pragma mark -
 #pragma mark Public Implementations
 
 TYVName *TYVNameCreate(){
