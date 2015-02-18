@@ -16,8 +16,8 @@
 enum TYVGender {TYVmale, TYVfemale};
 typedef enum TYVGender TYVGender;
 
-enum TYVMarried {TYVYes, TYVNo};
-typedef enum TYVMarried TYVMarried;
+enum TYVMarriedStatus {TYVYes, TYVNo};
+typedef enum TYVMarriedStatus TYVMarriedStatus;
 
 typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
@@ -25,7 +25,7 @@ struct TYVHuman {
     unsigned int _age;
     TYVGender _gender;
 //    unsigned int _childrenCount;
-    TYVMarried _married;
+    TYVMarriedStatus _married;
     TYVHuman *_partner;
     TYVHuman *_mother;
     TYVHuman *_father;
@@ -35,7 +35,7 @@ struct TYVHuman {
 };
 
 extern
-TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender, TYVMarried married);
+TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender, TYVMarriedStatus married);
 
 extern
 void TYVHumanRetain(TYVHuman *human);
@@ -56,7 +56,7 @@ extern
 TYVGender TYVHumanGetGender(TYVHuman *human);
 
 extern
-TYVMarried TYVHumanGetMerriedStatus(TYVHuman *human);
+TYVMarriedStatus TYVHumanGetMerriedStatus(TYVHuman *human);
 
 extern
 TYVHuman *TYVHumanGetPartner(TYVHuman *human);

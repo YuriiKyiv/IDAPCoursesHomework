@@ -17,7 +17,7 @@ static
 void TYVHumanDealloc(TYVHuman *human);
 
 static
-void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarried status);
+void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarriedStatus status);
 
 static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
@@ -31,7 +31,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father);
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender, TYVMarried married){
+TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender, TYVMarriedStatus married){
     TYVHuman *human = malloc(sizeof(*human));
     human->_referenceCount = 1;   
     TYVNameRetain(name);
@@ -74,7 +74,7 @@ TYVGender TYVHumanGetGender(TYVHuman *human){
     return human->_gender;
 }
 
-TYVMarried TYVHumanGetMerriedStatus(TYVHuman *human){
+TYVMarriedStatus TYVHumanGetMerriedStatus(TYVHuman *human){
     return human->_married;
 }
 
@@ -130,7 +130,7 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
 TYVHuman *TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
     TYVHuman *human = NULL;
     if (TYVHumanIsSamePartners(male, female) && TYVHumanIsDifferentGender(male, female)) {
-        TYVMarried married = TYVNo;
+        TYVMarriedStatus married = TYVNo;
         TYVHuman *human = TYVHumanCreate(name, age, gender, married);
         if (TYVmale == TYVHumanGetGender(male)) {
             TYVHumanSetMother(human, female);
@@ -178,7 +178,7 @@ void TYVHumanDealloc(TYVHuman *human){
     free(human);
 }
 
-void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarried status){
+void TYVHumanSetMerriedStatus(TYVHuman *human, TYVMarriedStatus status){
     human->_married = status;
 }
 
