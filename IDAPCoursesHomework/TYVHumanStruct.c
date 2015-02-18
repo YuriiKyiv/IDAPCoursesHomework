@@ -23,9 +23,6 @@ static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 
 static
-bool TYVHumanIsSamePartners(TYVHuman *male, TYVHuman *female);
-
-static
 void TYVHumanSetMother(TYVHuman *human, TYVHuman *mather);
 
 static

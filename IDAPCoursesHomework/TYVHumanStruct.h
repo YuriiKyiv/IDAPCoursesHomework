@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "TYVName.h"
+#include "stdbool.h"
 
 enum TYVGender {TYVmale, TYVfemale};
 typedef enum TYVGender TYVGender;
@@ -29,7 +30,7 @@ struct TYVHuman {
     TYVHuman *_mather;
     TYVHuman *_father;
 //    TYVHuman *_childrenRef[20];
-    
+
     uint64_t _referenceCount;
 };
 
@@ -41,5 +42,38 @@ void TYVHumanRetain(TYVHuman *human);
 
 extern
 void TYVHumanRelease(TYVHuman *human);
+
+extern
+TYVName *TYVHumanGetName(TYVHuman *human);
+
+extern
+unsigned int TYVHumanGetAge(TYVHuman *human);
+
+extern
+void TYVHumanSetAge(TYVHuman *human, unsigned int age);
+
+extern
+TYVGender TYVHumanGetGender(TYVHuman *human);
+
+extern
+TYVMarried TYVHumanGetMerriedStatus(TYVHuman *human);
+
+extern
+TYVHuman *TYVHumanGetPartner(TYVHuman *human);
+
+extern
+void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female);
+
+extern
+bool TYVHumanIsSamePartners(TYVHuman *male, TYVHuman *female);
+
+extern
+bool TYVHumanIsDifferentGender(TYVHuman *male, TYVHuman *female);
+
+extern
+void TYVHumanDivorce(TYVHuman *male, TYVHuman *female);
+
+extern
+TYVHuman *TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHumanStruct__) */
