@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A859EA31A9493D0009F5793 /* TYVName.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A859EA11A9493D0009F5793 /* TYVName.c */; };
 		5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
 		5AE580DA1A936AFA00A4E0FA /* TYVHumanStruct.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AE580D81A936AFA00A4E0FA /* TYVHumanStruct.c */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5A859EA11A9493D0009F5793 /* TYVName.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TYVName.c; sourceTree = "<group>"; };
+		5A859EA21A9493D0009F5793 /* TYVName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVName.h; sourceTree = "<group>"; };
 		5ABCB6DF1A8CD25B00CD71E2 /* IDAPCoursesHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IDAPCoursesHomework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ABCB6E21A8CD25B00CD71E2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		5AE580D81A936AFA00A4E0FA /* TYVHumanStruct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TYVHumanStruct.c; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				5ABCB6E21A8CD25B00CD71E2 /* main.c */,
 				5AE580D81A936AFA00A4E0FA /* TYVHumanStruct.c */,
 				5AE580D91A936AFA00A4E0FA /* TYVHumanStruct.h */,
+				5A859EA11A9493D0009F5793 /* TYVName.c */,
+				5A859EA21A9493D0009F5793 /* TYVName.h */,
 			);
 			path = IDAPCoursesHomework;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AE580DA1A936AFA00A4E0FA /* TYVHumanStruct.c in Sources */,
+				5A859EA31A9493D0009F5793 /* TYVName.c in Sources */,
 				5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
