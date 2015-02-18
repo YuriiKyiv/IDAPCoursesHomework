@@ -42,7 +42,6 @@ void TYVHumanRetain(TYVHuman *human){
 void TYVHumanRelease(TYVHuman *human){
     human->_referenceCount--;
     if (0 == human->_referenceCount){
-        TYVNameRelease(human->_name);
         TYVHumanDealloc(human);
     }
 }
@@ -83,10 +82,22 @@ void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
     }
 }
 
+void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
+    TYVHuman *malePartner = TYVHumanGetPartner(male);
+    TYVHuman *femalePartner = TYVHumanGetPartner(female);
+    if ((malePartner == female) && (femalePartner == male)) {
+        
+    }
+}
+
 #pragma mark -
 #pragma mark Private Implementations
 
 void TYVHumanDealloc(TYVHuman *human){
+    if (NULL != human->_name){
+        TYVNameRelease(human->_name);
+    }
+    
     if (yes == TYVHumanGetMerriedStatus(human)){
         TYVHuman *partner = TYVHumanGetPartner(human);
         TYVHumanSetPartner(partner, NULL);
