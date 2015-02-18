@@ -27,7 +27,7 @@ struct TYVHuman {
 //    unsigned int _childrenCount;
     TYVMarried _married;
     TYVHuman *_partner;
-    TYVHuman *_mather;
+    TYVHuman *_mother;
     TYVHuman *_father;
 //    TYVHuman *_childrenRef[20];
 
@@ -75,5 +75,11 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female);
 
 extern
 TYVHuman *TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender);
+
+extern
+TYVHuman *TYVHumanGetFather(TYVHuman *human);
+
+extern
+TYVHuman *TYVHumanGetMather(TYVHuman *human);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHumanStruct__) */

@@ -23,7 +23,7 @@ static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 
 static
-void TYVHumanSetMother(TYVHuman *human, TYVHuman *mather);
+void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother);
 
 static
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father);
@@ -40,7 +40,7 @@ TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender, TYVM
     human->_gender = gender;
     human->_married = married;
     
-    human->_mather = NULL;
+    human->_mother = NULL;
     human->_father = NULL;
     human->_partner = NULL;
     
@@ -80,6 +80,14 @@ TYVMarried TYVHumanGetMerriedStatus(TYVHuman *human){
 
 TYVHuman *TYVHumanGetPartner(TYVHuman *human){
     return human->_partner;
+}
+
+TYVHuman *TYVHumanGetMather(TYVHuman *human){
+    return human->_mother;
+}
+
+TYVHuman *TYVHumanGetFather(TYVHuman *human){
+    return human->_father;
 }
 
 void TYVHunamGetMarried(TYVHuman *male, TYVHuman *female){
@@ -155,6 +163,18 @@ void TYVHumanDealloc(TYVHuman *human){
         TYVHumanSetMerriedStatus(partner, no);
         TYVHumanRelease(partner);
     }
+    
+    TYVHuman *father = TYVHumanGetFather(human);
+    TYVHuman *mother = TYVHumanGetMather(human);
+    if (NULL != father){
+        TYVHumanRelease(father);
+    }
+    if (NULL != mother){
+        TYVHumanRelease(mother);
+    }
+    
+    // TODO write for children;
+    
     free(human);
 }
 
@@ -166,8 +186,8 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     human->_partner = partner;
 }
 
-void TYVHumanSetMother(TYVHuman *human, TYVHuman *mather){
-    human->_mather = mather;
+void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
+    human->_mother = mother;
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
