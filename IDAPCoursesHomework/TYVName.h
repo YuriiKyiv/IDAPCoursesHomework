@@ -12,8 +12,8 @@
 #include <stdio.h>
 
 struct TYVName {
-    char *name;
-    unsigned int length;
+    char *_name;
+    uint64_t _length;
     
     uint64_t _referenceCount;
 };
