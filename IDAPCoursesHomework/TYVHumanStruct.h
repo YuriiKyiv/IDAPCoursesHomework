@@ -11,60 +11,48 @@
 
 #include <stdio.h>
 #include "stdbool.h"
+#include "TYVName.h"
 
-struct TYVName {
-    char *_name;
-    int _lenght;
-};
-typedef struct TYVName TYVName;
-
-struct TYVHumanStructParents {
-    struct TYVHumanStruct *_mather;
-    struct TYVHumanStruct *_father;
-};
-typedef struct TYVHumanStructParents TYVHumanStructParents;
-
-struct TYVHumanStruct {
+typedef struct TYVHuman TYVHuman;
+struct TYVHuman {
     TYVName _name;
     int _age;
     int _children;
     bool _married;
-    struct TYVHumanStruct *_partner;
-    TYVHumanStructParents *_parents;
-    struct TYVHumanStruct *_childrenRef[20];
+    TYVHuman *_partner;
+    TYVHuman *_childrenRef[20];
     
     uint64_t _referenceCount;
 };
-typedef struct TYVHumanStruct TYVHumanStruct;
 
 extern
-TYVHumanStruct *TYVHumanStructCreate();
+TYVHuman *TYVHumanStructCreate();
 
 extern
-void TYVHumanStructRetain(TYVHumanStruct *human);
+void TYVHumanRetain(TYVHuman *human);
 
 extern
-void TYVHumanStructRelease(TYVHumanStruct *human);
+void TYVHumanRelease(TYVHuman *human);
 
 extern
-void TYVHumanStructDealloc(TYVHumanStruct *human);
+void TYVHumanDealloc(TYVHuman *human);
 
 extern
-void TYVHumanStructSetAge(TYVHumanStruct *human, int age);
+void TYVHumanSetAge(TYVHuman *human, int age);
 
 extern
-int TYVHumanStructGetAge(TYVHumanStruct *human);
+int TYVHumanGetAge(TYVHuman *human);
 
 extern
-void TYVHumanStructSetChildren(TYVHumanStruct *human, int children);
+void TYVHumanSetChildren(TYVHuman *human, int children);
 
 extern
-int TYVHumanStructGetChildren(TYVHumanStruct *human);
+int TYVHumanGetChildren(TYVHuman *human);
 
 extern
-void TYVHumanStructSetMarried(TYVHumanStruct *human, bool married);
+void TYVHumanSetMarried(TYVHuman *human, bool married);
 
 extern
-bool TYVHumanStructGetMarried(TYVHumanStruct *human);
+bool TYVHumanGetMarried(TYVHuman *human);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHumanStruct__) */

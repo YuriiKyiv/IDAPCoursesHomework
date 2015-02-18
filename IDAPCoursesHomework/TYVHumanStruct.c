@@ -10,51 +10,50 @@
 #include "stdbool.h"
 #include "stdlib.h"
 
-TYVHumanStruct *TYVHumanStructCreate(){
-    TYVHumanStruct *human = malloc(sizeof(*human));
+TYVHuman *TYVHumanCreate(){
+    TYVHuman *human = malloc(sizeof(*human));
     human->_partner = NULL;
-    human->_parents = NULL;
     human->_referenceCount = 1;
     
     return human;
 }
 
-void TYVHumanStructRetain(TYVHumanStruct *human){
+void TYVHumanRetain(TYVHuman *human){
     human->_referenceCount++;
 }
 
-void TYVHumanStructRelease(TYVHumanStruct *human){
+void TYVHumanRelease(TYVHuman *human){
     human->_referenceCount--;
 //    if ( 0 == human->_referenceCount);
 //    DEALLOC
 }
 
-void TYVHumanStructDealloc(TYVHumanStruct *human){
+void TYVHumanDealloc(TYVHuman *human){
 //    if ((NULL != human->_parents) && NULL != (human->_partner))
 //        Call the dealloc method for parents and parther stucts
     free(human);
 }
 
-void TYVHumanStructSetAge(TYVHumanStruct *human, int age){
+void TYVHumanSetAge(TYVHuman *human, int age){
     human->_age = age;
 }
 
-int TYVHumanStructGetAge(TYVHumanStruct *human){
+int TYVHumanGetAge(TYVHuman *human){
     return human->_age;
 }
 
-void TYVHumanStructSetChildren(TYVHumanStruct *human, int children){
+void TYVHumanSetChildren(TYVHuman *human, int children){
     human->_children = children;
 }
 
-int TYVHumanStructGetChildren(TYVHumanStruct *human){
+int TYVHumanGetChildren(TYVHuman *human){
     return human->_children;
 }
 
-void TYVHumanStructSetMarried(TYVHumanStruct *human, bool married){
+void TYVHumanSetMarried(TYVHuman *human, bool married){
     human->_married = married;
 }
 
-bool TYVHumanStructGetMarried(TYVHumanStruct *human){
+bool TYVHumanGetMarried(TYVHuman *human){
     return human->_married;
 }
