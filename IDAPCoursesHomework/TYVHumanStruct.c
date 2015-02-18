@@ -31,13 +31,18 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father);
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender){
+TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender, TYVMarried married){
     TYVHuman *human = malloc(sizeof(*human));
     human->_referenceCount = 1;   
     TYVNameRetain(name);
     human->_name = name;
     human->_age = age;
     human->_gender = gender;
+    human->_married = married;
+    
+    human->_mather = NULL;
+    human->_father = NULL;
+    human->_partner = NULL;
     
     return human;
 }
@@ -117,7 +122,8 @@ void TYVHumanDivorce(TYVHuman *male, TYVHuman *female){
 TYVHuman *TYVHumanMakeChildren(TYVHuman *male, TYVHuman *female, TYVName *name, unsigned int age, TYVGender gender){
     TYVHuman *human = NULL;
     if (TYVHumanIsSamePartners(male, female) && TYVHumanIsDifferentGender(male, female)) {
-        TYVHuman *human = TYVHumanCreate(name, age, gender);
+        TYVMarried married = no;
+        TYVHuman *human = TYVHumanCreate(name, age, gender, married);
         if (TYVmale == TYVHumanGetGender(male)) {
             TYVHumanSetMother(human, female);
             TYVHumanSetFather(human, male);

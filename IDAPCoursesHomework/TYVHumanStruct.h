@@ -35,7 +35,7 @@ struct TYVHuman {
 };
 
 extern
-TYVHuman *TYVHumanStructCreate(TYVName *name, unsigned int age);
+TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age, TYVGender gender, TYVMarried married);
 
 extern
 void TYVHumanRetain(TYVHuman *human);
