@@ -48,3 +48,18 @@ void TYVNameSetLength(TYVName *name, uint64_t length){
     
     name->_length = length;
 }
+
+char *TYVNameGetName(TYVName *name){
+    return name->_name;
+}
+
+#pragma mark -
+#pragma mark Private Implementations
+
+void IDPStringStructStackDealloc(TYVName *name) {
+    if (NULL != name->_name) {
+        free(name->_name);
+    }
+    
+    free(name);
+}
