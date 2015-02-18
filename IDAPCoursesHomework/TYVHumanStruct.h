@@ -13,13 +13,19 @@
 #include "stdbool.h"
 #include "TYVName.h"
 
+enum TYVGender {male, female};
+typedef enum TYVGender TYVGender;
+
+enum TYVMarried {yes, no};
+typedef enum TYVMarried TYVMarried;
+
 typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
     TYVName _name;
     unsigned int _age;
-    bool _gender;
+    TYVGender _gender;
     unsigned int _childrenCount;
-    bool _married;
+    TYVMarried _married;
     TYVHuman *_partner;
     TYVHuman *_mather;
     TYVHuman *_father;
