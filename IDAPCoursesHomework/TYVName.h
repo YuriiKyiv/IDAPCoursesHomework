@@ -20,7 +20,7 @@ struct TYVName {
 typedef struct TYVName TYVName;
 
 extern
-TYVName *TYVNameCreate();
+TYVName *TYVNameCreate(char *data);
 
 extern
 void TYVNameRetain(TYVName *name);

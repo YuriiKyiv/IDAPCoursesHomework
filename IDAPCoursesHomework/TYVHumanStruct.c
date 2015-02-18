@@ -7,13 +7,22 @@
 //
 
 #include "TYVHumanStruct.h"
-#include "stdbool.h"
 #include "stdlib.h"
 
-TYVHuman *TYVHumanCreate(){
+#pragma mark -
+#pragma mark Private Declarations
+
+void TYVHumanDealloc(TYVHuman human);
+
+#pragma mark -
+#pragma mark Public Implementations
+
+TYVHuman *TYVHumanCreate(TYVName *name, unsigned int age){
     TYVHuman *human = malloc(sizeof(*human));
-    human->_partner = NULL;
     human->_referenceCount = 1;
+    TYVNameRetain(name);
+    human->_name = name;
+    human->_age = age;
     
     return human;
 }
@@ -24,36 +33,15 @@ void TYVHumanRetain(TYVHuman *human){
 
 void TYVHumanRelease(TYVHuman *human){
     human->_referenceCount--;
-//    if ( 0 == human->_referenceCount);
-//    DEALLOC
+    if (0 == human->_referenceCount){
+        TYVNameRelease(human->_name);
+        TYVHumanDealloc(human);
+    }
 }
 
-void TYVHumanDealloc(TYVHuman *human){
-//    if ((NULL != human->_parents) && NULL != (human->_partner))
-//        Call the dealloc method for parents and parther stucts
-    free(human);
-}
+#pragma mark -
+#pragma mark Private Implementations
 
-void TYVHumanSetAge(TYVHuman *human, int age){
-    human->_age = age;
-}
-
-int TYVHumanGetAge(TYVHuman *human){
-    return human->_age;
-}
-
-void TYVHumanSetChildren(TYVHuman *human, int children){
-    human->_children = children;
-}
-
-int TYVHumanGetChildren(TYVHuman *human){
-    return human->_children;
-}
-
-void TYVHumanSetMarried(TYVHuman *human, bool married){
-    human->_married = married;
-}
-
-bool TYVHumanGetMarried(TYVHuman *human){
-    return human->_married;
+void TYVHumanDealloc(TYVHuman human){
+    
 }

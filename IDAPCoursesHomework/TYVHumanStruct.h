@@ -10,7 +10,6 @@
 #define __IDAPCoursesHomework__TYVHumanStruct__
 
 #include <stdio.h>
-#include "stdbool.h"
 #include "TYVName.h"
 
 enum TYVGender {male, female};
@@ -21,15 +20,15 @@ typedef enum TYVMarried TYVMarried;
 
 typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
-    TYVName _name;
+    TYVName *_name;
     unsigned int _age;
-    TYVGender _gender;
-    unsigned int _childrenCount;
-    TYVMarried _married;
-    TYVHuman *_partner;
-    TYVHuman *_mather;
-    TYVHuman *_father;
-    TYVHuman *_childrenRef[20];
+//    TYVGender _gender;
+//    unsigned int _childrenCount;
+//    TYVMarried _married;
+//    TYVHuman *_partner;
+//    TYVHuman *_mather;
+//    TYVHuman *_father;
+//    TYVHuman *_childrenRef[20];
     
     uint64_t _referenceCount;
 };
@@ -42,26 +41,5 @@ void TYVHumanRetain(TYVHuman *human);
 
 extern
 void TYVHumanRelease(TYVHuman *human);
-
-extern
-void TYVHumanDealloc(TYVHuman *human);
-
-extern
-void TYVHumanSetAge(TYVHuman *human, int age);
-
-extern
-int TYVHumanGetAge(TYVHuman *human);
-
-extern
-void TYVHumanSetChildren(TYVHuman *human, int children);
-
-extern
-int TYVHumanGetChildren(TYVHuman *human);
-
-extern
-void TYVHumanSetMarried(TYVHuman *human, bool married);
-
-extern
-bool TYVHumanGetMarried(TYVHuman *human);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHumanStruct__) */

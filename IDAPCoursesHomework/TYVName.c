@@ -19,9 +19,9 @@ void TYVNameDealloc(TYVName *name);
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVName *TYVNameCreate(){
+TYVName *TYVNameCreate(char *data){
     TYVName *name = malloc(sizeof(*name));
-    name->_name = NULL;
+    name->_name = data;
     name->_referenceCount = 1;
     
     return name;
