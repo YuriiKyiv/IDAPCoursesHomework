@@ -16,10 +16,13 @@
 typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
     TYVName _name;
-    int _age;
-    int _children;
+    unsigned int _age;
+    bool _gender;
+    unsigned int _childrenCount;
     bool _married;
     TYVHuman *_partner;
+    TYVHuman *_mather;
+    TYVHuman *_father;
     TYVHuman *_childrenRef[20];
     
     uint64_t _referenceCount;
