@@ -15,7 +15,7 @@ void TYVValueBitOutput(void *valueRef, size_t size, TYVEndian endian) {
     unsigned char charValue = 0;
     size_t iter = 0;
     for (long int byteIter = 0; byteIter < size; byteIter++) {
-        iter = endian ? byteIter : size - byteIter - 1;
+        iter = endian == TYVLitleEndian ? byteIter : size - byteIter - 1;
         charValue = charValueRef[iter];
         TYVBitLoop(charValue);
     }

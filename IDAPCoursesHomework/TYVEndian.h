@@ -17,4 +17,7 @@ typedef enum TYVEndian TYVEndian;
 extern
 TYVEndian TYVGetByteOrder();
 
+extern
+TYVEndian TYVEndianGetReverse(TYVEndian endian);
+
 #endif /* defined(__IDAPCoursesHomework__TYVEndian__) */

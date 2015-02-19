@@ -12,8 +12,7 @@
 
 void TYVBitReverse(char *number, bool reverse){
     TYVEndian endian = TYVGetByteOrder();
-    printf("%d\n",endian);
     reverse ?
-        TYVValueBitOutput(number, sizeof(*number), endian++):
+        TYVValueBitOutput(number, sizeof(*number), TYVEndianGetReverse(endian)):
         TYVValueBitOutput(number, sizeof(*number), endian);
 }
