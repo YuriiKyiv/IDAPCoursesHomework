@@ -11,6 +11,5 @@
 TYVEndian TYVByteOrder() {
     int a = 1;
     char *c = (char *)&a;
-    TYVEndian endian = TYVlitleEndian;
-    return 1 == *c ? endian : endian;
+    return 1 == *c ? TYVlitleEndian : TYVbigEndian;
 }
