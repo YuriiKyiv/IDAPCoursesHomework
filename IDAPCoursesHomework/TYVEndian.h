@@ -15,6 +15,6 @@ enum TYVEndian {TYVBigEndian, TYVLitleEndian};
 typedef enum TYVEndian TYVEndian;
 
 extern
-TYVEndian TYVByteOrder();
+TYVEndian TYVGetByteOrder();
 
 #endif /* defined(__IDAPCoursesHomework__TYVEndian__) */

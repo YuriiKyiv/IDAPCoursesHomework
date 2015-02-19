@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A4C5DD01A95F830006E309E /* TYVBitReverse.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A4C5DCE1A95F830006E309E /* TYVBitReverse.c */; };
 		5A8E122E1A92122700DCBE13 /* TYVValueBitOutputTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A8E122C1A92122700DCBE13 /* TYVValueBitOutputTests.c */; };
 		5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
 		5AFA967E1A91E85E00F2C080 /* TYVEndian.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AFA967C1A91E85E00F2C080 /* TYVEndian.c */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5A4C5DCE1A95F830006E309E /* TYVBitReverse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TYVBitReverse.c; sourceTree = "<group>"; };
+		5A4C5DCF1A95F830006E309E /* TYVBitReverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVBitReverse.h; sourceTree = "<group>"; };
 		5A8E122C1A92122700DCBE13 /* TYVValueBitOutputTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TYVValueBitOutputTests.c; sourceTree = "<group>"; };
 		5A8E122D1A92122700DCBE13 /* TYVValueBitOutputTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVValueBitOutputTests.h; sourceTree = "<group>"; };
 		5ABCB6DF1A8CD25B00CD71E2 /* IDAPCoursesHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IDAPCoursesHomework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +72,8 @@
 				5ABCB6E21A8CD25B00CD71E2 /* main.c */,
 				5AFA967C1A91E85E00F2C080 /* TYVEndian.c */,
 				5AFA967D1A91E85E00F2C080 /* TYVEndian.h */,
+				5A4C5DCE1A95F830006E309E /* TYVBitReverse.c */,
+				5A4C5DCF1A95F830006E309E /* TYVBitReverse.h */,
 				5AFA967F1A91EB8100F2C080 /* TYVValueBitOutput.c */,
 				5AFA96801A91EB8100F2C080 /* TYVValueBitOutput.h */,
 				5A8E122C1A92122700DCBE13 /* TYVValueBitOutputTests.c */,
@@ -134,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A8E122E1A92122700DCBE13 /* TYVValueBitOutputTests.c in Sources */,
+				5A4C5DD01A95F830006E309E /* TYVBitReverse.c in Sources */,
 				5AFA967E1A91E85E00F2C080 /* TYVEndian.c in Sources */,
 				5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */,
 				5AFA96811A91EB8100F2C080 /* TYVValueBitOutput.c in Sources */,

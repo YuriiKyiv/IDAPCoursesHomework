@@ -8,7 +8,7 @@
 
 #include "TYVEndian.h"
 
-TYVEndian TYVByteOrder() {
+TYVEndian TYVGetByteOrder() {
     int a = 1;
     char *c = (char *)&a;
     return 1 == *c ? TYVLitleEndian : TYVBigEndian;

@@ -12,6 +12,6 @@
 #include <stdio.h>
 
 extern
-void TYVValueBitOutputTest();
+void TYVTests();
 
 #endif /* defined(__IDAPCoursesHomework__TYVValueBitOutputTests__) */

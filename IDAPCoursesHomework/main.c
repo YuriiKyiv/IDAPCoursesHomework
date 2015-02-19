@@ -15,9 +15,9 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
     
-    printf("%u \n", TYVByteOrder());
+    printf("%u \n", TYVGetByteOrder());
     
-    TYVValueBitOutputTest();
+    TYVTests();
     
     return 0;
 }
