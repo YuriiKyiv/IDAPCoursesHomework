@@ -14,8 +14,8 @@ void TYVValueBitOutputTest(){
     char one = 1;
     char a = 'A';
     int value = 1000;
-    TYVValueBitOutput(&zero, sizeof(zero), litleEndian);
-    TYVValueBitOutput(&one, sizeof(one), litleEndian);
-    TYVValueBitOutput(&a, sizeof(a), litleEndian);
-    TYVValueBitOutput(&value, sizeof(value), litleEndian);
+    TYVValueBitOutput(&zero, sizeof(zero), TYVlitleEndian);
+    TYVValueBitOutput(&one, sizeof(one), TYVlitleEndian);
+    TYVValueBitOutput(&a, sizeof(a), TYVlitleEndian);
+    TYVValueBitOutput(&value, sizeof(value), TYVlitleEndian);
 }
