@@ -20,7 +20,10 @@ static
 void TYVSayOnlyPAPA();
 
 static
-void TYVSayAll();
+void TYVSayMAMAPAPA();
+
+static
+void TYVSayNothing();
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -31,23 +34,29 @@ void TYVMultiplesTests(){
     TYVOutputMultiplesNumber(45);
     TYVSayOnlyMAMA();
     TYVSayOnlyPAPA();
-    TYVSayAll();
+    TYVSayMAMAPAPA();
+    TYVSayNothing();
 }
 
 #pragma mark -
 #pragma mark Private Implementations
 
 void TYVSayOnlyMAMA(){
-    assert(1 == TYVOutputMultiplesNumber(3));
-    assert(1 == TYVOutputMultiplesNumber(6));
+    assert(TYVSayMama == TYVOutputMultiplesNumber(3));
+    assert(TYVSayMama == TYVOutputMultiplesNumber(6));
 }
 
 void TYVSayOnlyPAPA(){
-    assert(10 == TYVOutputMultiplesNumber(5));
-    assert(10 == TYVOutputMultiplesNumber(10));
+    assert(TYVSayPapa == TYVOutputMultiplesNumber(5));
+    assert(TYVSayPapa == TYVOutputMultiplesNumber(10));
 }
 
-void TYVSayAll(){
-    assert(111 == TYVOutputMultiplesNumber(15));
-    assert(111 == TYVOutputMultiplesNumber(30));
+void TYVSayMAMAPAPA(){
+    assert(TYVSayMamapapa == TYVOutputMultiplesNumber(15));
+    assert(TYVSayMamapapa == TYVOutputMultiplesNumber(30));
+}
+
+void TYVSayNothing(){
+    assert(TYVSayNothing == TYVOutputMultiplesNumber(7));
+    assert(TYVSayNothing == TYVOutputMultiplesNumber(17));
 }
