@@ -14,16 +14,16 @@
 #pragma mark Private Definitions
 
 static
-void TYVSayOnlyMAMA();
+void TYVSayOnlyMAMATest();
 
 static
-void TYVSayOnlyPAPA();
+void TYVSayOnlyPAPATest();
 
 static
-void TYVSayMAMAPAPA();
+void TYVSayMAMAPAPATest();
 
 static
-void TYVSayNothing();
+void TYVSayNothingTest();
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -32,31 +32,31 @@ void TYVMultiplesTests(){
     TYVOutputMultiplesNumber(6);
     TYVOutputMultiplesNumber(10);
     TYVOutputMultiplesNumber(45);
-    TYVSayOnlyMAMA();
-    TYVSayOnlyPAPA();
-    TYVSayMAMAPAPA();
-    TYVSayNothing();
+    TYVSayOnlyMAMATest();
+    TYVSayOnlyPAPATest();
+    TYVSayMAMAPAPATest();
+    TYVSayNothingTest();
 }
 
 #pragma mark -
 #pragma mark Private Implementations
 
-void TYVSayOnlyMAMA(){
+void TYVSayOnlyMAMATest(){
     assert(TYVSayMama == TYVOutputMultiplesNumber(3));
     assert(TYVSayMama == TYVOutputMultiplesNumber(6));
 }
 
-void TYVSayOnlyPAPA(){
+void TYVSayOnlyPAPATest(){
     assert(TYVSayPapa == TYVOutputMultiplesNumber(5));
     assert(TYVSayPapa == TYVOutputMultiplesNumber(10));
 }
 
-void TYVSayMAMAPAPA(){
+void TYVSayMAMAPAPATest(){
     assert(TYVSayMamapapa == TYVOutputMultiplesNumber(15));
     assert(TYVSayMamapapa == TYVOutputMultiplesNumber(30));
 }
 
-void TYVSayNothing(){
+void TYVSayNothingTest(){
     assert(TYVSayNothing == TYVOutputMultiplesNumber(7));
     assert(TYVSayNothing == TYVOutputMultiplesNumber(17));
 }

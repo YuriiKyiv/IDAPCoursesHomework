@@ -9,18 +9,18 @@
 #include "TYVMultiples.h"
 #include "stdlib.h"
 
-const char mamaMessage[] = "MAMA";
-const char papaMessage[] = "PAPA";
+const char TYVMamaMessage[] = "MAMA";
+const char TYVPapaMessage[] = "PAPA";
 
 TYVWhatSay TYVOutputMultiplesNumber(int number) {
     TYVWhatSay result = TYVSayNothing;
     if (0 == (number % 3)) {
-        printf("%s ", mamaMessage);
+        printf("%s ", TYVMamaMessage);
         result +=1;
     }
     
     if (0 == (number % 5)) {
-        printf("%s ", papaMessage);
+        printf("%s ", TYVPapaMessage);
         result += 2;
     }
     
