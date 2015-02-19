@@ -15,12 +15,12 @@ const char TYVPapaMessage[] = "PAPA";
 TYVWhatSay TYVOutputMultiplesNumber(int number) {
     TYVWhatSay result = TYVSayNothing;
     if (0 == (number % 3)) {
-        printf("%s ", TYVMamaMessage);
+        printf("%s", TYVMamaMessage);
         result +=1;
     }
     
     if (0 == (number % 5)) {
-        printf("%s ", TYVPapaMessage);
+        printf("%s", TYVPapaMessage);
         result += 2;
     }
     
