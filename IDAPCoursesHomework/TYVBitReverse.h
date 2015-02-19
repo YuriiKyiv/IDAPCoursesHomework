@@ -12,6 +12,6 @@
 #include <stdio.h>
 #include "stdbool.h"
 
-void TYVBitReverse(char *number, bool reverse);
+void TYVBitReverse(void *number, size_t size, bool reverse);
 
 #endif /* defined(__IDAPCoursesHomework__TYVBitReverse__) */

@@ -37,7 +37,7 @@ void TYVValueBitOutputTests(){
 }
 
 void TYVBitReversTest(){
-    char a = 'A';
+    int number = 1000;
     printf("Reverse test 1\n");
-    TYVBitReverse(&a, 1);
+    TYVBitReverse(&number, sizeof(number),1);
 }
