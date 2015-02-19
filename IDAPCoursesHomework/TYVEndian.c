@@ -9,7 +9,6 @@
 #include "TYVEndian.h"
 
 TYVEndian TYVGetByteOrder() {
-    int a = 1;
-    char *c = (char *)&a;
-    return 1 == *c ? TYVLitleEndian : TYVBigEndian;
+    unsigned int a = 1;
+    return 1 == (char)a ? TYVLitleEndian : TYVBigEndian;
 }
