@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 
-enum TYVWhatSay {TYVSayNothing, TYVSayMama, TYVSayPapa, TYVSayMamapapa};
-typedef enum TYVWhatSay TYVWhatSay;
+enum TYVMessage {TYVNothing, TYVMama, TYVPapa, TYVMamapapa};
+typedef enum TYVMessage TYVMessage;
 
-TYVWhatSay TYVOutputMultiplesNumber(int number);
+TYVMessage TYVMultiplesOutputMessage(int number);
 
 #endif /* defined(__IDAPCoursesHomework__TYVMultiples__) */

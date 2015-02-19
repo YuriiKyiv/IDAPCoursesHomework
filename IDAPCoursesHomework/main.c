@@ -29,7 +29,7 @@ inline
 void TYVOutputMultiplesNumberLoop(int iter){
     for (int iter = 0; iter < iterations; iter++) {
         printf("Iteration: %d ", iter);
-        TYVOutputMultiplesNumber(iter);
+        TYVMultiplesOutputMessage(iter);
         printf("\n");
     }
 }

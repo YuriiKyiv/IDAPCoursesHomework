@@ -12,8 +12,8 @@
 const char TYVMamaMessage[] = "MAMA";
 const char TYVPapaMessage[] = "PAPA";
 
-TYVWhatSay TYVOutputMultiplesNumber(int number) {
-    TYVWhatSay result = TYVSayNothing;
+TYVMessage TYVMultiplesOutputMessage(int number) {
+    TYVMessage result = TYVNothing;
     if (0 == (number % 3)) {
         printf("%s", TYVMamaMessage);
         result +=1;
