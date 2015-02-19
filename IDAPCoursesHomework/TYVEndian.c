@@ -13,6 +13,6 @@ TYVEndian TYVGetByteOrder() {
     return 1 == (char)a ? TYVLitleEndian : TYVBigEndian;
 }
 
-TYVEndian TYVEndianGetReverse(TYVEndian endian){
+TYVEndian TYVGetReverseEndian(TYVEndian endian){
     return endian == TYVBigEndian ? TYVLitleEndian : TYVBigEndian;
 }

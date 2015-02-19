@@ -18,6 +18,6 @@ extern
 TYVEndian TYVGetByteOrder();
 
 extern
-TYVEndian TYVEndianGetReverse(TYVEndian endian);
+TYVEndian TYVGetReverseEndian(TYVEndian endian);
 
 #endif /* defined(__IDAPCoursesHomework__TYVEndian__) */
