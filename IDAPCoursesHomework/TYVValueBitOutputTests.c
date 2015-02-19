@@ -14,8 +14,12 @@ void TYVValueBitOutputTest(){
     char one = 1;
     char a = 'A';
     int value = 1000;
-    TYVValueBitOutput(&zero, sizeof(zero), TYVlitleEndian);
-    TYVValueBitOutput(&one, sizeof(one), TYVlitleEndian);
-    TYVValueBitOutput(&a, sizeof(a), TYVlitleEndian);
-    TYVValueBitOutput(&value, sizeof(value), TYVlitleEndian);
+    printf("TEST 1\n");
+    TYVValueBitOutput(&zero, sizeof(zero), TYVLitleEndian);
+    printf("TEST 2\n");
+    TYVValueBitOutput(&one, sizeof(one), TYVLitleEndian);
+    printf("TEST 3\n");
+    TYVValueBitOutput(&a, sizeof(a), TYVLitleEndian);
+    printf("TEST 4\n");
+    TYVValueBitOutput(&value, sizeof(value), TYVLitleEndian);
 }
