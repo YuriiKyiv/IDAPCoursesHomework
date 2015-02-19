@@ -11,14 +11,14 @@
 #include "TYVBitReverse.h"
 
 static
-void TYVBitReversTest();
+void TYVBitReverseTest();
 
 static
 void TYVValueBitOutputTests();
 
 void TYVTests(){
     TYVValueBitOutputTests();
-    TYVBitReversTest();
+    TYVBitReverseTest();
 }
 
 void TYVValueBitOutputTests(){
@@ -36,7 +36,7 @@ void TYVValueBitOutputTests(){
     TYVValueBitOutput(&value, sizeof(value), TYVLitleEndian);
 }
 
-void TYVBitReversTest(){
+void TYVBitReverseTest(){
     int number = 1000;
     printf("Reverse test 1\n");
     TYVBitReverse(&number, sizeof(number),1);
