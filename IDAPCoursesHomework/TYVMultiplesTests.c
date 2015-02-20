@@ -49,8 +49,8 @@ void TYVSayOnlyPAPATest(){
 }
 
 void TYVSayMAMAPAPATest(){
-    assert(TYVMamapapa == TYVMultiplesOutputMessage(15));
-    assert(TYVMamapapa == TYVMultiplesOutputMessage(30));
+    assert(TYVMamaPapa == TYVMultiplesOutputMessage(15));
+    assert(TYVMamaPapa == TYVMultiplesOutputMessage(30));
 }
 
 void TYVSayNothingTest(){
