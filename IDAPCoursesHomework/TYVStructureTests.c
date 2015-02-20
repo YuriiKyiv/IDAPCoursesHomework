@@ -11,12 +11,36 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-void TYVStuctureTestsRunAll(){
+#pragma mark -
+#pragma mark Private Definitions
+
+static
+void TYVStrucureSizeTest();
+
+static
+void TYVStrucureOptimizedSizeTest();
+
+static
+void TYVStructureOffsetofTest();
+
+static
+void TYVBasicUnionStructureTest();
+
+static
+void TYVFieldSizesTest();
+
+#pragma mark -
+#pragma mark Public Implementations
+
+void TYVStuctureTestsRun(){
     TYVStrucureSizeTest();
     TYVStrucureOptimizedSizeTest();
     TYVFieldSizesTest();
     TYVBasicUnionStructureTest();
 }
+
+#pragma mark -
+#pragma mark Private Implementations
 
 void TYVStrucureSizeTest(){
     TYVBasicStructure structure;
@@ -31,7 +55,6 @@ void TYVStrucureOptimizedSizeTest(){
 void TYVStructureOffsetofTest(){
 //    TYVBasicStructure strucuture;
 //    doesn't work the offsetof method
-    TYVBasicOptimizedStructure strucuture;
 }
 
 void TYVBasicUnionStructureTest(){

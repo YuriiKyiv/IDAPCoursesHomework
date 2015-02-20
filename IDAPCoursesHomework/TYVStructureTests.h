@@ -11,11 +11,7 @@
 
 #include <stdio.h>
 
-void TYVStuctureTestsRunAll();
-void TYVStrucureSizeTest();
-void TYVStrucureOptimizedSizeTest();
-void TYVStructureOffsetofTest();
-void TYVBasicUnionStructureTest();
-void TYVFieldSizesTest();
+extern
+void TYVStuctureTestsRun();
 
 #endif /* defined(__IDAPCoursesHomework__TYVStructureTests__) */
