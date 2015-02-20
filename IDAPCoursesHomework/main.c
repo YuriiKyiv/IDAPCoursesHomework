@@ -10,6 +10,7 @@
 #include "TYVMultiplesTests.h"
 #include "TYVMultiples.h"
 #include <assert.h>
+#include "TYVStructureTests.h"
 
 #define TYVValueOutputGenerate(type, spec) \
     type TYVOutput_##type(type value) { \
@@ -37,6 +38,7 @@ int main(int argc, const char * argv[]) {
     printf("Hello, World!\n");
     
     TYVTask1Perform();
+    TYVStuctureTestsRun();
     
     TYVTask2Perform();
     

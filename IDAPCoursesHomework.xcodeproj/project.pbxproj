@@ -74,6 +74,10 @@
 				5A26DD7B1A8DEB93008AA0F2 /* TYVMultiples.h */,
 				5A26DD7D1A8DEBB7008AA0F2 /* TYVMultiplesTests.c */,
 				5A26DD7E1A8DEBB7008AA0F2 /* TYVMultiplesTests.h */,
+				5ABCB6EF1A8CD5FD00CD71E2 /* TYVStructure.c */,
+				5ABCB6F01A8CD5FD00CD71E2 /* TYVStructure.h */,
+				5ABCB6F21A8CD6AF00CD71E2 /* TYVStructureTests.c */,
+				5ABCB6F31A8CD6AF00CD71E2 /* TYVStructureTests.h */,
 			);
 			path = IDAPCoursesHomework;
 			sourceTree = "<group>";
@@ -137,6 +141,8 @@
 				5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */,
 				5A26DD7C1A8DEB93008AA0F2 /* TYVMultiples.c in Sources */,
 				5A26DD7F1A8DEBB7008AA0F2 /* TYVMultiplesTests.c in Sources */,
+				5ABCB6F11A8CD5FD00CD71E2 /* TYVStructure.c in Sources */,
+				5ABCB6F41A8CD6AF00CD71E2 /* TYVStructureTests.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
