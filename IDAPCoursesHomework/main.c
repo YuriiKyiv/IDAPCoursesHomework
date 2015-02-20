@@ -13,7 +13,7 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
     
-    TYVStuctureTestsRunAll();
+    TYVStuctureTestsRun();
     
     return 0;
 }
