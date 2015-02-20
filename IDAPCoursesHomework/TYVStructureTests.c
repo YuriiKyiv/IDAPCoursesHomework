@@ -19,23 +19,24 @@ void TYVStuctureTestsRunAll(){
 }
 
 void TYVStrucureSizeTest(){
-    TYVBasicStructure strucuture;
-    printf("Size of the basic stucture : %lu \n",sizeof(strucuture));
+    TYVBasicStructure structure;
+    printf("Size of the basic stucture : %lu \n",sizeof(structure));
 }
 
 void TYVStrucureOptimizedSizeTest(){
-    TYVBasicOptimizedStructure strucuture;
-    printf("Size of the optimized stucture : %lu \n",sizeof(strucuture));
+    TYVBasicOptimizedStructure structure;
+    printf("Size of the optimized stucture : %lu \n",sizeof(structure));
 }
 
 void TYVStructureOffsetofTest(){
 //    TYVBasicStructure strucuture;
 //    doesn't work the offsetof method
+    TYVBasicOptimizedStructure strucuture;
 }
 
 void TYVBasicUnionStructureTest(){
-    TYVBasicUnionStructure strucuture;
-    printf("%d\n",strucuture.data.bits.bool1 = 1);
+    TYVBasicUnionStructure structure;
+    printf("%d\n",structure.data.bits.bool1 = 1);
 }
 
 void TYVFieldSizesTest(){
