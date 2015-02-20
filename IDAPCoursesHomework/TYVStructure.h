@@ -29,7 +29,6 @@ struct TYVBasicStructure {
     bool bool6;
 
 };
-
 typedef struct TYVBasicStructure TYVBasicStructure;
 
 struct TYVBasicOptimizedStructure {
@@ -52,10 +51,14 @@ struct TYVBasicOptimizedStructure {
     bool bool5;
     bool bool6;
 };
-
 typedef struct TYVBasicOptimizedStructure TYVBasicOptimizedStructure;
 
 struct TYVBasicUnionStructure {
+    long long longLong1;
+    double double1;
+    
+    char *char1;
+    
     union {
         struct {
             bool bool1 : 1;
@@ -69,21 +72,12 @@ struct TYVBasicUnionStructure {
     } data;
     
     float float1;
-    
     int int1;
-    
-    long long longLong1;
     
     short short1;
     short short2;
     short short3;
-    
-    double double1;
-    
-    char *char1;
-    
 };
-
 typedef struct TYVBasicUnionStructure TYVBasicUnionStructure;
 
 #endif /* defined(__IDAPCoursesHomework__TYVStructure__) */
