@@ -13,38 +13,31 @@
 #include <stdbool.h>
 
 struct TYVBasicStructure {
-    
-    bool bool1;
     bool bool2;
-    bool bool3;
-    bool bool4;
-    bool bool5;
-    bool bool6;
-    
-    float float1;
-    
-    int int1;
-    
-    long long longLong1;
-    
-    short short1;
     short short2;
+    bool bool3;
+    long long longLong1;
+    bool bool5;
+    float float1;
+    int int1;
+    short short1;
+    bool bool4;
     short short3;
-    
     double double1;
-    
+    bool bool1;
     char *char1;
-    
+    bool bool6;
+
 };
 
 typedef struct TYVBasicStructure TYVBasicStructure;
 
 struct TYVBasicOptimizedStructure {
+    long long longLong1;
+    double double1;
     
     char *char1;
     
-    long long longLong1;
-    double double1;
     int int1;
     float float1;
     
@@ -58,13 +51,11 @@ struct TYVBasicOptimizedStructure {
     bool bool4;
     bool bool5;
     bool bool6;
-    
 };
 
 typedef struct TYVBasicOptimizedStructure TYVBasicOptimizedStructure;
 
 struct TYVBasicUnionStructure {
-    
     union {
         struct {
             bool bool1 : 1;
