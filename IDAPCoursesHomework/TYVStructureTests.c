@@ -37,6 +37,7 @@ void TYVStuctureTestsRun(){
     TYVStrucureOptimizedSizeTest();
     TYVFieldSizesTest();
     TYVBasicUnionStructureTest();
+    TYVStructureOffsetofTest();
 }
 
 #pragma mark -

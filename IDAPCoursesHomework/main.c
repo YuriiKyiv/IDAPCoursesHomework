@@ -29,6 +29,8 @@ void TYVTask1Perform();
 
 void TYVTask2Perform();
 
+void TYVTask3Perform();
+
 TYVValueOutputGenerate(int, d);
 TYVValueOutputGenerate(long, ld);
 TYVValueOutputGenerate(char, c);
@@ -38,10 +40,11 @@ int main(int argc, const char * argv[]) {
     printf("Hello, World!\n");
     
     TYVTask1Perform();
-    TYVStuctureTestsRun();
     
     TYVTask2Perform();
     
+    TYVTask3Perform();
+
     return 0;
 }
 
@@ -54,11 +57,13 @@ void TYVOutputMultiplesNumberLoop(int iter){
     }
 }
 
+inline
 void TYVTask1Perform(){
     TYVOutputMultiplesNumberLoop(iterations);
     TYVMultiplesTests();
 }
 
+inline
 void TYVTask2Perform(){
     TYVOutputValue(int, 15)
     TYVOutputValue(long, 100500)
@@ -67,4 +72,9 @@ void TYVTask2Perform(){
     assert(12 == TYVOutput_int(12));
     assert(100500 == TYVOutput_long(100500));
     assert('c'== TYVOutput_char('c'));
+}
+
+inline
+void TYVTask3Perform(){
+    TYVStuctureTestsRun();
 }
