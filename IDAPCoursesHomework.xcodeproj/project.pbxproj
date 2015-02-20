@@ -70,16 +70,32 @@
 			isa = PBXGroup;
 			children = (
 				5ABCB6E21A8CD25B00CD71E2 /* main.c */,
-				5A26DD7A1A8DEB93008AA0F2 /* TYVMultiples.c */,
-				5A26DD7B1A8DEB93008AA0F2 /* TYVMultiples.h */,
-				5A26DD7D1A8DEBB7008AA0F2 /* TYVMultiplesTests.c */,
-				5A26DD7E1A8DEBB7008AA0F2 /* TYVMultiplesTests.h */,
+				5AD107271A979BD900C18E74 /* Task1 */,
+				5AD107261A979BB900C18E74 /* Task3 */,
+			);
+			path = IDAPCoursesHomework;
+			sourceTree = "<group>";
+		};
+		5AD107261A979BB900C18E74 /* Task3 */ = {
+			isa = PBXGroup;
+			children = (
 				5ABCB6EF1A8CD5FD00CD71E2 /* TYVStructure.c */,
 				5ABCB6F01A8CD5FD00CD71E2 /* TYVStructure.h */,
 				5ABCB6F21A8CD6AF00CD71E2 /* TYVStructureTests.c */,
 				5ABCB6F31A8CD6AF00CD71E2 /* TYVStructureTests.h */,
 			);
-			path = IDAPCoursesHomework;
+			name = Task3;
+			sourceTree = "<group>";
+		};
+		5AD107271A979BD900C18E74 /* Task1 */ = {
+			isa = PBXGroup;
+			children = (
+				5A26DD7A1A8DEB93008AA0F2 /* TYVMultiples.c */,
+				5A26DD7B1A8DEB93008AA0F2 /* TYVMultiples.h */,
+				5A26DD7D1A8DEBB7008AA0F2 /* TYVMultiplesTests.c */,
+				5A26DD7E1A8DEBB7008AA0F2 /* TYVMultiplesTests.h */,
+			);
+			name = Task1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
