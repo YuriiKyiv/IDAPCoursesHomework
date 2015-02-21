@@ -11,7 +11,10 @@
 
 #include <stdio.h>
 
-enum TYVEndian {TYVBigEndian, TYVLitleEndian};
+enum TYVEndian {
+    TYVBigEndian,
+    TYVLitleEndian
+};
 typedef enum TYVEndian TYVEndian;
 
 extern
