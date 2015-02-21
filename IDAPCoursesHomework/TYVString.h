@@ -12,6 +12,18 @@
 #include <stdio.h>
 
 typedef struct TYVString TYVString;
+struct TYVString {
+    char *_data;
+    uint8_t _length;
+    
+    size_t _referenceCount;
+};
+
+typedef enum TYVGender TYVGender;
+enum TYVGender {
+    TYVMale,
+    TYVFemale
+};
 
 TYVString *TYVStringCreate(char *data, uint8_t length);
 

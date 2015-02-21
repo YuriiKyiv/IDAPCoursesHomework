@@ -15,14 +15,6 @@
 static
 void TYVStringDealloc(TYVString *string);
 
-
-struct TYVString {
-    char *_data;
-    uint8_t _length;
-    
-    size_t _referenceCount;
-};
-
 #pragma mark -
 #pragma mark Public Implementations
 
