@@ -10,7 +10,7 @@
 #include "stdbool.h"
 #include "TYVValueBitOutput.h"
 
-void TYVBitReverse(void *number, size_t size, bool reverse){
+void TYVByteReverse(void *number, size_t size, bool reverse){
     TYVEndian endian = TYVGetByteOrder();
     reverse ?
         TYVValueBitOutput(number, size, TYVGetReverseEndian(endian)):
