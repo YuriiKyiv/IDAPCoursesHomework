@@ -19,14 +19,6 @@ void TYVHumanDealloc(TYVHuman *);
 #pragma mark -
 #pragma mark Public Implementations
 
-struct TYVHuman {
-    TYVString *_name;
-    uint8_t _age;
-    TYVGender _gender;
-    
-    size_t _referenceCount;
-};
-
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHuman *human = malloc(sizeof(*human));
     human->_referenceCount = 1;
@@ -52,5 +44,9 @@ void TYVHumanRelease(TYVHuman *human){
 #pragma mark Private Implementations
 
 void TYVHumanDealloc(TYVHuman *human){
+    if (NULL != human->_name) {
+        TYVStringRelease(human->_name);
+    }
     
+    free(human);
 }

@@ -13,6 +13,13 @@
 #include "TYVString.h"
 
 typedef struct TYVHuman TYVHuman;
+struct TYVHuman {
+    TYVString *_name;
+    uint8_t _age;
+    TYVGender _gender;
+    
+    size_t _referenceCount;
+};
 
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender);
 
