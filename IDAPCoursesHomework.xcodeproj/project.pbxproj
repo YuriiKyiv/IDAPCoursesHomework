@@ -154,6 +154,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A8E122E1A92122700DCBE13 /* TYVValueBitOutputTests.c in Sources */,
+				5A4C5DD01A95F830006E309E /* TYVBitReverse.c in Sources */,
+				5AFA967E1A91E85E00F2C080 /* TYVEndian.c in Sources */,
 				5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */,
 				5A26DD7C1A8DEB93008AA0F2 /* TYVMultiples.c in Sources */,
 				5A26DD7F1A8DEBB7008AA0F2 /* TYVMultiplesTests.c in Sources */,
