@@ -19,10 +19,9 @@ void TYVReverse(void *number, size_t size);
 #pragma mark Public Implementations
 
 void TYVByteReverse(void *number, size_t size, bool reverse){
-    TYVEndian endian = TYVGetByteOrder();
-    reverse ?
-        TYVValueBitOutput(number, size, TYVGetReverseEndian(endian)):
-        TYVValueBitOutput(number, size, endian);
+    if (reverse) {
+        TYVReverse(number, size);
+    }
 }
 
 #pragma mark -
