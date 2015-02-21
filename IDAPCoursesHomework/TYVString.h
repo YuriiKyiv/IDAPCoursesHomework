@@ -13,4 +13,10 @@
 
 typedef struct TYVString TYVString;
 
+TYVString *TYVStringCreate(char *data, uint8_t length);
+
+void TYVStringRetain(TYVString *string);
+
+void TYVStringRelease(TYVString *string);
+
 #endif /* defined(__IDAPCoursesHomework__TYVString__) */
