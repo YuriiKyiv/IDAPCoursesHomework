@@ -14,6 +14,7 @@
 #include "stdbool.h"
 #include "TYVValueBitOutputTests.h"
 #include "TYVEndian.h"
+#include "TYVStringTests.h"
 
 #define TYVValueOutputGenerate(type, spec) \
     type TYVOutput_##type(type value) { \
@@ -36,6 +37,8 @@ void TYVTask3Perform();
 
 void TYVTask4Perform();
 
+void TYVTask5Perform();
+
 TYVValueOutputGenerate(int, d);
 TYVValueOutputGenerate(long, ld);
 TYVValueOutputGenerate(char, c);
@@ -51,6 +54,8 @@ int main(int argc, const char * argv[]) {
     TYVTask3Perform();
     
     TYVTask4Perform();
+    
+    TYVTask5Perform();
     
     return 0;
 }
@@ -89,4 +94,9 @@ void TYVTask3Perform(){
 inline
 void TYVTask4Perform(){
         TYVTests();
+}
+
+inline
+void TYVTask5Perform(){
+    TYVStringTestsPerfom();
 }

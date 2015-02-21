@@ -38,6 +38,14 @@ void TYVStringRelease(TYVString *string){
     }
 }
 
+char *TYVStringGetData(TYVString *string){
+    return string->_data;
+}
+
+uint8_t TYVStringGetLength(TYVString *string){
+    return string->_length;
+}
+
 #pragma mark -
 #pragma mark Private Implementations
 

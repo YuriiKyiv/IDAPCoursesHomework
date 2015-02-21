@@ -31,4 +31,8 @@ void TYVStringRetain(TYVString *string);
 
 void TYVStringRelease(TYVString *string);
 
+char *TYVStringGetData(TYVString *string);
+
+uint8_t TYVStringGetLength(TYVString *string);
+
 #endif /* defined(__IDAPCoursesHomework__TYVString__) */
