@@ -11,6 +11,9 @@
 #include "TYVMultiples.h"
 #include <assert.h>
 #include "TYVStructureTests.h"
+#include "stdbool.h"
+#include "TYVValueBitOutputTests.h"
+#include "TYVEndian.h"
 
 #define TYVValueOutputGenerate(type, spec) \
     type TYVOutput_##type(type value) { \
@@ -31,6 +34,8 @@ void TYVTask2Perform();
 
 void TYVTask3Perform();
 
+void TYVTask4Perform();
+
 TYVValueOutputGenerate(int, d);
 TYVValueOutputGenerate(long, ld);
 TYVValueOutputGenerate(char, c);
@@ -44,6 +49,8 @@ int main(int argc, const char * argv[]) {
     TYVTask2Perform();
     
     TYVTask3Perform();
+    
+    TYVTask4Perform();
     
     return 0;
 }
@@ -77,4 +84,9 @@ void TYVTask2Perform(){
 inline
 void TYVTask3Perform(){
     TYVStuctureTestsRun();
+}
+
+inline
+void TYVTask4Perform(){
+        TYVTests();
 }
