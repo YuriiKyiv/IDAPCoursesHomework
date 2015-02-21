@@ -10,7 +10,11 @@
 #include "TYVString.h"
 #include "stdlib.h"
 
+#pragma mark -
+#pragma mark Private Declarations
 
+static
+void TYVHumanDealloc(TYVHuman *);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -31,4 +35,22 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     human->_gender = gender;
     
     return human;
+}
+
+void TYVHumanRetain(TYVHuman *human){
+    human->_referenceCount++;
+}
+
+void TYVHumanRelease(TYVHuman *human){
+    human->_referenceCount--;
+    if (0 == human->_referenceCount){
+        TYVHumanDealloc(human);
+    }
+}
+
+#pragma mark -
+#pragma mark Private Implementations
+
+void TYVHumanDealloc(TYVHuman *human){
+    
 }
