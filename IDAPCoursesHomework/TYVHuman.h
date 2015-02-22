@@ -17,6 +17,8 @@ struct TYVHuman {
     TYVString *_name;
     uint8_t _age;
     TYVGender _gender;
+    uint8_t _childrenCount;
+    TYVHuman *_partner;
     
     size_t _referenceCount;
 };

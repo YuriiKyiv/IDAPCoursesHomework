@@ -16,6 +16,12 @@
 static
 void TYVHumanDealloc(TYVHuman *);
 
+static
+void TYVHumanDeletePartner(TYVHuman *human);
+
+static
+void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -25,6 +31,8 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     human->_name = string;
     human->_age = age;
     human->_gender = gender;
+    human->_childrenCount = 0;
+    human->_partner = NULL;
     
     return human;
 }
@@ -40,6 +48,19 @@ void TYVHumanRelease(TYVHuman *human){
     }
 }
 
+void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
+    // add cheaker for married before
+    if (NULL != male && NULL != female){
+        TYVHumanSetPartner(male,female);
+        TYVHumanSetPartner(female, male);
+    }
+}
+
+void TYVHumanDivorce(TYVHuman *human){
+    TYVHumanDeletePartner(human->_partner);
+    TYVHumanDeletePartner(human);
+}
+
 #pragma mark -
 #pragma mark Private Implementations
 
@@ -49,4 +70,22 @@ void TYVHumanDealloc(TYVHuman *human){
     }
     
     free(human);
+}
+
+void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
+    if (NULL != human){
+        if (NULL != partner) {
+            TYVHumanRetain(partner);
+        }
+        
+        human->_partner = partner;
+    }
+}
+
+void TYVHumanDeletePartner(TYVHuman *human){
+    if (NULL != human
+        && NULL != human->_partner) {
+        TYVHumanRelease(human->_partner);
+        human->_partner = NULL;
+    }
 }
