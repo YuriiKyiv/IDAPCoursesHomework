@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include "TYVString.h"
 
+const uint8_t TYVChildrenMaxCount = 20;
+
 typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
     TYVString *_name;
@@ -19,6 +21,9 @@ struct TYVHuman {
     TYVGender _gender;
     uint8_t _childrenCount;
     TYVHuman *_partner;
+    TYVHuman *_father;
+    TYVHuman *_mother;
+    TYVHuman *_children[TYVChildrenMaxCount];
     
     size_t _referenceCount;
 };

@@ -22,6 +22,9 @@ void TYVHumanDeletePartner(TYVHuman *human);
 static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 
+static
+void TYVHumanDeletePartner(TYVHuman *human);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -33,6 +36,8 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     human->_gender = gender;
     human->_childrenCount = 0;
     human->_partner = NULL;
+    human->_father = NULL;
+    human->_mother = NULL;
     
     return human;
 }
@@ -66,6 +71,15 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
 void TYVHumanDivorce(TYVHuman *human){
     TYVHumanDeletePartner(human->_partner);
     TYVHumanDeletePartner(human);
+}
+
+void TYVHumanMate(TYVHuman *human, TYVString *name){
+    if (NULL != human && NULL != human->_partner) {
+        TYVHuman *child = TYVHumanCreate(name, 0, TYVMale);
+        // TODO: connect with parents
+        child->_father = human;
+        TYVHumanRetain(human);
+    }
 }
 
 #pragma mark -
