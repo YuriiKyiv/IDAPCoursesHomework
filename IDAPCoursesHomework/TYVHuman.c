@@ -76,6 +76,10 @@ void TYVHumanDealloc(TYVHuman *human){
         TYVStringRelease(human->_name);
     }
     
+    if (NULL != human->_partner){
+        TYVHumanRelease(human->_partner);
+    }
+    
     free(human);
 }
 
