@@ -19,12 +19,6 @@ struct TYVString {
     size_t _referenceCount;
 };
 
-typedef enum TYVGender TYVGender;
-enum TYVGender {
-    TYVMale,
-    TYVFemale
-};
-
 TYVString *TYVStringCreate(char *data, uint8_t length);
 
 void TYVStringRetain(TYVString *string);

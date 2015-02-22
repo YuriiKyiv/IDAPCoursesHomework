@@ -73,13 +73,31 @@ void TYVHumanDivorce(TYVHuman *human){
     TYVHumanDeletePartner(human);
 }
 
-void TYVHumanMate(TYVHuman *human, TYVString *name){
+TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
+    TYVHuman *child = NULL;
     if (NULL != human && NULL != human->_partner) {
-        TYVHuman *child = TYVHumanCreate(name, 0, TYVMale);
-        // TODO: connect with parents
-        child->_father = human;
-        TYVHumanRetain(human);
+        child = TYVHumanCreate(name, 0, TYVMale);
+        if (TYVHumanGetGender(human) == TYVMale){
+            child->_father = human;
+            TYVHumanRetain(human);
+            child->_mother = human->_partner;
+            TYVHumanRetain(human->_partner);
+        } else {
+            child->_mother = human;
+            TYVHumanRetain(human);
+            child->_father = human->_partner;
+            TYVHumanRetain(human->_partner);
+        }
+        
+        TYVHumanRetain(child);
+        TYVHumanRetain(child);
     }
+    
+    return child;
+}
+            
+TYVGender TYVHumanGetGender(TYVHuman *human){
+    return human->_gender;
 }
 
 #pragma mark -

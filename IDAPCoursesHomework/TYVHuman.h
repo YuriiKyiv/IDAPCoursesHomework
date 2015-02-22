@@ -12,7 +12,13 @@
 #include <stdio.h>
 #include "TYVString.h"
 
-const uint8_t TYVChildrenMaxCount = 20;
+//const uint8_t TYVChildrenMaxCount = 20;
+
+typedef enum TYVGender TYVGender;
+enum TYVGender {
+    TYVMale,
+    TYVFemale
+};
 
 typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
@@ -23,7 +29,7 @@ struct TYVHuman {
     TYVHuman *_partner;
     TYVHuman *_father;
     TYVHuman *_mother;
-    TYVHuman *_children[TYVChildrenMaxCount];
+    TYVHuman *_children[20];
     
     size_t _referenceCount;
 };
@@ -35,5 +41,9 @@ void TYVHumanRetain(TYVHuman *string);
 void TYVHumanRelease(TYVHuman *string);
 
 void TYVHumanDivorce(TYVHuman *human);
+
+TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name);
+
+TYVGender TYVHumanGetGender(TYVHuman *human);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */
