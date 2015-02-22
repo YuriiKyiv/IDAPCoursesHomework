@@ -29,4 +29,6 @@ void TYVHumanRetain(TYVHuman *string);
 
 void TYVHumanRelease(TYVHuman *string);
 
+void TYVHumanDivorce(TYVHuman *human);
+
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */

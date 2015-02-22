@@ -49,8 +49,15 @@ void TYVHumanRelease(TYVHuman *human){
 }
 
 void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
-    // add cheaker for married before
     if (NULL != male && NULL != female){
+        if (NULL != male->_partner){
+            TYVHumanDivorce(male);
+        }
+    
+        if (NULL != female->_partner){
+            TYVHumanDivorce(female);
+        }
+    
         TYVHumanSetPartner(male,female);
         TYVHumanSetPartner(female, male);
     }
