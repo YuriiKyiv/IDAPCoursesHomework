@@ -77,6 +77,7 @@ void TYVHumanDivorce(TYVHuman *human){
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
+    // TODO: Add condition of childrenCount
     TYVHuman *child = NULL;
     if (NULL != human && NULL != human->_partner) {
         child = TYVHumanCreate(name, 0, TYVMale);
@@ -98,6 +99,7 @@ TYVGender TYVHumanGetGender(TYVHuman *human){
 #pragma mark Private Implementations
 
 void TYVHumanDealloc(TYVHuman *human){
+    // TODO: add children information
     if (NULL != human->_name) {
         TYVStringRelease(human->_name);
     }
@@ -142,4 +144,10 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
     TYVHumanRetain(human->_partner);
     TYVHumanRetain(human);
     TYVHumanRetain(human->_partner);
+    human->_children[human->_childrenCount] = child;
+    human->_partner->_children[human->_partner->_childrenCount] = child;
+    TYVHumanRetain(child);
+    TYVHumanRetain(child);
+    human->_childrenCount++;
+    human->_partner->_childrenCount++;
 }
