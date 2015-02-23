@@ -25,6 +25,9 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 static
 void TYVHumanDeletePartner(TYVHuman *human);
 
+static
+void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -78,19 +81,10 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
     if (NULL != human && NULL != human->_partner) {
         child = TYVHumanCreate(name, 0, TYVMale);
         if (TYVHumanGetGender(human) == TYVMale){
-            child->_father = human;
-            TYVHumanRetain(human);
-            child->_mother = human->_partner;
-            TYVHumanRetain(human->_partner);
+            TYVHumanConnectWithParents(child, human);
         } else {
-            child->_mother = human;
-            TYVHumanRetain(human);
-            child->_father = human->_partner;
-            TYVHumanRetain(human->_partner);
+            TYVHumanConnectWithParents(child, human->_partner);
         }
-        
-        TYVHumanRetain(child);
-        TYVHumanRetain(child);
     }
     
     return child;
@@ -131,4 +125,13 @@ void TYVHumanDeletePartner(TYVHuman *human){
         TYVHumanRelease(human->_partner);
         human->_partner = NULL;
     }
+}
+
+void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
+    child->_father = human;
+    TYVHumanRetain(human);
+    child->_mother = human->_partner;
+    TYVHumanRetain(human->_partner);
+    TYVHumanRetain(child);
+    TYVHumanRetain(child);
 }
