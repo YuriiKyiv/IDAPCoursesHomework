@@ -106,6 +106,14 @@ void TYVHumanDealloc(TYVHuman *human){
         TYVHumanRelease(human->_partner);
     }
     
+    if (NULL != human->_father) {
+        TYVHumanRelease(human->_father);
+    }
+    
+    if (NULL != human->_mother) {
+        TYVHumanRelease(human->_mother);
+    }
+    
     free(human);
 }
 
