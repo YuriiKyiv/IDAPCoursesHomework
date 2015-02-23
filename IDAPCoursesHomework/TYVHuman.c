@@ -140,6 +140,6 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
     TYVHumanRetain(human);
     child->_mother = human->_partner;
     TYVHumanRetain(human->_partner);
-    TYVHumanRetain(child);
-    TYVHumanRetain(child);
+    TYVHumanRetain(human);
+    TYVHumanRetain(human->_partner);
 }
