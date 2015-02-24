@@ -59,6 +59,13 @@ struct TYVBasicUnionStructure {
     
     char *char1;
     
+    float float1;
+    int int1;
+    
+    short short1;
+    short short2;
+    short short3;
+    
     union {
         struct {
             bool bool1 : 1;
@@ -70,13 +77,6 @@ struct TYVBasicUnionStructure {
         } bits;
         uint8_t flags;
     } data;
-    
-    float float1;
-    int int1;
-    
-    short short1;
-    short short2;
-    short short3;
 };
 typedef struct TYVBasicUnionStructure TYVBasicUnionStructure;
 
