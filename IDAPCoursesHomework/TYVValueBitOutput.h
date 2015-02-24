@@ -13,6 +13,6 @@
 #include "TYVEndian.h"
 
 extern
-void TYVValueBitOutput(void *valueRef, size_t size, TYVEndian endian);
+void TYVValueBitsOutput(void *valueRef, size_t size, TYVEndian endian);
 
 #endif /* defined(__IDAPCoursesHomework__TYVValueBitOutput__) */

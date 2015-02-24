@@ -8,7 +8,7 @@
 
 #include "TYVValueBitOutput.h"
 
-void TYVBitLoop(unsigned char charValue);
+void TYVByteLoop(unsigned char charValue);
 
 void TYVValueBitsOutput(void *valueRef, size_t size, TYVEndian endian) {
     unsigned char *charValueRef = (unsigned char *)valueRef;
@@ -16,7 +16,7 @@ void TYVValueBitsOutput(void *valueRef, size_t size, TYVEndian endian) {
     for (long int byteIter = 0; byteIter < size; byteIter++) {
         iter = endian ? byteIter : size - byteIter - 1;
         unsigned char charValue = charValueRef[iter];
-        TYVBitLoop(charValue);
+        TYVByteLoop(charValue);
         printf(" ");
     }
     
