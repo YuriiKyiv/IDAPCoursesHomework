@@ -121,11 +121,21 @@ void TYVHumanDealloc(TYVHuman *human){
 }
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
-    if (NULL != human){
-        if (NULL != partner) {
+    if (NULL == human){
+        return
+    };
+    
+    if (NULL == human->_partner){
+        if (NULL == partner){
+            return
+        } else {
             TYVHumanRetain(partner);
+            human->_partner = partner;
         }
         
+    } else {
+        TYVHumanRelease(human->_partner);
+        TYVHumanRetain(partner);
         human->_partner = partner;
     }
 }
