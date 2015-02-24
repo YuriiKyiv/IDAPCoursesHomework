@@ -10,7 +10,7 @@
 
 void TYVBitLoop(unsigned char charValue);
 
-void TYVValueBitOutput(void *valueRef, size_t size, TYVEndian endian) {
+void TYVValueBitsOutput(void *valueRef, size_t size, TYVEndian endian) {
     unsigned char *charValueRef = (unsigned char *)valueRef;
     unsigned char charValue = 0;
     size_t iter = 0;
@@ -18,17 +18,16 @@ void TYVValueBitOutput(void *valueRef, size_t size, TYVEndian endian) {
         iter = endian ? byteIter : size - byteIter - 1;
         charValue = charValueRef[iter];
         TYVBitLoop(charValue);
+        printf(" ");
     }
     
     printf("\n");
 }
 
 inline
-void TYVBitLoop(unsigned char charValue){
+void TYVByteLoop(unsigned char charValue){
     for (int bitIter = 0; bitIter < 8; bitIter++) {
         printf("%u", 0 != (charValue & 128));
         charValue <<= 1;
     }
-    
-    printf(" ");
 }

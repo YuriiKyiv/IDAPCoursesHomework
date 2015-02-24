@@ -10,7 +10,7 @@
 
 TYVEndian TYVGetByteOrder() {
     unsigned int a = 1;
-    return 1 == (char)a ? TYVLitleEndian : TYVBigEndian;
+    return 1 == *(char *)&a ? TYVLitleEndian : TYVBigEndian;
 }
 
 TYVEndian TYVGetReverseEndian(TYVEndian endian){
