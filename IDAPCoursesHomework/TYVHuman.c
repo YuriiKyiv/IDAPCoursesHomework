@@ -144,7 +144,14 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
 }
 
 void TYVAddChild(TYVHuman *human, TYVHuman *child){
+    if (TYVMale == human->_gender)
+        ? child->_father = human
+        : child->_mother = human;
     
+    TYVHumanRetain(child);
+    TYVHumanRetain(human);
+    human->_children[human->_childrenCount] = child;
+    human->_childrenCount++;
 }
 
 void TYVRemoveChild(TYVHuman *human, TYVHuman *child){

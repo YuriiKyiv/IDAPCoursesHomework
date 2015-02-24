@@ -29,9 +29,8 @@ void TYVByteReverse(void *number, size_t size, bool reverse){
 
 void TYVReverse(void *valueRef, size_t size){
     unsigned char *charValueRef = (unsigned char *)valueRef;
-    unsigned char charValue = 0;
     for (int byteIter = 0; byteIter < size / 2; byteIter++){
-        charValue = charValueRef[byteIter];
+        unsigned char charValue = charValueRef[byteIter];
         charValueRef[byteIter] = charValueRef[size - 1 - byteIter];
         charValueRef[size - 1 - byteIter] = charValue;
     }
