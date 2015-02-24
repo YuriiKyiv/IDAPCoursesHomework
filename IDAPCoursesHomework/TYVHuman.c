@@ -27,6 +27,12 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 static
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
 
+static
+void TYVAddChild(TYVHuman *human, TYVHuman *child);
+
+static
+void TYVRemoveChild(TYVHuman *human, TYVHuman *child);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -135,4 +141,12 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
     TYVHumanRetain(child);
     human->_childrenCount++;
     human->_partner->_childrenCount++;
+}
+
+void TYVAddChild(TYVHuman *human, TYVHuman *child){
+    
+}
+
+void TYVRemoveChild(TYVHuman *human, TYVHuman *child){
+    
 }
