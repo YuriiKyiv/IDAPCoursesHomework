@@ -10,9 +10,9 @@
 #include "TYVString.h"
 #include "stdlib.h"
 
-#define TYVReleaseFieldGeneratorByType(type, field) \
+#define TYVReleaseFieldGeneratorByClass(class, field) \
     if (NULL != human->_##field){ \
-        TYV##type##Release(human->_##field); \
+        TYV##class##Release(human->_##field); \
     }
 
 #pragma mark -
@@ -91,10 +91,10 @@ TYVGender TYVHumanGetGender(TYVHuman *human){
 void TYVHumanDealloc(TYVHuman *human){
     // TODO: add children information
     
-    TYVReleaseFieldGeneratorByType(String, name);
-    TYVReleaseFieldGeneratorByType(Human, partner);
-    TYVReleaseFieldGeneratorByType(Human, father);
-    TYVReleaseFieldGeneratorByType(Human, mother);
+    TYVReleaseFieldGeneratorByClass(String, name);
+    TYVReleaseFieldGeneratorByClass(Human, partner);
+    TYVReleaseFieldGeneratorByClass(Human, father);
+    TYVReleaseFieldGeneratorByClass(Human, mother);
   
     free(human);
 }
