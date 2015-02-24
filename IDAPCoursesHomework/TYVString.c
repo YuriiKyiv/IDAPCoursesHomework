@@ -15,12 +15,15 @@
 static
 void TYVStringDealloc(TYVString *string);
 
+static
+char *TYVCharCopy(char *data, uint8_t length);
+
 #pragma mark -
 #pragma mark Public Implementations
 
 TYVString *TYVStringCreate(char *data, uint8_t length){
     TYVString *string = malloc(sizeof(*string));
-    string->_data = data;
+    string->_data = TYVCharCopy(data, length);
     string->_length = length;
     string->_referenceCount = 1;
     
@@ -44,6 +47,15 @@ char *TYVStringGetData(TYVString *string){
 
 uint8_t TYVStringGetLength(TYVString *string){
     return string->_length;
+}
+
+char *TYVCharCopy(char *data, uint8_t length){
+    char *newChar = malloc(sizeof(char) * length);
+    for (uint8_t iter = 0; iter < length; iter++) {
+        newChar[iter] = data[iter];
+    }
+    
+    return newChar;
 }
 
 #pragma mark -

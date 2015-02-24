@@ -16,6 +16,7 @@ TYVOutputMessage TYVMultiplesOutputMessage(int number) {
     if (0 == number){
         return TYVOutputNothing;
     }
+    
     TYVOutputMessage result = TYVOutputNothing;
     if (0 == (number % 3)) {
         printf("%s", TYVMamaMessage);
