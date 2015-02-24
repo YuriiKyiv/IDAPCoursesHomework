@@ -12,10 +12,10 @@
 #include <stdio.h>
 
 enum TYVOutputMessage {
-    TYVNothing,
-    TYVMama,
-    TYVPapa,
-    TYVMamaPapa
+    TYVOutputNothing,
+    TYVOutputMama,
+    TYVOutputPapa,
+    TYVOutputMamaPapa
 };
 typedef enum TYVOutputMessage TYVOutputMessage;
 

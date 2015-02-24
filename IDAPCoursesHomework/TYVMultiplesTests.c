@@ -39,21 +39,21 @@ void TYVMultiplesTests(){
 #pragma mark Private Implementations
 
 void TYVSayOnlyMAMATest(){
-    assert(TYVMama == TYVMultiplesOutputMessage(3));
-    assert(TYVMama == TYVMultiplesOutputMessage(6));
+    assert(TYVOutputMama == TYVMultiplesOutputMessage(3));
+    assert(TYVOutputMama == TYVMultiplesOutputMessage(6));
 }
 
 void TYVSayOnlyPAPATest(){
-    assert(TYVPapa == TYVMultiplesOutputMessage(5));
-    assert(TYVPapa == TYVMultiplesOutputMessage(10));
+    assert(TYVOutputPapa == TYVMultiplesOutputMessage(5));
+    assert(TYVOutputPapa == TYVMultiplesOutputMessage(10));
 }
 
 void TYVSayMAMAPAPATest(){
-    assert(TYVMamaPapa == TYVMultiplesOutputMessage(15));
-    assert(TYVMamaPapa == TYVMultiplesOutputMessage(30));
+    assert(TYVOutputMamaPapa == TYVMultiplesOutputMessage(15));
+    assert(TYVOutputMamaPapa == TYVMultiplesOutputMessage(30));
 }
 
 void TYVSayNothingTest(){
-    assert(TYVNothing == TYVMultiplesOutputMessage(7));
-    assert(TYVNothing == TYVMultiplesOutputMessage(17));
+    assert(TYVOutputNothing == TYVMultiplesOutputMessage(7));
+    assert(TYVOutputNothing == TYVMultiplesOutputMessage(17));
 }

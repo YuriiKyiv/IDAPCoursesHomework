@@ -14,17 +14,17 @@ const char TYVPapaMessage[] = "PAPA";
 
 TYVOutputMessage TYVMultiplesOutputMessage(int number) {
     if (0 == number){
-        return TYVNothing;
+        return TYVOutputNothing;
     }
-    TYVOutputMessage result = TYVNothing;
+    TYVOutputMessage result = TYVOutputNothing;
     if (0 == (number % 3)) {
         printf("%s", TYVMamaMessage);
-        result +=1;
+        result +=TYVOutputMama;
     }
     
     if (0 == (number % 5)) {
         printf("%s", TYVPapaMessage);
-        result += 2;
+        result += TYVOutputPapa;
     }
     
     printf("\n");
