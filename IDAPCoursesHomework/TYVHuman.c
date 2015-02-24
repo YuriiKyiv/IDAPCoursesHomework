@@ -34,6 +34,7 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHuman *human = malloc(sizeof(*human));
     human->_referenceCount = 1;
+    TYVStringRetain(string);
     human->_name = string;
     human->_age = age;
     human->_gender = gender;
