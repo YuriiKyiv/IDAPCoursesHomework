@@ -144,9 +144,11 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
 }
 
 void TYVAddChild(TYVHuman *human, TYVHuman *child){
-    if (TYVMale == human->_gender)
-        ? child->_father = human
-        : child->_mother = human;
+    if (TYVMale == human->_gender){
+        child->_father = human;
+    } else {
+        child->_mother = human;
+    }
     
     TYVHumanRetain(child);
     TYVHumanRetain(human);
