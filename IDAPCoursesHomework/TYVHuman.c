@@ -63,8 +63,8 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
 }
 
 void TYVHumanDivorce(TYVHuman *human){
-    TYVHumanDeletePartner(human->_partner);
-    TYVHumanDeletePartner(human);
+    TYVHumanSetPartner(human, NULL);
+    TYVHumanSetPartner(human->_partner, NULL);
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
@@ -124,8 +124,11 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
         }
         
     } else {
+        if (NULL != partner){
+            TYVHumanRetain(partner);
+        }
+        
         TYVHumanRelease(human->_partner);
-        TYVHumanRetain(partner);
         human->_partner = partner;
     }
 }
