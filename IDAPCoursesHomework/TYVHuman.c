@@ -28,10 +28,10 @@ static
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
 
 static
-void TYVAddChild(TYVHuman *human, TYVHuman *child);
+void TYVHumanAddChild(TYVHuman *human, TYVHuman *child);
 
 static
-void TYVRemoveChild(TYVHuman *human, TYVHuman *child);
+void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -129,21 +129,12 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
 }
 
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
-    child->_father = human;
-    TYVHumanRetain(human);
-    child->_mother = human->_partner;
-    TYVHumanRetain(human->_partner);
-    TYVHumanRetain(human);
-    TYVHumanRetain(human->_partner);
-    human->_children[human->_childrenCount] = child;
-    human->_partner->_children[human->_partner->_childrenCount] = child;
-    TYVHumanRetain(child);
-    TYVHumanRetain(child);
-    human->_childrenCount++;
-    human->_partner->_childrenCount++;
+    // TODO: add cheaking for NULL - parent partner child
+    TYVHumanAddChild(human, child);
+    TYVHumanAddChild(human->_partner, child);
 }
 
-void TYVAddChild(TYVHuman *human, TYVHuman *child){
+void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
     if (TYVMale == human->_gender){
         child->_father = human;
     } else {
@@ -156,6 +147,6 @@ void TYVAddChild(TYVHuman *human, TYVHuman *child){
     human->_childrenCount++;
 }
 
-void TYVRemoveChild(TYVHuman *human, TYVHuman *child){
+void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){
     
 }
