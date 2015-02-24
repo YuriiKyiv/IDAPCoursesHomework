@@ -17,13 +17,7 @@ static
 void TYVHumanDealloc(TYVHuman *);
 
 static
-void TYVHumanDeletePartner(TYVHuman *human);
-
-static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
-
-static
-void TYVHumanDeletePartner(TYVHuman *human);
 
 static
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
@@ -130,14 +124,6 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
         
         TYVHumanRelease(human->_partner);
         human->_partner = partner;
-    }
-}
-
-void TYVHumanDeletePartner(TYVHuman *human){
-    if (NULL != human
-        && NULL != human->_partner) {
-        TYVHumanRelease(human->_partner);
-        human->_partner = NULL;
     }
 }
 

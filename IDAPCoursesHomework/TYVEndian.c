@@ -14,5 +14,5 @@ TYVEndian TYVGetByteOrder() {
 }
 
 TYVEndian TYVGetReverseEndian(TYVEndian endian){
-    return endian == TYVBigEndian ? TYVLitleEndian : TYVBigEndian;
+    return !endian;
 }
