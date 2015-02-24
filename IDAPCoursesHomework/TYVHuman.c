@@ -10,6 +10,11 @@
 #include "TYVString.h"
 #include "stdlib.h"
 
+#define TYVReleaseFieldGeneratorByType(type, field) \
+    if (NULL != human->_##field){ \
+        TYV##type##Release(human->_##field); \
+    }
+
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -85,22 +90,12 @@ TYVGender TYVHumanGetGender(TYVHuman *human){
 
 void TYVHumanDealloc(TYVHuman *human){
     // TODO: add children information
-    if (NULL != human->_name) {
-        TYVStringRelease(human->_name);
-    }
     
-    if (NULL != human->_partner){
-        TYVHumanRelease(human->_partner);
-    }
-    
-    if (NULL != human->_father) {
-        TYVHumanRelease(human->_father);
-    }
-    
-    if (NULL != human->_mother) {
-        TYVHumanRelease(human->_mother);
-    }
-    
+    TYVReleaseFieldGeneratorByType(String, name);
+    TYVReleaseFieldGeneratorByType(Human, partner);
+    TYVReleaseFieldGeneratorByType(Human, father);
+    TYVReleaseFieldGeneratorByType(Human, mother);
+  
     free(human);
 }
 
