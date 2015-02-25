@@ -52,12 +52,10 @@ size_t TYVStringGetLength(TYVString *string){
 }
 
 char *TYVCharCopy(char *data, size_t length){
-    char *newChar = malloc(sizeof(char) * length);
-    for (size_t iter = 0; iter < length; iter++) {
-        newChar[iter] = data[iter];
-    }
+    char *newData = malloc(sizeof(char) * length);
+    memcpy(data, newData, length);
     
-    return newChar;
+    return newData;
 }
 
 #pragma mark -
