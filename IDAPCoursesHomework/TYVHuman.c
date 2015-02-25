@@ -75,18 +75,18 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
 
 void TYVHumanDivorce(TYVHuman *human){
     TYVHumanSetPartner(human, NULL);
-    TYVHumanSetPartner(human->_partner, NULL);
+    TYVHumanSetPartner(TYVHumanGetPartner(human), NULL);
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
     // TODO: Add condition of childrenCount
     TYVHuman *child = NULL;
-    if (NULL != human && NULL != human->_partner) {
+    if (NULL != human && NULL != TYVHumanGetPartner(human)) {
         child = TYVHumanCreate(name, 0, TYVMale);
         if (TYVHumanGetGender(human) == TYVMale){
             TYVHumanConnectWithParents(child, human);
         } else {
-            TYVHumanConnectWithParents(child, human->_partner);
+            TYVHumanConnectWithParents(child, TYVHumanGetPartner(human));
         }
     }
     
@@ -103,6 +103,10 @@ TYVHuman *TYVHumanGetMother(TYVHuman *human){
 
 TYVHuman *TYVHumanGetFather(TYVHuman *human){
     return human->_father;
+}
+
+TYVHuman *TYVHumanGetPartner(TYVHuman *human){
+    return human->_partner;
 }
 
 #pragma mark -
@@ -156,8 +160,8 @@ void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){
 }
 
 void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
-    if (NULL !=human->_mother){
-        TYVHumanRelease(human->_mother);
+    if (NULL != TYVHumanGetMother(human)){
+        TYVHumanRelease(TYVHumanGetMother(human));
     }
     
     TYVHumanRetain(mother);
@@ -165,8 +169,8 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
-    if (NULL !=human->_father){
-        TYVHumanRelease(human->_father);
+    if (NULL != TYVHumanGetFather(human)){
+        TYVHumanRelease(TYVHumanGetFather(human));
     }
     
     TYVHumanRetain(father);

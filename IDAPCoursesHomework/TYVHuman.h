@@ -50,4 +50,6 @@ TYVHuman *TYVHumanGetMother(TYVHuman *human);
 
 TYVHuman *TYVHumanGetFather(TYVHuman *human);
 
+TYVHuman *TYVHumanGetPartner(TYVHuman *human);
+
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */
