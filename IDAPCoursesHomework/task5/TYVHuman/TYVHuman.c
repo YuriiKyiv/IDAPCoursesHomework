@@ -117,8 +117,10 @@ void TYVHumanDealloc(TYVHuman *human){
     
     TYVReleaseFieldGeneratorByClass(String, name);
     TYVReleaseFieldGeneratorByClass(Human, partner);
-    TYVReleaseFieldGeneratorByClass(Human, father);
-    TYVReleaseFieldGeneratorByClass(Human, mother);
+//    TYVReleaseFieldGeneratorByClass(Human, father);
+//    TYVReleaseFieldGeneratorByClass(Human, mother);
+    TYVHumanSetFather(human, NULL);
+    TYVHumanSetMother(human, NULL);
   
     free(human);
 }
@@ -164,7 +166,10 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
         TYVHumanRelease(TYVHumanGetMother(human));
     }
     
-    TYVHumanRetain(mother);
+    if (NULL != mother) {
+        TYVHumanRetain(mother);
+    }
+    
     human->_mother = mother;
 }
 
@@ -173,6 +178,8 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
         TYVHumanRelease(TYVHumanGetFather(human));
     }
     
-    TYVHumanRetain(father);
+    if (NULL != father) {
+        TYVHumanRetain(father);
+    }
     human->_father = father;
 }
