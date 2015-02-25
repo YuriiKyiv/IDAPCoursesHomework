@@ -97,6 +97,14 @@ TYVGender TYVHumanGetGender(TYVHuman *human){
     return human->_gender;
 }
 
+TYVHuman *TYVHumanGetMother(TYVHuman *human){
+    return human->_mother;
+}
+
+TYVHuman *TYVHumanGetFather(TYVHuman *human){
+    return human->_father;
+}
+
 #pragma mark -
 #pragma mark Private Implementations
 

@@ -46,4 +46,8 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name);
 
 TYVGender TYVHumanGetGender(TYVHuman *human);
 
+TYVHuman *TYVHumanGetMother(TYVHuman *human);
+
+TYVHuman *TYVHumanGetFather(TYVHuman *human);
+
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */
