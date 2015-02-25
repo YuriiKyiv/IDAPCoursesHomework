@@ -24,20 +24,20 @@ void TYVHumanTests(){
 
 void TYVHumanCreateTest(){
     char name[] = "Vasy Pupkin";
-    TYVString *string = TYVStringCreate(name, 8);
+    TYVString *string = TYVStringCreate(name);
     TYVHumanCreate(string, 100, TYVMale);
 }
 
 void TYVHumanRetainTest(){
     char name[] = "Vasy Pupkin";
-    TYVString *string = TYVStringCreate(name, 8);
+    TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
     assert(1 == human->_referenceCount);
 }
 
 void TYVHumanReleaseTest(){
     char name[] = "Vasy Pupkin";
-    TYVString *string = TYVStringCreate(name, 8);
+    TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
     TYVHumanRelease(human);
     TYVHumanRetain(human);
