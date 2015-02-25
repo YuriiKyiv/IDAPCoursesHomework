@@ -8,6 +8,7 @@
 
 #include "TYVString.h"
 #include "stdlib.h"
+#include "string.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -16,12 +17,13 @@ static
 void TYVStringDealloc(TYVString *string);
 
 static
-char *TYVCharCopy(char *data, uint8_t length);
+char *TYVCharCopy(char *data, size_t length);
 
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVString *TYVStringCreate(char *data, uint8_t length){
+TYVString *TYVStringCreate(char *data){
+    size_t length  = strlen(data);
     TYVString *string = malloc(sizeof(*string));
     string->_data = TYVCharCopy(data, length);
     string->_length = length;
@@ -45,13 +47,13 @@ char *TYVStringGetData(TYVString *string){
     return string->_data;
 }
 
-uint8_t TYVStringGetLength(TYVString *string){
+size_t TYVStringGetLength(TYVString *string){
     return string->_length;
 }
 
-char *TYVCharCopy(char *data, uint8_t length){
+char *TYVCharCopy(char *data, size_t length){
     char *newChar = malloc(sizeof(char) * length);
-    for (uint8_t iter = 0; iter < length; iter++) {
+    for (size_t iter = 0; iter < length; iter++) {
         newChar[iter] = data[iter];
     }
     

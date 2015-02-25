@@ -14,12 +14,12 @@
 typedef struct TYVString TYVString;
 struct TYVString {
     char *_data;
-    uint8_t _length;
+    size_t _length;
     
     size_t _referenceCount;
 };
 
-TYVString *TYVStringCreate(char *data, uint8_t length);
+TYVString *TYVStringCreate(char *data);
 
 void TYVStringRetain(TYVString *string);
 
@@ -27,6 +27,6 @@ void TYVStringRelease(TYVString *string);
 
 char *TYVStringGetData(TYVString *string);
 
-uint8_t TYVStringGetLength(TYVString *string);
+size_t TYVStringGetLength(TYVString *string);
 
 #endif /* defined(__IDAPCoursesHomework__TYVString__) */

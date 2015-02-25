@@ -27,24 +27,24 @@ void TYVStringTestsPerfom(){
 }
 
 void TYVStringCreateTest(){
-    char name[] = "Vasy Pupkin";
-    TYVString *string = TYVStringCreate(name, 8);
-    printf("Length = %d\n",TYVStringGetLength(string));
+    char name[] = "Vasya Pupkin\0";
+    TYVString *string = TYVStringCreate(name);
+    printf("Length = %zu\n",TYVStringGetLength(string));
     printf("Name = %s\n",TYVStringGetData(string));
     assert(TYVStringGetLength(string) == 8);
 }
 
 void TYVStringRetainTest(){
-    char name[] = "Vasy Pupkin";
-    TYVString *string = TYVStringCreate(name, 8);
+    char name[] = "Vasya Pupkin\0";
+    TYVString *string = TYVStringCreate(name);
     TYVStringRetain(string);
     printf("Reference = %zu\n", string->_referenceCount);
     assert(string->_referenceCount == 2);
 }
 
 void TYVStringReleaseTest(){
-    char name[] = "Vasy Pupkin";
-    TYVString *string = TYVStringCreate(name, 8);
+    char name[] = "Vasya Pupkin\0";
+    TYVString *string = TYVStringCreate(name);
     TYVStringRetain(string);
     TYVStringRelease(string);
     printf("Reference = %zu\n", string->_referenceCount);
