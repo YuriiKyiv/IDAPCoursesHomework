@@ -142,7 +142,7 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
     // TODO: add cheaking for NULL - parent partner child
     TYVHumanAddChild(human, child);
-    TYVHumanAddChild(human->_partner, child);
+    TYVHumanAddChild(TYVHumanGetPartner(human), child);
 }
 
 void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
