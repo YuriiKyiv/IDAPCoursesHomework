@@ -58,5 +58,8 @@ void TYVHumanGetMarriedTest(){
     TYVHuman *partnerHuman = TYVHumanCreate(partnerString, 100, TYVMale);
     
     TYVHumanGetMarried(human, partnerHuman);
-    printf("%s", TYVHumanGetPartner(human)->_name->_data);
+    printf("%s\n", TYVHumanGetPartner(human)->_name->_data);
+    
+    TYVHumanGetMarried(human, NULL);
+    assert(NULL == TYVHumanGetPartner(human));
 }
