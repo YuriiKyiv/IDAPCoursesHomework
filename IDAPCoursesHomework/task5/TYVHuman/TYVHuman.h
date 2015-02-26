@@ -52,4 +52,6 @@ TYVHuman *TYVHumanGetFather(TYVHuman *human);
 
 TYVHuman *TYVHumanGetPartner(TYVHuman *human);
 
+void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female);
+
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */
