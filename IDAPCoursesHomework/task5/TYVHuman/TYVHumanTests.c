@@ -17,26 +17,30 @@ void TYVHumanCreateTest();
 static
 void TYVHumanRetainTest();
 
+static
+void TYVHumanGetMarriedTest();
+
 void TYVHumanTests(){
     TYVHumanCreateTest();
     TYVHumanRetainTest();
+    TYVHumanGetMarriedTest();
 }
 
 void TYVHumanCreateTest(){
-    char name[] = "Vasya Pupkin/0";
+    char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     TYVHumanCreate(string, 100, TYVMale);
 }
 
 void TYVHumanRetainTest(){
-    char name[] = "Vasya Pupkin/0";
+    char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
     assert(1 == human->_referenceCount);
 }
 
 void TYVHumanReleaseTest(){
-    char name[] = "Vasya Pupkin/0";
+    char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
     TYVHumanRelease(human);
@@ -45,11 +49,14 @@ void TYVHumanReleaseTest(){
 }
 
 void TYVHumanGetMarriedTest(){
-    char name[] = "Vasya Pupkin/0";
+    char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
     
-    char partnerName[] = "Mother test/0";
+    char partnerName[] = "Mother test";
     TYVString *partnerString = TYVStringCreate(partnerName);
     TYVHuman *partnerHuman = TYVHumanCreate(partnerString, 100, TYVMale);
+    
+    TYVHumanGetMarried(human, partnerHuman);
+    printf("%s", TYVHumanGetPartner(human)->_name->_data);
 }

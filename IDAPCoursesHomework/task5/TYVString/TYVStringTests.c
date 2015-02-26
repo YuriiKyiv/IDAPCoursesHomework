@@ -27,7 +27,7 @@ void TYVStringTestsPerfom(){
 }
 
 void TYVStringCreateTest(){
-    char name[] = "Vasya Pupkin\0";
+    char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     printf("Length = %zu\n",TYVStringGetLength(string));
     printf("Name = %s\n",TYVStringGetData(string));
@@ -35,7 +35,7 @@ void TYVStringCreateTest(){
 }
 
 void TYVStringRetainTest(){
-    char name[] = "Vasya Pupkin\0";
+    char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     TYVStringRetain(string);
     printf("Reference = %zu\n", string->_referenceCount);
@@ -43,7 +43,7 @@ void TYVStringRetainTest(){
 }
 
 void TYVStringReleaseTest(){
-    char name[] = "Vasya Pupkin\0";
+    char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     TYVStringRetain(string);
     TYVStringRelease(string);
