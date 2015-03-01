@@ -17,7 +17,7 @@ void *__TYVObjectCreate(size_t objectSize, TYVDeallocateCallback deallocateCallb
     return object;
 }
 
-void *YVObjectRetain(void *object){
+void *TYVObjectRetain(void *object){
     if (NULL != object){
         ((TYVObject *)object)->_referenceCount++;
     }
@@ -26,7 +26,7 @@ void *YVObjectRetain(void *object){
 }
 
 extern
-void YVObjectRelease(void *voidObject){
+void TYVObjectRelease(void *voidObject){
     if (NULL == voidObject){
         return;
     }
@@ -39,6 +39,6 @@ void YVObjectRelease(void *voidObject){
 }
 
 extern
-void YVObjectDeallocate(void *object){
+void TYVObjectDeallocate(void *object){
     free(object);
 }

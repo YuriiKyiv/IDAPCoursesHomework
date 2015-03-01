@@ -25,12 +25,12 @@ void *__TYVObjectCreate(size_t objectSize, TYVDeallocateCallback deallocateCallb
     __TYVObjectCreate(sizeof(type), (IDPDeallocateCallback)__##type##Deallocate)
 
 extern
-void *YVObjectRetain(void *object);
+void *TYVObjectRetain(void *object);
 
 extern
-void YVObjectRelease(void *object);
+void TYVObjectRelease(void *object);
 
 extern
-void YVObjectDeallocate(void *object);
+void TYVObjectDeallocate(void *object);
 
 #endif /* defined(__IDAPCoursesHomework__TYVObject__) */
