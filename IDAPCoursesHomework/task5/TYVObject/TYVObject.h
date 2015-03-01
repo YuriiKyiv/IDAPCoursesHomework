@@ -28,9 +28,9 @@ extern
 void *YVObjectRetain(void *object);
 
 extern
-void *YVObjectRelease(void *object);
+void YVObjectRelease(void *object);
 
 extern
-void *YVObjectDeallocate(void *object);
+void YVObjectDeallocate(void *object);
 
 #endif /* defined(__IDAPCoursesHomework__TYVObject__) */
