@@ -11,4 +11,26 @@
 
 #include <stdio.h>
 
+typedef void(*TYVDeallocateCallback)(void *);
+
+struct TYVObject {
+    uint64_t _referenceCount;
+    TYVDeallocateCallback _deallocateCallback;
+};
+typedef struct TYVObject TYVObject;
+
+extern
+void *__TYVObjectCreate(size_t objectSize, TYVDeallocateCallback deallocateCallback);
+#define TYVObjectCreate(type) \
+    __TYVObjectCreate(sizeof(type), (IDPDeallocateCallback)__##type##Deallocate)
+
+extern
+void *YVObjectRetain(void *object);
+
+extern
+void *YVObjectRelease(void *object);
+
+extern
+void *YVObjectDeallocate(void *object);
+
 #endif /* defined(__IDAPCoursesHomework__TYVObject__) */
