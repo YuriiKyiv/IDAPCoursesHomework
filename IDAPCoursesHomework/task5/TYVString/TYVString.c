@@ -36,6 +36,11 @@ void TYVStringSetData(TYVString *string, char *data){
     if (NULL == string || NULL == data){
         return;
     }
+    
+    if (NULL != string->_data){
+        free(string->_data);
+    }
+    
     size_t length  = strlen(data);
     string->_data = TYVCharCopy(data, length);
     string->_length = length;
