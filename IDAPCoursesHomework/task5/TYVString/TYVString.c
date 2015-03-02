@@ -14,9 +14,6 @@
 #pragma mark Private Declarations
 
 static
-void __TYVStringDealloc(TYVString *string);
-
-static
 char *TYVCharCopy(char *data, size_t length);
 
 #pragma mark -
@@ -27,7 +24,6 @@ TYVString *TYVStringCreate(char *data){
     TYVString *string = calloc(1 ,sizeof(*string));
     string->_data = TYVCharCopy(data, length);
     string->_length = length;
-    string->_referenceCount = 1;
     
     return string;
 }

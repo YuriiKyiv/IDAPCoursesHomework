@@ -32,8 +32,6 @@ struct TYVHuman {
     TYVHuman *_father;
     TYVHuman *_mother;
     TYVHuman *_children[20];
-    
-    size_t _referenceCount;
 };
 
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender);

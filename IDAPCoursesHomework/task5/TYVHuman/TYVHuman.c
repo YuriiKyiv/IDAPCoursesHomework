@@ -41,7 +41,6 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *mother);
 
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHuman *human = malloc(sizeof(*human));
-    human->_referenceCount = 1;
     TYVObjectRetain(string);
     human->_name = string;
     human->_age = age;

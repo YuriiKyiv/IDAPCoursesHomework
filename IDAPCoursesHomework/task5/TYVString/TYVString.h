@@ -18,8 +18,6 @@ struct TYVString {
     
     char *_data;
     size_t _length;
-    
-    size_t _referenceCount;
 };
 
 TYVString *TYVStringCreate(char *data);
