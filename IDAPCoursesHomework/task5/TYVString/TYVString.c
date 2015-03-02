@@ -32,17 +32,6 @@ TYVString *TYVStringCreate(char *data){
     return string;
 }
 
-void TYVStringRetain(TYVString *string){
-    string->_referenceCount++;
-}
-
-void TYVStringRelease(TYVString *string){
-    string->_referenceCount--;
-    if (0 == string->_referenceCount){
-        //TYVStringDealloc(string);
-    }
-}
-
 void TYVStringSetData(TYVString *string, char *data){
     if (NULL == string || NULL == data){
         return;

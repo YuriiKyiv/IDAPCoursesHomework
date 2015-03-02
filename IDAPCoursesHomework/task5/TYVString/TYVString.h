@@ -22,10 +22,6 @@ struct TYVString {
 
 TYVString *TYVStringCreate(char *data);
 
-void TYVStringRetain(TYVString *string);
-
-void TYVStringRelease(TYVString *string);
-
 char *TYVStringGetData(TYVString *string);
 
 size_t TYVStringGetLength(TYVString *string);

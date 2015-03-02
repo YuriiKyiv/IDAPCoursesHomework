@@ -42,7 +42,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *mother);
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHuman *human = malloc(sizeof(*human));
     human->_referenceCount = 1;
-    TYVStringRetain(string);
+    TYVObjectRetain(string);
     human->_name = string;
     human->_age = age;
     human->_gender = gender;
@@ -141,7 +141,7 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human){
 void __TYVHumanDeallocate(TYVHuman *human){
     // TODO: add children information
     
-    TYVReleaseFieldGeneratorByClass(String, name);
+    TYVObjectRelease(human->_name);
     TYVHumanSetPartner(human, NULL);
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);
