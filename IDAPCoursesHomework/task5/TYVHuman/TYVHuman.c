@@ -78,6 +78,38 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
     
     return child;
 }
+
+void TYVHumanSetName(TYVHuman *human, TYVString *string){
+    if (NULL == human || human->_name == string){
+        return;
+    }
+    
+    if (NULL != human->_name){
+        TYVObjectRelease(human->_name);
+    }
+    
+    if (NULL != string){
+        TYVObjectRetain(string);
+    }
+    
+    human->_name = string;
+}
+
+TYVString *TYVHumanGetName(TYVHuman *human){
+    if (NULL == human){
+        return;
+    }
+    return human->_name;
+}
+
+void TYVHumanNameOutput(TYVHuman *human){
+    if (NULL == human){
+        return;
+    }
+    
+    TYVString *string = TYVHumanGetName(human);
+    printf("%s\n", TYVStringGetData(string));
+}
             
 void TYVHumanSetGender(TYVHuman *human, TYVGender gender){
     if (NULL == human) {
