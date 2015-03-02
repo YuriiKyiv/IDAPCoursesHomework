@@ -10,6 +10,7 @@
 #define __IDAPCoursesHomework__TYVString__
 
 #include <stdio.h>
+#include "TYVObject.h"
 
 typedef struct TYVString TYVString;
 struct TYVString {
@@ -28,5 +29,9 @@ void TYVStringRelease(TYVString *string);
 char *TYVStringGetData(TYVString *string);
 
 size_t TYVStringGetLength(TYVString *string);
+
+void __TYVStringDeallocate(TYVString *string);
+
+void TYVStringSetData(TYVString *string, char *data);
 
 #endif /* defined(__IDAPCoursesHomework__TYVString__) */

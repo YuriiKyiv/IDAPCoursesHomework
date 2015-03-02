@@ -31,6 +31,6 @@ extern
 void TYVObjectRelease(void *object);
 
 extern
-void TYVObjectDeallocate(void *object);
+void __TYVObjectDeallocate(void *object);
 
 #endif /* defined(__IDAPCoursesHomework__TYVObject__) */

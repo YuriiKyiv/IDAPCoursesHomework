@@ -39,6 +39,6 @@ void TYVObjectRelease(void *voidObject){
 }
 
 extern
-void TYVObjectDeallocate(void *object){
+void __TYVObjectDeallocate(void *object){
     free(object);
 }

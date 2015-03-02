@@ -24,7 +24,7 @@ char *TYVCharCopy(char *data, size_t length);
 
 TYVString *TYVStringCreate(char *data){
     size_t length  = strlen(data);
-    TYVString *string = malloc(sizeof(*string));
+    TYVString *string = calloc(1 ,sizeof(*string));
     string->_data = TYVCharCopy(data, length);
     string->_length = length;
     string->_referenceCount = 1;
@@ -39,8 +39,17 @@ void TYVStringRetain(TYVString *string){
 void TYVStringRelease(TYVString *string){
     string->_referenceCount--;
     if (0 == string->_referenceCount){
-        TYVStringDealloc(string);
+        //TYVStringDealloc(string);
     }
+}
+
+void TYVStringSetData(TYVString *string, char *data){
+    if (NULL == string || NULL == data){
+        return;
+    }
+    size_t length  = strlen(data);
+    string->_data = TYVCharCopy(data, length);
+    string->_length = length;
 }
 
 char *TYVStringGetData(TYVString *string){
@@ -52,7 +61,7 @@ size_t TYVStringGetLength(TYVString *string){
 }
 
 char *TYVCharCopy(char *data, size_t length){
-    char *newData = malloc(sizeof(char) * length);
+    char *newData = calloc(length, sizeof(char));
     memcpy(newData, data, length);
     
     return newData;
@@ -61,10 +70,11 @@ char *TYVCharCopy(char *data, size_t length){
 #pragma mark -
 #pragma mark Private Implementations
 
-void TYVStringDealloc(TYVString *string){
+void __TYVStringDeallocate(TYVString *string){
     if (NULL != string->_data){
         free(string->_data);
+        string->_data = NULL;
     }
     
-    free(string);
+    __TYVObjectDeallocate(string);
 }

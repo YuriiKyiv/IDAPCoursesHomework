@@ -9,44 +9,21 @@
 #include "TYVStringTests.h"
 #include "TYVString.h"
 #include "assert.h"
+#include "TYVObject.h"
 
 static
 void TYVStringCreateTest();
 
-static
-void TYVStringRetainTest();
-
-static
-void TYVStringReleaseTest();
-
 void TYVStringTestsPerfom(){
     printf("\nTASK 5\n");
     TYVStringCreateTest();
-    TYVStringRetainTest();
-    TYVStringReleaseTest();
+
 }
 
 void TYVStringCreateTest(){
     char name[] = "Vasya Pupkin";
-    TYVString *string = TYVStringCreate(name);
-    printf("Length = %zu\n",TYVStringGetLength(string));
-    printf("Name = %s\n",TYVStringGetData(string));
-    //assert(TYVStringGetLength(string) == 8);
-}
-
-void TYVStringRetainTest(){
-    char name[] = "Vasya Pupkin";
-    TYVString *string = TYVStringCreate(name);
-    TYVStringRetain(string);
-    printf("Reference = %zu\n", string->_referenceCount);
-    assert(string->_referenceCount == 2);
-}
-
-void TYVStringReleaseTest(){
-    char name[] = "Vasya Pupkin";
-    TYVString *string = TYVStringCreate(name);
-    TYVStringRetain(string);
-    TYVStringRelease(string);
-    printf("Reference = %zu\n", string->_referenceCount);
-    assert(string->_referenceCount == 1);
+    TYVString *string = __TYVObjectCreate(sizeof(TYVString), (TYVDeallocateCallback)&__TYVStringDeallocate);
+    TYVStringSetData(string, name);
+    char *data = TYVStringGetData(string);
+    printf("%s\n", data);
 }
