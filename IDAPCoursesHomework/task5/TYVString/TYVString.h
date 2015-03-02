@@ -14,6 +14,8 @@
 
 typedef struct TYVString TYVString;
 struct TYVString {
+    TYVObject _object;
+    
     char *_data;
     size_t _length;
     
@@ -21,10 +23,6 @@ struct TYVString {
 };
 
 TYVString *TYVStringCreate(char *data);
-
-void TYVStringRetain(TYVString *string);
-
-void TYVStringRelease(TYVString *string);
 
 char *TYVStringGetData(TYVString *string);
 

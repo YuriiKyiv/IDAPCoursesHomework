@@ -14,7 +14,7 @@
 #pragma mark Private Declarations
 
 static
-void TYVStringDealloc(TYVString *string);
+void __TYVStringDealloc(TYVString *string);
 
 static
 char *TYVCharCopy(char *data, size_t length);
@@ -32,21 +32,15 @@ TYVString *TYVStringCreate(char *data){
     return string;
 }
 
-void TYVStringRetain(TYVString *string){
-    string->_referenceCount++;
-}
-
-void TYVStringRelease(TYVString *string){
-    string->_referenceCount--;
-    if (0 == string->_referenceCount){
-        //TYVStringDealloc(string);
-    }
-}
-
 void TYVStringSetData(TYVString *string, char *data){
     if (NULL == string || NULL == data){
         return;
     }
+    
+    if (NULL != string->_data){
+        free(string->_data);
+    }
+    
     size_t length  = strlen(data);
     string->_data = TYVCharCopy(data, length);
     string->_length = length;
