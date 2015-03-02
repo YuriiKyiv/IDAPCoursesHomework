@@ -14,6 +14,8 @@
 
 typedef struct TYVString TYVString;
 struct TYVString {
+    TYVObject _object;
+    
     char *_data;
     size_t _length;
     

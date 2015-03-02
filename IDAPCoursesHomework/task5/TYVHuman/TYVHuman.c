@@ -141,7 +141,7 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human){
 void __TYVHumanDeallocate(TYVHuman *human){
     // TODO: add children information
     
-    TYVObjectRelease(human->_name);
+    TYVHumanSetName(human, NULL);
     TYVHumanSetPartner(human, NULL);
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);

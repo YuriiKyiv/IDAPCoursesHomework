@@ -22,6 +22,8 @@ enum TYVGender {
 
 typedef struct TYVHuman TYVHuman;
 struct TYVHuman {
+    TYVObject _object;
+    
     TYVString *_name;
     uint8_t _age;
     TYVGender _gender;
@@ -41,6 +43,12 @@ void __TYVHumanDeallocate(TYVHuman *human);
 void TYVHumanDivorce(TYVHuman *human);
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name);
+
+void TYVHumanSetName(TYVHuman *human, TYVString *string);
+
+TYVString *TYVHumanGetName(TYVHuman *human);
+
+void TYVHumanNameOutput(TYVHuman *human);
 
 void TYVHumanSetGender(TYVHuman *human, TYVGender gender);
 

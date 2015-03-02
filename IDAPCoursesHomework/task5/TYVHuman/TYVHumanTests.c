@@ -28,6 +28,8 @@ void TYVHumanCreateTest(){
     TYVHuman *human = __TYVObjectCreate(sizeof(TYVHuman), (TYVDeallocateCallback)&__TYVHumanDeallocate);
     TYVHumanSetGender(human, TYVMale);
     TYVString *string = TYVStringCreate(name);
+    TYVHumanSetName(human, string);
+    TYVHumanNameOutput(human);
 }
 
 void TYVHumanGetMarriedTest(){
