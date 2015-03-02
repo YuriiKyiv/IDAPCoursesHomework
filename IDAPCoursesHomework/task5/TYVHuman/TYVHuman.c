@@ -96,10 +96,12 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string){
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human){
-    if (NULL == human){
-        return;
+    TYVString *string = NULL;
+    if (NULL != human){
+        string = human->_name;
     }
-    return human->_name;
+    
+    return string;
 }
 
 void TYVHumanNameOutput(TYVHuman *human){
