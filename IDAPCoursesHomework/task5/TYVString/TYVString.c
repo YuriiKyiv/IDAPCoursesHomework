@@ -14,7 +14,7 @@
 #pragma mark Private Declarations
 
 static
-void TYVStringDealloc(TYVString *string);
+void __TYVStringDealloc(TYVString *string);
 
 static
 char *TYVCharCopy(char *data, size_t length);

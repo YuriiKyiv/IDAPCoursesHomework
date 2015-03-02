@@ -10,42 +10,24 @@
 #include "TYVHuman.h"
 #include "TYVString.h"
 #include "assert.h"
+#include "TYVObject.h"
 
 static
 void TYVHumanCreateTest();
-
-static
-void TYVHumanRetainTest();
 
 static
 void TYVHumanGetMarriedTest();
 
 void TYVHumanTests(){
     TYVHumanCreateTest();
-    TYVHumanRetainTest();
     TYVHumanGetMarriedTest();
 }
 
 void TYVHumanCreateTest(){
     char name[] = "Vasya Pupkin";
+    TYVHuman *human = __TYVObjectCreate(sizeof(TYVHuman), (TYVDeallocateCallback)&__TYVHumanDeallocate);
+    TYVHumanSetGender(human, TYVMale);
     TYVString *string = TYVStringCreate(name);
-    TYVHumanCreate(string, 100, TYVMale);
-}
-
-void TYVHumanRetainTest(){
-    char name[] = "Vasya Pupkin";
-    TYVString *string = TYVStringCreate(name);
-    TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
-    assert(1 == human->_referenceCount);
-}
-
-void TYVHumanReleaseTest(){
-    char name[] = "Vasya Pupkin";
-    TYVString *string = TYVStringCreate(name);
-    TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
-    TYVHumanRelease(human);
-    TYVHumanRetain(human);
-    assert(1 == human->_referenceCount);
 }
 
 void TYVHumanGetMarriedTest(){

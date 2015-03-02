@@ -36,13 +36,13 @@ struct TYVHuman {
 
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender);
 
-void TYVHumanRetain(TYVHuman *string);
-
-void TYVHumanRelease(TYVHuman *string);
+void __TYVHumanDeallocate(TYVHuman *human);
 
 void TYVHumanDivorce(TYVHuman *human);
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name);
+
+void TYVHumanSetGender(TYVHuman *human, TYVGender gender);
 
 TYVGender TYVHumanGetGender(TYVHuman *human);
 

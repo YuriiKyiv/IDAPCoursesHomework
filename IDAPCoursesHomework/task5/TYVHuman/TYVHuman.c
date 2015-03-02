@@ -19,9 +19,6 @@
 #pragma mark Private Declarations
 
 static
-void TYVHumanDealloc(TYVHuman *);
-
-static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 
 static
@@ -30,8 +27,8 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
 static
 void TYVHumanAddChild(TYVHuman *human, TYVHuman *child);
 
-static
-void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child);
+//static
+//void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child);
 
 static
 void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother);
@@ -55,17 +52,6 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     human->_mother = NULL;
     
     return human;
-}
-
-void TYVHumanRetain(TYVHuman *human){
-    human->_referenceCount++;
-}
-
-void TYVHumanRelease(TYVHuman *human){
-    human->_referenceCount--;
-    if (0 == human->_referenceCount){
-        TYVHumanDealloc(human);
-    }
 }
 
 void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
@@ -93,6 +79,14 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
     return child;
 }
             
+void TYVHumanSetGender(TYVHuman *human, TYVGender gender){
+    if (NULL == human) {
+        return;
+    }
+    
+    human->_gender = gender;
+}
+
 TYVGender TYVHumanGetGender(TYVHuman *human){
     return human->_gender;
 }
@@ -109,19 +103,22 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human){
     return human->_partner;
 }
 
-#pragma mark -
-#pragma mark Private Implementations
 
-void TYVHumanDealloc(TYVHuman *human){
+void __TYVHumanDeallocate(TYVHuman *human){
     // TODO: add children information
     
     TYVReleaseFieldGeneratorByClass(String, name);
     TYVHumanSetPartner(human, NULL);
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);
-  
+    
     free(human);
+    
+    __TYVObjectDeallocate(human);
 }
+
+#pragma mark -
+#pragma mark Private Implementations
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     if ( NULL == human || human == partner){
@@ -129,11 +126,11 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     }
     
     if (NULL != TYVHumanGetPartner(human)){
-        TYVHumanRelease(TYVHumanGetPartner(human));
+        TYVObjectRelease(human->_partner);
     }
     
     if (NULL != partner){
-        TYVHumanRetain(partner);
+        TYVObjectRetain(partner);
     }
     
     human->_partner = partner;
@@ -152,23 +149,24 @@ void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
         child->_mother = human;
     }
     
-    TYVHumanRetain(child);
-    TYVHumanRetain(human);
+    TYVObjectRetain(child);
+    TYVObjectRetain(human);
     human->_children[human->_childrenCount] = child;
     human->_childrenCount++;
 }
 
-void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){
-    
-}
+//void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){
+//    
+//}
 
 void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
     if (NULL != TYVHumanGetMother(human)){
-        TYVHumanRelease(TYVHumanGetMother(human));
+
+        TYVObjectRelease(human->_mother);
     }
     
     if (NULL != mother) {
-        TYVHumanRetain(mother);
+        TYVObjectRetain(mother);
     }
     
     human->_mother = mother;
@@ -176,11 +174,11 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
     if (NULL != TYVHumanGetFather(human)){
-        TYVHumanRelease(TYVHumanGetFather(human));
+        TYVObjectRelease(human->_father);
     }
     
     if (NULL != father) {
-        TYVHumanRetain(father);
+        TYVObjectRetain(father);
     }
     human->_father = father;
 }
