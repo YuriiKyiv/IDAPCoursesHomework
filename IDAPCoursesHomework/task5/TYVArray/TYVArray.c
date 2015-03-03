@@ -38,6 +38,16 @@ void TYVArrayRemove(TYVArray *array, void *object){
     array->_array[iter] = NULL;
 }
 
+void __TYVArrayDeallocate(TYVArray *array){
+    for (int iter = 0; iter < 20; iter++){
+        if (NULL != array->_array[iter]) {
+            TYVObjectRelease(array->_array[iter]);
+        }
+    }
+    
+    __TYVObjectDeallocate(array);
+}
+
 #pragma mark -
 #pragma mark Private Implementations
 
@@ -52,14 +62,4 @@ uint8_t TYVArrayItemLoop(TYVArray *array, void *object){
     }
     
     return iter;
-}
-
-void __TYVArrayDeallocate(TYVArray *array){
-    for (int iter = 0; iter < 20; iter++){
-        if (NULL != array->_array[iter]) {
-            TYVObjectRelease(array->_array[iter]);
-        }
-    }
-    
-    __TYVObjectDeallocate(array);
 }

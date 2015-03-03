@@ -62,4 +62,6 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human);
 
 void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female);
 
+TYVArray *TYVHumanGetArray(TYVHuman *human);
+
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */

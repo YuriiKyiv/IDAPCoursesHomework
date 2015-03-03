@@ -25,3 +25,5 @@ struct TYVArray {
 void TYVArrayAdd(TYVArray *array, void *);
 
 void TYVArrayRemove(TYVArray *array, void *);
+
+void __TYVArrayDeallocate(TYVArray *array);

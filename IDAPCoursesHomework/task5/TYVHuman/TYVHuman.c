@@ -36,6 +36,9 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother);
 static
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *mother);
 
+static
+void TYVHumanSetArray(TYVHuman *human, TYVArray *array);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -137,6 +140,10 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human){
     return human->_partner;
 }
 
+TYVArray *TYVHumanGetArray(TYVHuman *human){
+    return human->childrenArray;
+}
+
 
 void __TYVHumanDeallocate(TYVHuman *human){
     // TODO: add children information
@@ -180,8 +187,11 @@ void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
     }
     
     if (NULL == human->childrenArray){
-        TYVObjectCreate(Array);
+        TYVArray *array = __TYVObjectCreate(sizeof(TYVArray), (TYVDeallocateCallback)&__TYVArrayDeallocate);
+        TYVHumanSetArray(human, array);
     }
+    
+    TYVArrayAdd(TYVHumanGetArray(human), child);
 }
 
 //void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){
@@ -211,4 +221,9 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
     }
     
     human->_father = father;
+}
+
+void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
+    TYVObjectRetain(array);
+    human->childrenArray = array;
 }
