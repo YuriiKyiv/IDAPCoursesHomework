@@ -145,8 +145,6 @@ void __TYVHumanDeallocate(TYVHuman *human){
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);
     
-    free(human);
-    
     __TYVObjectDeallocate(human);
 }
 
@@ -213,5 +211,6 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
     if (NULL != father) {
         TYVObjectRetain(father);
     }
+    
     human->_father = father;
 }

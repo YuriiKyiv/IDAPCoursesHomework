@@ -25,7 +25,3 @@ struct TYVArray {
 void TYVArrayAdd(TYVArray *array, void *);
 
 void TYVArrayRemove(TYVArray *array, void *);
-
-void TYVArraySetCount(TYVArray *array, uint8_t count);
-
-uint8_t TYVArrayGetCount(TYVArray *array);
