@@ -39,6 +39,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *mother);
 #pragma mark -
 #pragma mark Public Implementations
 
+//deprecated
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHuman *human = malloc(sizeof(*human));
     TYVObjectRetain(string);
@@ -174,16 +175,13 @@ void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
 }
 
 void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
-    if (TYVMale == human->_gender){
-        child->_father = human;
-    } else {
-        child->_mother = human;
+    if (NULL == human){
+        return;
     }
     
-    TYVObjectRetain(child);
-    TYVObjectRetain(human);
-    human->_children[human->_childrenCount] = child;
-    human->_childrenCount++;
+    if (NULL == human->childrenArray){
+        TYVObjectCreate(Array);
+    }
 }
 
 //void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){

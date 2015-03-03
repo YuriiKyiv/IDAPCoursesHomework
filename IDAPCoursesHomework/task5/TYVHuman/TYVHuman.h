@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "TYVString.h"
+#include "TYVArray.h"
 
 //const uint8_t TYVChildrenMaxCount = 20;
 
@@ -25,13 +26,14 @@ struct TYVHuman {
     TYVObject _object;
     
     TYVString *_name;
-    uint8_t _age;
-    TYVGender _gender;
-    uint8_t _childrenCount;
     TYVHuman *_partner;
     TYVHuman *_father;
     TYVHuman *_mother;
-    TYVHuman *_children[20];
+    TYVArray *childrenArray;
+    
+    uint8_t _age;
+    TYVGender _gender;
+    uint8_t _childrenCount;
 };
 
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender);
