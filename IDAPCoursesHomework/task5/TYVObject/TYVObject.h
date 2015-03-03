@@ -22,7 +22,7 @@ typedef struct TYVObject TYVObject;
 extern
 void *__TYVObjectCreate(size_t objectSize, TYVDeallocateCallback deallocateCallback);
 #define TYVObjectCreate(type) \
-    __TYVObjectCreate(sizeof(type), (IDPDeallocateCallback)__##type##Deallocate)
+    __TYVObjectCreate(sizeof(type), (TYVDeallocateCallback)__##type##Deallocate)
 
 extern
 void *TYVObjectRetain(void *object);

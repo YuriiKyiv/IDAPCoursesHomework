@@ -19,6 +19,7 @@ char *TYVCharCopy(char *data, size_t length);
 #pragma mark -
 #pragma mark Public Implementations
 
+//deprecated
 TYVString *TYVStringCreate(char *data){
     size_t length  = strlen(data);
     TYVString *string = calloc(1 ,sizeof(*string));
@@ -37,7 +38,7 @@ void TYVStringSetData(TYVString *string, char *data){
         free(string->_data);
     }
     
-    size_t length  = strlen(data);
+    size_t length  = strlen(data) + 1;
     string->_data = TYVCharCopy(data, length);
     string->_length = length;
 }
