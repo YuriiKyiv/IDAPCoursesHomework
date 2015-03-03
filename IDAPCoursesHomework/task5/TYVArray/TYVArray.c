@@ -8,13 +8,18 @@
 
 #include "TYVArray.h"
 
+#pragma mark -
+#pragma mark Private Declarations
+
+uint8_t TYVArrayItemLoop(TYVArray *array, void *object);
+
+#pragma mark -
+#pragma mark Public Implementations
+
 void TYVArrayAdd(TYVArray *array, void *object){
-    uint8_t iter = 0;
-    while (NULL != array->_array[iter] && iter < 20) {
-        iter++;
-    }
+    uint8_t iter = TYVArrayItemLoop(array, object);
     
-    if (iter > 19){
+    if (iter < 0){
         return;
     }
     
@@ -23,15 +28,28 @@ void TYVArrayAdd(TYVArray *array, void *object){
 }
 
 void TYVArrayRemove(TYVArray *array, void *object){
+    uint8_t iter = TYVArrayItemLoop(array, object);
+    
+    if (iter < 0){
+        return;
+    }
+    
+    TYVObjectRelease(array->_array[iter]);
+    array->_array[iter] = NULL;
+}
+
+#pragma mark -
+#pragma mark Private Implementations
+
+uint8_t TYVArrayItemLoop(TYVArray *array, void *object){
     uint8_t iter = 0;
     while (object != array->_array[iter] && iter < 20) {
         iter++;
     }
     
     if (iter > 19){
-        return;
+        return -1;
     }
     
-    TYVObjectRelease(array->_array[iter]);
-    array->_array[iter] = NULL;
+    return iter;
 }
