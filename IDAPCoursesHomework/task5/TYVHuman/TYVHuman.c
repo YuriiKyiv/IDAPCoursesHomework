@@ -163,7 +163,7 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human){
 }
 
 TYVArray *TYVHumanGetArray(TYVHuman *human){
-    return human->childrenArray;
+    return human->_childrenArray;
 }
 
 uint8_t TYVHumanGetChildrenCount(TYVHuman *human){
@@ -216,8 +216,8 @@ void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
         return;
     }
     
-    if (NULL == human->childrenArray){
-        TYVArray *array = __TYVObjectCreate(sizeof(TYVArray), (TYVDeallocateCallback)&__TYVArrayDeallocate);
+    if (NULL == human->_childrenArray){
+        TYVArray *array = TYVObjectCreate(TYVArray);
         TYVHumanSetArray(human, array);
     }
     
@@ -254,6 +254,17 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
 }
 
 void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
-    TYVObjectRetain(array);
-    human->childrenArray = array;
+    if (NULL == human || array != human->_childrenArray){
+        return;
+    }
+    
+    if (NULL != human->_childrenArray){
+        TYVObjectRelease(human->_childrenArray);
+    }
+    
+    if (NULL != array){
+        TYVObjectRetain(array);
+    }
+    
+    human->_childrenArray = array;
 }

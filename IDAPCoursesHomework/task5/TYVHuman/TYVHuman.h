@@ -29,7 +29,7 @@ struct TYVHuman {
     TYVHuman *_partner;
     TYVHuman *_father;
     TYVHuman *_mother;
-    TYVArray *childrenArray;
+    TYVArray *_childrenArray;
     
     uint8_t _age;
     TYVGender _gender;
