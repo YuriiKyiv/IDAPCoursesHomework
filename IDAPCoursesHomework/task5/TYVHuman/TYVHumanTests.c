@@ -19,17 +19,16 @@ static
 void TYVHumanGetMarriedTest();
 
 void TYVHumanTests(){
-    TYVHumanCreateTest();
+    //TYVHumanCreateTest();
     TYVHumanGetMarriedTest();
 }
 
 void TYVHumanCreateTest(){
     char name[] = "Vasya Pupkin";
-    TYVHuman *human = __TYVObjectCreate(sizeof(TYVHuman), (TYVDeallocateCallback)&__TYVHumanDeallocate);
-    TYVHumanSetGender(human, TYVMale);
     TYVString *string = TYVStringCreate(name);
-    TYVHumanSetName(human, string);
+    TYVHuman *human = TYVHumanCreate(string, 11, TYVMale);
     TYVHumanNameOutput(human);
+    printf("%d\n", TYVHumanGetAge(human));
 }
 
 void TYVHumanGetMarriedTest(){
@@ -37,12 +36,11 @@ void TYVHumanGetMarriedTest(){
     TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
     
-    char partnerName[] = "Mother test";
+    char partnerName[] = "Masha";
     TYVString *partnerString = TYVStringCreate(partnerName);
     TYVHuman *partnerHuman = TYVHumanCreate(partnerString, 100, TYVMale);
     
     TYVHumanGetMarried(human, partnerHuman);
-    printf("%s\n", TYVHumanGetPartner(human)->_name->_data);
     
     TYVHumanGetMarried(human, NULL);
     assert(NULL == TYVHumanGetPartner(human));

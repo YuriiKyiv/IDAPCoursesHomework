@@ -99,6 +99,6 @@ void TYVTask4Perform(){
 
 inline
 void TYVTask5Perform(){
-    TYVStringTestsPerfom();
-    //TYVHumanTests();
+    //TYVStringTestsPerfom();
+    TYVHumanTests();
 }

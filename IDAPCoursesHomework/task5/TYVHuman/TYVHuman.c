@@ -45,7 +45,6 @@ void TYVHumanSetAge(TYVHuman *human, uint8_t age);
 #pragma mark -
 #pragma mark Public Implementations
 
-//deprecated
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHuman *human = TYVObjectCreate(TYVHuman);
     TYVHumanSetName(human, string);
@@ -64,8 +63,12 @@ uint8_t TYVHumanGetAge(TYVHuman *human){
 }
 
 void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
-        TYVHumanSetPartner(male,female);
-        TYVHumanSetPartner(female, male);
+    if (NULL == male || NULL == female){
+        return;
+    }
+    
+    TYVHumanSetPartner(male,female);
+    TYVHumanSetPartner(female, male);
 }
 
 void TYVHumanDivorce(TYVHuman *human){
