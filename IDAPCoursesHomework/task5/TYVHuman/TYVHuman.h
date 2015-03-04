@@ -64,4 +64,6 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female);
 
 TYVArray *TYVHumanGetArray(TYVHuman *human);
 
+uint8_t TYVHumanGetAge(TYVHuman *human);
+
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */

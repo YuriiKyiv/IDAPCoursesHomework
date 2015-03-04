@@ -39,22 +39,28 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *mother);
 static
 void TYVHumanSetArray(TYVHuman *human, TYVArray *array);
 
+static
+void TYVHumanSetAge(TYVHuman *human, uint8_t age);
+
 #pragma mark -
 #pragma mark Public Implementations
 
 //deprecated
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
-    TYVHuman *human = malloc(sizeof(*human));
-    TYVObjectRetain(string);
-    human->_name = string;
-    human->_age = age;
-    human->_gender = gender;
-    human->_childrenCount = 0;
-    human->_partner = NULL;
-    human->_father = NULL;
-    human->_mother = NULL;
+    TYVHuman *human = TYVObjectCreate(TYVHuman);
+    TYVHumanSetName(human, string);
+    TYVHumanSetGender(human, gender);
+    TYVHumanSetAge(human, age);
     
     return human;
+}
+
+void TYVHumanSetAge(TYVHuman *human, uint8_t age){
+    human->_age = age;
+}
+
+uint8_t TYVHumanGetAge(TYVHuman *human){
+    return human->_age;
 }
 
 void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
