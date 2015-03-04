@@ -93,8 +93,13 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
         return NULL;
     }
     
-    TYVHuman *child = TYVObjectCreate(TYVHuman);
+    TYVHuman *child = TYVHumanCreate(name, 0, gender);
     
+    TYVHumanAddChild(human, child);
+    TYVHumanAddChild(humanPartner, child);
+    TYVHumanConnectWithParents(child, human);
+    
+    TYVObjectRelease(child);
     
     return child;
 }
