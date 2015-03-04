@@ -22,8 +22,8 @@ void TYVStringTestsPerfom(){
 
 void TYVStringCreateTest(){
     char name[] = "Vasya Pupkin";
-    TYVString *string = __TYVObjectCreate(sizeof(TYVString), (TYVDeallocateCallback)&__TYVStringDeallocate);
-    TYVStringSetData(string, name);
+    TYVString *string = TYVStringCreate(name);
     char *data = TYVStringGetData(string);
     printf("%s\n", data);
+    assert(*name == *data);
 }

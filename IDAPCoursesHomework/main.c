@@ -48,13 +48,13 @@ int main(int argc, const char * argv[]) {
     // insert code here...
     printf("Hello, World!\n");
     
-    TYVTask1Perform();
-    
-    TYVTask2Perform();
-    
-    TYVTask3Perform();
-    
-    TYVTask4Perform();
+//    TYVTask1Perform();
+//    
+//    TYVTask2Perform();
+//    
+//    TYVTask3Perform();
+//    
+//    TYVTask4Perform();
     
     TYVTask5Perform();
     
@@ -100,5 +100,5 @@ void TYVTask4Perform(){
 inline
 void TYVTask5Perform(){
     TYVStringTestsPerfom();
-    TYVHumanTests();
+    //TYVHumanTests();
 }
