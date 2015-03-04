@@ -72,21 +72,29 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
 }
 
 void TYVHumanDivorce(TYVHuman *human){
+    if (NULL == human){
+        return;
+    }
+    
     TYVHumanSetPartner(TYVHumanGetPartner(human), NULL);
     TYVHumanSetPartner(human, NULL);
 }
 
-TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
-    // TODO: Add condition of childrenCount
-    TYVHuman *child = NULL;
-    if (NULL != human && NULL != TYVHumanGetPartner(human)) {
-        child = TYVHumanCreate(name, 0, TYVMale);
-        if (TYVHumanGetGender(human) == TYVMale){
-            TYVHumanConnectWithParents(child, human);
-        } else {
-            TYVHumanConnectWithParents(child, TYVHumanGetPartner(human));
-        }
+TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
+    TYVHuman *humanPartner = TYVHumanGetPartner(human);
+    if (NULL == human
+        || NULL == name
+        || NULL == humanPartner){
+        return NULL;
     }
+    
+    if (TYVHumanGetChildrenCount(human) > 19
+        || TYVHumanGetChildrenCount(humanPartner) > 19){
+        return NULL;
+    }
+    
+    TYVHuman *child = TYVObjectCreate(TYVHuman);
+    
     
     return child;
 }
@@ -151,6 +159,14 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human){
 
 TYVArray *TYVHumanGetArray(TYVHuman *human){
     return human->childrenArray;
+}
+
+uint8_t TYVHumanGetChildrenCount(TYVHuman *human){
+    if (NULL == human){
+        return -1;
+    }
+    
+    return human->_childrenCount;
 }
 
 

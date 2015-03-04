@@ -42,7 +42,7 @@ void __TYVHumanDeallocate(TYVHuman *human);
 
 void TYVHumanDivorce(TYVHuman *human);
 
-TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name);
+TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender);
 
 void TYVHumanSetName(TYVHuman *human, TYVString *string);
 
@@ -65,5 +65,7 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female);
 TYVArray *TYVHumanGetArray(TYVHuman *human);
 
 uint8_t TYVHumanGetAge(TYVHuman *human);
+
+uint8_t TYVHumanGetChildrenCount(TYVHuman *human);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */
