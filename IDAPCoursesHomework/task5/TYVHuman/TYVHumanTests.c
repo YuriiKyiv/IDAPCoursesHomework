@@ -19,7 +19,7 @@ static
 void TYVHumanGetMarriedTest();
 
 void TYVHumanTests(){
-    //TYVHumanCreateTest();
+    TYVHumanCreateTest();
     TYVHumanGetMarriedTest();
 }
 
@@ -42,6 +42,7 @@ void TYVHumanGetMarriedTest(){
     
     TYVHumanGetMarried(human, partnerHuman);
     
-    TYVHumanGetMarried(human, NULL);
+    TYVHumanDivorce(human);
     assert(NULL == TYVHumanGetPartner(human));
+    assert(NULL == TYVHumanGetPartner(partnerHuman));
 }

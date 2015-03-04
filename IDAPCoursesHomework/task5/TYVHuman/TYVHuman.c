@@ -72,8 +72,8 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
 }
 
 void TYVHumanDivorce(TYVHuman *human){
-    TYVHumanSetPartner(human, NULL);
     TYVHumanSetPartner(TYVHumanGetPartner(human), NULL);
+    TYVHumanSetPartner(human, NULL);
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name){
