@@ -97,7 +97,8 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
     
     TYVHumanAddChild(human, child);
     TYVHumanAddChild(humanPartner, child);
-    TYVHumanConnectWithParents(child, human);
+    
+    // add setter for mother and father
     
     TYVObjectRelease(child);
     
@@ -182,6 +183,7 @@ void __TYVHumanDeallocate(TYVHuman *human){
     TYVHumanSetPartner(human, NULL);
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);
+    TYVHumanSetArray(human, NULL);
     
     __TYVObjectDeallocate(human);
 }
