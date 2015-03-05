@@ -27,3 +27,16 @@ void TYVStringCreateTest(){
     printf("%s\n", data);
     assert(*name == *data);
 }
+
+void TYVStringBehaviorTest(){
+    char name[] = "Vasya Pupkin";
+    TYVString *string = TYVStringCreate(name);
+    assert(name == TYVStringGetData(string));
+    assert(TYVStringGetLength(string) == 12);
+    
+    char newName[] = "Masha";
+    TYVStringSetData(string, newName);
+    assert(name != TYVStringGetData(string));
+    assert(newName == TYVStringGetData(string));
+    assert(TYVStringGetLength(string) == 5);
+}
