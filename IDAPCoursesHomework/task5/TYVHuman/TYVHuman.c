@@ -42,6 +42,9 @@ void TYVHumanSetArray(TYVHuman *human, TYVArray *array);
 static
 void TYVHumanSetAge(TYVHuman *human, uint8_t age);
 
+static
+void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -95,8 +98,11 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
     
     TYVHuman *child = TYVHumanCreate(name, 0, gender);
     
-    TYVHumanAddChild(human, child);
-    TYVHumanAddChild(humanPartner, child);
+    TYVHumanConnectWithParents(child, human);
+    
+    
+//    TYVHumanAddChild(human, child);
+//    TYVHumanAddChild(humanPartner, child);
     
     // add setter for mother and father
     
@@ -208,9 +214,24 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
 }
 
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
-    // TODO: add cheaking for NULL - parent partner child
     TYVHumanAddChild(human, child);
     TYVHumanAddChild(TYVHumanGetPartner(human), child);
+    TYVHumanSetParents(child, human);
+    
+}
+
+void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent){
+    if (NULL == child || NULL == parent){
+        return;
+    }
+    
+    if (TYVHumanGetGender(parent) == TYVMale){
+        TYVHumanSetFather(child, parent);
+        TYVHumanSetMother(child, TYVHumanGetPartner(parent));
+    } else {
+        TYVHumanSetFather(child, TYVHumanGetPartner(parent));
+        TYVHumanSetMother(child, parent);
+    }
 }
 
 void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
