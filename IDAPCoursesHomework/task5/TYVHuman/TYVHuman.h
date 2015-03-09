@@ -13,7 +13,7 @@
 #include "TYVString.h"
 #include "TYVArray.h"
 
-//const uint8_t TYVChildrenMaxCount = 20;
+const static uint8_t TYVChildrenMaxCount = 20;
 
 typedef enum TYVGender TYVGender;
 enum TYVGender {

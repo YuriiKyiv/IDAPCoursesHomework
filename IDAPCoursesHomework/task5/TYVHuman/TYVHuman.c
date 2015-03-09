@@ -54,6 +54,9 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHumanSetGender(human, gender);
     TYVHumanSetAge(human, age);
     
+    TYVArray *array = TYVObjectCreate(TYVArray);
+    TYVHumanSetArray(human, array);
+    
     return human;
 }
 
@@ -91,20 +94,14 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
         return NULL;
     }
     
-    if (TYVHumanGetChildrenCount(human) > 19
-        || TYVHumanGetChildrenCount(humanPartner) > 19){
+    if (TYVHumanGetChildrenCount(human) >= TYVChildrenMaxCount
+        || TYVHumanGetChildrenCount(humanPartner) >= TYVChildrenMaxCount){
         return NULL;
     }
     
     TYVHuman *child = TYVHumanCreate(name, 0, gender);
     
     TYVHumanConnectWithParents(child, human);
-    
-    
-//    TYVHumanAddChild(human, child);
-//    TYVHumanAddChild(humanPartner, child);
-    
-    // add setter for mother and father
     
     TYVObjectRelease(child);
     
@@ -175,7 +172,7 @@ TYVArray *TYVHumanGetArray(TYVHuman *human){
 
 uint8_t TYVHumanGetChildrenCount(TYVHuman *human){
     if (NULL == human){
-        return -1;
+        return 255;
     }
     
     return human->_childrenCount;
@@ -237,11 +234,6 @@ void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent){
 void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
     if (NULL == human){
         return;
-    }
-    
-    if (NULL == human->_childrenArray){
-        TYVArray *array = TYVObjectCreate(TYVArray);
-        TYVHumanSetArray(human, array);
     }
     
     TYVArrayAdd(TYVHumanGetArray(human), child);
