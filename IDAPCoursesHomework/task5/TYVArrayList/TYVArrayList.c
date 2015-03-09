@@ -18,6 +18,8 @@ void *TYVArrayListGetData(TYVArrayList *array);
 
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
+void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
+
 void TYVArrayListResize(TYVArrayList *array);
 
 #pragma mark -
@@ -49,23 +51,25 @@ size_t TYVArrayListGetSize(TYVArrayList *array){
     return (NULL != array) ? array->_size : 0;
 }
 
-void TYVArraListAddItem(TYVArrayList *array, void *item){
+void TYVArrayListAddItem(TYVArrayList *array, void *item){
     if (NULL == array){
         return;
     }
     
+    uint64_t currentCount = TYVArrayListGetCount(array);
     size_t arraySize = TYVArrayListGetSize(array);
     
-    if (arraySize == TYVArrayListGetCount(array)){
+    if (arraySize == currentCount){
         TYVArrayListResize(array);
     }
     
     void *data = TYVArrayListGetData(array);
     size_t iter = 0;
-    while (NULL != &data[iter] || iter < arraySize) {
+    while ((NULL != &data[iter]) && (iter < arraySize)) {
         iter++;
     }
     
+    TYVArrayListSetCount(array, currentCount + 1);
     //data[iter] = *item;
 }
 
@@ -90,6 +94,14 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
     }
     
     array->_size = newSize;
+}
+
+void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount){
+    if (NULL == array || array->_count == newCount){
+        return;
+    }
+    
+    array->_count = newCount;
 }
 
 void TYVArrayListResize(TYVArrayList *array){

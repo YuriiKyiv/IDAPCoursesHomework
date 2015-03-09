@@ -27,7 +27,7 @@ TYVArrayList *TYVArrayListCreate(size_t size);
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList);
 
-void TYVArraListAddItem(TYVArrayList *array, void *item);
+void TYVArrayListAddItem(TYVArrayList *array, void *item);
 
 uint64_t TYVArrayListGetCount(TYVArrayList *array);
 
