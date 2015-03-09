@@ -35,9 +35,8 @@ void TYVStringSetData(TYVString *string, char *data){
         free(string->_data);
     }
     
-    size_t length  = strlen(data) + 1;
-    string->_data = TYVCharCopy(data, length);
-    string->_length = length;
+    string->_data = strdup(data);
+    string->_length = strlen(data) + 1;
 }
 
 char *TYVStringGetData(TYVString *string){
@@ -46,13 +45,6 @@ char *TYVStringGetData(TYVString *string){
 
 size_t TYVStringGetLength(TYVString *string){
     return string->_length;
-}
-
-char *TYVCharCopy(char *data, size_t length){
-    char *newData = calloc(length, sizeof(char));
-    memcpy(newData, data, length);
-    
-    return newData;
 }
 
 #pragma mark -
