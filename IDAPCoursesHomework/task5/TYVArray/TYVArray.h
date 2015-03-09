@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include "TYVObject.h"
 
-#endif /* defined(__IDAPCoursesHomework__TYVArray__) */
-
 typedef struct TYVArray TYVArray;
 struct TYVArray {
     TYVObject _object;
@@ -27,3 +25,5 @@ void TYVArrayAdd(TYVArray *array, void *);
 void TYVArrayRemove(TYVArray *array, void *);
 
 void __TYVArrayDeallocate(TYVArray *array);
+
+#endif /* defined(__IDAPCoursesHomework__TYVArray__) */
