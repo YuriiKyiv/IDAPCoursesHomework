@@ -14,6 +14,8 @@
 
 void TYVArrayListSetData(TYVArrayList *arrayList, void *newData);
 
+void *TYVArrayListGetData(TYVArrayList *array);
+
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
 void TYVArrayListResize(TYVArrayList *array);
@@ -22,6 +24,9 @@ void TYVArrayListResize(TYVArrayList *array);
 #pragma mark Public Implementations
 
 TYVArrayList *TYVArrayListCreate(size_t size){
+    if (0 == size){
+        size = 1;
+    }
     TYVArrayList *arrayList = TYVObjectCreate(TYVArrayList);
     void *newData = calloc(size, sizeof(*newData));
     TYVArrayListSetData(arrayList, newData);
@@ -49,9 +54,19 @@ void TYVArraListAddItem(TYVArrayList *array, void *item){
         return;
     }
     
-    if (TYVArrayListGetSize(array) == TYVArrayListGetCount(array)){
+    size_t arraySize = TYVArrayListGetSize(array);
+    
+    if (arraySize == TYVArrayListGetCount(array)){
         TYVArrayListResize(array);
     }
+    
+    void *data = TYVArrayListGetData(array);
+    size_t iter = 0;
+    while (NULL != &data[iter] || iter < arraySize) {
+        iter++;
+    }
+    
+    //data[iter] = *item;
 }
 
 #pragma mark -
@@ -82,6 +97,8 @@ void TYVArrayListResize(TYVArrayList *array){
         return;
     }
     
-    void *newData = realloc(TYVArrayListGetData(array), TYVArrayListGetSize(array)*2);
+    size_t newSize = TYVArrayListGetSize(array)*2;
+    void *newData = realloc(TYVArrayListGetData(array), newSize);
     TYVArrayListSetData(array, newData);
+    TYVArrayListSetSize(array, newSize);
 }
