@@ -18,7 +18,7 @@ void TYVArrayListPerfomTests(){
 }
 
 void TYVArrayListCreateTest(){
-    TYVArrayList *array = TYVArrayListCreate(1);
-    assert(0 == array->_count);
-    assert(1 == array->_size);
+    TYVArrayList *array = TYVArrayListCreate(2);
+    assert(0 == TYVArrayListGetCount(array));
+    assert(2 == TYVArrayListGetSize(array));
 }

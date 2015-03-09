@@ -27,4 +27,10 @@ TYVArrayList *TYVArrayListCreate(size_t size);
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList);
 
+void TYVArraListAddItem(TYVArrayList *array, void *item);
+
+uint64_t TYVArrayListGetCount(TYVArrayList *array);
+
+size_t TYVArrayListGetSize(TYVArrayList *array);
+
 #endif /* defined(__IDAPCoursesHomework__TYVArrayList__) */
