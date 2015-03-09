@@ -14,6 +14,7 @@
 
 void TYVArrayListSetData(TYVArrayList *arrayList, void *newData);
 
+void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -22,8 +23,13 @@ TYVArrayList *TYVArrayListCreate(size_t size){
     TYVArrayList *arrayList = TYVObjectCreate(TYVArrayList);
     void *newData = calloc(size, sizeof(*newData));
     TYVArrayListSetData(arrayList, newData);
+    TYVArrayListSetSize(arrayList, size);
     
     return arrayList;
+}
+
+void __TYVArrayListDeallocate(TYVArrayList *arrayList){
+    
 }
 
 #pragma mark -
@@ -35,4 +41,12 @@ void TYVArrayListSetData(TYVArrayList *arrayList, void *newData){
     }
     
     arrayList->_data = newData;
+}
+
+void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
+    if (NULL == array || array->_size == newSize){
+        return;
+    }
+    
+    array->_size = newSize;
 }

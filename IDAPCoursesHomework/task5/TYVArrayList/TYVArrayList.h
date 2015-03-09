@@ -20,7 +20,7 @@ struct TYVArrayList {
     void *_data;
     
     uint64_t _count;
-    size_t size;
+    size_t _size;
 };
 
 TYVArrayList *TYVArrayListCreate(size_t size);
