@@ -41,7 +41,7 @@ void TYVStringCreateTest(){
 //     data of string object equals null
 //     length of data equals  0
 
-// after creating string object with char doesn't equal null
+// after creating string object with char equals null
 //      and set a new data of char which equals null
 //          data of string object equals null
 //          length of data equals  0

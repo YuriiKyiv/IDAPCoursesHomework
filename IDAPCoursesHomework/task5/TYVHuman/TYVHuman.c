@@ -61,9 +61,19 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
 }
 
 void TYVHumanSet(void *field, void *value){
-    if (NULL == field || field == value){
-        field = value;
+    if (field == value){
+        return;
     }
+    
+    if (NULL != field){
+        TYVObjectRelease(field);
+    }
+    
+    if (NULL != value){
+        TYVObjectRetain(value);
+    }
+    
+    field = value;
 }
 
 void TYVHumanSetAge(TYVHuman *human, uint8_t age){
@@ -119,15 +129,7 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string){
         return;
     }
     
-    if (NULL != human->_name){
-        TYVObjectRelease(human->_name);
-    }
-    
-    if (NULL != string){
-        TYVObjectRetain(string);
-    }
-    
-    human->_name = string;
+    TYVHumanSet(human->_name, string);
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human){
@@ -205,15 +207,7 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
         return;
     }
     
-    if (NULL != TYVHumanGetPartner(human)){
-        TYVObjectRelease(human->_partner);
-    }
-    
-    if (NULL != partner){
-        TYVObjectRetain(partner);
-    }
-    
-    human->_partner = partner;
+    TYVHumanSet(human->_partner, partner);
 }
 
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
@@ -250,28 +244,19 @@ void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
 //}
 
 void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
-    if (NULL != TYVHumanGetMother(human)){
-
-        TYVObjectRelease(human->_mother);
+    if ( NULL == human || human == mother){
+        return;
     }
     
-    if (NULL != mother) {
-        TYVObjectRetain(mother);
-    }
-    
-    human->_mother = mother;
+    TYVHumanSet(human->_mother, mother);
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
-    if (NULL != TYVHumanGetFather(human)){
-        TYVObjectRelease(human->_father);
+    if ( NULL == human || human == father){
+        return;
     }
     
-    if (NULL != father) {
-        TYVObjectRetain(father);
-    }
-    
-    human->_father = father;
+    TYVHumanSet(human->_father, father);
 }
 
 void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
@@ -279,13 +264,5 @@ void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
         return;
     }
     
-    if (NULL != human->_childrenArray){
-        TYVObjectRelease(human->_childrenArray);
-    }
-    
-    if (NULL != array){
-        TYVObjectRetain(array);
-    }
-    
-    human->_childrenArray = array;
+    TYVHumanSet(human->_childrenArray, array);
 }
