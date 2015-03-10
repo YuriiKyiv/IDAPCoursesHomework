@@ -13,9 +13,6 @@
 #pragma mark -
 #pragma mark Private Declarations
 
-static
-char *TYVCharCopy(char *data, size_t length);
-
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -27,7 +24,7 @@ TYVString *TYVStringCreate(char *data){
 }
 
 void TYVStringSetData(TYVString *string, char *data){
-    if (NULL == string || NULL == data){
+    if (NULL == string){
         return;
     }
     
@@ -35,8 +32,13 @@ void TYVStringSetData(TYVString *string, char *data){
         free(string->_data);
     }
     
-    string->_data = strdup(data);
-    string->_length = strlen(data) + 1;
+    if (NULL != data){
+        string->_data = strdup(data);
+        string->_length = strlen(data) + 1;
+    } else {
+        string->_data = NULL;
+        string->_length = 0;
+    }
 }
 
 char *TYVStringGetData(TYVString *string){
