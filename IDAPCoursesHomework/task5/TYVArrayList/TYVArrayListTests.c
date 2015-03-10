@@ -36,3 +36,30 @@ void TYVArrayListResizeTest(){
     assert(2 == TYVArrayListGetCount(array));
     assert(2 == TYVArrayListGetSize(array));
 }
+
+// after creating 1-size arraylist
+//      size of arraylist is 1
+//      count of arraylist is 0
+//      after adding not NULL object
+//          count of arraylist is 1
+//          after adding not NULL object
+//              count of arraylist is 2
+//              size of arraylist is 2
+//              after adding not NULL object
+//                  count of arraylist is 3
+//                  size of arraylist is 4
+//                  after removing not NULL object
+//                      count of arraylist is 2
+//                      size of arraylist is 4
+//                      after removing not NULL object which is contained
+//                          count of arraylist is 1
+//                          size of arraylist is 2
+
+// after creating 1-size arraylist
+//      after adding NULL object
+//      NOTHING
+
+// after creating 1-size arraylist
+//      after adding not NULL object
+//      after removing NULL object
+//      NOTHING
