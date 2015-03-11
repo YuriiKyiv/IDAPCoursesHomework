@@ -52,10 +52,7 @@ size_t TYVStringGetLength(TYVString *string){
 #pragma mark Private Implementations
 
 void __TYVStringDeallocate(TYVString *string){
-    if (NULL != string->_data){
-        free(string->_data);
-        string->_data = NULL;
-    }
+    TYVStringSetData(string, NULL);
     
     __TYVObjectDeallocate(string);
 }
