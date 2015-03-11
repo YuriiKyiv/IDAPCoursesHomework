@@ -22,12 +22,12 @@ struct TYVString {
 
 TYVString *TYVStringCreate(char *data);
 
+void TYVStringSetData(TYVString *string, char *data);
+
 char *TYVStringGetData(TYVString *string);
 
 size_t TYVStringGetLength(TYVString *string);
 
 void __TYVStringDeallocate(TYVString *string);
-
-void TYVStringSetData(TYVString *string, char *data);
 
 #endif /* defined(__IDAPCoursesHomework__TYVString__) */

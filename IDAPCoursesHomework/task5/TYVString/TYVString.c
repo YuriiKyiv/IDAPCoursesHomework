@@ -30,14 +30,13 @@ void TYVStringSetData(TYVString *string, char *data){
     
     if (NULL != string->_data){
         free(string->_data);
+        string->_data = NULL;
+        string->_length = 0;
     }
     
     if (NULL != data){
         string->_data = strdup(data);
         string->_length = strlen(data) + 1;
-    } else {
-        string->_data = NULL;
-        string->_length = 0;
     }
 }
 
