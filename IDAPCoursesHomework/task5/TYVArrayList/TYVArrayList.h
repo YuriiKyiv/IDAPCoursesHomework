@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "TYVObject.h"
+#include "stdbool.h"
 
 typedef struct TYVArrayList TYVArrayList;
 
@@ -29,8 +30,12 @@ void __TYVArrayListDeallocate(TYVArrayList *arrayList);
 
 void TYVArrayListAddItem(TYVArrayList *array, void *item);
 
-uint64_t TYVArrayListGetCount(TYVArrayList *array);
+void TYVArrayListRemoveItem(TYVArrayList *array, void *item);
 
-size_t TYVArrayListGetSize(TYVArrayList *array);
+void TYVArrayListRemoveItems(TYVArrayList *array);
+
+bool TYVArrayListIsContain(TYVArrayList *array, void *item);
+
+uint64_t TYVArrayListGetCount(TYVArrayList *array);
 
 #endif /* defined(__IDAPCoursesHomework__TYVArrayList__) */

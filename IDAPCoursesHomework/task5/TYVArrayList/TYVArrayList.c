@@ -22,6 +22,8 @@ void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
 
 void TYVArrayListResize(TYVArrayList *array);
 
+size_t TYVArrayListGetSize(TYVArrayList *array);
+
 #pragma mark -
 #pragma mark Public Implementations
 
