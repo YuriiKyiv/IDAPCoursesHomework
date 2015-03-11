@@ -68,6 +68,6 @@ uint8_t TYVHumanGetAge(TYVHuman *human);
 
 uint8_t TYVHumanGetChildrenCount(TYVHuman *human);
 
-void TYVHumanSet(void *field, void *value);
+void TYVHumanSet(void **field, void **value);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */
