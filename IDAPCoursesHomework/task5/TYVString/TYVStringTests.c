@@ -28,23 +28,14 @@ void TYVStringCreateTest(){
     assert(*name == *data);
 }
 
-// after creating string object with char doesn't equal null
-//     data of string object doesn't equals char pointer
-//     length of data equals  input char array
-
-// after creating string object with char doesn't equal null
-//      and set a new data of char which doesnt equal null
-//          data of string object doesn't equal char pointer
-//          length of data equals  input char array
-
-// after creating string object with char equals null
-//     data of string object equals null
-//     length of data equals  0
-
-// after creating string object with char equals null
-//      and set a new data of char which equals null
-//          data of string object equals null
-//          length of data equals  0
+//after creating a string with the non-NULL char pointer
+//the length of data equls the length of the input argument
+//after getting the data of string, this data equals the input argument
+//    after setting a new non-NULL char pointer
+//    the length of string equals length of the input char pointer
+//        after setting a NULL char pointer
+//        the length of string equals 0
+//        the data of string equals NULL
 
 void TYVStringBehaviorTest(){
     char name[] = "Vasya Pupkin";
