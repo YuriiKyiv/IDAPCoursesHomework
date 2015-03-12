@@ -60,11 +60,12 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
         return;
     }
     
+    data = realloc(data, newSize * sizeof(data));
     if (currentSize < newSize){
-        data = realloc(data, newSize);
+        memset(data + currentSize, 0, (newSize - currentSize) * sizeof(data));
     }
     
-    
+    array->_size =  newSize;
 }
 
 size_t TYVArrayListGetSize(TYVArrayList *array){
