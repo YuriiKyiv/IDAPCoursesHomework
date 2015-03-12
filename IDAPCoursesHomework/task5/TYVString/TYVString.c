@@ -41,11 +41,11 @@ void TYVStringSetData(TYVString *string, char *data){
 }
 
 char *TYVStringGetData(TYVString *string){
-    return string->_data;
+    return (NULL != string) ? string->_data : 0;
 }
 
 size_t TYVStringGetLength(TYVString *string){
-    return string->_length;
+    return (NULL != string) ? string->_length : 0;
 }
 
 #pragma mark -

@@ -187,7 +187,7 @@ void __TYVHumanDeallocate(TYVHuman *human){
 #pragma mark Private Implementations
 
 void TYVHumanSetRetain(void **field, void *value){
-    if (*field == value){
+    if (NULL == field || *field == value){
         return;
     }
     
