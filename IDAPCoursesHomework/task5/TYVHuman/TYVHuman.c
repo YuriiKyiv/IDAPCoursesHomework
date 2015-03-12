@@ -46,6 +46,9 @@ void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent);
 static
 void TYVHumanSetRetain(void **field, void *value);
 
+static
+void TYVHumanSetAssign(void **field, void *value);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -76,8 +79,13 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
         return;
     }
     
-    TYVHumanSetPartnerRetain(male,female);
-    TYVHumanSetPartnerAssign(female, male);
+    if (TYVHumanGetGender(male) == TYVMale){
+        TYVHumanSetPartnerRetain(male, female);
+        TYVHumanSetPartnerAssign(female, male);
+    } else {
+        TYVHumanSetPartnerRetain(female, male);
+        TYVHumanSetPartnerAssign(male, female);
+    }
 }
 
 bool TYVHumanIsMarried(TYVHuman *human){
