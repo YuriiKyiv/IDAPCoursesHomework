@@ -9,7 +9,6 @@
 #include "TYVHuman.h"
 #include "TYVString.h"
 #include "stdlib.h"
-#include "stdbool.h"
 
 #pragma mark -
 #pragma mark Private Declarations

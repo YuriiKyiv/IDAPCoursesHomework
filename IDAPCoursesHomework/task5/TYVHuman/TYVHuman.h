@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "TYVString.h"
 #include "TYVArray.h"
+#include "stdbool.h"
 
 const static uint8_t TYVChildrenMaxCount = 20;
 
