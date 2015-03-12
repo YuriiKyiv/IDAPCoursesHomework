@@ -8,6 +8,7 @@
 
 #include "TYVArrayList.h"
 #include "stdlib.h"
+#include "assert.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -61,11 +62,12 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
     }
     
     data = realloc(data, newSize * sizeof(data));
+    assert(NULL != data);
     if (currentSize < newSize){
         memset(data + currentSize, 0, (newSize - currentSize) * sizeof(data));
     }
     
-    array->_size =  newSize;
+    array->_size = newSize;
 }
 
 size_t TYVArrayListGetSize(TYVArrayList *array){
