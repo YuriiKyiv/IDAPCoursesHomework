@@ -10,11 +10,6 @@
 #include "TYVString.h"
 #include "stdlib.h"
 
-#define TYVReleaseFieldGeneratorByClass(class, field) \
-    if (NULL != human->_##field){ \
-        TYV##class##Release(human->_##field); \
-    }
-
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -45,6 +40,9 @@ void TYVHumanSetAge(TYVHuman *human, uint8_t age);
 static
 void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent);
 
+static
+void TYVHumanSetRetain(void **field, void *value);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -60,22 +58,6 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVObjectRelease(array);
     
     return human;
-}
-
-void TYVHumanSet(void **field, void *value){
-    if (*field == value){
-        return;
-    }
-    
-    if (NULL != *field){
-        TYVObjectRelease(*field);
-    }
-    
-    if (NULL != value){
-        TYVObjectRetain(value);
-    }
-    
-    *field = value;
 }
 
 void TYVHumanSetAge(TYVHuman *human, uint8_t age){
@@ -204,12 +186,28 @@ void __TYVHumanDeallocate(TYVHuman *human){
 #pragma mark -
 #pragma mark Private Implementations
 
+void TYVHumanSetRetain(void **field, void *value){
+    if (*field == value){
+        return;
+    }
+    
+    if (NULL != *field){
+        TYVObjectRelease(*field);
+    }
+    
+    if (NULL != value){
+        TYVObjectRetain(value);
+    }
+    
+    *field = value;
+}
+
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     if ( NULL == human || human == partner){
         return;
     }
     
-    TYVHumanSet(human->_partner, partner);
+    TYVHumanSetRetain((void **)human->_partner, partner);
 }
 
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
@@ -250,7 +248,7 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
         return;
     }
     
-    TYVHumanSet(human->_mother, mother);
+    TYVHumanSetRetain((void **)human->_mother, mother);
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
@@ -258,7 +256,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
         return;
     }
     
-    TYVHumanSet(human->_father, father);
+    TYVHumanSetRetain((void **)human->_father, father);
 }
 
 void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
@@ -266,5 +264,5 @@ void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
         return;
     }
     
-    TYVHumanSet(human->_childrenArray, array);
+    TYVHumanSetRetain((void **)human->_childrenArray, array);
 }
