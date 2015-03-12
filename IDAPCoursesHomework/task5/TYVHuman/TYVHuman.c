@@ -235,7 +235,7 @@ void TYVHumanSetPartnerRetain(TYVHuman *human, TYVHuman *partner){
         return;
     }
     
-    TYVHumanSetRetain((void **)human->_partner, partner);
+    TYVHumanSetRetain((void **)&human->_partner, partner);
 }
 
 
@@ -244,7 +244,7 @@ void TYVHumanSetPartnerAssign(TYVHuman *human, TYVHuman *partner){
         return;
     }
     
-    TYVHumanSetAssign((void **)human->_partner, partner);
+    TYVHumanSetAssign((void **)&human->_partner, partner);
 }
 
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
