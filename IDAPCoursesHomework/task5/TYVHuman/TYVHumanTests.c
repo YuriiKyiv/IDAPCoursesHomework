@@ -16,12 +16,12 @@ static
 void TYVHumanCreateTest();
 
 static
-void TYVHumanGetMarriedTest();
+void TYVHumanGetMarriedAndDivorceTest();
 
 void TYVHumanTests(){
     printf("HUMAN TESTS\n");
     TYVHumanCreateTest();
-    TYVHumanGetMarriedTest();
+    TYVHumanGetMarriedAndDivorceTest();
 }
 
 void TYVHumanCreateTest(){
@@ -35,16 +35,23 @@ void TYVHumanCreateTest(){
     TYVObjectRelease(string);
 }
 
-void TYVHumanGetMarriedTest(){
+void TYVHumanGetMarriedAndDivorceTest(){
     char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 100, TYVMale);
     
     char partnerName[] = "Masha";
     TYVString *partnerString = TYVStringCreate(partnerName);
-    TYVHuman *partnerHuman = TYVHumanCreate(partnerString, 100, TYVMale);
+    TYVHuman *partnerHuman = TYVHumanCreate(partnerString, 100, TYVFemale);
     
     TYVHumanGetMarried(human, partnerHuman);
+    assert(TYVHumanIsMarried(human));
+    assert(NULL != TYVHumanGetPartner(human));
+    assert(TYVHumanGetPartner(human) == partnerHuman);
+    
+    assert(TYVHumanIsMarried(partnerHuman));
+    assert(NULL != TYVHumanGetPartner(partnerHuman));
+    assert(TYVHumanGetPartner(partnerHuman) == human);
     
     TYVHumanDivorce(human);
     assert(NULL == TYVHumanGetPartner(human));
