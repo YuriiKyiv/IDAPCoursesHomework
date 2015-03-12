@@ -17,6 +17,9 @@ static
 void TYVHumanSetPartnerRetain(TYVHuman *human, TYVHuman *partner);
 
 static
+void TYVHumanSetPartnerAssign(TYVHuman *human, TYVHuman *partner);
+
+static
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
 
 static
@@ -216,6 +219,15 @@ void TYVHumanSetPartnerRetain(TYVHuman *human, TYVHuman *partner){
     }
     
     TYVHumanSetRetain((void **)human->_partner, partner);
+}
+
+
+void TYVHumanSetPartnerAssign(TYVHuman *human, TYVHuman *partner){
+    if ( NULL == human || human == partner){
+        return;
+    }
+    
+    TYVHumanSetAssign((void **)human->_partner, partner);
 }
 
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
