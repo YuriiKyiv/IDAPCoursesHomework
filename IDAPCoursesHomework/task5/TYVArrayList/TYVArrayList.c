@@ -14,8 +14,6 @@
 
 void TYVArrayListSetData(TYVArrayList *arrayList, void *newData);
 
-void *TYVArrayListGetData(TYVArrayList *array);
-
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
 void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
@@ -38,6 +36,12 @@ uint64_t TYVArrayListGetCount(TYVArrayList *array){
     return array->_count;
 }
 
+
+void __TYVArrayListDeallocate(TYVArrayList *arrayList){
+    
+}
+
+
 #pragma mark -
 #pragma mark Private Implementations
 
@@ -51,8 +55,8 @@ void TYVArrayListSetData(TYVArrayList *arrayList, void *newData){
 
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
     size_t currentSize = array->_size;
-    void *data = TYVArrayListGetData(array);
-    if (NULL == array || currentSize){
+    void *data = array->_data;
+    if (NULL == array || currentSize == newSize){
         return;
     }
     
