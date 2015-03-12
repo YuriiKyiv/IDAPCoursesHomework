@@ -14,7 +14,7 @@
 #pragma mark Private Declarations
 
 static
-void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
+void TYVHumanSetPartnerRetain(TYVHuman *human, TYVHuman *partner);
 
 static
 void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
@@ -73,8 +73,8 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
         return;
     }
     
-    TYVHumanSetPartner(male,female);
-    TYVHumanSetPartner(female, male);
+    TYVHumanSetPartnerRetain(male,female);
+    TYVHumanSetPartnerRetain(female, male);
 }
 
 void TYVHumanDivorce(TYVHuman *human){
@@ -82,8 +82,8 @@ void TYVHumanDivorce(TYVHuman *human){
         return;
     }
     
-    TYVHumanSetPartner(TYVHumanGetPartner(human), NULL);
-    TYVHumanSetPartner(human, NULL);
+    TYVHumanSetPartnerRetain(TYVHumanGetPartner(human), NULL);
+    TYVHumanSetPartnerRetain(human, NULL);
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
@@ -175,7 +175,7 @@ void __TYVHumanDeallocate(TYVHuman *human){
     // TODO: add children information
     
     TYVHumanSetName(human, NULL);
-    TYVHumanSetPartner(human, NULL);
+    TYVHumanSetPartnerRetain(human, NULL);
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);
     TYVHumanSetArray(human, NULL);
@@ -210,7 +210,7 @@ void TYVHumanSetAssign(void **field, void *value){
     *field = value;
 }
 
-void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
+void TYVHumanSetPartnerRetain(TYVHuman *human, TYVHuman *partner){
     if ( NULL == human || human == partner){
         return;
     }
