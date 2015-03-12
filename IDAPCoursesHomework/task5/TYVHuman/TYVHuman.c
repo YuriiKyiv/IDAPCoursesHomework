@@ -113,7 +113,7 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string){
         return;
     }
     
-    TYVHumanSet(human->_name, string);
+    TYVHumanSetRetain((void **)human->_name, string);
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human){
