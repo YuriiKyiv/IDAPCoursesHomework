@@ -19,6 +19,7 @@ static
 void TYVHumanGetMarriedTest();
 
 void TYVHumanTests(){
+    printf("HUMAN TESTS\n");
     TYVHumanCreateTest();
     TYVHumanGetMarriedTest();
 }
@@ -28,7 +29,10 @@ void TYVHumanCreateTest(){
     TYVString *string = TYVStringCreate(name);
     TYVHuman *human = TYVHumanCreate(string, 11, TYVMale);
     TYVHumanNameOutput(human);
-    printf("%d\n", TYVHumanGetAge(human));
+    assert(11 == TYVHumanGetAge(human));
+    
+    TYVObjectRelease(human);
+    TYVObjectRelease(string);
 }
 
 void TYVHumanGetMarriedTest(){
@@ -45,4 +49,9 @@ void TYVHumanGetMarriedTest(){
     TYVHumanDivorce(human);
     assert(NULL == TYVHumanGetPartner(human));
     assert(NULL == TYVHumanGetPartner(partnerHuman));
+    
+    TYVObjectRelease(human);
+    TYVObjectRelease(string);
+    TYVObjectRelease(partnerString);
+    TYVObjectRelease(partnerHuman);
 }
