@@ -62,8 +62,8 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     return human;
 }
 
-void TYVHumanSet(void **field, void **value){
-    if (*field == *value){
+void TYVHumanSet(void **field, void *value){
+    if (*field == value){
         return;
     }
     
@@ -72,10 +72,10 @@ void TYVHumanSet(void **field, void **value){
     }
     
     if (NULL != value){
-        TYVObjectRetain(*value);
+        TYVObjectRetain(value);
     }
     
-    *field = *value;
+    *field = value;
 }
 
 void TYVHumanSetAge(TYVHuman *human, uint8_t age){
