@@ -48,4 +48,6 @@ void TYVStringBehaviorTest(){
     assert(name != TYVStringGetData(string));
     assert(newName == TYVStringGetData(string));
     assert(TYVStringGetLength(string) == 5);
+    
+    TYVObjectRelease(string);
 }
