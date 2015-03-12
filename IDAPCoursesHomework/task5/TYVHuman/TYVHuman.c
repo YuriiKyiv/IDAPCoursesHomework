@@ -202,6 +202,14 @@ void TYVHumanSetRetain(void **field, void *value){
     *field = value;
 }
 
+void TYVHumanSetAssign(void **field, void *value){
+    if (NULL == field || *field == value){
+        return;
+    }
+    
+    *field = value;
+}
+
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     if ( NULL == human || human == partner){
         return;
