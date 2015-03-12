@@ -9,6 +9,7 @@
 #include "TYVHuman.h"
 #include "TYVString.h"
 #include "stdlib.h"
+#include "stdbool.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -77,16 +78,25 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
     }
     
     TYVHumanSetPartnerRetain(male,female);
-    TYVHumanSetPartnerRetain(female, male);
+    TYVHumanSetPartnerAssign(female, male);
+}
+
+bool TYVHumanIsMarried(TYVHuman *human){
+    return (NULL != human) ? (NULL != TYVHumanGetPartner(human)) : false;
 }
 
 void TYVHumanDivorce(TYVHuman *human){
-    if (NULL == human){
+    if (NULL == human || !TYVHumanIsMarried(human)){
         return;
     }
     
-    TYVHumanSetPartnerRetain(TYVHumanGetPartner(human), NULL);
-    TYVHumanSetPartnerRetain(human, NULL);
+    if (TYVHumanGetGender(human) == TYVMale){
+        TYVHumanSetPartnerAssign(TYVHumanGetPartner(human), NULL);
+        TYVHumanSetPartnerRetain(human, NULL);
+    } else {
+        TYVHumanSetPartnerRetain(TYVHumanGetPartner(human), NULL);
+        TYVHumanSetPartnerAssign(human, NULL);
+    }
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){

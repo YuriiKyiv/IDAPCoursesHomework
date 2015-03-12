@@ -62,6 +62,8 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human);
 
 void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female);
 
+bool TYVHumanIsMarried(TYVHuman *human);
+
 TYVArray *TYVHumanGetArray(TYVHuman *human);
 
 uint8_t TYVHumanGetAge(TYVHuman *human);
