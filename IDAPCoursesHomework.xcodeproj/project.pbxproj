@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A51A9C71AA095F3003CC905 /* TYVObject.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A51A9C51AA095F3003CC905 /* TYVObject.c */; };
+		5A5201DE1AB3259B00D2C6EE /* TYVUniversalSetters.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5201DC1AB3259B00D2C6EE /* TYVUniversalSetters.c */; };
 		5A5BF99B1AADF4AE00388CA8 /* TYVArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF9991AADF4AE00388CA8 /* TYVArrayList.c */; };
 		5A5BF99F1AADF92800388CA8 /* TYVArrayListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF99D1AADF92800388CA8 /* TYVArrayListTests.c */; };
 		5AADBF3C1AA487A600B29A88 /* TYVArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AADBF3A1AA487A600B29A88 /* TYVArray.c */; };
@@ -43,6 +44,8 @@
 /* Begin PBXFileReference section */
 		5A51A9C51AA095F3003CC905 /* TYVObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVObject.c; path = TYVObject/TYVObject.c; sourceTree = "<group>"; };
 		5A51A9C61AA095F3003CC905 /* TYVObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVObject.h; path = TYVObject/TYVObject.h; sourceTree = "<group>"; };
+		5A5201DC1AB3259B00D2C6EE /* TYVUniversalSetters.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVUniversalSetters.c; path = TYVUniversalSetters/TYVUniversalSetters.c; sourceTree = "<group>"; };
+		5A5201DD1AB3259B00D2C6EE /* TYVUniversalSetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVUniversalSetters.h; path = TYVUniversalSetters/TYVUniversalSetters.h; sourceTree = "<group>"; };
 		5A5BF9991AADF4AE00388CA8 /* TYVArrayList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVArrayList.c; path = TYVArrayList/TYVArrayList.c; sourceTree = "<group>"; };
 		5A5BF99A1AADF4AE00388CA8 /* TYVArrayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArrayList.h; path = TYVArrayList/TYVArrayList.h; sourceTree = "<group>"; };
 		5A5BF99D1AADF92800388CA8 /* TYVArrayListTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVArrayListTests.c; path = TYVArrayList/TYVArrayListTests.c; sourceTree = "<group>"; };
@@ -99,6 +102,15 @@
 				5A51A9C61AA095F3003CC905 /* TYVObject.h */,
 			);
 			name = TYVObject;
+			sourceTree = "<group>";
+		};
+		5A5201DF1AB325A000D2C6EE /* TYVUniversalSetters */ = {
+			isa = PBXGroup;
+			children = (
+				5A5201DC1AB3259B00D2C6EE /* TYVUniversalSetters.c */,
+				5A5201DD1AB3259B00D2C6EE /* TYVUniversalSetters.h */,
+			);
+			name = TYVUniversalSetters;
 			sourceTree = "<group>";
 		};
 		5A5BF99C1AADF4B800388CA8 /* TYVArrayList */ = {
@@ -198,6 +210,7 @@
 				5A51A9C81AA095F9003CC905 /* TYVObject */,
 				5AADBF3D1AA487AD00B29A88 /* TYVArray */,
 				5A5BF99C1AADF4B800388CA8 /* TYVArrayList */,
+				5A5201DF1AB325A000D2C6EE /* TYVUniversalSetters */,
 			);
 			path = task5;
 			sourceTree = "<group>";
@@ -307,6 +320,7 @@
 				5AADBF3C1AA487A600B29A88 /* TYVArray.c in Sources */,
 				5AFD29FC1A9DE189007EFFB5 /* TYVMultiples.c in Sources */,
 				5A5BF99F1AADF92800388CA8 /* TYVArrayListTests.c in Sources */,
+				5A5201DE1AB3259B00D2C6EE /* TYVUniversalSetters.c in Sources */,
 				5AFD2A2B1A9E0F97007EFFB5 /* TYVName.c in Sources */,
 				5AFD2A0A1A9DE2EC007EFFB5 /* TYVStructure.c in Sources */,
 				5AFD2A0B1A9DE2EC007EFFB5 /* TYVStructureTests.c in Sources */,
