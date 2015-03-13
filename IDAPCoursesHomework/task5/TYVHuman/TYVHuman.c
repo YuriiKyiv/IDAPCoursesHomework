@@ -113,7 +113,7 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string){
         return;
     }
 
-    TYVUniversalSetRetain((void **)human->_name, string);
+    TYVUniversalSetRetain((void **)&human->_name, string);
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human){
@@ -188,11 +188,11 @@ void __TYVHumanDeallocate(TYVHuman *human){
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     if (TYVHumanGetGender(human) == TYVMale){
-        TYVUniversalSetAssign((void **)TYVHumanGetPartner(human)->_partner, partner);
-        TYVUniversalSetRetain((void **)human->_partner, partner);
+        TYVUniversalSetAssign((void **)&TYVHumanGetPartner(human)->_partner, partner);
+        TYVUniversalSetRetain((void **)&human->_partner, partner);
     } else {
-        TYVUniversalSetRetain((void **)TYVHumanGetPartner(human)->_partner, partner);
-        TYVUniversalSetAssign((void **)human->_partner, partner);
+        TYVUniversalSetRetain((void **)&TYVHumanGetPartner(human)->_partner, partner);
+        TYVUniversalSetAssign((void **)&human->_partner, partner);
     }
 }
 
@@ -234,7 +234,7 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
         return;
     }
     
-    TYVUniversalSetRetain((void **)human->_mother, mother);
+    TYVUniversalSetRetain((void **)&human->_mother, mother);
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
@@ -242,7 +242,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
         return;
     }
     
-    TYVUniversalSetRetain((void **)human->_father, father);
+    TYVUniversalSetRetain((void **)&human->_father, father);
 }
 
 void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
@@ -250,5 +250,5 @@ void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
         return;
     }
     
-    TYVUniversalSetRetain((void **)human->_childrenArray, array);
+    TYVUniversalSetRetain((void **)&human->_childrenArray, array);
 }

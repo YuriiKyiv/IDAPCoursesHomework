@@ -40,7 +40,7 @@ void TYVArrayListAddItem(TYVArrayList *array, void *item){
     }
     
     TYVObjectRetain(item);
-    array->_data[TYVArrayListGetCount(array)] = item;
+    //array->_data[TYVArrayListGetCount(array)] = item;
 }
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList){
