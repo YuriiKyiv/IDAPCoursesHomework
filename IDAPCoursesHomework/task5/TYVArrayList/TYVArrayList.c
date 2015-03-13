@@ -34,6 +34,14 @@ uint64_t TYVArrayListGetCount(TYVArrayList *array){
     return array->_count;
 }
 
+void TYVArrayListAddItem(TYVArrayList *array, void *item){
+    if (NULL == array || NULL == item){
+        return;
+    }
+    
+    TYVObjectRetain(item);
+    array->_data[TYVArrayListGetCount(array)] = item;
+}
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList){
     TYVArrayListSetSize(arrayList, 0);
@@ -54,7 +62,7 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
         free(array->_data);
         array->_data = NULL;
         array->_size = 0;
-        array->_count = 0;
+        TYVArrayListSetCount(array, 0);
         return;
     }
     
