@@ -11,4 +11,8 @@
 
 #include <stdio.h>
 
+void TYVUniversalSetRetain(void **field, void *value);
+
+void TYVUniversalSetAssign(void **field, void *value);
+
 #endif /* defined(__IDAPCoursesHomework__TYVUniversalSetters__) */
