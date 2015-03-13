@@ -8,18 +8,15 @@
 
 #include "TYVArrayList.h"
 #include "stdlib.h"
+#include "string.h"
 #include "assert.h"
 
 #pragma mark -
 #pragma mark Private Declarations
 
-void TYVArrayListSetData(TYVArrayList *arrayList, void *newData);
-
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
 void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
-
-void TYVArrayListResize(TYVArrayList *array);
 
 size_t TYVArrayListGetSize(TYVArrayList *array);
 
@@ -46,25 +43,15 @@ void __TYVArrayListDeallocate(TYVArrayList *arrayList){
 #pragma mark -
 #pragma mark Private Implementations
 
-void TYVArrayListSetData(TYVArrayList *arrayList, void *newData){
-    if (NULL == arrayList){
-        return;
-    }
-    
-    
-}
-
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
-    size_t currentSize = array->_size;
-    void *data = array->_data;
-    if (NULL == array || currentSize == newSize){
+    if (NULL == array || array->_size == newSize){
         return;
     }
     
-    data = realloc(data, newSize * sizeof(data));
-    assert(NULL != data);
-    if (currentSize < newSize){
-        memset(data + currentSize, 0, (newSize - currentSize) * sizeof(data));
+    array->_data = realloc(array->_data, newSize * sizeof(array->_data));
+    assert(NULL != array->_data);
+    if (array->_size < newSize){
+        memset(array->_data + array->_size, 0, (newSize - array->_size) * sizeof(array->_data));
     }
     
     array->_size = newSize;
