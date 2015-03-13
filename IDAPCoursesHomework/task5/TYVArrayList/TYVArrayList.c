@@ -78,3 +78,11 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
 size_t TYVArrayListGetSize(TYVArrayList *array){
     return array->_size;
 }
+
+void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount){
+    if (NULL == array){
+        return;
+    }
+    
+    array->_count = newCount;
+}
