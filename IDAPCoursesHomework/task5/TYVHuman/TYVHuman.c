@@ -9,6 +9,7 @@
 #include "TYVHuman.h"
 #include "TYVString.h"
 #include "stdlib.h"
+#include "TYVUniversalSetters.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -49,6 +50,9 @@ void TYVHumanSetRetain(void **field, void *value);
 static
 void TYVHumanSetAssign(void **field, void *value);
 
+static
+void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -79,13 +83,7 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
         return;
     }
     
-    if (TYVHumanGetGender(male) == TYVMale){
-        TYVHumanSetPartnerRetain(male, female);
-        TYVHumanSetPartnerAssign(female, male);
-    } else {
-        TYVHumanSetPartnerRetain(female, male);
-        TYVHumanSetPartnerAssign(male, female);
-    }
+    TYVHumanSetPartner(male, female);
 }
 
 bool TYVHumanIsMarried(TYVHuman *human){
@@ -97,13 +95,7 @@ void TYVHumanDivorce(TYVHuman *human){
         return;
     }
     
-    if (TYVHumanGetGender(human) == TYVMale){
-        TYVHumanSetPartnerAssign(TYVHumanGetPartner(human), NULL);
-        TYVHumanSetPartnerRetain(human, NULL);
-    } else {
-        TYVHumanSetPartnerRetain(TYVHumanGetPartner(human), NULL);
-        TYVHumanSetPartnerAssign(human, NULL);
-    }
+    TYVHumanSetPartner(human, NULL);
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
@@ -228,6 +220,16 @@ void TYVHumanSetAssign(void **field, void *value){
     }
     
     *field = value;
+}
+
+void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
+    if (TYVHumanGetGender(human) == TYVMale){
+        TYVUniversalSetAssign((void **)TYVHumanGetPartner(human)->_partner, partner);
+        TYVUniversalSetRetain((void **)human->_partner, partner);
+    } else {
+        TYVUniversalSetRetain((void **)TYVHumanGetPartner(human)->_partner, partner);
+        TYVUniversalSetAssign((void **)human->_partner, partner);
+    }
 }
 
 void TYVHumanSetPartnerRetain(TYVHuman *human, TYVHuman *partner){
