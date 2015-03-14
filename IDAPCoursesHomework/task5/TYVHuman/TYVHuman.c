@@ -11,6 +11,8 @@
 #include "stdlib.h"
 #include "TYVUniversalSetters.h"
 
+const static uint8_t TYVNotFoundObject = 255;
+
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -143,31 +145,27 @@ void TYVHumanSetGender(TYVHuman *human, TYVGender gender){
 }
 
 TYVGender TYVHumanGetGender(TYVHuman *human){
-    return human->_gender;
+    return (NULL != human) ? human->_gender : TYVMale;
 }
 
 TYVHuman *TYVHumanGetMother(TYVHuman *human){
-    return human->_mother;
+    return (NULL != human) ? human->_mother : NULL;
 }
 
 TYVHuman *TYVHumanGetFather(TYVHuman *human){
-    return human->_father;
+    return (NULL != human) ? human->_father : NULL;
 }
 
 TYVHuman *TYVHumanGetPartner(TYVHuman *human){
-    return human->_partner;
+    return (NULL != human) ? human->_partner : NULL;
 }
 
 TYVArray *TYVHumanGetArray(TYVHuman *human){
-    return human->_childrenArray;
+    return (NULL != human) ? human->_childrenArray : NULL;
 }
 
 uint8_t TYVHumanGetChildrenCount(TYVHuman *human){
-    if (NULL == human){
-        return 255;
-    }
-    
-    return human->_childrenCount;
+    return (NULL != human) ? human->_childrenCount : TYVNotFoundObject;
 }
 
 
