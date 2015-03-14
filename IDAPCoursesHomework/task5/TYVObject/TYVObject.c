@@ -25,7 +25,6 @@ void *TYVObjectRetain(void *object){
     return object;
 }
 
-extern
 void TYVObjectRelease(void *voidObject){
     if (NULL == voidObject){
         return;
@@ -38,7 +37,6 @@ void TYVObjectRelease(void *voidObject){
     }
 }
 
-extern
 void __TYVObjectDeallocate(void *object){
     free(object);
 }
