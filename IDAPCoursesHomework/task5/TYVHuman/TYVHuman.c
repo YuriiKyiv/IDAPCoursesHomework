@@ -61,6 +61,10 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
 }
 
 void TYVHumanSetAge(TYVHuman *human, uint8_t age){
+    if (NULL == human){
+        return;
+    }
+    
     human->_age = age;
 }
 
@@ -92,12 +96,14 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
     TYVHuman *humanPartner = TYVHumanGetPartner(human);
     if (NULL == human
         || NULL == name
-        || NULL == humanPartner){
+        || NULL == humanPartner)
+    {
         return NULL;
     }
     
     if (TYVHumanGetChildrenCount(human) >= TYVChildrenMaxCount
-        || TYVHumanGetChildrenCount(humanPartner) >= TYVChildrenMaxCount){
+        || TYVHumanGetChildrenCount(humanPartner) >= TYVChildrenMaxCount)
+    {
         return NULL;
     }
     
@@ -119,12 +125,7 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string){
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human){
-    TYVString *string = NULL;
-    if (NULL != human){
-        string = human->_name;
-    }
-    
-    return string;
+    return (NULL != human) ? human->_name : NULL;
 }
 
 void TYVHumanNameOutput(TYVHuman *human){
