@@ -18,7 +18,7 @@ typedef struct TYVArrayList TYVArrayList;
 struct TYVArrayList {
     TYVObject _object;
     
-    void *_data;
+    TYVObject *_data;
     
     uint64_t _count;
     size_t _size;
@@ -28,13 +28,13 @@ TYVArrayList *TYVArrayListCreate(size_t size);
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList);
 
-void TYVArrayListAddItem(TYVArrayList *array, void *item);
+void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item);
 
-void TYVArrayListRemoveItem(TYVArrayList *array, void *item);
+void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item);
 
 void TYVArrayListRemoveItems(TYVArrayList *array);
 
-bool TYVArrayListIsContain(TYVArrayList *array, void *item);
+bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item);
 
 uint64_t TYVArrayListGetCount(TYVArrayList *array);
 

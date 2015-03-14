@@ -34,13 +34,14 @@ uint64_t TYVArrayListGetCount(TYVArrayList *array){
     return array->_count;
 }
 
-void TYVArrayListAddItem(TYVArrayList *array, void *item){
+void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item){
     if (NULL == array || NULL == item){
         return;
     }
     
     TYVObjectRetain(item);
-    //array->_data[TYVArrayListGetCount(array)] = item;
+    array->_data[TYVArrayListGetCount(array)] = *item;
+    array->_count++;
 }
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList){
