@@ -20,6 +20,8 @@ void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
 
 size_t TYVArrayListGetSize(TYVArrayList *array);
 
+void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexSecond);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -136,4 +138,14 @@ void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount){
     }
     
     array->_count = newCount;
+}
+
+void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexSecond){
+    if (NULL == array) {
+        return;
+    }
+    
+    TYVObject *tempItem = array->_data[indexFirst];
+    array->_data[indexFirst] = array->_data[indexSecond];
+    array->_data[indexSecond] = tempItem;
 }
