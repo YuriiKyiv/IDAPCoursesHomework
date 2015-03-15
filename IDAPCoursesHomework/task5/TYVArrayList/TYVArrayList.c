@@ -57,7 +57,21 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item){
             TYVObjectRelease(array->_data[iter]);
             array->_data[iter] = NULL;
             array->_count--;
+            break;
         }
+    }
+}
+
+void TYVArrayListRemoveItems(TYVArrayList *array){
+    if (NULL == array){
+        return;
+    }
+    
+    size_t currentSize = TYVArrayListGetCount(array);
+    for (size_t iter = 0; iter < currentSize; iter++) {
+        TYVObjectRelease(array->_data[iter]);
+        array->_data[iter] = NULL;
+        array->_count--;
     }
 }
 
