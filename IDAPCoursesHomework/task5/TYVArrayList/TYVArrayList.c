@@ -39,9 +39,25 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item){
         return;
     }
     
+    size_t currentSize = TYVArrayListGetSize(array);
+    
+    if (currentSize == TYVArrayListGetCount(array)){
+        TYVArrayListSetSize(array, currentSize * 2);
+    }
+    
     TYVObjectRetain(item);
-    array->_data[TYVArrayListGetCount(array)] = *item;
+    array->_data[TYVArrayListGetCount(array)] = item;
     array->_count++;
+}
+
+void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item){
+    size_t currentSize = TYVArrayListGetCount(array);
+    for (size_t iter = 0; iter < currentSize; item++) {
+        if (array->_data[iter] == item){
+            TYVObjectRelease(&array->_data[iter]);
+            array->_data[iter] = NULL;
+        }
+    }
 }
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList){

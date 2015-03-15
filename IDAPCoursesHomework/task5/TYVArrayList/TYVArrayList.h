@@ -18,7 +18,7 @@ typedef struct TYVArrayList TYVArrayList;
 struct TYVArrayList {
     TYVObject _object;
     
-    TYVObject *_data;
+    TYVObject **_data;
     
     uint64_t _count;
     size_t _size;
