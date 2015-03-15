@@ -52,10 +52,11 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item){
 
 void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item){
     size_t currentSize = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentSize; item++) {
+    for (size_t iter = 0; iter < currentSize; iter++) {
         if (array->_data[iter] == item){
-            TYVObjectRelease(&array->_data[iter]);
+            TYVObjectRelease(array->_data[iter]);
             array->_data[iter] = NULL;
+            array->_count--;
         }
     }
 }
