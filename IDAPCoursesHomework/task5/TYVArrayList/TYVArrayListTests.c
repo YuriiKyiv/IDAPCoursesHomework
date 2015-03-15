@@ -10,6 +10,7 @@
 #include "TYVArrayList.h"
 #include "assert.h"
 #include "stdlib.h"
+#include "TYVHuman.h"
 
 void TYVArrayListCreateTest();
 
@@ -17,25 +18,29 @@ void TYVArrayListResizeTest();
 
 void TYVArrayListPerfomTests(){
     printf("\nArrayList Tests\n");
-//    TYVArrayListCreateTest();
-//    TYVArrayListResizeTest();
+    TYVArrayListCreateTest();
+    TYVArrayListResizeTest();
 }
 
-//void TYVArrayListCreateTest(){
-//    TYVArrayList *array = TYVArrayListCreate(2);
-//    assert(0 == TYVArrayListGetCount(array));
-//    assert(2 == TYVArrayListGetSize(array));
-//}
-//
-//void TYVArrayListResizeTest(){
-//    TYVArrayList *array = TYVArrayListCreate(1);
-//    void *one = calloc(1, sizeof(char));
-//    TYVArrayListAddItem(array, one);
-//    assert(1 == TYVArrayListGetCount(array));
-//    TYVArrayListAddItem(array, one);
-//    assert(2 == TYVArrayListGetCount(array));
-//    assert(2 == TYVArrayListGetSize(array));
-//}
+void TYVArrayListCreateTest(){
+    TYVArrayList *array = TYVArrayListCreate(2);
+    assert(0 == TYVArrayListGetCount(array));
+}
+
+void TYVArrayListResizeTest(){
+    TYVArrayList *array = TYVArrayListCreate(1);
+    TYVHuman *one = TYVObjectCreate(TYVHuman);
+    TYVArrayListAddItem(array, (TYVObject *)one);
+    assert(1 == TYVArrayListGetCount(array));
+    TYVArrayListAddItem(array, (TYVObject *)one);
+    assert(2 == TYVArrayListGetCount(array));
+    TYVArrayListAddItem(array, (TYVObject *)one);
+    assert(3 == TYVArrayListGetCount(array));
+    TYVArrayListRemoveItem(array, (TYVObject *)one);
+    TYVObjectRelease(one);
+    TYVObjectRelease(one);
+    TYVObjectRelease(array);
+}
 
 // after creating 1-size arraylist
 //      size of arraylist is 1
