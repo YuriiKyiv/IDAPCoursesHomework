@@ -57,11 +57,12 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item){
         return;
     }
     
-    size_t currentSize = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentSize; iter++) {
+    size_t currentCount = TYVArrayListGetCount(array);
+    for (size_t iter = 0; iter < currentCount; iter++) {
         if (array->_data[iter] == item){
             TYVObjectRelease(array->_data[iter]);
             array->_data[iter] = NULL;
+            TYVArrayListSwapItems(array, iter, currentCount);
             array->_count--;
             break;
         }
@@ -73,8 +74,8 @@ void TYVArrayListRemoveItems(TYVArrayList *array){
         return;
     }
     
-    size_t currentSize = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentSize; iter++) {
+    size_t currentCount = TYVArrayListGetCount(array);
+    for (size_t iter = 0; iter < currentCount; iter++) {
         TYVObjectRelease(array->_data[iter]);
         array->_data[iter] = NULL;
         array->_count--;
@@ -86,8 +87,8 @@ bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item){
         return false;
     }
     
-    size_t currentSize = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentSize; iter++) {
+    size_t currentCount = TYVArrayListGetCount(array);
+    for (size_t iter = 0; iter < currentCount; iter++) {
         if (array->_data[iter] == item){
             return true;
         }
