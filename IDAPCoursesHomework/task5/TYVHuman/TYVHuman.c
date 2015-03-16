@@ -10,6 +10,7 @@
 #include "TYVString.h"
 #include "stdlib.h"
 #include "TYVUniversalSetters.h"
+#include "TYVPropertySetters.h"
 
 const static uint8_t TYVNotFoundObject = 255;
 
