@@ -14,7 +14,6 @@
 #include "stdbool.h"
 
 typedef struct TYVArrayList TYVArrayList;
-
 struct TYVArrayList {
     TYVObject _object;
     

@@ -14,6 +14,8 @@
 #pragma mark -
 #pragma mark Private Declarations
 
+//typedef bool(TYVCompute)(TYVObject *, TYVObject *);
+
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
 void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
@@ -150,3 +152,20 @@ void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexS
     array->_data[indexFirst] = array->_data[indexSecond];
     array->_data[indexSecond] = tempItem;
 }
+
+//bool TYVArrayListIterationWithFunction(TYVArrayList *array, TYVCompute *compute, TYVObject* compared){
+//    for (size_t iter = 0; iter < array->_count; iter++) {
+//        if (compute(array->_data[iter], compared)){
+//            return true;
+//        }
+//    }
+//    return false;
+//}
+//
+//bool TYVIsContain(TYVObject *item, TYVObject *compared){
+//    return (item == compared) ? true : false;
+//}
+//
+//bool TYVArrayIsContain(TYVArrayList *array, TYVObject* compared){
+//    return (TYVArrayListIterationWithFunction(array, TYVIsContain(<#TYVObject *item#>, <#TYVObject *compared#>), <#TYVObject *argumant#>))
+//}
