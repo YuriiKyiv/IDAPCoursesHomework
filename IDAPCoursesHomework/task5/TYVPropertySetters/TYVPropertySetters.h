@@ -9,6 +9,12 @@
 #ifndef __IDAPCoursesHomework__TYVPropertySetters__
 #define __IDAPCoursesHomework__TYVPropertySetters__
 
+#define TYVPropertySetRetainVoid(field, value) \
+    TYVPropertySetRetain((void **) #field, #value);
+
+#define TYVPropertySetAssignVoid(field, value) \
+TYVPropertySetAssign((void **) #field, #value);
+
 #include <stdio.h>
 
 void TYVPropertySetRetain(void **field, void *value);
