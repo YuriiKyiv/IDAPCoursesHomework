@@ -10,6 +10,7 @@
 #include "stdlib.h"
 #include "string.h"
 #include "assert.h"
+#include "TYVPropertySetters.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -23,6 +24,8 @@ void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
 size_t TYVArrayListGetSize(TYVArrayList *array);
 
 void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexSecond);
+
+void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -108,6 +111,24 @@ void __TYVArrayListDeallocate(TYVArrayList *arrayList){
 
 #pragma mark -
 #pragma mark Private Implementations
+
+void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item){
+    if (NULL == array || NULL == item || TYVArrayListGetCount(array) < index){
+        return;
+    }
+    // resize if needed
+    TYVPropertySetRetainVoid(array->_data[index], index);
+}
+
+TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index){
+    if (NULL == array || TYVArrayListGetCount(array) < index){
+        return NULL;
+    }
+    
+    TYVObject *item = array->_data[index];
+    TYVPropertySetRetainVoid(array->_data[index], NULL);
+    return item;
+}
 
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
     if (NULL == array || array->_size == newSize){

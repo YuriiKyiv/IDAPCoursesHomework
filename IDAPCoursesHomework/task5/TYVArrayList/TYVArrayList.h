@@ -29,6 +29,8 @@ void __TYVArrayListDeallocate(TYVArrayList *arrayList);
 
 void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item);
 
+TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index);
+
 void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item);
 
 void TYVArrayListRemoveItems(TYVArrayList *array);
