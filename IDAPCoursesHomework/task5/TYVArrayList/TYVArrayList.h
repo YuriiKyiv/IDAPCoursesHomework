@@ -31,6 +31,8 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item);
 
 TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index);
 
+size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item);
+
 void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item);
 
 void TYVArrayListRemoveItems(TYVArrayList *array);

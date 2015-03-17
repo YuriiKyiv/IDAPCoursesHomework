@@ -12,6 +12,8 @@
 #include "assert.h"
 #include "TYVPropertySetters.h"
 
+const static size_t TYVNotFoundItem = SIZE_MAX;
+
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -30,25 +32,25 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *it
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVArrayList *TYVArrayListCreate(size_t size){
+TYVArrayList *TYVArrayListCreate(size_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
     TYVArrayListSetSize(array, size);
     
     return array;
 }
 
-uint64_t TYVArrayListGetCount(TYVArrayList *array){
+uint64_t TYVArrayListGetCount(TYVArrayList *array) {
     return array->_count;
 }
 
-void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item){
-    if (NULL == array || NULL == item){
+void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item) {
+    if (NULL == array || NULL == item) {
         return;
     }
     
     size_t currentSize = TYVArrayListGetSize(array);
     
-    if (currentSize == TYVArrayListGetCount(array)){
+    if (currentSize == TYVArrayListGetCount(array)) {
         TYVArrayListSetSize(array, currentSize * 2);
     }
     
@@ -57,7 +59,22 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item){
     array->_count++;
 }
 
-void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item){
+size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
+    size_t result = TYVNotFoundItem;
+    if (NULL == array || NULL == item) {
+        return TYVNotFoundItem;
+    }
+    
+    for (size_t iter = 0; iter < TYVArrayListGetCount(array); iter++) {
+        if (TYVArrayListGetItemAtIndex(array, iter) == item) {
+            result = iter;
+        }
+    }
+    
+    return result;
+}
+
+void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
     if (NULL == array || NULL == item){
         return;
     }
@@ -74,7 +91,7 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item){
     }
 }
 
-void TYVArrayListRemoveItems(TYVArrayList *array){
+void TYVArrayListRemoveItems(TYVArrayList *array) {
     if (NULL == array){
         return;
     }
@@ -87,7 +104,7 @@ void TYVArrayListRemoveItems(TYVArrayList *array){
     }    
 }
 
-bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item){
+bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item) {
     if (NULL == array || NULL == item){
         return false;
     }
@@ -102,7 +119,7 @@ bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item){
     return false;
 }
 
-void __TYVArrayListDeallocate(TYVArrayList *arrayList){
+void __TYVArrayListDeallocate(TYVArrayList *arrayList) {
     TYVArrayListSetSize(arrayList, 0);
     
     __TYVObjectDeallocate(arrayList);
@@ -112,7 +129,7 @@ void __TYVArrayListDeallocate(TYVArrayList *arrayList){
 #pragma mark -
 #pragma mark Private Implementations
 
-void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item){
+void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item) {
     if (NULL == array || NULL == item || TYVArrayListGetCount(array) < index){
         return;
     }
@@ -120,7 +137,7 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *it
     TYVPropertySetRetainVoid(array->_data[index], index);
 }
 
-TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index){
+TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {
     if (NULL == array || TYVArrayListGetCount(array) < index){
         return NULL;
     }
@@ -130,12 +147,12 @@ TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index){
     return item;
 }
 
-void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
-    if (NULL == array || array->_size == newSize){
+void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
+    if (NULL == array || array->_size == newSize) {
         return;
     }
     
-    if (0 == newSize && NULL != array->_data){
+    if (0 == newSize && NULL != array->_data) {
         free(array->_data);
         array->_data = NULL;
         array->_size = 0;
@@ -145,26 +162,26 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize){
     
     array->_data = realloc(array->_data, newSize * sizeof(array->_data));
     assert(NULL != array->_data);
-    if (array->_size < newSize){
+    if (array->_size < newSize) {
         memset(array->_data + array->_size, 0, (newSize - array->_size) * sizeof(array->_data));
     }
     
     array->_size = newSize;
 }
 
-size_t TYVArrayListGetSize(TYVArrayList *array){
+size_t TYVArrayListGetSize(TYVArrayList *array) {
     return array->_size;
 }
 
-void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount){
-    if (NULL == array){
+void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount) {
+    if (NULL == array) {
         return;
     }
     
     array->_count = newCount;
 }
 
-void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexSecond){
+void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexSecond) {
     if (NULL == array) {
         return;
     }
