@@ -12,7 +12,7 @@
 #include "assert.h"
 #include "TYVPropertySetters.h"
 
-const static size_t TYVNotFoundItem = SIZE_MAX;
+const size_t TYVNotFoundItem = SIZE_MAX;
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -91,7 +91,7 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
     }
 }
 
-void TYVArrayListRemoveItems(TYVArrayList *array) {
+void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     if (NULL == array){
         return;
     }
@@ -102,6 +102,16 @@ void TYVArrayListRemoveItems(TYVArrayList *array) {
         array->_data[iter] = NULL;
         array->_count--;
     }    
+}
+
+void TYVArrayListRemoveItems(TYVArrayList *array, size_t beginIndex, size_t endIndex){
+    if (NULL == array || TYVArrayListGetCount(array) <= endIndex || beginIndex > endIndex) {
+        return;
+    }
+    
+    for (size_t iter = beginIndex; endIndex >= iter; iter++) {
+        TYVArrayListRemoveItemAtIndex(array, iter);
+    }
 }
 
 bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item) {
@@ -130,10 +140,10 @@ void __TYVArrayListDeallocate(TYVArrayList *arrayList) {
 #pragma mark Private Implementations
 
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item) {
-    if (NULL == array || NULL == item || TYVArrayListGetCount(array) < index){
+    if (NULL == array || NULL == item || TYVArrayListGetCount(array) <= index){
         return;
     }
-    // resize if needed
+    
     TYVPropertySetRetainVoid(array->_data[index], index);
 }
 
@@ -141,10 +151,8 @@ TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {
     if (NULL == array || TYVArrayListGetCount(array) < index){
         return NULL;
     }
-    
-    TYVObject *item = array->_data[index];
-    TYVPropertySetRetainVoid(array->_data[index], NULL);
-    return item;
+
+    return array->_data[index];
 }
 
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
@@ -153,11 +161,16 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
     }
     
     if (0 == newSize && NULL != array->_data) {
+        TYVArrayListRemoveAllItems(array);
         free(array->_data);
         array->_data = NULL;
         array->_size = 0;
         TYVArrayListSetCount(array, 0);
         return;
+    }
+    
+    if (array->_size > newSize){
+        TYVArrayListRemoveItems(array, newSize - 1, array->_size - 1);
     }
     
     array->_data = realloc(array->_data, newSize * sizeof(array->_data));

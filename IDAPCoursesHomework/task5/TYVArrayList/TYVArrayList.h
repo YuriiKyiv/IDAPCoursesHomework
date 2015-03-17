@@ -13,6 +13,9 @@
 #include "TYVObject.h"
 #include "stdbool.h"
 
+extern
+const size_t TYVNotFoundItem;
+
 typedef struct TYVArrayList TYVArrayList;
 struct TYVArrayList {
     TYVObject _object;
@@ -35,7 +38,11 @@ size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item);
 
 void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item);
 
-void TYVArrayListRemoveItems(TYVArrayList *array);
+void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index);
+
+void TYVArrayListRemoveAllItems(TYVArrayList *array);
+
+void TYVArrayListRemoveItems(TYVArrayList *array, size_t beginIndex, size_t endIndex);
 
 bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item);
 
