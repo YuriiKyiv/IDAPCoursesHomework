@@ -91,6 +91,14 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
     }
 }
 
+void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index){
+    if (NULL == array || TYVArrayListGetCount(array) <= index){
+        return;
+    }
+    
+    TYVPropertySetRetainVoid(&array->_data[index], NULL);
+}
+
 void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     if (NULL == array){
         return;
@@ -144,7 +152,7 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *it
         return;
     }
     
-    TYVPropertySetRetainVoid(array->_data[index], index);
+    TYVPropertySetRetainVoid(&array->_data[index], index);
 }
 
 TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {

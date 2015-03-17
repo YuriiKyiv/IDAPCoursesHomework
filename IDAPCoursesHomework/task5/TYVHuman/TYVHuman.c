@@ -70,7 +70,7 @@ void TYVHumanSetAge(TYVHuman *human, uint8_t age){
 }
 
 uint8_t TYVHumanGetAge(TYVHuman *human){
-    return human->_age;
+    return (NULL != human) ? human->_age : 0;
 }
 
 void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female){
@@ -188,10 +188,8 @@ void __TYVHumanDeallocate(TYVHuman *human){
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     if (TYVHumanGetGender(human) == TYVMale){
-        TYVUniversalSetAssign((void **)&TYVHumanGetPartner(human)->_partner, partner);
         TYVUniversalSetRetain((void **)&human->_partner, partner);
     } else {
-        TYVUniversalSetRetain((void **)&TYVHumanGetPartner(human)->_partner, partner);
         TYVUniversalSetAssign((void **)&human->_partner, partner);
     }
 }
