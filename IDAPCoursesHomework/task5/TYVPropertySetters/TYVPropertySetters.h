@@ -13,7 +13,7 @@
     TYVPropertySetRetain((void **) #field, #value);
 
 #define TYVPropertySetAssignVoid(field, value) \
-TYVPropertySetAssign((void **) #field, #value);
+TYVPropertySetAssign((void **) field, value);
 
 #include <stdio.h>
 
