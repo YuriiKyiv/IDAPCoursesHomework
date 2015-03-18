@@ -48,15 +48,7 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item) {
         return;
     }
     
-    size_t currentSize = TYVArrayListGetSize(array);
-    
-    if (currentSize == TYVArrayListGetCount(array)) {
-        TYVArrayListSetSize(array, currentSize * 2);
-    }
-    
-    TYVObjectRetain(item);
-    array->_data[TYVArrayListGetCount(array)] = item;
-    array->_count++;
+    TYVArrayListSetItemAtIndex(array, TYVArrayListGetCount(array), item);
 }
 
 size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
