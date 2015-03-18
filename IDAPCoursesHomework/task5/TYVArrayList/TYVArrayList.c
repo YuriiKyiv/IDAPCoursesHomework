@@ -90,9 +90,7 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     
     size_t currentCount = TYVArrayListGetCount(array);
     for (size_t iter = 0; iter < currentCount; iter++) {
-        TYVObjectRelease(array->_data[iter]);
-        array->_data[iter] = NULL;
-        array->_count--;
+        TYVArrayListRemoveItemAtIndex(array, iter);
     }    
 }
 
