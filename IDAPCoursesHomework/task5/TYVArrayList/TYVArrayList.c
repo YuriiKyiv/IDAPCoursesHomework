@@ -17,20 +17,21 @@ const size_t TYVNotFoundItem = SIZE_MAX;
 #pragma mark -
 #pragma mark Private Declarations
 
-//typedef bool(TYVCompute)(TYVObject *, TYVObject *);
-
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
 void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
 
 size_t TYVArrayListGetSize(TYVArrayList *array);
 
-void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexSecond);
-
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item);
 
 #pragma mark -
 #pragma mark Public Implementations
+
+struct TYVRange {
+    size_t *pointer;
+    uint64_t length;
+};
 
 TYVArrayList *TYVArrayListCreate(size_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
@@ -94,7 +95,7 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     }    
 }
 
-void TYVArrayListRemoveItems(TYVArrayList *array, size_t beginIndex, size_t endIndex){
+void TYVArrayListRemoveItemsInRange(TYVArrayList *array, size_t beginIndex, size_t endIndex){
     if (NULL == array || TYVArrayListGetCount(array) <= endIndex || beginIndex > endIndex) {
         return;
     }
@@ -183,30 +184,3 @@ void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount) {
     
     array->_count = newCount;
 }
-
-void TYVArrayListSwapItems(TYVArrayList *array, size_t indexFirst, size_t indexSecond) {
-    if (NULL == array) {
-        return;
-    }
-    
-    TYVObject *tempItem = array->_data[indexFirst];
-    array->_data[indexFirst] = array->_data[indexSecond];
-    array->_data[indexSecond] = tempItem;
-}
-
-//bool TYVArrayListIterationWithFunction(TYVArrayList *array, TYVCompute *compute, TYVObject* compared){
-//    for (size_t iter = 0; iter < array->_count; iter++) {
-//        if (compute(array->_data[iter], compared)){
-//            return true;
-//        }
-//    }
-//    return false;
-//}
-//
-//bool TYVIsContain(TYVObject *item, TYVObject *compared){
-//    return (item == compared) ? true : false;
-//}
-//
-//bool TYVArrayIsContain(TYVArrayList *array, TYVObject* compared){
-//    return (TYVArrayListIterationWithFunction(array, TYVIsContain(<#TYVObject *item#>, <#TYVObject *compared#>), <#TYVObject *argumant#>))
-//}

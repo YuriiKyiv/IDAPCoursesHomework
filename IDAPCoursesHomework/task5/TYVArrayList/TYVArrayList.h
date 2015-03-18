@@ -16,6 +16,8 @@
 extern
 const size_t TYVNotFoundItem;
 
+typedef struct TYVRange TYVRange;
+
 typedef struct TYVArrayList TYVArrayList;
 struct TYVArrayList {
     TYVObject _object;
