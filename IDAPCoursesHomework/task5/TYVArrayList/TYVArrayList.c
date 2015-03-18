@@ -25,6 +25,8 @@ size_t TYVArrayListGetSize(TYVArrayList *array);
 
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item);
 
+void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -151,6 +153,17 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array) {
     if (NULL == array) {
         return;
     }
+    
+    uint64_t currentCount = TYVArrayListGetCount(array);
+    size_t currentSize = TYVArrayListGetSize(array);
+    
+    if (currentSize == currentCount){
+        TYVArrayListSetSize(array, currentSize * 2);
+    }
+    
+    if ((currentSize * 0.25) >= currentCount){
+        TYVArrayListSetSize(array, currentSize / 2);
+    }
 }
 
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item) {
@@ -202,7 +215,7 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
 }
 
 size_t TYVArrayListGetSize(TYVArrayList *array) {
-    return array->_size;
+    return (NULL != array) ? array->_size : 0;
 }
 
 void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount) {
