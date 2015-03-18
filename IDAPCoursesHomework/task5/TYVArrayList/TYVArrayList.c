@@ -40,7 +40,7 @@ TYVArrayList *TYVArrayListCreate(size_t size) {
 }
 
 uint64_t TYVArrayListGetCount(TYVArrayList *array) {
-    return array->_count;
+    return (NULL != array) ? array->_count : 0;
 }
 
 void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item) {
@@ -52,18 +52,18 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item) {
 }
 
 size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
-    size_t result = TYVNotFoundItem;
     if (NULL == array || NULL == item) {
-        return TYVNotFoundItem;
+        return 0;
     }
     
-    for (size_t iter = 0; iter < TYVArrayListGetCount(array); iter++) {
+    uint64_t currentCount = TYVArrayListGetCount(array);
+    for (size_t iter = 0; iter < currentCount; iter++) {
         if (TYVArrayListGetItemAtIndex(array, iter) == item) {
-            result = iter;
+            return iter;
         }
     }
     
-    return result;
+    return TYVNotFoundItem;
 }
 
 void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
