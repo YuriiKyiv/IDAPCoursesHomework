@@ -70,17 +70,9 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
     if (NULL == array || NULL == item){
         return;
     }
-    
-    size_t currentCount = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentCount; iter++) {
-        if (array->_data[iter] == item){
-            TYVObjectRelease(array->_data[iter]);
-            array->_data[iter] = NULL;
-            TYVArrayListSwapItems(array, iter, currentCount);
-            array->_count--;
-            break;
-        }
-    }
+
+    uint64_t index = TYVArrayListGetIndexOfItem(array, item);
+    TYVArrayListRemoveItemAtIndex(array, index);
 }
 
 void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index){
