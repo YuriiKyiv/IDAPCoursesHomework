@@ -29,9 +29,17 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *it
 #pragma mark Public Implementations
 
 struct TYVRange {
-    size_t *pointer;
-    uint64_t length;
+    TYVObject *_pointer;
+    uint64_t _length;
 };
+
+TYVObject *TYVRangeGetPointer(TYVRange range){
+    return range._pointer;
+}
+
+uint64_t TYVRangeGetLength(TYVRange range){
+    return range._length;
+}
 
 TYVArrayList *TYVArrayListCreate(size_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
@@ -95,13 +103,14 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     }    
 }
 
-void TYVArrayListRemoveItemsInRange(TYVArrayList *array, size_t beginIndex, size_t endIndex){
-    if (NULL == array || TYVArrayListGetCount(array) <= endIndex || beginIndex > endIndex) {
+void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range){
+    if (NULL == array) {
         return;
     }
-    
-    for (size_t iter = beginIndex; endIndex >= iter; iter++) {
-        TYVArrayListRemoveItemAtIndex(array, iter);
+    uint64_t length = TYVRangeGetLength(range);
+    TYVObject *pointer = TYVRangeGetPointer(range);
+    for (size_t iter = 0; iter < length; iter++) {
+        TYVPropertySetRetainVoid(&pointer[iter], NULL);
     }
 }
 
