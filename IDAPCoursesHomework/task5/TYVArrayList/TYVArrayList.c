@@ -33,8 +33,16 @@ struct TYVRange {
     uint64_t _length;
 };
 
+void TYVRangeSetPointer(TYVRange range, TYVObject *pointer){
+    range._pointer = pointer;
+}
+
 TYVObject *TYVRangeGetPointer(TYVRange range){
     return range._pointer;
+}
+
+void TYVRangeSetLength(TYVRange range, uint64_t length){
+    range._length = length;
 }
 
 uint64_t TYVRangeGetLength(TYVRange range){
@@ -115,13 +123,13 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range){
 }
 
 bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item) {
-    if (NULL == array || NULL == item){
+    if (NULL == array || NULL == item) {
         return false;
     }
     
     size_t currentCount = TYVArrayListGetCount(array);
     for (size_t iter = 0; iter < currentCount; iter++) {
-        if (array->_data[iter] == item){
+        if (array->_data[iter] == item) {
             return true;
         }
     }
@@ -139,12 +147,20 @@ void __TYVArrayListDeallocate(TYVArrayList *arrayList) {
 #pragma mark -
 #pragma mark Private Implementations
 
+void TYVArrayListResizeIfNeeded(TYVArrayList *array) {
+    if (NULL == array) {
+        return;
+    }
+}
+
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item) {
     if (NULL == array || NULL == item || TYVArrayListGetCount(array) <= index){
         return;
     }
     
+    TYVArrayListResizeIfNeeded(array);
     TYVPropertySetRetainVoid(&array->_data[index], index);
+    array->_count++;
 }
 
 TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {
@@ -169,8 +185,11 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
         return;
     }
     
-    if (array->_size > newSize){
-        TYVArrayListRemoveItems(array, newSize - 1, array->_size - 1);
+    if (array->_size > newSize) {
+        TYVRange range;
+        TYVRangeSetLength(range, newSize - array->_size);
+        TYVRangeSetPointer(range, array->_data[array->_size]);
+        TYVArrayListRemoveItemsInRange(array, range);
     }
     
     array->_data = realloc(array->_data, newSize * sizeof(array->_data));
