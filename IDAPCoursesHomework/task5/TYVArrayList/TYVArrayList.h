@@ -16,6 +16,8 @@
 extern
 const size_t TYVNotFoundItem;
 
+typedef struct TYVRange TYVRange;
+
 typedef struct TYVArrayList TYVArrayList;
 struct TYVArrayList {
     TYVObject _object;
@@ -42,7 +44,7 @@ void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index);
 
 void TYVArrayListRemoveAllItems(TYVArrayList *array);
 
-void TYVArrayListRemoveItems(TYVArrayList *array, size_t beginIndex, size_t endIndex);
+void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range);
 
 bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item);
 
