@@ -77,8 +77,10 @@ void TYVArrayListRemoveTest(){
     assert(1 == objectOne->_referenceCount);
     assert(1 == TYVArrayListGetCount(array));
     
-    
-    
+    TYVArrayListRemoveItemAtIndex(array, 0);
+    assert(false == TYVArrayListContains(array, objectTwo));
+    assert(1 == objectTwo->_referenceCount);
+    assert(0 == TYVArrayListGetCount(array));
     
     TYVObjectRelease(objectTwo);
     TYVObjectRelease(objectOne);
