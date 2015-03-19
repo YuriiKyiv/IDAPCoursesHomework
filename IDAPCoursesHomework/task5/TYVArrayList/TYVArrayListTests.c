@@ -16,15 +16,35 @@ void TYVArrayListCreateTest();
 
 void TYVArrayListResizeTest();
 
+void TYVArrayListAddTest();
+
 void TYVArrayListPerfomTests(){
     printf("\nArrayList Tests\n");
     TYVArrayListCreateTest();
+    TYVArrayListAddTest();
     TYVArrayListResizeTest();
+    printf("ArrayList has been finished\n");
 }
 
 void TYVArrayListCreateTest(){
     TYVArrayList *array = TYVArrayListCreate(2);
     assert(0 == TYVArrayListGetCount(array));
+    TYVObjectRelease(array);
+}
+
+void TYVArrayListAddTest(){
+    TYVArrayList *array = TYVArrayListCreate(2);
+    TYVObject *object = TYVObjectCreate(TYVObject);
+    
+    TYVArrayListAddItem(array, object);
+    assert(1 == TYVArrayListGetCount(array));
+    assert(2 == object->_referenceCount);
+    assert(TYVArrayListContains(array, object));
+    
+    
+    
+    TYVObjectRelease(object);
+    TYVObjectRelease(array);
 }
 
 void TYVArrayListResizeTest(){

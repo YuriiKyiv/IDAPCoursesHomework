@@ -107,7 +107,7 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range){
 
 }
 
-bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item) {
+bool TYVArrayListContains(TYVArrayList *array, TYVObject *item) {
     if (NULL == array || NULL == item) {
         return false;
     }
@@ -150,7 +150,7 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array) {
 }
 
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item) {
-    if (NULL == array || NULL == item || TYVArrayListGetCount(array) <= index){
+    if (NULL == array || NULL == item || TYVArrayListGetSize(array) <= index){
         return;
     }
 
@@ -179,7 +179,7 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
         return;
     }
     
-    if (array->_size > newSize) {
+    if (newSize < array->_size) {
         TYVRange range;
         TYVArrayListRemoveItemsInRange(array, range);
     }
