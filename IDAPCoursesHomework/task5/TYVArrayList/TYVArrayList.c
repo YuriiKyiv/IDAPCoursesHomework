@@ -35,7 +35,7 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array);
 #pragma mark Public Implementations
 
 struct TYVRange {
-    size_t *_pointer;
+    size_t _pointer;
     uint64_t _length;
 };
 
@@ -116,7 +116,10 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range) {
     if (NULL == array) {
         return;
     }
-
+    
+    for (size_t iter = range._pointer; iter < (range._pointer + range._length); iter++) {
+        TYVArrayListRemoveItemAtIndex(array, iter);
+    }
 }
 
 bool TYVArrayListContains(TYVArrayList *array, TYVObject *item) {
@@ -126,7 +129,7 @@ bool TYVArrayListContains(TYVArrayList *array, TYVObject *item) {
     
     size_t currentCount = TYVArrayListGetCount(array);
     for (size_t iter = 0; iter < currentCount; iter++) {
-        if (item == TYVArrayListGetItemAtIndex(array, iter)) {
+        if (TYVArrayListGetItemAtIndex(array, iter) == item) {
             return true;
         }
     }
@@ -203,7 +206,7 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
     }
     
     if (newSize < array->_size) {
-        TYVRange range;
+        TYVRange range = {newSize, array->_size - newSize};
         TYVArrayListRemoveItemsInRange(array, range);
     }
     
