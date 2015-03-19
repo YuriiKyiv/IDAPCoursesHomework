@@ -18,11 +18,14 @@ void TYVArrayListResizeTest();
 
 void TYVArrayListAddTest();
 
+void TYVArrayListRemoveTest();
+
 void TYVArrayListPerfomTests(){
     printf("\nArrayList Tests\n");
-    TYVArrayListCreateTest();
-    TYVArrayListAddTest();
-    TYVArrayListResizeTest();
+    //TYVArrayListCreateTest();
+    //TYVArrayListAddTest();
+    //TYVArrayListResizeTest();
+    TYVArrayListRemoveTest();
     printf("ArrayList has been finished\n");
 }
 
@@ -61,6 +64,27 @@ void TYVArrayListAddTest(){
     TYVObjectRelease(array);
 }
 
+void TYVArrayListRemoveTest(){
+    TYVArrayList *array = TYVArrayListCreate(2);
+    TYVObject *objectOne = TYVObjectCreate(TYVObject);
+    TYVObject *objectTwo = TYVObjectCreate(TYVObject);
+    
+    TYVArrayListAddItem(array, objectOne);
+    TYVArrayListAddItem(array, objectTwo);
+    
+    TYVArrayListRemoveItem(array, objectOne);
+    assert(false == TYVArrayListContains(array, objectOne));
+    assert(1 == objectOne->_referenceCount);
+    assert(1 == TYVArrayListGetCount(array));
+    
+    
+    
+    
+    TYVObjectRelease(objectTwo);
+    TYVObjectRelease(objectOne);
+    TYVObjectRelease(array);
+}
+
 void TYVArrayListResizeTest(){
     TYVArrayList *array = TYVArrayListCreate(1);
     TYVObject *objectOne = TYVObjectCreate(TYVObject);
@@ -76,6 +100,7 @@ void TYVArrayListResizeTest(){
         TYVObject *object = TYVObjectCreate(TYVObject);
         TYVArrayListAddItem(arrayMega, object);
         TYVObjectRelease(object);
+        assert(iter + 1 == TYVArrayListGetCount(array));
     }
     assert(1000 == TYVArrayListGetCount(arrayMega));
     

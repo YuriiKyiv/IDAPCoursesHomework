@@ -85,12 +85,13 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
     TYVArrayListRemoveItemAtIndex(array, index);
 }
 
-void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index){
+void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index) {
     if (NULL == array || TYVArrayListGetCount(array) <= index){
         return;
     }
     
     TYVPropSetRetain(&array->_data[index], NULL);
+    array->_count--;
 }
 
 void TYVArrayListRemoveAllItems(TYVArrayList *array) {
