@@ -24,7 +24,7 @@ void TYVArrayListPerfomTests(){
     printf("\nArrayList Tests\n");
     //TYVArrayListCreateTest();
     //TYVArrayListAddTest();
-    //TYVArrayListResizeTest();
+    TYVArrayListResizeTest();
     TYVArrayListRemoveTest();
     printf("ArrayList has been finished\n");
 }
@@ -98,14 +98,19 @@ void TYVArrayListResizeTest(){
     assert(TYVArrayListContains(array, objectTwo));
     
     TYVArrayList *arrayMega = TYVArrayListCreate(1);
+    TYVObject *object = TYVObjectCreate(TYVObject);
     for (size_t iter = 0; iter < 1000; iter++){
-        TYVObject *object = TYVObjectCreate(TYVObject);
         TYVArrayListAddItem(arrayMega, object);
-        TYVObjectRelease(object);
-        assert(iter + 1 == TYVArrayListGetCount(array));
+        assert(iter + 1 == TYVArrayListGetCount(arrayMega));
     }
     assert(1000 == TYVArrayListGetCount(arrayMega));
     
+    for (size_t iter = 0; iter < 1000; iter++){
+        TYVArrayListRemoveItem(arrayMega, object);
+        assert(1000 - iter - 1 == TYVArrayListGetCount(arrayMega));
+    }
+    
+    TYVObjectRelease(object);
     TYVObjectRelease(arrayMega);
     TYVObjectRelease(objectTwo);
     TYVObjectRelease(objectOne);

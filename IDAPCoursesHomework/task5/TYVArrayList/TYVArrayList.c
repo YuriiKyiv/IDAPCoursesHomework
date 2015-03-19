@@ -97,6 +97,8 @@ void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index) {
     TYVPropSetAssign(&array->_data[lastindex], NULL);
     
     array->_count--;
+    
+    TYVArrayListResizeIfNeeded(array);
 }
 
 void TYVArrayListRemoveAllItems(TYVArrayList *array) {
@@ -110,7 +112,7 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     }    
 }
 
-void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range){
+void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range) {
     if (NULL == array) {
         return;
     }
