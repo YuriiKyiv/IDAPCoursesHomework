@@ -28,18 +28,7 @@ void TYVArrayListCreateTest(){
 }
 
 void TYVArrayListResizeTest(){
-    TYVArrayList *array = TYVArrayListCreate(1);
-    TYVHuman *one = TYVObjectCreate(TYVHuman);
-    TYVArrayListAddItem(array, (TYVObject *)one);
-    assert(1 == TYVArrayListGetCount(array));
-    TYVArrayListAddItem(array, (TYVObject *)one);
-    assert(2 == TYVArrayListGetCount(array));
-    TYVArrayListAddItem(array, (TYVObject *)one);
-    assert(3 == TYVArrayListGetCount(array));
-    TYVArrayListRemoveItem(array, (TYVObject *)one);
-    TYVObjectRelease(one);
-    TYVObjectRelease(one);
-    TYVObjectRelease(array);
+    
 }
 
 // after creating 1-size arraylist
