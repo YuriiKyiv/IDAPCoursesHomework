@@ -62,7 +62,18 @@ void TYVArrayListAddTest(){
 }
 
 void TYVArrayListResizeTest(){
+    TYVArrayList *array = TYVArrayListCreate(1);
+    TYVObject *objectOne = TYVObjectCreate(TYVObject);
+    TYVObject *objectTwo = TYVObjectCreate(TYVObject);
     
+    TYVArrayListAddItem(array, objectOne);
+    TYVArrayListAddItem(array, objectTwo);
+    assert(TYVArrayListContains(array, objectOne));
+    assert(TYVArrayListContains(array, objectTwo));
+    
+    TYVObjectRelease(objectTwo);
+    TYVObjectRelease(objectOne);
+    TYVObjectRelease(array);
 }
 
 // after creating 1-size arraylist
