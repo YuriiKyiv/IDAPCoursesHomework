@@ -27,29 +27,17 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *it
 
 void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 
+size_t TYVArrayListGetNewSize(TYVArrayList *array);
+
+void TYVArrayListResizeIfNeeded(TYVArrayList *array);
+
 #pragma mark -
 #pragma mark Public Implementations
 
 struct TYVRange {
-    TYVObject *_pointer;
-    uint64_t _length;
+    size_t pointer;
+    uint64_t length;
 };
-
-void TYVRangeSetPointer(TYVRange range, TYVObject *pointer){
-    range._pointer = pointer;
-}
-
-TYVObject *TYVRangeGetPointer(TYVRange range){
-    return range._pointer;
-}
-
-void TYVRangeSetLength(TYVRange range, uint64_t length){
-    range._length = length;
-}
-
-uint64_t TYVRangeGetLength(TYVRange range){
-    return range._length;
-}
 
 TYVArrayList *TYVArrayListCreate(size_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
@@ -67,7 +55,10 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item) {
         return;
     }
     
+    TYVArrayListResizeIfNeeded(array);
+    
     TYVArrayListSetItemAtIndex(array, TYVArrayListGetCount(array), item);
+    array->_count++;
 }
 
 size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
@@ -94,12 +85,20 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
     TYVArrayListRemoveItemAtIndex(array, index);
 }
 
-void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index){
+void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index) {
     if (NULL == array || TYVArrayListGetCount(array) <= index){
         return;
     }
     
-    TYVPropertySetRetainVoid(&array->_data[index], NULL);
+    size_t lastindex = TYVArrayListGetCount(array) - 1;
+    
+    TYVPropSetRetain(&array->_data[index], NULL);
+    TYVPropSetAssign(&array->_data[index], array->_data[lastindex]);
+    TYVPropSetAssign(&array->_data[lastindex], NULL);
+    
+    array->_count--;
+    
+    TYVArrayListResizeIfNeeded(array);
 }
 
 void TYVArrayListRemoveAllItems(TYVArrayList *array) {
@@ -113,25 +112,24 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     }    
 }
 
-void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range){
+void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range) {
     if (NULL == array) {
         return;
     }
-    uint64_t length = TYVRangeGetLength(range);
-    TYVObject *pointer = TYVRangeGetPointer(range);
-    for (size_t iter = 0; iter < length; iter++) {
-        TYVPropertySetRetainVoid(&pointer[iter], NULL);
+    
+    for (size_t iter = range.pointer; iter < (range.pointer + range.length); iter++) {
+        TYVArrayListRemoveItemAtIndex(array, iter);
     }
 }
 
-bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item) {
+bool TYVArrayListContains(TYVArrayList *array, TYVObject *item) {
     if (NULL == array || NULL == item) {
         return false;
     }
     
     size_t currentCount = TYVArrayListGetCount(array);
     for (size_t iter = 0; iter < currentCount; iter++) {
-        if (array->_data[iter] == item) {
+        if (TYVArrayListGetItemAtIndex(array, iter) == item) {
             return true;
         }
     }
@@ -154,26 +152,35 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array) {
         return;
     }
     
+    TYVArrayListSetSize(array, TYVArrayListGetNewSize(array));
+}
+
+size_t TYVArrayListGetNewSize(TYVArrayList *array){
+    if (NULL == array) {
+        return 0;
+    }
+    
     uint64_t currentCount = TYVArrayListGetCount(array);
     size_t currentSize = TYVArrayListGetSize(array);
     
+   
     if (currentSize == currentCount){
-        TYVArrayListSetSize(array, currentSize * 2);
+        return currentSize * 2 + 1;
     }
     
-    if ((currentSize * 0.25) >= currentCount){
-        TYVArrayListSetSize(array, currentSize / 2);
+    if (currentSize >= (currentCount * 4)){
+        return currentSize / 2 + 1;
     }
+    
+    return currentSize;
 }
 
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item) {
-    if (NULL == array || NULL == item || TYVArrayListGetCount(array) <= index){
+    if (NULL == array || NULL == item || TYVArrayListGetSize(array) <= index){
         return;
     }
-    
-    TYVArrayListResizeIfNeeded(array);
-    TYVPropertySetRetainVoid(&array->_data[index], index);
-    array->_count++;
+
+    TYVPropSetRetain(&array->_data[index], item);
 }
 
 TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {
@@ -198,10 +205,8 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
         return;
     }
     
-    if (array->_size > newSize) {
-        TYVRange range;
-        TYVRangeSetLength(range, newSize - array->_size);
-        TYVRangeSetPointer(range, array->_data[array->_size]);
+    if (newSize < array->_size) {
+        TYVRange range = {newSize, array->_size - newSize};
         TYVArrayListRemoveItemsInRange(array, range);
     }
     

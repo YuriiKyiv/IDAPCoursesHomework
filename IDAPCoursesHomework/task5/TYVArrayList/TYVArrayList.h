@@ -46,7 +46,7 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array);
 
 void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range);
 
-bool TYVArrayListIsContain(TYVArrayList *array, TYVObject *item);
+bool TYVArrayListContains(TYVArrayList *array, TYVObject *item);
 
 uint64_t TYVArrayListGetCount(TYVArrayList *array);
 

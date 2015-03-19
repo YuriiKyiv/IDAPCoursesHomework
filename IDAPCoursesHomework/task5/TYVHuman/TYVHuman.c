@@ -193,9 +193,9 @@ void __TYVHumanDeallocate(TYVHuman *human){
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
     if (TYVHumanGetGender(human) == TYVMale){
-        TYVPropertySetRetainVoid(&human->_partner, partner);
+        TYVPropSetRetain(&human->_partner, partner);
     } else {
-        TYVPropertySetAssignVoid(&human->_partner, partner);
+        TYVPropSetAssign(&human->_partner, partner);
     }
 }
 
