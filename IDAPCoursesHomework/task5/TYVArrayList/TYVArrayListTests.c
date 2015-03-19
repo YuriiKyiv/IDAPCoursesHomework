@@ -71,6 +71,15 @@ void TYVArrayListResizeTest(){
     assert(TYVArrayListContains(array, objectOne));
     assert(TYVArrayListContains(array, objectTwo));
     
+    TYVArrayList *arrayMega = TYVArrayListCreate(1);
+    for (size_t iter = 0; iter < 1000; iter++){
+        TYVObject *object = TYVObjectCreate(TYVObject);
+        TYVArrayListAddItem(arrayMega, object);
+        TYVObjectRelease(object);
+    }
+    assert(1000 == TYVArrayListGetCount(arrayMega));
+    
+    TYVObjectRelease(arrayMega);
     TYVObjectRelease(objectTwo);
     TYVObjectRelease(objectOne);
     TYVObjectRelease(array);
