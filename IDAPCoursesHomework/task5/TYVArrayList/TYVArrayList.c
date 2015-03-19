@@ -114,7 +114,7 @@ bool TYVArrayListContains(TYVArrayList *array, TYVObject *item) {
     
     size_t currentCount = TYVArrayListGetCount(array);
     for (size_t iter = 0; iter < currentCount; iter++) {
-        if (array->_data[iter] == item) {
+        if (item == TYVArrayListGetItemAtIndex(array, iter)) {
             return true;
         }
     }
