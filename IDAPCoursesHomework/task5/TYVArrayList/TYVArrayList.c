@@ -31,25 +31,9 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
 #pragma mark Public Implementations
 
 struct TYVRange {
-    TYVObject *_pointer;
+    size_t *_pointer;
     uint64_t _length;
 };
-
-void TYVRangeSetPointer(TYVRange range, TYVObject *pointer){
-    range._pointer = pointer;
-}
-
-TYVObject *TYVRangeGetPointer(TYVRange range){
-    return range._pointer;
-}
-
-void TYVRangeSetLength(TYVRange range, uint64_t length){
-    range._length = length;
-}
-
-uint64_t TYVRangeGetLength(TYVRange range){
-    return range._length;
-}
 
 TYVArrayList *TYVArrayListCreate(size_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
@@ -67,7 +51,10 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item) {
         return;
     }
     
+    //resizing
+    
     TYVArrayListSetItemAtIndex(array, TYVArrayListGetCount(array), item);
+    array->_count++;
 }
 
 size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
@@ -99,7 +86,7 @@ void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index){
         return;
     }
     
-    TYVPropertySetRetainVoid(&array->_data[index], NULL);
+    TYVPropertySetRetain(&array->_data[index], NULL);
 }
 
 void TYVArrayListRemoveAllItems(TYVArrayList *array) {
@@ -120,7 +107,7 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range){
     uint64_t length = TYVRangeGetLength(range);
     TYVObject *pointer = TYVRangeGetPointer(range);
     for (size_t iter = 0; iter < length; iter++) {
-        TYVPropertySetRetainVoid(&pointer[iter], NULL);
+        TYVPropertySetRetain(&pointer[iter], NULL);
     }
 }
 
@@ -170,10 +157,8 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *it
     if (NULL == array || NULL == item || TYVArrayListGetCount(array) <= index){
         return;
     }
-    
-    TYVArrayListResizeIfNeeded(array);
-    TYVPropertySetRetainVoid(&array->_data[index], index);
-    array->_count++;
+
+    TYVPropertySetRetain(&array->_data[index], item);
 }
 
 TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {
@@ -200,8 +185,6 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
     
     if (array->_size > newSize) {
         TYVRange range;
-        TYVRangeSetLength(range, newSize - array->_size);
-        TYVRangeSetPointer(range, array->_data[array->_size]);
         TYVArrayListRemoveItemsInRange(array, range);
     }
     

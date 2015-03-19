@@ -9,7 +9,7 @@
 #include "TYVPropertySetters.h"
 #include "TYVObject.h"
 
-void TYVPropertySetRetain(void **field, void *value){
+void TYVPropertySetRetain(void **field, void *value) {
     if (NULL == field || *field == value){
         return;
     }
@@ -25,7 +25,7 @@ void TYVPropertySetRetain(void **field, void *value){
     *field = value;
 }
 
-void TYVPropertySetAssign(void **field, void *value){
+void TYVPropertySetAssign(void **field, void *value) {
     if (NULL == field || *field == value){
         return;
     }
