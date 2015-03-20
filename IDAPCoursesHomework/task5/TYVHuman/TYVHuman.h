@@ -13,8 +13,10 @@
 #include "TYVString.h"
 #include "TYVArray.h"
 #include "stdbool.h"
+#include "TYVArrayList.h"
 
-const static uint8_t TYVChildrenMaxCount = 20;
+extern
+const uint64_t TYVNotFoundItem;
 
 typedef enum TYVGender TYVGender;
 enum TYVGender {
@@ -30,11 +32,10 @@ struct TYVHuman {
     TYVHuman *_partner;
     TYVHuman *_father;
     TYVHuman *_mother;
-    TYVArray *_childrenArray;
+    TYVArrayList *_childrenArray;
     
     uint8_t _age;
     TYVGender _gender;
-    uint8_t _childrenCount;
 };
 
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender);
@@ -65,10 +66,10 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female);
 
 bool TYVHumanIsMarried(TYVHuman *human);
 
-TYVArray *TYVHumanGetArray(TYVHuman *human);
+TYVArrayList *TYVHumanGetArray(TYVHuman *human);
 
 uint8_t TYVHumanGetAge(TYVHuman *human);
 
-uint8_t TYVHumanGetChildrenCount(TYVHuman *human);
+uint64_t TYVHumanGetChildrenCount(TYVHuman *human);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */
