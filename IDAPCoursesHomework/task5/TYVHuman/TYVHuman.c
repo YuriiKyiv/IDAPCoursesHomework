@@ -210,9 +210,9 @@ void TYVHumanSetParent(TYVHuman *child, TYVHuman *parent) {
     }
     
     if (TYVHumanGetGender(parent) == TYVMale) {
-        TYVPropSetAssign(&child->_father, parent);
+        TYVHumanSetFather(child, parent);
     } else {
-        TYVPropSetAssign(&child->_mother, parent);
+        TYVHumanSetMother(child, parent);
     }
 }
 
@@ -237,7 +237,7 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
         return;
     }
     
-    TYVPropSetRetain(&human->_mother, mother);
+    TYVPropSetAssign(&human->_mother, mother);
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
@@ -245,7 +245,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
         return;
     }
     
-    TYVPropSetRetain(&human->_father, father);
+    TYVPropSetAssign(&human->_father, father);
 }
 
 void TYVHumanSetArray(TYVHuman *human, TYVArrayList *array){
