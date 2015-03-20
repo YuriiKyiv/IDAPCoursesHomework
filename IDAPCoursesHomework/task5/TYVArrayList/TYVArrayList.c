@@ -12,7 +12,7 @@
 #include "assert.h"
 #include "TYVPropertySetters.h"
 
-const size_t TYVNotFoundItem = SIZE_MAX;
+const uint64_t TYVNotFoundItem = SIZE_MAX;
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -122,7 +122,7 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range) {
     }
 }
 
-bool TYVArrayListContains(TYVArrayList *array, TYVObject *item) {
+bool TYVArrayListContainsItem(TYVArrayList *array, TYVObject *item) {
     if (NULL == array || NULL == item) {
         return false;
     }

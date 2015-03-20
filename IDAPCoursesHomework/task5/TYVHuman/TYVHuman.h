@@ -15,7 +15,8 @@
 #include "stdbool.h"
 #include "TYVArrayList.h"
 
-const static uint8_t TYVChildrenMaxCount = 20;
+extern
+const uint64_t TYVNotFoundItem;
 
 typedef enum TYVGender TYVGender;
 enum TYVGender {
@@ -69,6 +70,6 @@ TYVArrayList *TYVHumanGetArray(TYVHuman *human);
 
 uint8_t TYVHumanGetAge(TYVHuman *human);
 
-uint8_t TYVHumanGetChildrenCount(TYVHuman *human);
+uint64_t TYVHumanGetChildrenCount(TYVHuman *human);
 
 #endif /* defined(__IDAPCoursesHomework__TYVHuman__) */

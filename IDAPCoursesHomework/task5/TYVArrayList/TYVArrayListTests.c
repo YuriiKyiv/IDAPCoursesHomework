@@ -48,14 +48,14 @@ void TYVArrayListAddTest(){
     TYVArrayListAddItem(array, objectOne);
     assert(1 == TYVArrayListGetCount(array));
     assert(2 == objectOne->_referenceCount);
-    assert(TYVArrayListContains(array, objectOne));
+    assert(TYVArrayListContainsItem(array, objectOne));
     assert(0 == TYVArrayListGetIndexOfItem(array, objectOne));
     assert(objectOne == TYVArrayListGetItemAtIndex(array, 0));
     
     TYVArrayListAddItem(array, objectTwo);
     assert(2 == TYVArrayListGetCount(array));
     assert(2 == objectTwo->_referenceCount);
-    assert(TYVArrayListContains(array, objectTwo));
+    assert(TYVArrayListContainsItem(array, objectTwo));
     assert(1 == TYVArrayListGetIndexOfItem(array, objectTwo));
     assert(objectTwo == TYVArrayListGetItemAtIndex(array, 1));
     
@@ -73,12 +73,12 @@ void TYVArrayListRemoveTest(){
     TYVArrayListAddItem(array, objectTwo);
     
     TYVArrayListRemoveItem(array, objectOne);
-    assert(false == TYVArrayListContains(array, objectOne));
+    assert(false == TYVArrayListContainsItem(array, objectOne));
     assert(1 == objectOne->_referenceCount);
     assert(1 == TYVArrayListGetCount(array));
     
     TYVArrayListRemoveItemAtIndex(array, 0);
-    assert(false == TYVArrayListContains(array, objectTwo));
+    assert(false == TYVArrayListContainsItem(array, objectTwo));
     assert(1 == objectTwo->_referenceCount);
     assert(0 == TYVArrayListGetCount(array));
     
@@ -94,8 +94,8 @@ void TYVArrayListResizeTest(){
     
     TYVArrayListAddItem(array, objectOne);
     TYVArrayListAddItem(array, objectTwo);
-    assert(TYVArrayListContains(array, objectOne));
-    assert(TYVArrayListContains(array, objectTwo));
+    assert(TYVArrayListContainsItem(array, objectOne));
+    assert(TYVArrayListContainsItem(array, objectTwo));
     
     TYVArrayList *arrayMega = TYVArrayListCreate(1);
     TYVObject *object = TYVObjectCreate(TYVObject);

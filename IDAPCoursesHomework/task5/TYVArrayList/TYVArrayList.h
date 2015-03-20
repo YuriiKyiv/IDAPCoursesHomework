@@ -14,7 +14,7 @@
 #include "stdbool.h"
 
 extern
-const size_t TYVNotFoundItem;
+const uint64_t TYVNotFoundItem;
 
 typedef struct TYVRange TYVRange;
 
@@ -46,7 +46,7 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array);
 
 void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range);
 
-bool TYVArrayListContains(TYVArrayList *array, TYVObject *item);
+bool TYVArrayListContainsItem(TYVArrayList *array, TYVObject *item);
 
 uint64_t TYVArrayListGetCount(TYVArrayList *array);
 
