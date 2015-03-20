@@ -12,22 +12,22 @@
 #include "assert.h"
 #include "TYVPropertySetters.h"
 
-const uint64_t TYVNotFoundItem = SIZE_MAX;
+const uint64_t TYVNotFoundItem = UINT64_MAX;
 
 #pragma mark -
 #pragma mark Private Declarations
 
-void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
+void TYVArrayListSetSize(TYVArrayList *array, uint64_t newSize);
 
 void TYVArrayListSetCount(TYVArrayList *array, uint64_t newCount);
 
-size_t TYVArrayListGetSize(TYVArrayList *array);
+uint64_t TYVArrayListGetSize(TYVArrayList *array);
 
-void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item);
+void TYVArrayListSetItemAtIndex(TYVArrayList *array, uint64_t index, TYVObject *item);
 
-void TYVArrayListSetSize(TYVArrayList *array, size_t newSize);
+void TYVArrayListSetSize(TYVArrayList *array, uint64_t newSize);
 
-size_t TYVArrayListGetNewSize(TYVArrayList *array);
+uint64_t TYVArrayListGetNewSize(TYVArrayList *array);
 
 void TYVArrayListResizeIfNeeded(TYVArrayList *array);
 
@@ -35,11 +35,11 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array);
 #pragma mark Public Implementations
 
 struct TYVRange {
-    size_t pointer;
+    uint64_t pointer;
     uint64_t length;
 };
 
-TYVArrayList *TYVArrayListCreate(size_t size) {
+TYVArrayList *TYVArrayListCreate(uint64_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
     TYVArrayListSetSize(array, size);
     
@@ -61,7 +61,7 @@ void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item) {
     array->_count++;
 }
 
-size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
+uint64_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
     if (NULL == array || NULL == item) {
         return 0;
     }
@@ -85,7 +85,7 @@ void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item) {
     TYVArrayListRemoveItemAtIndex(array, index);
 }
 
-void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index) {
+void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, uint64_t index) {
     if (NULL == array || TYVArrayListGetCount(array) <= index){
         return;
     }
@@ -117,7 +117,7 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range) {
         return;
     }
     
-    for (size_t iter = range.pointer; iter < (range.pointer + range.length); iter++) {
+    for (uint64_t iter = range.pointer; iter < (range.pointer + range.length); iter++) {
         TYVArrayListRemoveItemAtIndex(array, iter);
     }
 }
@@ -155,7 +155,7 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array) {
     TYVArrayListSetSize(array, TYVArrayListGetNewSize(array));
 }
 
-size_t TYVArrayListGetNewSize(TYVArrayList *array){
+uint64_t TYVArrayListGetNewSize(TYVArrayList *array){
     if (NULL == array) {
         return 0;
     }
@@ -175,7 +175,7 @@ size_t TYVArrayListGetNewSize(TYVArrayList *array){
     return currentSize;
 }
 
-void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *item) {
+void TYVArrayListSetItemAtIndex(TYVArrayList *array, uint64_t index, TYVObject *item) {
     if (NULL == array || NULL == item || TYVArrayListGetSize(array) <= index){
         return;
     }
@@ -183,7 +183,7 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, size_t index, TYVObject *it
     TYVPropSetRetain(&array->_data[index], item);
 }
 
-TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {
+TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, uint64_t index) {
     if (NULL == array || TYVArrayListGetCount(array) < index){
         return NULL;
     }
@@ -191,7 +191,7 @@ TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index) {
     return array->_data[index];
 }
 
-void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
+void TYVArrayListSetSize(TYVArrayList *array, uint64_t newSize) {
     if (NULL == array || array->_size == newSize) {
         return;
     }
@@ -219,7 +219,7 @@ void TYVArrayListSetSize(TYVArrayList *array, size_t newSize) {
     array->_size = newSize;
 }
 
-size_t TYVArrayListGetSize(TYVArrayList *array) {
+uint64_t TYVArrayListGetSize(TYVArrayList *array) {
     return (NULL != array) ? array->_size : 0;
 }
 
