@@ -201,7 +201,7 @@ void TYVArrayListSetSize(TYVArrayList *array, uint64_t newSize) {
     }
     
     if (newSize < array->_size) {
-        TYVRange range = {newSize, array->_size - newSize};
+        TYVRange range = {newSize, array->_size - newSize - 1};
         TYVArrayListRemoveItemsInRange(array, range);
     }
     
