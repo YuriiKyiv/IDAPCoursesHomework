@@ -12,11 +12,10 @@
 #include <stdio.h>
 #include "TYVObject.h"
 #include "stdbool.h"
+#include "TYVRange.h"
 
 extern
 const uint64_t TYVNotFoundItem;
-
-typedef struct TYVRange TYVRange;
 
 typedef struct TYVArrayList TYVArrayList;
 struct TYVArrayList {
@@ -25,22 +24,22 @@ struct TYVArrayList {
     TYVObject **_data;
     
     uint64_t _count;
-    size_t _size;
+    uint64_t _size;
 };
 
-TYVArrayList *TYVArrayListCreate(size_t size);
+TYVArrayList *TYVArrayListCreate(uint64_t size);
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList);
 
 void TYVArrayListAddItem(TYVArrayList *array, TYVObject *item);
 
-TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, size_t index);
+TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, uint64_t index);
 
-size_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item);
+uint64_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item);
 
 void TYVArrayListRemoveItem(TYVArrayList *array, TYVObject *item);
 
-void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, size_t index);
+void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, uint64_t index);
 
 void TYVArrayListRemoveAllItems(TYVArrayList *array);
 
