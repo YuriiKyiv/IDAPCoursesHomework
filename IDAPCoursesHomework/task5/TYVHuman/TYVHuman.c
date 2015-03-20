@@ -10,7 +10,6 @@
 #include "TYVString.h"
 #include "stdlib.h"
 #include "TYVPropertySetters.h"
-#include "TYVArrayList.h"
 
 const static uint8_t TYVNotFoundObject = 255;
 
@@ -33,7 +32,7 @@ static
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *mother);
 
 static
-void TYVHumanSetArray(TYVHuman *human, TYVArray *array);
+void TYVHumanSetArray(TYVHuman *human, TYVArrayList *array);
 
 static
 void TYVHumanSetAge(TYVHuman *human, uint8_t age);
@@ -53,7 +52,7 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender){
     TYVHumanSetGender(human, gender);
     TYVHumanSetAge(human, age);
     
-    TYVArray *array = TYVObjectCreate(TYVArray);
+    TYVArrayList *array = TYVArrayListCreate(2);
     TYVHumanSetArray(human, array);
     
     TYVObjectRelease(array);
@@ -99,16 +98,9 @@ void TYVHumanDivorce(TYVHuman *human){
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
-    TYVHuman *humanPartner = TYVHumanGetPartner(human);
     if (NULL == human
         || NULL == name
-        || NULL == humanPartner)
-    {
-        return NULL;
-    }
-    
-    if (TYVHumanGetChildrenCount(human) >= TYVChildrenMaxCount
-        || TYVHumanGetChildrenCount(humanPartner) >= TYVChildrenMaxCount)
+        || NULL == TYVHumanGetPartner(human))
     {
         return NULL;
     }
@@ -167,7 +159,7 @@ TYVHuman *TYVHumanGetPartner(TYVHuman *human){
     return (NULL != human) ? human->_partner : NULL;
 }
 
-TYVArray *TYVHumanGetArray(TYVHuman *human){
+TYVArrayList *TYVHumanGetArray(TYVHuman *human){
     return (NULL != human) ? human->_childrenArray : NULL;
 }
 
@@ -222,16 +214,20 @@ void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent){
 }
 
 void TYVHumanAddChild(TYVHuman *human, TYVHuman *child){
-    if (NULL == human){
+    if (NULL == human || NULL == child){
+        return;
+    }
+
+    TYVArrayListAddItem(TYVHumanGetArray(human), (TYVObject *)child);
+}
+
+void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){
+    if (NULL == human || NULL == child){
         return;
     }
     
-    TYVArrayAdd(TYVHumanGetArray(human), child);
+    TYVArrayListRemoveItem(TYVHumanGetArray(human), (TYVObject *)child);
 }
-
-//void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child){
-//    
-//}
 
 void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
     if ( NULL == human || human == mother){
@@ -249,7 +245,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
     TYVPropSetRetain(&human->_father, father);
 }
 
-void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
+void TYVHumanSetArray(TYVHuman *human, TYVArrayList *array){
     if (NULL == human || array != human->_childrenArray){
         return;
     }

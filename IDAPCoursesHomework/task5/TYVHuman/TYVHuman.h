@@ -13,6 +13,7 @@
 #include "TYVString.h"
 #include "TYVArray.h"
 #include "stdbool.h"
+#include "TYVArrayList.h"
 
 const static uint8_t TYVChildrenMaxCount = 20;
 
@@ -30,7 +31,7 @@ struct TYVHuman {
     TYVHuman *_partner;
     TYVHuman *_father;
     TYVHuman *_mother;
-    TYVArray *_childrenArray;
+    TYVArrayList *_childrenArray;
     
     uint8_t _age;
     TYVGender _gender;
@@ -64,7 +65,7 @@ void TYVHumanGetMarried(TYVHuman *male, TYVHuman *female);
 
 bool TYVHumanIsMarried(TYVHuman *human);
 
-TYVArray *TYVHumanGetArray(TYVHuman *human);
+TYVArrayList *TYVHumanGetArray(TYVHuman *human);
 
 uint8_t TYVHumanGetAge(TYVHuman *human);
 
