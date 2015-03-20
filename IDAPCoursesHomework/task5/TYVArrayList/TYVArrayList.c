@@ -62,7 +62,7 @@ uint64_t TYVArrayListGetIndexOfItem(TYVArrayList *array, TYVObject *item) {
     }
     
     uint64_t currentCount = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentCount; iter++) {
+    for (uint64_t iter = 0; iter < currentCount; iter++) {
         if (TYVArrayListGetItemAtIndex(array, iter) == item) {
             return iter;
         }
@@ -105,8 +105,8 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
         return;
     }
     
-    size_t currentCount = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentCount; iter++) {
+    uint64_t currentCount = TYVArrayListGetCount(array);
+    for (uint64_t iter = 0; iter < currentCount; iter++) {
         TYVArrayListRemoveItemAtIndex(array, iter);
     }    
 }
@@ -126,8 +126,8 @@ bool TYVArrayListContainsItem(TYVArrayList *array, TYVObject *item) {
         return false;
     }
     
-    size_t currentCount = TYVArrayListGetCount(array);
-    for (size_t iter = 0; iter < currentCount; iter++) {
+    uint64_t currentCount = TYVArrayListGetCount(array);
+    for (uint64_t iter = 0; iter < currentCount; iter++) {
         if (TYVArrayListGetItemAtIndex(array, iter) == item) {
             return true;
         }
@@ -160,7 +160,7 @@ uint64_t TYVArrayListGetNewSize(TYVArrayList *array){
     }
     
     uint64_t currentCount = TYVArrayListGetCount(array);
-    size_t currentSize = TYVArrayListGetSize(array);
+    uint64_t currentSize = TYVArrayListGetSize(array);
     
    
     if (currentSize == currentCount){
