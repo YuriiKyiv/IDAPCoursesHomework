@@ -9,8 +9,8 @@
 #include "TYVHuman.h"
 #include "TYVString.h"
 #include "stdlib.h"
-#include "TYVUniversalSetters.h"
 #include "TYVPropertySetters.h"
+#include "TYVArrayList.h"
 
 const static uint8_t TYVNotFoundObject = 255;
 
@@ -127,7 +127,7 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string){
         return;
     }
 
-    TYVUniversalSetRetain((void **)&human->_name, string);
+    TYVPropSetRetain(&human->_name, string);
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human){
@@ -172,7 +172,8 @@ TYVArray *TYVHumanGetArray(TYVHuman *human){
 }
 
 uint8_t TYVHumanGetChildrenCount(TYVHuman *human){
-    return (NULL != human) ? human->_childrenCount : TYVNotFoundObject;
+    // write
+    return TYVNotFoundObject;
 }
 
 
@@ -237,7 +238,7 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother){
         return;
     }
     
-    TYVUniversalSetRetain((void **)&human->_mother, mother);
+    TYVPropSetRetain(&human->_mother, mother);
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
@@ -245,7 +246,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father){
         return;
     }
     
-    TYVUniversalSetRetain((void **)&human->_father, father);
+    TYVPropSetRetain(&human->_father, father);
 }
 
 void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
@@ -253,5 +254,5 @@ void TYVHumanSetArray(TYVHuman *human, TYVArray *array){
         return;
     }
     
-    TYVUniversalSetRetain((void **)&human->_childrenArray, array);
+    TYVPropSetRetain(&human->_childrenArray, array);
 }
