@@ -12,11 +12,10 @@
 #include <stdio.h>
 #include "TYVObject.h"
 #include "stdbool.h"
+#include "TYVRange.h"
 
 extern
 const uint64_t TYVNotFoundItem;
-
-typedef struct TYVRange TYVRange;
 
 typedef struct TYVArrayList TYVArrayList;
 struct TYVArrayList {

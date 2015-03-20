@@ -7,3 +7,7 @@
 //
 
 #include "TYVRange.h"
+
+uint64_t TYVRangeGetLastIndex(TYVRange range){
+    return range.origin + range.length;
+}

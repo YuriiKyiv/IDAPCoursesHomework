@@ -11,4 +11,12 @@
 
 #include <stdio.h>
 
+typedef struct TYVRange TYVRange;
+struct TYVRange {
+    uint64_t origin;
+    uint64_t length;
+};
+
+uint64_t TYVRangeGetLastIndex(TYVRange range);
+
 #endif /* defined(__IDAPCoursesHomework__TYVRange__) */

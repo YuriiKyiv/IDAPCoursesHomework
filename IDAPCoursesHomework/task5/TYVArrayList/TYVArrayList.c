@@ -34,11 +34,6 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array);
 #pragma mark -
 #pragma mark Public Implementations
 
-struct TYVRange {
-    uint64_t pointer;
-    uint64_t length;
-};
-
 TYVArrayList *TYVArrayListCreate(uint64_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
     TYVArrayListSetSize(array, size);
@@ -116,9 +111,9 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range) {
     if (NULL == array) {
         return;
     }
-    
-    for (uint64_t iter = range.pointer; iter < (range.pointer + range.length); iter++) {
-        TYVArrayListRemoveItemAtIndex(array, iter);
+   
+    for (uint64_t iter = 0; iter <= range.length; iter++) {
+        TYVArrayListRemoveItemAtIndex(array, range.origin + iter);
     }
 }
 
