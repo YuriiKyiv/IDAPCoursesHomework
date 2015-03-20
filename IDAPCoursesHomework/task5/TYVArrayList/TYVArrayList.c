@@ -85,11 +85,15 @@ void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, uint64_t index) {
         return;
     }
     
-    size_t lastindex = TYVArrayListGetCount(array) - 1;
+    uint64_t lastIndex = TYVArrayListGetCount(array) - 1;
     
-    TYVPropSetRetain(&array->_data[index], NULL);
-    TYVPropSetAssign(&array->_data[index], array->_data[lastindex]);
-    TYVPropSetAssign(&array->_data[lastindex], NULL);
+    if (index == lastIndex) {
+        TYVPropSetRetain(&array->_data[index], NULL);
+    }else {
+        TYVPropSetRetain(&array->_data[index], NULL);
+        TYVPropSetAssign(&array->_data[index], array->_data[lastIndex]);
+        TYVPropSetAssign(&array->_data[lastIndex], NULL);
+    }
     
     array->_count--;
     
