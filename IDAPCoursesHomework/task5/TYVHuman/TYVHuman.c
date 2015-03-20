@@ -107,7 +107,10 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
     
     TYVHuman *child = TYVHumanCreate(name, 0, gender);
     
-    //TYVHumanConnectWithParents(child, human);
+    TYVHumanSetParents(child, human);
+    
+    TYVHumanAddChild(human, child);
+    TYVHumanAddChild(TYVHumanGetPartner(human), child);
     
     TYVObjectRelease(child);
     
