@@ -17,13 +17,10 @@ const static uint8_t TYVNotFoundObject = 255;
 #pragma mark Private Declarations
 
 static
-void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human);
-
-static
 void TYVHumanAddChild(TYVHuman *human, TYVHuman *child);
 
-//static
-//void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child);
+static
+void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child);
 
 static
 void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother);
@@ -39,6 +36,9 @@ void TYVHumanSetAge(TYVHuman *human, uint8_t age);
 
 static
 void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent);
+
+static
+void TYVHumanSetParent(TYVHuman *child, TYVHuman *parent);
 
 static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
@@ -107,7 +107,7 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender){
     
     TYVHuman *child = TYVHumanCreate(name, 0, gender);
     
-    TYVHumanConnectWithParents(child, human);
+    //TYVHumanConnectWithParents(child, human);
     
     TYVObjectRelease(child);
     
@@ -184,32 +184,32 @@ void __TYVHumanDeallocate(TYVHuman *human){
 #pragma mark -
 #pragma mark Private Implementations
 
-void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner){
-    if (TYVHumanGetGender(human) == TYVMale){
+void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner) {
+    if (TYVHumanGetGender(human) == TYVMale) {
         TYVPropSetRetain(&human->_partner, partner);
     } else {
         TYVPropSetAssign(&human->_partner, partner);
     }
 }
 
-void TYVHumanConnectWithParents(TYVHuman *child, TYVHuman *human){
-    TYVHumanAddChild(human, child);
-    TYVHumanAddChild(TYVHumanGetPartner(human), child);
-    TYVHumanSetParents(child, human);
-    
-}
-
-void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent){
+void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent) {
     if (NULL == child || NULL == parent){
         return;
     }
     
-    if (TYVHumanGetGender(parent) == TYVMale){
-        TYVHumanSetFather(child, parent);
-        TYVHumanSetMother(child, TYVHumanGetPartner(parent));
+    TYVHumanSetParent(child, parent);
+    TYVHumanSetParent(child, TYVHumanGetPartner(parent));
+}
+
+void TYVHumanSetParent(TYVHuman *child, TYVHuman *parent) {
+    if (NULL == child || NULL == parent) {
+        return;
+    }
+    
+    if (TYVHumanGetGender(parent) == TYVMale) {
+        TYVPropSetAssign(&child->_father, parent);
     } else {
-        TYVHumanSetFather(child, TYVHumanGetPartner(parent));
-        TYVHumanSetMother(child, parent);
+        TYVPropSetAssign(&child->_mother, parent);
     }
 }
 
