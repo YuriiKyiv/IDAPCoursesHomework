@@ -7,10 +7,11 @@
 //
 
 #include "TYVArrayList.h"
-#include "stdlib.h"
-#include "string.h"
-#include "assert.h"
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
 #include "TYVPropertySetters.h"
+#include <math.h>
 
 const uint64_t TYVNotFoundItem = UINT64_MAX;
 
@@ -105,9 +106,9 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
         return;
     }
     
-    uint64_t currentCount = TYVArrayListGetCount(array);
-    for (uint64_t iter = 0; iter < currentCount; iter++) {
-        TYVArrayListRemoveItemAtIndex(array, iter);
+    uint64_t count = TYVArrayListGetCount(array);
+    for (uint64_t iter = 0; iter < count; iter++) {
+        TYVArrayListRemoveItemAtIndex(array, 0);
     }    
 }
 
@@ -159,19 +160,19 @@ uint64_t TYVArrayListGetNewSize(TYVArrayList *array){
         return 0;
     }
     
-    uint64_t currentCount = TYVArrayListGetCount(array);
-    uint64_t currentSize = TYVArrayListGetSize(array);
+    uint64_t count = TYVArrayListGetCount(array);
+    uint64_t size = TYVArrayListGetSize(array);
     
    
-    if (currentSize == currentCount){
-        return currentSize * 2 + 1;
+    if (size == count){
+        size *= 2;
     }
     
-    if (currentSize >= (currentCount * 4)){
-        return currentSize / 2 + 1;
+    if (size >= (count * 4)){
+        size /= 2;
     }
     
-    return currentSize;
+    return fmax(size, 1);
 }
 
 void TYVArrayListSetItemAtIndex(TYVArrayList *array, uint64_t index, TYVObject *item) {
