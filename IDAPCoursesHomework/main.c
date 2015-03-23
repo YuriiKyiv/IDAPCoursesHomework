@@ -100,7 +100,7 @@ void TYVTask4Perform(){
 
 inline
 void TYVTask5Perform(){
-    //TYVStringTestsPerfom();
+    TYVStringTestsPerfom();
     //TYVHumanTests();
-    TYVArrayListPerfomTests();
+    //TYVArrayListPerfomTests();
 }
