@@ -35,7 +35,11 @@ void TYVArrayListResizeIfNeeded(TYVArrayList *array);
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVArrayList *TYVArrayListCreate(uint64_t size) {
+TYVArrayList *TYVArrayListCreate() {
+    return TYVArrayListCreateWithSize(0);
+}
+
+TYVArrayList *TYVArrayListCreateWithSize(uint64_t size) {
     TYVArrayList *array = TYVObjectCreate(TYVArrayList);
     TYVArrayListSetSize(array, size);
     

@@ -27,7 +27,7 @@ struct TYVArrayList {
     uint64_t _size;
 };
 
-TYVArrayList *TYVArrayListCreate(uint64_t size);
+TYVArrayList *TYVArrayListCreate();
 
 void __TYVArrayListDeallocate(TYVArrayList *arrayList);
 
@@ -48,5 +48,7 @@ void TYVArrayListRemoveItemsInRange(TYVArrayList *array, TYVRange range);
 bool TYVArrayListContainsItem(TYVArrayList *array, TYVObject *item);
 
 uint64_t TYVArrayListGetCount(TYVArrayList *array);
+
+TYVArrayList *TYVArrayListCreateWithSize(uint64_t size);
 
 #endif /* defined(__IDAPCoursesHomework__TYVArrayList__) */

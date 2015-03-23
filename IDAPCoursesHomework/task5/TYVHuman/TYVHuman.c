@@ -53,7 +53,7 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender) {
     TYVHumanSetGender(human, gender);
     TYVHumanSetAge(human, age);
     
-    TYVArrayList *array = TYVArrayListCreate(2);
+    TYVArrayList *array = TYVArrayListCreateWithSize(2);
     TYVHumanSetArray(human, array);
     
     TYVObjectRelease(array);
