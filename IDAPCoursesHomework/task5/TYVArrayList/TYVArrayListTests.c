@@ -117,29 +117,26 @@ void TYVArrayListResizeTest(){
     TYVObjectRelease(array);
 }
 
-// after creating 1-size arraylist
-//      size of arraylist is 1
-//      count of arraylist is 0
-//      after adding not NULL object
-//          count of arraylist is 1
-//          after adding not NULL object
-//              count of arraylist is 2
-//              size of arraylist is 2
-//              after adding not NULL object
-//                  count of arraylist is 3
-//                  size of arraylist is 4
-//                  after removing not NULL object
-//                      count of arraylist is 2
-//                      size of arraylist is 4
-//                      after removing not NULL object which is contained
-//                          count of arraylist is 1
-//                          size of arraylist is 2
-
-// after creating 1-size arraylist
-//      after adding NULL object
-//      NOTHING
-
-// after creating 1-size arraylist
-//      after adding not NULL object
-//      after removing NULL object
-//      NOTHING
+//  after creating array with size = 0
+//      count = 0
+//      array doesnt contain any objects
+//      get item at index = NULL
+//      get index of object = 0
+//          after adding TYVObject object1
+//                count = 1
+//                array contains object1
+//                get index of object1 = 0
+//                get item at 1 = object1
+//                      after adding TYVObject object2
+//                          count = 2
+//                          array contains object2
+//                          get index of object2 = 1
+//                          get item at 2 = object2
+//                              after removing item at 0
+//                                  count = 1
+//                                  get item at 0 = object2
+//                                  array doesnt contain object1
+//                                  array contains object2
+//                                      after removing all items
+//                                          count = 0
+//                                          array doesnt contain any objects
