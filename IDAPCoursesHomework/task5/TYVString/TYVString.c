@@ -16,19 +16,19 @@
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVString *TYVStringCreate(char *data){
+TYVString *TYVStringCreate(char *data) {
     TYVString *string = TYVObjectCreate(TYVString);
     TYVStringSetData(string, data);
     
     return string;
 }
 
-void TYVStringSetData(TYVString *string, char *data){
+void TYVStringSetData(TYVString *string, char *data) {
     if (NULL == string){
         return;
     }
     
-    if (NULL != string->_data){
+    if (NULL != string->_data) {
         free(string->_data);
         string->_data = NULL;
         string->_length = 0;
@@ -40,18 +40,18 @@ void TYVStringSetData(TYVString *string, char *data){
     }
 }
 
-char *TYVStringGetData(TYVString *string){
+char *TYVStringGetData(TYVString *string) {
     return (NULL != string) ? string->_data : 0;
 }
 
-size_t TYVStringGetLength(TYVString *string){
+size_t TYVStringGetLength(TYVString *string) {
     return (NULL != string) ? string->_length : 0;
 }
 
 #pragma mark -
 #pragma mark Private Implementations
 
-void __TYVStringDeallocate(TYVString *string){
+void __TYVStringDeallocate(TYVString *string) {
     TYVStringSetData(string, NULL);
     
     __TYVObjectDeallocate(string);
