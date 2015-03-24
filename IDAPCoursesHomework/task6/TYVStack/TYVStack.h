@@ -20,7 +20,7 @@ struct TYVStack {
     TYVObject **_data;
     
     size_t _size;
-    size_t _currentSize;
+    uint64_t _count;
 };
 
 extern

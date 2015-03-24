@@ -8,28 +8,32 @@
 
 #include "TYVStack.h"
 #include <stdlib.h>
+#include <string.h>
 
 #pragma mark -
 #pragma mark Private Declarations
 
+void TYVStackSetSize(TYVStack *stack, size_t size);
 
 #pragma mark -
 #pragma mark Public Implementations
 
 TYVStack *TYVStackCreate(){
     TYVStack *stack = TYVObjectCreate(TYVStack);
+    
     return stack;
 }
 
 TYVStack *TYVStackCreateWithSize(size_t size){
     TYVStack *stack = TYVObjectCreate(TYVStack);
-    stack->_size = size;
-    stack->_data = calloc(stack->_size, sizeof(*stack->_data));
+    TYVStackSetSize(stack, size);
+    
     return stack;
 }
 
 void __TYVStackDeallocate(TYVStack *stack){
-    
+    TYVStackSetSize(stack, 0);
+    __TYVObjectDeallocate(stack);
 }
 
 extern
@@ -39,12 +43,36 @@ extern
 TYVObject *TYVStackPopItem(TYVStack *stack);
 
 bool TYVStackIsFull(TYVStack *stack) {
-    return (NULL != stack) ? stack->_size == stack->_currentSize : false;
+    return (NULL != stack) ? stack->_size == stack->_count : false;
 }
 
 bool TYVStackIsEmpty(TYVStack *stack) {
-    return (NULL != stack) ? 0 == stack->_currentSize : false;
+    return (NULL != stack) ? 0 == stack->_count : false;
 }
 
 #pragma mark -
 #pragma mark Private Implementations
+
+void TYVStackSetSize(TYVStack *stack, size_t size) {
+    if (NULL == stack || stack->_size == size) {
+        return;
+    }
+    
+    if (0 == size && NULL != stack->_data) {
+        free(stack->_data);
+    }
+    
+    if (stack->_size > size) {
+        // release object which which are between size and stack->_size
+        // make pop while count != size
+    }
+    
+    stack->_data = calloc(stack->_size, sizeof(*stack->_data));
+    
+    if (stack->_size < size) {
+        // check pointer and size
+        memset(stack->_data + size, 0, stack->_size - size);
+    }
+    
+    stack->_size = size;
+}
