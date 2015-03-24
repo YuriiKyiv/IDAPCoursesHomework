@@ -24,19 +24,19 @@ TYVStack *TYVStackCreate(){
     return stack;
 }
 
-TYVStack *TYVStackCreateWithSize(size_t size){
+TYVStack *TYVStackCreateWithSize(size_t size) {
     TYVStack *stack = TYVObjectCreate(TYVStack);
     TYVStackSetSize(stack, size);
     
     return stack;
 }
 
-void __TYVStackDeallocate(TYVStack *stack){
+void __TYVStackDeallocate(TYVStack *stack) {
     TYVStackSetSize(stack, 0);
     __TYVObjectDeallocate(stack);
 }
 
-void TYVStackPushItem(TYVStack *stack, TYVObject *item){
+void TYVStackPushItem(TYVStack *stack, TYVObject *item) {
     if (NULL == stack) {
         return;
     }
@@ -50,9 +50,21 @@ void TYVStackPushItem(TYVStack *stack, TYVObject *item){
     stack->_count++;
 }
 
-
-extern
-TYVObject *TYVStackPopItem(TYVStack *stack);
+TYVObject *TYVStackPopItem(TYVStack *stack) {
+    if (NULL == stack) {
+        return NULL;
+    }
+    
+    if (TYVStackIsEmpty(stack)){
+        return NULL;
+    }
+    
+    TYVObject **head = stack->_data + stack->_count - 1;
+    TYVObjectRelease(*head);
+    
+    // if needed ?
+    return *head;
+}
 
 bool TYVStackIsFull(TYVStack *stack) {
     return (NULL != stack) ? stack->_size == stack->_count : false;
