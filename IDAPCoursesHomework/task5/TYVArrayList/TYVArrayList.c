@@ -109,10 +109,9 @@ void TYVArrayListRemoveAllItems(TYVArrayList *array) {
     if (NULL == array){
         return;
     }
-    
-    uint64_t count = TYVArrayListGetCount(array);
-    for (uint64_t iter = 0; iter < count; iter++) {
-        TYVArrayListRemoveItemAtIndex(array, 0);
+
+    for (uint64_t iter = TYVArrayListGetCount(array); iter > 0; iter--) {
+        TYVArrayListRemoveItemAtIndex(array, iter - 1);
     }    
 }
 
