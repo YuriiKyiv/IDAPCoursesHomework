@@ -24,6 +24,12 @@ struct TYVStack {
 };
 
 extern
+TYVStack *TYVStackCreate();
+
+extern
+void __TYVStackDeallocate(TYVStack *stack);
+
+extern
 void TYVStackPushItem(TYVStack *stack, TYVObject *data);
 
 extern
@@ -34,9 +40,5 @@ bool TYVStackIsFull(TYVStack *stack);
 
 extern
 bool TYVStackIsEmpty(TYVStack *stack);
-
-//bool TYVStackIsFull(TYVStack *stack){
-//    return (NULL != stack) ? stack->_size == stack->_currentSize : false;
-//}
 
 #endif /* defined(__IDAPCoursesHomework__TYVStack__) */
