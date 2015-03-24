@@ -14,18 +14,20 @@
 static
 void TYVStringCreateTest();
 
-void TYVStringTestsPerfom(){
+void TYVStringTestsPerfom() {
     printf("\nTASK 5\n");
     TYVStringCreateTest();
 
 }
 
-void TYVStringCreateTest(){
+void TYVStringCreateTest() {
     char name[] = "Vasya Pupkin";
     TYVString *string = TYVStringCreate(name);
     char *data = TYVStringGetData(string);
     printf("%s\n", data);
     assert(*name == *data);
+    
+    TYVObjectRelease(string);
 }
 
 //after creating a string with "mama"
@@ -41,7 +43,7 @@ void TYVStringCreateTest(){
 //  the length of string equals 0
 //  the data of string equals NULL
 
-void TYVStringBehaviorTest(){
+void TYVStringBehaviorTest() {
     char name[] = "mama";
     TYVString *string = TYVStringCreate(name);
     assert(name == TYVStringGetData(string));
@@ -58,4 +60,5 @@ void TYVStringBehaviorTest(){
     assert(NULL == TYVStringGetData(string));
     
     TYVObjectRelease(string);
+    TYVObjectRelease(stringNULL);
 }
