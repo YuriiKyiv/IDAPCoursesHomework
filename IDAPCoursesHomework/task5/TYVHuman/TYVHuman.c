@@ -233,6 +233,18 @@ void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child) {
         return;
     }
     
+    TYVArrayList *array = TYVHumanGetArray(human);
+    
+    if (NULL == array || !TYVArrayListContainsItem(array, (TYVObject *)child)){
+        return;
+    }
+    
+    if (TYVMale == TYVHumanGetGender(human)){
+        TYVHumanSetFather(child, NULL);
+    } else {
+        TYVHumanSetMother(child, NULL);
+    }
+    
     TYVArrayListRemoveItem(TYVHumanGetArray(human), (TYVObject *)child);
 }
 
