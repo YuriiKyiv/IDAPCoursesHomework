@@ -272,7 +272,7 @@ void TYVHumanSetArray(TYVHuman *human, TYVArrayList *array) {
     TYVPropSetRetain(&human->_childrenArray, array);
 }
 
-void TYVHumanRemoveConnectionChildToParent(TYVHuman *human) {
+void TYVHumanRemoveAllChildren(TYVHuman *human) {
     if (NULL == human || TYVHumanGetArray(human)) {
         return;
     }
@@ -280,7 +280,6 @@ void TYVHumanRemoveConnectionChildToParent(TYVHuman *human) {
     TYVArrayList *array = TYVHumanGetArray(human);
     uint64_t count = TYVArrayListGetCount(array);
     for (uint64_t iter = 0; iter < count; iter++) {
-        TYVHuman *child = (TYVHuman*)TYVArrayListGetItemAtIndex(array, iter);
-        TYVHumanSetParent(child, NULL);
+        TYVHumanRemoveChild(human, (TYVHuman *)TYVArrayListGetItemAtIndex(array, iter));
     }
 }
