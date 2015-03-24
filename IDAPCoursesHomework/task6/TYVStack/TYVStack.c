@@ -36,8 +36,20 @@ void __TYVStackDeallocate(TYVStack *stack){
     __TYVObjectDeallocate(stack);
 }
 
-extern
-void TYVStackPushItem(TYVStack *stack, TYVObject *data);
+void TYVStackPushItem(TYVStack *stack, TYVObject *item){
+    if (NULL == stack) {
+        return;
+    }
+    
+    if (TYVStackIsFull(stack)){
+        return;
+    }
+    
+    TYVObject **head = stack->_data + stack->_count;
+    *head = item;
+    stack->_count++;
+}
+
 
 extern
 TYVObject *TYVStackPopItem(TYVStack *stack);
@@ -59,6 +71,7 @@ void TYVStackSetSize(TYVStack *stack, size_t size) {
     }
     
     if (0 == size && NULL != stack->_data) {
+        //Pop all elements
         free(stack->_data);
     }
     
@@ -67,10 +80,10 @@ void TYVStackSetSize(TYVStack *stack, size_t size) {
         // make pop while count != size
     }
     
-    stack->_data = calloc(stack->_size, sizeof(*stack->_data));
+    stack->_data = realloc(stack->_data, size * sizeof(*stack->_data));
     
     if (stack->_size < size) {
-        // check pointer and size
+        // check pointer and size in memset
         memset(stack->_data + size, 0, stack->_size - size);
     }
     

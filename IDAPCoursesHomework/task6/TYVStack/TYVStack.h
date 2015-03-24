@@ -30,7 +30,7 @@ extern
 void __TYVStackDeallocate(TYVStack *stack);
 
 extern
-void TYVStackPushItem(TYVStack *stack, TYVObject *data);
+void TYVStackPushItem(TYVStack *stack, TYVObject *item);
 
 extern
 TYVObject *TYVStackPopItem(TYVStack *stack);
