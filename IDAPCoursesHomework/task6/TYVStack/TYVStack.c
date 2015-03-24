@@ -60,7 +60,9 @@ TYVObject *TYVStackPopItem(TYVStack *stack) {
     }
     
     TYVObject **head = stack->_data + stack->_count - 1;
-    TYVObjectRelease(*head);
+    if (NULL != *head) {
+        TYVObjectRelease(*head);
+    }
     stack->_count--;
     
     // if needed ?
