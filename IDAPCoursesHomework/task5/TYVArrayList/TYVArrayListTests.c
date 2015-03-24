@@ -117,26 +117,26 @@ void TYVArrayListResizeTest(){
     TYVObjectRelease(array);
 }
 
-//  after creating array with size = 0
-//      count = 0
+//  after creating array with size equls 0
+//      count equls 0
 //      array doesnt contain any objects
-//      get item at index = NULL
-//      get index of object = 0
+//      get item at index return NULL
+//      get index of object equls 0
 //          after adding TYVObject object1
-//                count = 1
+//                count equls 1
 //                array contains object1
-//                get index of object1 = 0
-//                get item at 1 = object1
+//                get index of object1 equls 0
+//                get item at zero index equls object1
 //                      after adding TYVObject object2
-//                          count = 2
+//                          count equls 2
 //                          array contains object2
-//                          get index of object2 = 1
-//                          get item at 2 = object2
-//                              after removing item at 0
-//                                  count = 1
-//                                  get item at 0 = object2
+//                          get index of object2 equals 1
+//                          get item at first index equls object2
+//                              after removing item at zero index
+//                                  count equls 1
+//                                  get item at zero index equls object2
 //                                  array doesnt contain object1
 //                                  array contains object2
 //                                      after removing all items
-//                                          count = 0
+//                                          count equls 0
 //                                          array doesnt contain any objects
