@@ -42,7 +42,7 @@ static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 
 static
-void TYVHumanRemoveConnectionChildToParent(TYVHuman *human);
+void TYVHumanRemoveAllChildren(TYVHuman *human);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -107,8 +107,6 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender) {
     }
     
     TYVHuman *child = TYVHumanCreate(name, 0, gender);
-    
-    TYVHumanSetParents(child, human);
     
     TYVHumanAddChild(human, child);
     TYVHumanAddChild(TYVHumanGetPartner(human), child);
@@ -179,7 +177,7 @@ void __TYVHumanDeallocate(TYVHuman *human){
     TYVHumanRemoveChild(TYVHumanGetMother(human), human);
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);
-    TYVHumanRemoveConnectionChildToParent(human);
+    TYVHumanRemoveAllChildren(human);
     TYVHumanSetArray(human, NULL);
     
     __TYVObjectDeallocate(human);
@@ -222,6 +220,8 @@ void TYVHumanAddChild(TYVHuman *human, TYVHuman *child) {
         return;
     }
     
+    TYVHumanSetParent(child, human);
+    
     TYVArrayList *array = TYVHumanGetArray(human);
     if (!TYVArrayListContainsItem(array, (TYVObject *)child)) {
         TYVArrayListAddItem(TYVHumanGetArray(human), (TYVObject *)child);
@@ -231,6 +231,18 @@ void TYVHumanAddChild(TYVHuman *human, TYVHuman *child) {
 void TYVHumanRemoveChild(TYVHuman *human, TYVHuman *child) {
     if (NULL == human || NULL == child){
         return;
+    }
+    
+    TYVArrayList *array = TYVHumanGetArray(human);
+    
+    if (NULL == array || !TYVArrayListContainsItem(array, (TYVObject *)child)){
+        return;
+    }
+    
+    if (TYVMale == TYVHumanGetGender(human)){
+        TYVHumanSetFather(child, NULL);
+    } else {
+        TYVHumanSetMother(child, NULL);
     }
     
     TYVArrayListRemoveItem(TYVHumanGetArray(human), (TYVObject *)child);
@@ -260,7 +272,7 @@ void TYVHumanSetArray(TYVHuman *human, TYVArrayList *array) {
     TYVPropSetRetain(&human->_childrenArray, array);
 }
 
-void TYVHumanRemoveConnectionChildToParent(TYVHuman *human) {
+void TYVHumanRemoveAllChildren(TYVHuman *human) {
     if (NULL == human || TYVHumanGetArray(human)) {
         return;
     }
@@ -268,7 +280,6 @@ void TYVHumanRemoveConnectionChildToParent(TYVHuman *human) {
     TYVArrayList *array = TYVHumanGetArray(human);
     uint64_t count = TYVArrayListGetCount(array);
     for (uint64_t iter = 0; iter < count; iter++) {
-        TYVHuman *child = (TYVHuman*)TYVArrayListGetItemAtIndex(array, iter);
-        TYVHumanSetParent(child, NULL);
+        TYVHumanRemoveChild(human, (TYVHuman *)TYVArrayListGetItemAtIndex(array, iter));
     }
 }
