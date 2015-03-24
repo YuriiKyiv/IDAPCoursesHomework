@@ -86,6 +86,7 @@ void TYVStackSetSize(TYVStack *stack, size_t size) {
     if (0 == size && NULL != stack->_data) {
         //Pop all elements
         free(stack->_data);
+        return;
     }
     
     if (stack->_size > size) {
@@ -97,7 +98,7 @@ void TYVStackSetSize(TYVStack *stack, size_t size) {
     
     if (stack->_size < size) {
         // check pointer and size in memset
-        memset(stack->_data + size, 0, stack->_size - size);
+        memset(stack->_data + stack->_size, 0, size - stack->_size);
     }
     
     stack->_size = size;

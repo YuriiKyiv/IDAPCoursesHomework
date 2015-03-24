@@ -17,6 +17,7 @@
 #include "TYVStringTests.h"
 #include "TYVHumanTests.h"
 #include "TYVArrayListTests.h"
+#include "TYVStackTest.h"
 
 #define TYVValueOutputGenerate(type, spec) \
     type TYVOutput_##type(type value) { \
@@ -100,7 +101,8 @@ void TYVTask4Perform(){
 
 inline
 void TYVTask5Perform(){
-    TYVStringTestsPerfom();
+    //TYVStringTestsPerfom();
     //TYVHumanTests();
     //TYVArrayListPerfomTests();
+    TYVStackTestPerfom();
 }

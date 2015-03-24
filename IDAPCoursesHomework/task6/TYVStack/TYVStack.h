@@ -27,6 +27,9 @@ extern
 TYVStack *TYVStackCreate();
 
 extern
+TYVStack *TYVStackCreateWithSize(size_t size);
+
+extern
 void __TYVStackDeallocate(TYVStack *stack);
 
 extern
