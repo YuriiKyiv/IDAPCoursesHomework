@@ -26,6 +26,8 @@ void TYVStringCreateTest(){
     char *data = TYVStringGetData(string);
     printf("%s\n", data);
     assert(*name == *data);
+    
+    TYVObjectRelease(string);
 }
 
 //after creating a string with "mama"
@@ -58,4 +60,5 @@ void TYVStringBehaviorTest(){
     assert(NULL == TYVStringGetData(string));
     
     TYVObjectRelease(string);
+    TYVObjectRelease(stringNULL);
 }
