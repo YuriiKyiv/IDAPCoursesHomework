@@ -42,7 +42,7 @@ static
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner);
 
 static
-void TYVHumanRemoveConnectionChildToParent(TYVHuman *human);
+void TYVHumanRemoveAllChildren(TYVHuman *human);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -107,8 +107,6 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender) {
     }
     
     TYVHuman *child = TYVHumanCreate(name, 0, gender);
-    
-    TYVHumanSetParents(child, human);
     
     TYVHumanAddChild(human, child);
     TYVHumanAddChild(TYVHumanGetPartner(human), child);
@@ -179,7 +177,7 @@ void __TYVHumanDeallocate(TYVHuman *human){
     TYVHumanRemoveChild(TYVHumanGetMother(human), human);
     TYVHumanSetFather(human, NULL);
     TYVHumanSetMother(human, NULL);
-    TYVHumanRemoveConnectionChildToParent(human);
+    TYVHumanRemoveAllChildren(human);
     TYVHumanSetArray(human, NULL);
     
     __TYVObjectDeallocate(human);
@@ -221,6 +219,8 @@ void TYVHumanAddChild(TYVHuman *human, TYVHuman *child) {
     if (NULL == human || NULL == child){
         return;
     }
+    
+    TYVHumanSetParent(child, human);
     
     TYVArrayList *array = TYVHumanGetArray(human);
     if (!TYVArrayListContainsItem(array, (TYVObject *)child)) {
