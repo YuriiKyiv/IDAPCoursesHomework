@@ -93,11 +93,11 @@ void TYVArrayListRemoveItemAtIndex(TYVArrayList *array, uint64_t index) {
     uint64_t lastIndex = TYVArrayListGetCount(array) - 1;
     
     if (index == lastIndex) {
-        TYVPropSetRetain(&array->_data[index], NULL);
+        TYVPropertySetRetain(&array->_data[index], NULL);
     }else {
-        TYVPropSetRetain(&array->_data[index], NULL);
-        TYVPropSetAssign(&array->_data[index], array->_data[lastIndex]);
-        TYVPropSetAssign(&array->_data[lastIndex], NULL);
+        TYVPropertySetRetain(&array->_data[index], NULL);
+        TYVPropertySetAssign(&array->_data[index], array->_data[lastIndex]);
+        TYVPropertySetAssign(&array->_data[lastIndex], NULL);
     }
     
     array->_count--;
@@ -183,7 +183,7 @@ void TYVArrayListSetItemAtIndex(TYVArrayList *array, uint64_t index, TYVObject *
         return;
     }
 
-    TYVPropSetRetain(&array->_data[index], item);
+    TYVPropertySetRetain(&array->_data[index], item);
 }
 
 TYVObject *TYVArrayListGetItemAtIndex(TYVArrayList *array, uint64_t index) {

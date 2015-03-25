@@ -11,14 +11,16 @@
 
 #include <stdio.h>
 
+extern
 void TYVPropertySetRetain(void **field, void *value);
 
-#define TYVPropSetRetain(field, value) \
+#define TYVPropertySetRetain(field, value) \
 TYVPropertySetRetain((void **)field, value);
 
+extern
 void TYVPropertySetAssign(void **field, void *value);
 
-#define TYVPropSetAssign(field, value) \
+#define TYVPropertySetAssign(field, value) \
 TYVPropertySetAssign((void **)field, value);
 
 #endif /* defined(__IDAPCoursesHomework__TYVPropertySetters__) */
