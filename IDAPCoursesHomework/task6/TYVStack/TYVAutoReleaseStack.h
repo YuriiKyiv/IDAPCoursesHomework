@@ -13,6 +13,12 @@
 #include "TYVObject.h"
 #include <stdbool.h>
 
+enum TYVAutoReleaseStackPopType {
+    TYVAutoReleaseStackPopNULL,
+    TYVAutoReleaseStackPopObject
+};
+typedef enum TYVAutoReleaseStackPopType TYVAutoReleaseStackPopType;
+
 typedef struct TYVAutoReleaseStack TYVAutoReleaseStack;
 struct TYVAutoReleaseStack {
     TYVObject _super;
@@ -36,7 +42,7 @@ extern
 void TYVAutoReleaseStackPushItem(TYVAutoReleaseStack *stack, TYVObject *item);
 
 extern
-void TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack);
+TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack);
 
 extern
 void TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack);
