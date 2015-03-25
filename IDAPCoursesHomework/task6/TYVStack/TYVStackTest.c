@@ -7,7 +7,7 @@
 //
 
 #include "TYVStackTest.h"
-#include "TYVStack.h"
+#include "TYVAutoReleaseStack.h"
 #include <assert.h>
 
 void TYVStackCreateTest();
@@ -24,8 +24,8 @@ void TYVStackTestPerfom(){
 }
 
 void TYVStackCreateTest(){
-    TYVStack *stack = TYVStackCreateWithSize(100);
-    assert(TYVStackIsEmpty(stack));
+    TYVAutoReleaseStack *stack = TYVAutoReleaseStackCreateWithSize(100);
+    assert(TYVAutoReleaseStackIsEmpty(stack));
     assert(100 == stack->_size);
     assert(0 == stack->_count);
     
@@ -33,10 +33,10 @@ void TYVStackCreateTest(){
 }
 
 void TYVStackPopTest(){
-    TYVStack *stack = TYVStackCreateWithSize(100);
+    TYVAutoReleaseStack *stack = TYVAutoReleaseStackCreateWithSize(100);
     TYVObject *object = TYVObjectCreate(TYVObject);
-    TYVStackPushItem(stack, object);
-    assert(!TYVStackIsEmpty(stack));
+    TYVAutoReleaseStackPushItem(stack, object);
+    assert(!TYVAutoReleaseStackIsEmpty(stack));
     assert(1 == stack->_count);
 
     TYVObjectRelease(object);
@@ -45,27 +45,29 @@ void TYVStackPopTest(){
 
 
 void TYVStackPushTest(){
-    TYVStack *stack = TYVStackCreateWithSize(100);
+    TYVAutoReleaseStack *stack = TYVAutoReleaseStackCreateWithSize(100);
     TYVObject *object = TYVObjectCreate(TYVObject);
     TYVObjectRetain(stack);
-    TYVStackPushItem(stack, object);
+    TYVAutoReleaseStackPushItem(stack, object);
     assert(1 == stack->_count);
     
-    TYVObject *popObject = TYVStackPopItem(stack);
+    TYVObject *popObject = TYVAutoReleaseStackPopItem(stack);
     assert(popObject == object);
-    assert(TYVStackIsEmpty(stack));
+    assert(TYVAutoReleaseStackIsEmpty(stack));
     
     TYVObjectRelease(object);
     TYVObjectRelease(stack);
 }
 
 void TYVStackIsFullTest(){
-    TYVStack *stack = TYVStackCreateWithSize(100);
-    while (!TYVStackIsFull(stack)) {
+    TYVAutoReleaseStack *stack = TYVAutoReleaseStackCreateWithSize(100);
+    while (!TYVAutoReleaseStackIsFull(stack)) {
         TYVObject *object = TYVObjectCreate(TYVObject);
-        TYVStackPushItem(stack, object);
+        TYVAutoReleaseStackPushItem(stack, object);
     }
     assert(100 == stack->_count);
     
-    //Release
+    while (!TYVAutoReleaseStackIsEmpty(stack)) {
+        TYVAutoReleaseStackPopItem(stack);
+    }
 }
