@@ -118,7 +118,7 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string) {
         return;
     }
 
-    TYVPropSetRetain(&human->_name, string);
+    TYVPropertySetRetain(&human->_name, string);
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human) {
@@ -185,9 +185,9 @@ void __TYVHumanDeallocate(TYVHuman *human){
 
 void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner) {
     if (TYVHumanGetGender(human) == TYVMale) {
-        TYVPropSetRetain(&human->_partner, partner);
+        TYVPropertySetRetain(&human->_partner, partner);
     } else {
-        TYVPropSetAssign(&human->_partner, partner);
+        TYVPropertySetAssign(&human->_partner, partner);
     }
 }
 
@@ -241,7 +241,7 @@ void TYVHumanSetMother(TYVHuman *human, TYVHuman *mother) {
         return;
     }
     
-    TYVPropSetAssign(&human->_mother, mother);
+    TYVPropertySetAssign(&human->_mother, mother);
 }
 
 void TYVHumanSetFather(TYVHuman *human, TYVHuman *father) {
@@ -249,7 +249,7 @@ void TYVHumanSetFather(TYVHuman *human, TYVHuman *father) {
         return;
     }
     
-    TYVPropSetAssign(&human->_father, father);
+    TYVPropertySetAssign(&human->_father, father);
 }
 
 void TYVHumanSetArray(TYVHuman *human, TYVArrayList *array) {
@@ -257,7 +257,7 @@ void TYVHumanSetArray(TYVHuman *human, TYVArrayList *array) {
         return;
     }
     
-    TYVPropSetRetain(&human->_childrenArray, array);
+    TYVPropertySetRetain(&human->_childrenArray, array);
 }
 
 void TYVHumanRemoveAllChildren(TYVHuman *human) {
