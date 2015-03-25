@@ -279,7 +279,7 @@ void TYVHumanRemoveAllChildren(TYVHuman *human) {
     
     TYVArrayList *array = TYVHumanGetArray(human);
     uint64_t count = TYVArrayListGetCount(array);
-    for (uint64_t iter = 0; iter < count; iter++) {
-        TYVHumanRemoveChild(human, (TYVHuman *)TYVArrayListGetItemAtIndex(array, iter));
+    for (uint64_t iter = count; iter > 0; iter--) {
+        TYVHumanRemoveChild(human, (TYVHuman *)TYVArrayListGetItemAtIndex(array, iter - 1));
     }
 }
