@@ -121,7 +121,7 @@ void TYVAutoReleaseStackSetSize(TYVAutoReleaseStack *stack, size_t size) {
     }
     
     if (0 == size && NULL != stack->_data) {
-        //Pop all elements
+        TYVAutoReleaseStackPopAllItem(stack);
         free(stack->_data);
         stack->_data = NULL;
         stack->_count = 0;
@@ -132,12 +132,15 @@ void TYVAutoReleaseStackSetSize(TYVAutoReleaseStack *stack, size_t size) {
     if (stack->_size > size) {
         // release object which which are between size and stack->_size
         // make pop while count != size
+        // or write to use TYVRange
+        while (stack->_count != stack->_size){
+            TYVAutoReleaseStackPopItem(stack);
+        }
     }
     
     stack->_data = realloc(stack->_data, size * sizeof(*stack->_data));
     
     if (stack->_size < size) {
-        // check pointer and size in memset
         memset(stack->_data + stack->_size, 0, size - stack->_size);
     }
     
