@@ -51,22 +51,24 @@ void TYVAutoReleaseStackPushItem(TYVAutoReleaseStack *stack, TYVObject *item) {
 }
 
 TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack) {
+    TYVAutoReleaseStackPopType result = TYVAutoReleaseStackPopNULL;
     if (NULL == stack) {
-        return TYVAutoReleaseStackPopNULL;
+        return result;
     }
     
     if (TYVAutoReleaseStackIsEmpty(stack)){
-        return TYVAutoReleaseStackPopNULL;
+        return result;
     }
     
     TYVObject **head = stack->_data + stack->_count - 1;
     if (NULL != *head) {
         TYVObjectRelease(*head);
-        stack->_count--;
-        return TYVAutoReleaseStackPopObject;
+        result = TYVAutoReleaseStackPopObject;
     }
     
-    return TYVAutoReleaseStackPopNULL;
+     stack->_count--;
+    
+    return result;
     
 }
 
