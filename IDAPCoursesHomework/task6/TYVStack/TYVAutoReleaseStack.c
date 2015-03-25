@@ -21,9 +21,7 @@ TYVObject **TYVAutoReleaseStackGetHead(TYVAutoReleaseStack *stack);
 #pragma mark Public Implementations
 
 TYVAutoReleaseStack *TYVAutoReleaseStackCreate(){
-    TYVAutoReleaseStack *stack = TYVObjectCreate(TYVAutoReleaseStack);
-    
-    return stack;
+    return TYVAutoReleaseStackCreate(0);
 }
 
 TYVAutoReleaseStack *TYVAutoReleaseStackCreateWithSize(size_t size) {
