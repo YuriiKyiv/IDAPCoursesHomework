@@ -47,8 +47,8 @@ void TYVAutoReleaseStackPushItem(TYVAutoReleaseStack *stack, TYVObject *item) {
         return;
     }
     
-    TYVObject **head = stack->_data + stack->_count;
-    *head = item;
+    TYVObject **newHead = TYVAutoReleaseStackGetHead(stack) + 1;
+    *newHead = item;
     stack->_count++;
 }
 
@@ -62,7 +62,7 @@ TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack
         return result;
     }
     
-    TYVObject **head = stack->_data + stack->_count - 1;
+    TYVObject **head = TYVAutoReleaseStackGetHead(stack);
     if (NULL != *head) {
         TYVObjectRelease(*head);
         result = TYVAutoReleaseStackPopObject;
