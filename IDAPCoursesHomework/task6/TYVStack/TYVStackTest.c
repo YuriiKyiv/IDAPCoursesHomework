@@ -32,7 +32,7 @@ void TYVStackCreateTest(){
     TYVObjectRelease(stack);
 }
 
-void TYVStackPopTest(){
+void TYVStackPushTest(){
     TYVAutoReleaseStack *stack = TYVAutoReleaseStackCreateWithSize(100);
     TYVObject *object = TYVObjectCreate(TYVObject);
     TYVAutoReleaseStackPushItem(stack, object);
@@ -44,15 +44,15 @@ void TYVStackPopTest(){
 }
 
 
-void TYVStackPushTest(){
+void TYVStackPopTest(){
     TYVAutoReleaseStack *stack = TYVAutoReleaseStackCreateWithSize(100);
     TYVObject *object = TYVObjectCreate(TYVObject);
     TYVObjectRetain(stack);
     TYVAutoReleaseStackPushItem(stack, object);
     assert(1 == stack->_count);
     
-    TYVObject *popObject = TYVAutoReleaseStackPopItem(stack);
-    assert(popObject == object);
+    TYVAutoReleaseStackPopType popObject = TYVAutoReleaseStackPopItem(stack);
+    assert(popObject == TYVAutoReleaseStackPopObject);
     assert(TYVAutoReleaseStackIsEmpty(stack));
     
     TYVObjectRelease(object);

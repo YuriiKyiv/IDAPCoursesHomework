@@ -62,6 +62,7 @@ TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack
     TYVObject **head = stack->_data + stack->_count - 1;
     if (NULL != *head) {
         TYVObjectRelease(*head);
+        stack->_count--;
         return TYVAutoReleaseStackPopObject;
     }
     
