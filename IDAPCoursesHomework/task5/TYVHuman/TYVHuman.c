@@ -33,9 +33,6 @@ static
 void TYVHumanSetAge(TYVHuman *human, uint8_t age);
 
 static
-void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent);
-
-static
 void TYVHumanSetParent(TYVHuman *child, TYVHuman *parent);
 
 static
@@ -192,15 +189,6 @@ void TYVHumanSetPartner(TYVHuman *human, TYVHuman *partner) {
     } else {
         TYVPropSetAssign(&human->_partner, partner);
     }
-}
-
-void TYVHumanSetParents(TYVHuman *child, TYVHuman *parent) {
-    if (NULL == child || NULL == parent){
-        return;
-    }
-    
-    TYVHumanSetParent(child, parent);
-    TYVHumanSetParent(child, TYVHumanGetPartner(parent));
 }
 
 void TYVHumanSetParent(TYVHuman *child, TYVHuman *parent) {
