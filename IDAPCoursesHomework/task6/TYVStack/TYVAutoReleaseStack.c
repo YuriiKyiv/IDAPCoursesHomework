@@ -50,23 +50,21 @@ void TYVAutoReleaseStackPushItem(TYVAutoReleaseStack *stack, TYVObject *item) {
     stack->_count++;
 }
 
-TYVObject *TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack) {
+void TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack) {
     if (NULL == stack) {
-        return NULL;
+        return;
     }
     
     if (TYVAutoReleaseStackIsEmpty(stack)){
-        return NULL;
+        return;
     }
     
     TYVObject **head = stack->_data + stack->_count - 1;
     if (NULL != *head) {
         TYVObjectRelease(*head);
     }
-    stack->_count--;
     
-    // if needed ?
-    return *head;
+    stack->_count--;
 }
 
 bool TYVAutoReleaseStackIsFull(TYVAutoReleaseStack *stack) {
@@ -88,6 +86,9 @@ void TYVAutoReleaseStackSetSize(TYVAutoReleaseStack *stack, size_t size) {
     if (0 == size && NULL != stack->_data) {
         //Pop all elements
         free(stack->_data);
+        stack->_data = NULL;
+        stack->_count = 0;
+        stack->_size = 0;
         return;
     }
     
