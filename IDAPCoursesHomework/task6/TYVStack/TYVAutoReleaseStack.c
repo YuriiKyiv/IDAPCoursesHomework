@@ -15,6 +15,8 @@
 
 void TYVAutoReleaseStackSetSize(TYVAutoReleaseStack *stack, size_t size);
 
+TYVObject **TYVAutoReleaseStackGetHead(TYVAutoReleaseStack *stack);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -104,6 +106,14 @@ bool TYVAutoReleaseStackIsEmpty(TYVAutoReleaseStack *stack) {
 
 #pragma mark -
 #pragma mark Private Implementations
+
+TYVObject **TYVAutoReleaseStackGetHead(TYVAutoReleaseStack *stack) {
+    if (NULL == stack) {
+        return NULL;
+    }
+    
+    return stack->_data + stack->_count - 1;
+}
 
 void TYVAutoReleaseStackSetSize(TYVAutoReleaseStack *stack, size_t size) {
     if (NULL == stack || stack->_size == size) {
