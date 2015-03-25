@@ -56,4 +56,7 @@ bool TYVAutoReleaseStackIsFull(TYVAutoReleaseStack *stack);
 extern
 bool TYVAutoReleaseStackIsEmpty(TYVAutoReleaseStack *stack);
 
+extern
+uint64_t TYVAutoReleaseStackGetCount(TYVAutoReleaseStack *stack);
+
 #endif /* defined(__IDAPCoursesHomework__TYVAutoReleaseStack__) */

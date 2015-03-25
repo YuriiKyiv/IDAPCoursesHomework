@@ -36,6 +36,10 @@ void __TYVAutoReleaseStackDeallocate(TYVAutoReleaseStack *stack) {
     __TYVObjectDeallocate(stack);
 }
 
+uint64_t TYVAutoReleaseStackGetCount(TYVAutoReleaseStack *stack){
+    return stack->_count;
+}
+
 void TYVAutoReleaseStackPushItem(TYVAutoReleaseStack *stack, TYVObject *item) {
     if (NULL == stack) {
         return;
