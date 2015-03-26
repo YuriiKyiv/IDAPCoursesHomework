@@ -9,6 +9,7 @@
 #include "TYVAutoReleaseStack.h"
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -20,11 +21,8 @@ TYVObject **TYVAutoReleaseStackGetHead(TYVAutoReleaseStack *stack);
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVAutoReleaseStack *TYVAutoReleaseStackCreate(){
-    return TYVAutoReleaseStackCreate(0);
-}
-
 TYVAutoReleaseStack *TYVAutoReleaseStackCreateWithSize(size_t size) {
+    assert(0 != size);
     TYVAutoReleaseStack *stack = TYVObjectCreate(TYVAutoReleaseStack);
     TYVAutoReleaseStackSetSize(stack, size);
     
@@ -76,19 +74,21 @@ TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack
     
 }
 
-void TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack) {
+TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack) {
     if (NULL == stack) {
-        return;
+        return TYVAutoReleaseStackPopNULL;
+    }
+
+    while (TYVAutoReleaseStackPopObject == TYVAutoReleaseStackPopItem(stack)) {
+        if (TYVAutoReleaseStackIsEmpty(stack)) {
+            return TYVAutoReleaseStackPopObject;
+        }
     }
     
-    while (!TYVAutoReleaseStackIsEmpty(stack)
-           || (TYVAutoReleaseStackPopObject == TYVAutoReleaseStackPopItem(stack)))
-    {
-        
-    }
+    return TYVAutoReleaseStackPopNULL;
 }
 
-void TYVAutoReleaseStackPopAllItem(TYVAutoReleaseStack *stack) {
+void TYVAutoReleaseStackPopAllItems(TYVAutoReleaseStack *stack) {
     if (NULL == stack) {
         return;
     }
@@ -99,11 +99,11 @@ void TYVAutoReleaseStackPopAllItem(TYVAutoReleaseStack *stack) {
 }
 
 bool TYVAutoReleaseStackIsFull(TYVAutoReleaseStack *stack) {
-    return (NULL != stack) ? stack->_size == stack->_count : false;
+    return ((NULL != stack) && (stack->_size == stack->_count));
 }
 
 bool TYVAutoReleaseStackIsEmpty(TYVAutoReleaseStack *stack) {
-    return (NULL != stack) ? 0 == stack->_count : false;
+    return ((NULL != stack) && (0 == stack->_count));
 }
 
 #pragma mark -
@@ -123,27 +123,12 @@ void TYVAutoReleaseStackSetSize(TYVAutoReleaseStack *stack, size_t size) {
     }
     
     if (0 == size && NULL != stack->_data) {
-        TYVAutoReleaseStackPopAllItem(stack);
+        TYVAutoReleaseStackPopAllItems(stack);
         free(stack->_data);
         stack->_data = NULL;
-        stack->_count = 0;
-        stack->_size = 0;
-        return;
-    }
-    
-    if (stack->_size > size) {
-        // release object which which are between size and stack->_size
-        // make pop while count != size
-        // or write to use TYVRange
-        while (stack->_count != stack->_size){
-            TYVAutoReleaseStackPopItem(stack);
-        }
-    }
-    
-    stack->_data = realloc(stack->_data, size * sizeof(*stack->_data));
-    
-    if (stack->_size < size) {
-        memset(stack->_data + stack->_size, 0, size - stack->_size);
+    } else {
+        stack->_data = calloc(size, sizeof(*stack->_data));
+        assert(NULL != stack->_data);
     }
     
     stack->_size = size;

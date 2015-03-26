@@ -30,9 +30,6 @@ struct TYVAutoReleaseStack {
 };
 
 extern
-TYVAutoReleaseStack *TYVStackCreate();
-
-extern
 TYVAutoReleaseStack *TYVAutoReleaseStackCreateWithSize(size_t size);
 
 extern
@@ -45,10 +42,10 @@ extern
 TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack);
 
 extern
-void TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack);
+TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack);
 
 extern
-void TYVAutoReleaseStackPopAllItem(TYVAutoReleaseStack *stack);
+void TYVAutoReleaseStackPopAllItems(TYVAutoReleaseStack *stack);
 
 extern
 bool TYVAutoReleaseStackIsFull(TYVAutoReleaseStack *stack);
