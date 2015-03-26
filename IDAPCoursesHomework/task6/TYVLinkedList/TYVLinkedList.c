@@ -39,6 +39,7 @@ void TYVLinkedListAddObject(TYVLinkedList *list, TYVObject *object) {
     TYVLinkedListSetRootNode(list, newNode);
     
     list->_count++;
+    list->_mutationCount++;
     
     TYVObjectRelease(newNode);
     

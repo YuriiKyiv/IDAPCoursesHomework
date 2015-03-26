@@ -13,12 +13,12 @@ void TYVPropertySetRetain(void **field, void *value) {
         return;
     }
     
-    if (NULL != *field){
-        TYVObjectRelease(*field);
-    }
-    
     if (NULL != value){
         TYVObjectRetain(value);
+    }
+    
+    if (NULL != *field){
+        TYVObjectRelease(*field);
     }
     
     *field = value;
