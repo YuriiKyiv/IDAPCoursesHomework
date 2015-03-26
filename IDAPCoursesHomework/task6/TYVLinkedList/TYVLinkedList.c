@@ -44,8 +44,11 @@ void TYVLinkedListAddObject(TYVLinkedList *list, TYVObject *object) {
     
 }
 
-extern
-void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object);
+void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
+    if (NULL == list || NULL == object) {
+        return;
+    }
+}
 
 extern
 void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
@@ -59,11 +62,13 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
 extern
 void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
 
-extern
-TYVLinkedListNode *TYVLinkedListGetFirstObject(TYVLinkedList *list);
+TYVLinkedListNode *TYVLinkedListGetFirstObject(TYVLinkedList *list) {
+    return (NULL != list) ? (TYVLinkedListNode *)TYVLinkedListNodeGetObject(TYVLinkedListGetRootNode(list)) : NULL;
+}
 
-extern
-uint64_t TYVLinkedListGetCount(TYVLinkedList *list);
+uint64_t TYVLinkedListGetCount(TYVLinkedList *list) {
+    return (NULL != list) ? list->_count : 0;
+}
 
 #pragma mark -
 #pragma mark Private Implementations
