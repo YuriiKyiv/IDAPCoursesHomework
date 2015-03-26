@@ -123,8 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				5A302C901AC17D4900E784ED /* TYVStack */,
-				5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */,
-				5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */,
+				5A45A7E31AC427DA007FAB8F /* TYVLinkedListNode */,
 			);
 			name = task6;
 			sourceTree = "<group>";
@@ -138,6 +137,15 @@
 				5AF30FB81AC2CE10000D40E9 /* TYVAutoReleaseStack.h */,
 			);
 			name = TYVStack;
+			sourceTree = "<group>";
+		};
+		5A45A7E31AC427DA007FAB8F /* TYVLinkedListNode */ = {
+			isa = PBXGroup;
+			children = (
+				5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */,
+				5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */,
+			);
+			name = TYVLinkedListNode;
 			sourceTree = "<group>";
 		};
 		5A51A9C81AA095F9003CC905 /* TYVObject */ = {

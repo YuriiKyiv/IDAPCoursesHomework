@@ -7,6 +7,7 @@
 //
 
 #include "TYVLinkedListNode.h"
+#include "TYVPropertySetters.h"
 
 TYVLinkedListNode *TYVLinkedListNodeCreate(TYVObject *object) {
     TYVLinkedListNode *node = TYVObjectCreate(TYVLinkedListNode);
@@ -15,20 +16,36 @@ TYVLinkedListNode *TYVLinkedListNodeCreate(TYVObject *object) {
 }
 
 void __TYVLinkedListNodeDeallocate(TYVLinkedListNode *node) {
+    if (NULL == node) {
+        return;
+    }
+    
     TYVLinkedListNodeSetObject(node, NULL);
     TYVLinkedListNodeSetNextNode(node, NULL);
     
     __TYVObjectDeallocate(node);
 }
 
-extern
-void TYVLinkedListNodeSetNextNode(TYVLinkedListNode *node, TYVLinkedListNode *nextNode);
+void TYVLinkedListNodeSetNextNode(TYVLinkedListNode *node, TYVLinkedListNode *nextNode) {
+    if (NULL == node || node->_nextNode == nextNode) {
+        return;
+    }
+    
+    TYVPropertySetRetain(node->_nextNode, nextNode);
+}
 
-extern
-TYVLinkedListNode *TYVLinkedListNodeGetNextNode(TYVLinkedListNode *node);
+TYVLinkedListNode *TYVLinkedListNodeGetNextNode(TYVLinkedListNode *node) {
+    return (NULL != node) ? node->_nextNode : NULL;
+}
 
-extern
-void TYVLinkedListNodeSetObject(TYVLinkedListNode *node, TYVObject *object);
+void TYVLinkedListNodeSetObject(TYVLinkedListNode *node, TYVObject *object) {
+    if (NULL == node || node->_object == object) {
+        return;
+    }
+    
+    TYVPropertySetRetain(node->_object, object);
+}
 
-extern
-TYVObject *TYVLinkedListNodeGetNextNode(TYVLinkedListNode *node);
+TYVObject *TYVLinkedListNodeGetObject(TYVLinkedListNode *node) {
+    return (NULL != node) ? node->_object : NULL;
+}
