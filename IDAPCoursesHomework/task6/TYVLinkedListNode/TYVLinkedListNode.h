@@ -24,6 +24,12 @@ extern
 TYVLinkedListNode *TYVLinkedListNodeCreate(TYVObject *object);
 
 extern
+TYVLinkedListNode *TYVLinkedListNodeCreateWithObject(TYVObject *object);
+
+extern
+TYVLinkedListNode *TYVLinkedListNodeCreateWithObjectAndNextNode(TYVObject *object, TYVLinkedListNode *nextNode);
+
+extern
 void __TYVLinkedListNodeDeallocate(TYVLinkedListNode *node);
 
 extern

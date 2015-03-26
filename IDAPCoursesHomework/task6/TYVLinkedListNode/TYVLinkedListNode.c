@@ -9,9 +9,18 @@
 #include "TYVLinkedListNode.h"
 #include "TYVPropertySetters.h"
 
-TYVLinkedListNode *TYVLinkedListNodeCreate(TYVObject *object) {
+TYVLinkedListNode *TYVLinkedListNodeCreate() {
+    return TYVLinkedListNodeCreateWithObjectAndNextNode(NULL, NULL);
+}
+
+TYVLinkedListNode *TYVLinkedListNodeCreateWithObject(TYVObject *object) {
+    return TYVLinkedListNodeCreateWithObjectAndNextNode(object, NULL);
+}
+
+TYVLinkedListNode *TYVLinkedListNodeCreateWithObjectAndNextNode(TYVObject *object, TYVLinkedListNode *nextNode) {
     TYVLinkedListNode *node = TYVObjectCreate(TYVLinkedListNode);
     TYVLinkedListNodeSetObject(node, object);
+    TYVLinkedListNodeSetNextNode(node, nextNode);
     
     return node;
 }
