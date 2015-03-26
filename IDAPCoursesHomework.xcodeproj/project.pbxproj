@@ -10,6 +10,7 @@
 		5A2F2C861AB6F19C00BBF458 /* TYVPropertySetters.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A2F2C841AB6F19C00BBF458 /* TYVPropertySetters.c */; };
 		5A302C931AC193B400E784ED /* TYVStackTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A302C911AC193B400E784ED /* TYVStackTest.c */; };
 		5A45A7E21AC41FDF007FAB8F /* TYVLinkedListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */; };
+		5A45A7E61AC42B9A007FAB8F /* TYVLinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */; };
 		5A51A9C71AA095F3003CC905 /* TYVObject.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A51A9C51AA095F3003CC905 /* TYVObject.c */; };
 		5A5201DE1AB3259B00D2C6EE /* TYVUniversalSetters.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5201DC1AB3259B00D2C6EE /* TYVUniversalSetters.c */; };
 		5A5BF99B1AADF4AE00388CA8 /* TYVArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF9991AADF4AE00388CA8 /* TYVArrayList.c */; };
@@ -53,6 +54,8 @@
 		5A302C921AC193B400E784ED /* TYVStackTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVStackTest.h; path = task6/TYVStack/TYVStackTest.h; sourceTree = "<group>"; };
 		5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedListNode.c; path = task6/TYVLinkedListNode/TYVLinkedListNode.c; sourceTree = "<group>"; };
 		5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListNode.h; path = task6/TYVLinkedListNode/TYVLinkedListNode.h; sourceTree = "<group>"; };
+		5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedList.c; path = task6/TYVLinkedList/TYVLinkedList.c; sourceTree = "<group>"; };
+		5A45A7E51AC42B9A007FAB8F /* TYVLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedList.h; path = task6/TYVLinkedList/TYVLinkedList.h; sourceTree = "<group>"; };
 		5A51A9C51AA095F3003CC905 /* TYVObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVObject.c; path = TYVObject/TYVObject.c; sourceTree = "<group>"; };
 		5A51A9C61AA095F3003CC905 /* TYVObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVObject.h; path = TYVObject/TYVObject.h; sourceTree = "<group>"; };
 		5A5201DC1AB3259B00D2C6EE /* TYVUniversalSetters.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVUniversalSetters.c; path = TYVUniversalSetters/TYVUniversalSetters.c; sourceTree = "<group>"; };
@@ -123,8 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				5A302C901AC17D4900E784ED /* TYVStack */,
-				5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */,
-				5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */,
+				5A45A7E31AC427DA007FAB8F /* TYVLinkedListNode */,
+				5A45A7E71AC42B9F007FAB8F /* TYVLinkedList */,
 			);
 			name = task6;
 			sourceTree = "<group>";
@@ -138,6 +141,24 @@
 				5AF30FB81AC2CE10000D40E9 /* TYVAutoReleaseStack.h */,
 			);
 			name = TYVStack;
+			sourceTree = "<group>";
+		};
+		5A45A7E31AC427DA007FAB8F /* TYVLinkedListNode */ = {
+			isa = PBXGroup;
+			children = (
+				5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */,
+				5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */,
+			);
+			name = TYVLinkedListNode;
+			sourceTree = "<group>";
+		};
+		5A45A7E71AC42B9F007FAB8F /* TYVLinkedList */ = {
+			isa = PBXGroup;
+			children = (
+				5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */,
+				5A45A7E51AC42B9A007FAB8F /* TYVLinkedList.h */,
+			);
+			name = TYVLinkedList;
 			sourceTree = "<group>";
 		};
 		5A51A9C81AA095F9003CC905 /* TYVObject */ = {
@@ -373,6 +394,7 @@
 				5AFD2A181A9E0E98007EFFB5 /* TYVValueBitOutputTests.c in Sources */,
 				5A2F2C861AB6F19C00BBF458 /* TYVPropertySetters.c in Sources */,
 				5A51A9C71AA095F3003CC905 /* TYVObject.c in Sources */,
+				5A45A7E61AC42B9A007FAB8F /* TYVLinkedList.c in Sources */,
 				5AFD2A171A9E0E98007EFFB5 /* TYVValueBitOutput.c in Sources */,
 				5AFD2A151A9E0E98007EFFB5 /* TYVBitReverse.c in Sources */,
 				5AFD29FD1A9DE189007EFFB5 /* TYVMultiplesTests.c in Sources */,
