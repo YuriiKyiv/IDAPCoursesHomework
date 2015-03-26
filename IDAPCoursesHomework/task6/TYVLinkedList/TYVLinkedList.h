@@ -10,5 +10,48 @@
 #define __IDAPCoursesHomework__TYVLinkedList__
 
 #include <stdio.h>
+#include "TYVObject.h"
+
+typedef struct TYVLinkedListNode TYVLinkedListNode;
+
+typedef struct TYVLinkedList TYVLinkedList;
+struct TYVLinkedList {
+    TYVObject _super;
+    
+    TYVLinkedListNode *_rootNode;
+    
+    uint64_t _count;
+    uint64_t _mutationCount;
+};
+
+extern
+TYVLinkedList *TYVLinkedListCreate();
+
+extern
+void __TYVLinkedListDeallocate(TYVLinkedList *list);
+
+extern
+void TYVLinkedListAddObject(TYVLinkedList *list, TYVObject *object);
+
+extern
+void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object);
+
+extern
+void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
+
+extern
+void TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object);
+
+extern
+void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
+
+extern
+void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
+
+extern
+TYVLinkedListNode *TYVLinkedListGetFirstObject(TYVLinkedList *list);
+
+extern
+uint64_t TYVLinkedListGetCount(TYVLinkedList *list);
 
 #endif /* defined(__IDAPCoursesHomework__TYVLinkedList__) */

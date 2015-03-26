@@ -7,3 +7,13 @@
 //
 
 #include "TYVLinkedList.h"
+
+TYVLinkedList *TYVLinkedListCreate(){
+    return TYVObjectCreate(TYVLinkedList);
+}
+
+void __TYVLinkedListDeallocate(TYVLinkedList *list){
+    //add setters
+    
+    __TYVObjectDeallocate(list);
+}
