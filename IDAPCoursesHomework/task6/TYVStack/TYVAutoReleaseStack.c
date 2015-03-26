@@ -86,7 +86,7 @@ void TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack) {
     }
 }
 
-void TYVAutoReleaseStackPopAllItem(TYVAutoReleaseStack *stack) {
+void TYVAutoReleaseStackPopAllItems(TYVAutoReleaseStack *stack) {
     if (NULL == stack) {
         return;
     }
@@ -121,27 +121,12 @@ void TYVAutoReleaseStackSetSize(TYVAutoReleaseStack *stack, size_t size) {
     }
     
     if (0 == size && NULL != stack->_data) {
-        TYVAutoReleaseStackPopAllItem(stack);
+        TYVAutoReleaseStackPopAllItems(stack);
         free(stack->_data);
         stack->_data = NULL;
-        stack->_count = 0;
-        stack->_size = 0;
-        return;
-    }
-    
-    if (stack->_size > size) {
-        // release object which which are between size and stack->_size
-        // make pop while count != size
-        // or write to use TYVRange
-        while (stack->_count != stack->_size){
-            TYVAutoReleaseStackPopItem(stack);
-        }
-    }
-    
-    stack->_data = realloc(stack->_data, size * sizeof(*stack->_data));
-    
-    if (stack->_size < size) {
-        memset(stack->_data + stack->_size, 0, size - stack->_size);
+    } else {
+        stack->_data = calloc(size, sizeof(*stack->_data));
+        assert(NULL != stack->_data);
     }
     
     stack->_size = size;

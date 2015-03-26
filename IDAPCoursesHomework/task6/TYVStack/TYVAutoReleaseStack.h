@@ -45,7 +45,7 @@ extern
 void TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack);
 
 extern
-void TYVAutoReleaseStackPopAllItem(TYVAutoReleaseStack *stack);
+void TYVAutoReleaseStackPopAllItems(TYVAutoReleaseStack *stack);
 
 extern
 bool TYVAutoReleaseStackIsFull(TYVAutoReleaseStack *stack);
