@@ -8,11 +8,18 @@
 
 #include "TYVLinkedListNode.h"
 
-extern
-TYVLinkedListNode *TYVLinkedListNodeCreare(TYVObject *object);
+TYVLinkedListNode *TYVLinkedListNodeCreate(TYVObject *object) {
+    TYVLinkedListNode *node = TYVObjectCreate(TYVLinkedListNode);
+    TYVLinkedListNodeSetObject(node, object);
+    return node;
+}
 
-extern
-void __TYVLinkedListNodeDeallocate(TYVLinkedListNode *node);
+void __TYVLinkedListNodeDeallocate(TYVLinkedListNode *node) {
+    TYVLinkedListNodeSetObject(node, NULL);
+    TYVLinkedListNodeSetNextNode(node, NULL);
+    
+    __TYVObjectDeallocate(node);
+}
 
 extern
 void TYVLinkedListNodeSetNextNode(TYVLinkedListNode *node, TYVLinkedListNode *nextNode);

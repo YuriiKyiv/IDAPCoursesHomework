@@ -10,7 +10,7 @@
 #define __IDAPCoursesHomework__TYVLinkedListNode__
 
 #include <stdio.h>
-#include "TYVObject.h"
+#include <TYVObject.h>
 
 typedef struct TYVLinkedListNode TYVLinkedListNode;
 struct TYVLinkedListNode {
@@ -21,7 +21,7 @@ struct TYVLinkedListNode {
 };
 
 extern
-TYVLinkedListNode *TYVLinkedListNodeCreare(TYVObject *object);
+TYVLinkedListNode *TYVLinkedListNodeCreate(TYVObject *object);
 
 extern
 void __TYVLinkedListNodeDeallocate(TYVLinkedListNode *node);
