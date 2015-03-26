@@ -97,11 +97,11 @@ void TYVAutoReleaseStackPopAllItem(TYVAutoReleaseStack *stack) {
 }
 
 bool TYVAutoReleaseStackIsFull(TYVAutoReleaseStack *stack) {
-    return (NULL != stack) ? stack->_size == stack->_count : false;
+    return ((NULL != stack) && (stack->_size == stack->_count));
 }
 
 bool TYVAutoReleaseStackIsEmpty(TYVAutoReleaseStack *stack) {
-    return (NULL != stack) ? 0 == stack->_count : false;
+    return ((NULL != stack) && (0 == stack->_count));
 }
 
 #pragma mark -
