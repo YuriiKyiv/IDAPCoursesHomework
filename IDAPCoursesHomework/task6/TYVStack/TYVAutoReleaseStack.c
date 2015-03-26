@@ -9,6 +9,7 @@
 #include "TYVAutoReleaseStack.h"
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -20,11 +21,8 @@ TYVObject **TYVAutoReleaseStackGetHead(TYVAutoReleaseStack *stack);
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVAutoReleaseStack *TYVAutoReleaseStackCreate(){
-    return TYVAutoReleaseStackCreate(0);
-}
-
 TYVAutoReleaseStack *TYVAutoReleaseStackCreateWithSize(size_t size) {
+    assert(0 != size);
     TYVAutoReleaseStack *stack = TYVObjectCreate(TYVAutoReleaseStack);
     TYVAutoReleaseStackSetSize(stack, size);
     

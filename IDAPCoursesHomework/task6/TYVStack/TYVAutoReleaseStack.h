@@ -30,9 +30,6 @@ struct TYVAutoReleaseStack {
 };
 
 extern
-TYVAutoReleaseStack *TYVStackCreate();
-
-extern
 TYVAutoReleaseStack *TYVAutoReleaseStackCreateWithSize(size_t size);
 
 extern
