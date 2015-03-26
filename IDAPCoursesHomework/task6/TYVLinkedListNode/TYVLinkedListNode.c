@@ -12,6 +12,7 @@
 TYVLinkedListNode *TYVLinkedListNodeCreate(TYVObject *object) {
     TYVLinkedListNode *node = TYVObjectCreate(TYVLinkedListNode);
     TYVLinkedListNodeSetObject(node, object);
+    
     return node;
 }
 
