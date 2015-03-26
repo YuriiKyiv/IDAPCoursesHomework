@@ -74,16 +74,18 @@ TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack
     
 }
 
-void TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack) {
+TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack) {
     if (NULL == stack) {
-        return;
+        return TYVAutoReleaseStackPopNULL;
+    }
+
+    while (TYVAutoReleaseStackPopObject == TYVAutoReleaseStackPopItem(stack)) {
+        if (TYVAutoReleaseStackIsEmpty(stack)) {
+            return TYVAutoReleaseStackPopObject;
+        }
     }
     
-    while (!TYVAutoReleaseStackIsEmpty(stack)
-           || (TYVAutoReleaseStackPopObject == TYVAutoReleaseStackPopItem(stack)))
-    {
-        
-    }
+    return TYVAutoReleaseStackPopNULL;
 }
 
 void TYVAutoReleaseStackPopAllItems(TYVAutoReleaseStack *stack) {

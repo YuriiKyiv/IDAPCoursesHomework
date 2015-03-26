@@ -42,7 +42,7 @@ extern
 TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItem(TYVAutoReleaseStack *stack);
 
 extern
-void TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack);
+TYVAutoReleaseStackPopType TYVAutoReleaseStackPopItems(TYVAutoReleaseStack *stack);
 
 extern
 void TYVAutoReleaseStackPopAllItems(TYVAutoReleaseStack *stack);
