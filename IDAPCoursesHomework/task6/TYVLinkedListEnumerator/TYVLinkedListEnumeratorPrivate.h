@@ -16,9 +16,18 @@ extern
 void TYVLinkedListEnumeratorSetList(TYVLinkedListEnumerator *enumerator, TYVLinkedList *list);
 
 extern
+TYVLinkedList *TYVLinkedListEnumeratorGetList(TYVLinkedListEnumerator *enumerator);
+
+extern
 void TYVLinkedListEnumeratorSetNode(TYVLinkedListEnumerator *enumerator, TYVLinkedList *node);
 
 extern
 void TYVLinkedListEnumeratorSetMutationCount(TYVLinkedListEnumerator *enumerator, uint64_t mutationCount);
+
+extern
+uint64_t TYVLinkedListEnumeratorGetMutationCount(TYVLinkedListEnumerator *enumerator);
+
+extern
+bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator);
 
 #endif

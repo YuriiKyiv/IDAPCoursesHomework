@@ -22,6 +22,7 @@ TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreate(TYVLinkedList *list) {
     TYVLinkedListEnumerator *enumerator = TYVObjectCreate(TYVLinkedListEnumerator);
     TYVLinkedListEnumeratorSetList(enumerator, list);
     TYVLinkedListEnumeratorSetMutationCount(enumerator, TYVLinkedListGetMutationCount(list));
+    enumerator->_valid = true;
     
     return enumerator;
 }
@@ -34,15 +35,21 @@ void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator) {
 }
 
 TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator) {
-    if (NULL == enumerator || !TYVLinkedListEnumeratorIsValid(enumerator)) {
+    if (NULL == enumerator || !TYVLinkedListEnumeratorIsValid(enumerator) || !TYVLinkedListEnumeratorCheckMutation(enumerator)) {
         return NULL;
     }
     
-    enumerator->li
+    return NULL;
 }
 
 extern
-bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator);
+bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator) {
+    if (NULL == enumerator ||TYVLinkedListEnumeratorNextObject(enumerator) == NULL) {
+        return false;
+    }
+    
+    return true;
+}
 
 #pragma mark -
 #pragma mark Private Implementations
@@ -53,6 +60,10 @@ void TYVLinkedListEnumeratorSetList(TYVLinkedListEnumerator *enumerator, TYVLink
     }
     
     TYVPropertySetRetain(enumerator->_list, list);
+}
+
+TYVLinkedList *TYVLinkedListEnumeratorGetList(TYVLinkedListEnumerator *enumerator) {
+    return (NULL != enumerator) ? enumerator->_list : NULL;
 }
 
 void TYVLinkedListEnumeratorSetNode(TYVLinkedListEnumerator *enumerator, TYVLinkedList *node) {
@@ -69,4 +80,12 @@ void TYVLinkedListEnumeratorSetMutationCount(TYVLinkedListEnumerator *enumerator
     }
     
     enumerator->_mutationCount = mutationCount;
+}
+
+uint64_t TYVLinkedListEnumeratorGetMutationCount(TYVLinkedListEnumerator *enumerator) {
+    return (NULL != enumerator) ? enumerator->_mutationCount : 0;
+}
+
+bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator) {
+    return (NULL != enumerator) ? TYVLinkedListGetMutationCount(TYVLinkedListEnumeratorGetList(enumerator)) == TYVLinkedListEnumeratorGetMutationCount(enumerator) : false;
 }
