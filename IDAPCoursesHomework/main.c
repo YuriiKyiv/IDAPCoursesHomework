@@ -18,6 +18,7 @@
 #include "TYVHumanTests.h"
 #include "TYVArrayListTests.h"
 #include "TYVStackTest.h"
+#include "TYVLinkedListNodeTests.h"
 
 #define TYVValueOutputGenerate(type, spec) \
     type TYVOutput_##type(type value) { \
@@ -42,6 +43,8 @@ void TYVTask4Perform();
 
 void TYVTask5Perform();
 
+void TYVTask6Perfom();
+
 TYVValueOutputGenerate(int, d);
 TYVValueOutputGenerate(long, ld);
 TYVValueOutputGenerate(char, c);
@@ -58,13 +61,15 @@ int main(int argc, const char * argv[]) {
 //    
 //    TYVTask4Perform();
     
-    TYVTask5Perform();
+//    TYVTask5Perform();
+    
+    TYVTask6Perfom();
     
     return 0;
 }
 
 inline
-void TYVOutputMultiplesNumberLoop(int iter){
+void TYVOutputMultiplesNumberLoop(int iter) {
     for (int iter = 0; iter < iterations; iter++) {
         printf("Iteration: %d ", iter);
         TYVMultiplesOutputMessage(iter);
@@ -73,13 +78,13 @@ void TYVOutputMultiplesNumberLoop(int iter){
 }
 
 inline
-void TYVTask1Perform(){
+void TYVTask1Perform() {
     TYVOutputMultiplesNumberLoop(iterations);
     TYVMultiplesTests();
 }
 
 inline
-void TYVTask2Perform(){
+void TYVTask2Perform() {
     TYVOutputValue(int, 15)
     TYVOutputValue(long, 100500)
     TYVOutputValue(char,'c')
@@ -90,19 +95,24 @@ void TYVTask2Perform(){
 }
 
 inline
-void TYVTask3Perform(){
+void TYVTask3Perform() {
     TYVStuctureTestsRun();
 }
 
 inline
-void TYVTask4Perform(){
+void TYVTask4Perform() {
         TYVTests();
 }
 
 inline
-void TYVTask5Perform(){
+void TYVTask5Perform() {
     //TYVStringTestsPerfom();
     //TYVHumanTests();
     //TYVArrayListPerfomTests();
     TYVStackTestPerfom();
+}
+
+inline
+void TYVTask6Perfom() {
+    TYVLinkedListNodePerfomTest();
 }
