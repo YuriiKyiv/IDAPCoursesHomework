@@ -49,7 +49,7 @@ extern
 void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
 
 extern
-TYVLinkedListNode *TYVLinkedListGetFirstObject(TYVLinkedList *list);
+TYVObject *TYVLinkedListGetFirstObject(TYVLinkedList *list);
 
 extern
 uint64_t TYVLinkedListGetCount(TYVLinkedList *list);
