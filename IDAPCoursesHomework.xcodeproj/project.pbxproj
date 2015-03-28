@@ -246,11 +246,11 @@
 			isa = PBXGroup;
 			children = (
 				5ABCB6E21A8CD25B00CD71E2 /* main.c */,
-				5A302C891AC17D0B00E784ED /* task6 */,
 				5AFD29FE1A9DE191007EFFB5 /* task1 */,
 				5AFD2A0C1A9DE2F5007EFFB5 /* task3 */,
 				5AFD2A191A9E0E9F007EFFB5 /* task4 */,
 				5AFD2A1A1A9E0F97007EFFB5 /* task5 */,
+				5A302C891AC17D0B00E784ED /* task6 */,
 			);
 			path = IDAPCoursesHomework;
 			sourceTree = "<group>";
