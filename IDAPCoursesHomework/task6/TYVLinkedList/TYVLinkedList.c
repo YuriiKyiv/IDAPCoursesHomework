@@ -19,7 +19,11 @@ TYVLinkedList *TYVLinkedListCreate(){
 }
 
 void __TYVLinkedListDeallocate(TYVLinkedList *list){
-    //add setters
+    if (NULL == list) {
+        return;
+    }
+    
+    TYVLinkedListSetRootNode(list, NULL);
     
     __TYVObjectDeallocate(list);
 }
@@ -58,8 +62,8 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
 extern
 void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
 
-TYVLinkedListNode *TYVLinkedListGetFirstObject(TYVLinkedList *list) {
-    return (NULL != list) ? (TYVLinkedListNode *)TYVLinkedListNodeGetObject(TYVLinkedListGetRootNode(list)) : NULL;
+TYVObject *TYVLinkedListGetFirstObject(TYVLinkedList *list) {
+    return (NULL != list) ? TYVLinkedListNodeGetObject(TYVLinkedListGetRootNode(list)) : NULL;
 }
 
 uint64_t TYVLinkedListGetCount(TYVLinkedList *list) {
@@ -70,7 +74,7 @@ uint64_t TYVLinkedListGetCount(TYVLinkedList *list) {
 #pragma mark Private Implementations
 
 void TYVLinkedListSetRootNode(TYVLinkedList *list, TYVLinkedListNode *node) {
-    if (NULL == list || NULL == node) {
+    if (NULL == list) {
         return;
     }
     

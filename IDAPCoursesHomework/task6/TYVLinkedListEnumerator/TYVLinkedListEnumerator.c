@@ -33,8 +33,13 @@ void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator) {
     __TYVObjectDeallocate(enumerator);
 }
 
-extern
-TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator);
+TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator) {
+    if (NULL == enumerator || !TYVLinkedListEnumeratorIsValid(enumerator)) {
+        return NULL;
+    }
+    
+    enumerator->li
+}
 
 extern
 bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator);
