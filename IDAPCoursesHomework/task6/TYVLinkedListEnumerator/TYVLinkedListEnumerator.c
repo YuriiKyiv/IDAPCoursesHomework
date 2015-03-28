@@ -7,13 +7,9 @@
 //
 
 #include "TYVLinkedListEnumerator.h"
-
-#pragma mark -
-#pragma mark Private Declarations
-
-void TYVLinkedListEnumeratorSetList(TYVLinkedListEnumerator *enumerator, TYVLinkedList *list);
-
-void TYVLinkedListEnumeratorSetMurationCount(TYVLinkedListEnumerator *enumerator, uint64_t *mutationCount);
+#include "TYVLinkedListPrivate.h"
+#include "TYVLinkedListEnumeratorPrivate.h"
+#include "TYVPropertySetters.h"
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -25,13 +21,17 @@ TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreate(TYVLinkedList *list) {
     
     TYVLinkedListEnumerator *enumerator = TYVObjectCreate(TYVLinkedListEnumerator);
     TYVLinkedListEnumeratorSetList(enumerator, list);
-//    TYVLinkedListEnumeratorSetMurationCount(enumerator, TYVLinkedList)
+    TYVLinkedListEnumeratorSetMutationCount(enumerator, TYVLinkedListGetMutationCount(list));
     
     return enumerator;
 }
 
-extern
-void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator);
+void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator) {
+    TYVLinkedListEnumeratorSetList(enumerator, NULL);
+    TYVLinkedListEnumeratorSetNode(enumerator, NULL);
+    
+    __TYVObjectDeallocate(enumerator);
+}
 
 extern
 TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator);
@@ -41,3 +41,27 @@ bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator);
 
 #pragma mark -
 #pragma mark Private Implementations
+
+void TYVLinkedListEnumeratorSetList(TYVLinkedListEnumerator *enumerator, TYVLinkedList *list) {
+    if (NULL == enumerator) {
+        return;
+    }
+    
+    TYVPropertySetRetain(enumerator->_list, list);
+}
+
+void TYVLinkedListEnumeratorSetNode(TYVLinkedListEnumerator *enumerator, TYVLinkedList *node) {
+    if (NULL == enumerator) {
+        return;
+    }
+    
+    TYVPropertySetRetain(enumerator->_node, node);
+}
+
+void TYVLinkedListEnumeratorSetMutationCount(TYVLinkedListEnumerator *enumerator, uint64_t mutationCount) {
+    if (NULL == enumerator) {
+        return;
+    }
+    
+    enumerator->_mutationCount = mutationCount;
+}

@@ -56,6 +56,7 @@
 		5A33B5151AC6F817002591DE /* TYVLinkedListEnumerator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedListEnumerator.c; path = task6/TYVLinkedListEnumerator/TYVLinkedListEnumerator.c; sourceTree = "<group>"; };
 		5A33B5161AC6F817002591DE /* TYVLinkedListEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListEnumerator.h; path = task6/TYVLinkedListEnumerator/TYVLinkedListEnumerator.h; sourceTree = "<group>"; };
 		5A33B5191AC6FE3B002591DE /* TYVLinkedListPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListPrivate.h; path = task6/TYVLinkedList/TYVLinkedListPrivate.h; sourceTree = "<group>"; };
+		5A33B51A1AC700A0002591DE /* TYVLinkedListEnumeratorPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListEnumeratorPrivate.h; path = task6/TYVLinkedListEnumerator/TYVLinkedListEnumeratorPrivate.h; sourceTree = "<group>"; };
 		5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedListNode.c; path = task6/TYVLinkedListNode/TYVLinkedListNode.c; sourceTree = "<group>"; };
 		5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListNode.h; path = task6/TYVLinkedListNode/TYVLinkedListNode.h; sourceTree = "<group>"; };
 		5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedList.c; path = task6/TYVLinkedList/TYVLinkedList.c; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 			children = (
 				5A33B5151AC6F817002591DE /* TYVLinkedListEnumerator.c */,
 				5A33B5161AC6F817002591DE /* TYVLinkedListEnumerator.h */,
+				5A33B51A1AC700A0002591DE /* TYVLinkedListEnumeratorPrivate.h */,
 			);
 			name = TYVLinkedListEnumerator;
 			sourceTree = "<group>";
