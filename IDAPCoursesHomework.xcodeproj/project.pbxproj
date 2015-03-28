@@ -11,6 +11,7 @@
 		5A302C931AC193B400E784ED /* TYVStackTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A302C911AC193B400E784ED /* TYVStackTest.c */; };
 		5A33B5171AC6F817002591DE /* TYVLinkedListEnumerator.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A33B5151AC6F817002591DE /* TYVLinkedListEnumerator.c */; };
 		5A33B51D1AC71DAD002591DE /* TYVLinkedListNodeTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A33B51B1AC71DAD002591DE /* TYVLinkedListNodeTests.c */; };
+		5A33B5201AC7350C002591DE /* TYVLinkedListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A33B51E1AC7350C002591DE /* TYVLinkedListTests.c */; };
 		5A45A7E21AC41FDF007FAB8F /* TYVLinkedListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */; };
 		5A45A7E61AC42B9A007FAB8F /* TYVLinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */; };
 		5A51A9C71AA095F3003CC905 /* TYVObject.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A51A9C51AA095F3003CC905 /* TYVObject.c */; };
@@ -60,6 +61,8 @@
 		5A33B51A1AC700A0002591DE /* TYVLinkedListEnumeratorPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListEnumeratorPrivate.h; path = task6/TYVLinkedListEnumerator/TYVLinkedListEnumeratorPrivate.h; sourceTree = "<group>"; };
 		5A33B51B1AC71DAD002591DE /* TYVLinkedListNodeTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedListNodeTests.c; path = task6/TYVLinkedListNode/TYVLinkedListNodeTests.c; sourceTree = "<group>"; };
 		5A33B51C1AC71DAD002591DE /* TYVLinkedListNodeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListNodeTests.h; path = task6/TYVLinkedListNode/TYVLinkedListNodeTests.h; sourceTree = "<group>"; };
+		5A33B51E1AC7350C002591DE /* TYVLinkedListTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedListTests.c; path = task6/TYVLinkedList/TYVLinkedListTests.c; sourceTree = "<group>"; };
+		5A33B51F1AC7350C002591DE /* TYVLinkedListTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListTests.h; path = task6/TYVLinkedList/TYVLinkedListTests.h; sourceTree = "<group>"; };
 		5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedListNode.c; path = task6/TYVLinkedListNode/TYVLinkedListNode.c; sourceTree = "<group>"; };
 		5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListNode.h; path = task6/TYVLinkedListNode/TYVLinkedListNode.h; sourceTree = "<group>"; };
 		5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedList.c; path = task6/TYVLinkedList/TYVLinkedList.c; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */,
 				5A45A7E51AC42B9A007FAB8F /* TYVLinkedList.h */,
 				5A33B5191AC6FE3B002591DE /* TYVLinkedListPrivate.h */,
+				5A33B51E1AC7350C002591DE /* TYVLinkedListTests.c */,
+				5A33B51F1AC7350C002591DE /* TYVLinkedListTests.h */,
 			);
 			name = TYVLinkedList;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				5A2F2C861AB6F19C00BBF458 /* TYVPropertySetters.c in Sources */,
 				5A51A9C71AA095F3003CC905 /* TYVObject.c in Sources */,
 				5A45A7E61AC42B9A007FAB8F /* TYVLinkedList.c in Sources */,
+				5A33B5201AC7350C002591DE /* TYVLinkedListTests.c in Sources */,
 				5AFD2A171A9E0E98007EFFB5 /* TYVValueBitOutput.c in Sources */,
 				5AFD2A151A9E0E98007EFFB5 /* TYVBitReverse.c in Sources */,
 				5AFD29FD1A9DE189007EFFB5 /* TYVMultiplesTests.c in Sources */,

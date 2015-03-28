@@ -19,6 +19,7 @@
 #include "TYVArrayListTests.h"
 #include "TYVStackTest.h"
 #include "TYVLinkedListNodeTests.h"
+#include "TYVLinkedListTests.h"
 
 #define TYVValueOutputGenerate(type, spec) \
     type TYVOutput_##type(type value) { \
@@ -114,5 +115,6 @@ void TYVTask5Perform() {
 
 inline
 void TYVTask6Perfom() {
-    TYVLinkedListNodePerfomTest();
+//    TYVLinkedListNodePerfomTest();
+    TYVLinkedListPerfomTest();
 }

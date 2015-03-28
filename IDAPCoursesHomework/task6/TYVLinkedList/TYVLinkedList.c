@@ -78,7 +78,7 @@ void TYVLinkedListSetRootNode(TYVLinkedList *list, TYVLinkedListNode *node) {
         return;
     }
     
-    TYVPropertySetRetain(list->_rootNode, node);
+    TYVPropertySetRetain(&list->_rootNode, node);
 }
 
 TYVLinkedListNode *TYVLinkedListGetRootNode(TYVLinkedList *list) {
