@@ -41,7 +41,7 @@ void TYVLinkedListNodeSetNextNode(TYVLinkedListNode *node, TYVLinkedListNode *ne
         return;
     }
     
-    TYVPropertySetRetain(node->_nextNode, nextNode);
+    TYVPropertySetRetain(&node->_nextNode, nextNode);
 }
 
 TYVLinkedListNode *TYVLinkedListNodeGetNextNode(TYVLinkedListNode *node) {
@@ -53,7 +53,7 @@ void TYVLinkedListNodeSetObject(TYVLinkedListNode *node, TYVObject *object) {
         return;
     }
     
-    TYVPropertySetRetain(node->_object, object);
+    TYVPropertySetRetain(&node->_object, object);
 }
 
 TYVObject *TYVLinkedListNodeGetObject(TYVLinkedListNode *node) {

@@ -11,4 +11,7 @@
 
 #include <stdio.h>
 
+extern
+void TYVLinkedListNodePerfomTest();
+
 #endif /* defined(__IDAPCoursesHomework__TYVLinkedListNodeTests__) */
