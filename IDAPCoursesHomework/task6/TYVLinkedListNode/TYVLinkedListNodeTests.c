@@ -20,8 +20,14 @@ void TYVLinkedListNodePerfomTest() {
 void TYVLinkedListNodeCreateTest() {
     TYVObject *object = TYVObjectCreate(TYVObject);
     TYVLinkedListNode *node = TYVLinkedListNodeCreateWithObject(object);
-    assert(2 == object->_referenceCount);
+    TYVLinkedListNode *nodeNext = TYVLinkedListNodeCreateWithObject(object);
+    assert(3 == object->_referenceCount);
+    assert(TYVLinkedListNodeGetObject(node) == object);
+    assert(TYVLinkedListNodeGetNextNode(node) == NULL);
+    TYVLinkedListNodeSetNextNode(node, nodeNext);
+    assert(TYVLinkedListNodeGetNextNode(node) == nodeNext);
     
+    TYVObjectRelease(nodeNext);
     TYVObjectRelease(node);
     TYVObjectRelease(object);
 }
