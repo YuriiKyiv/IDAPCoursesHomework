@@ -8,13 +8,8 @@
 
 #include "TYVLinkedList.h"
 #include "TYVLinkedListNode.h"
-
-#pragma mark -
-#pragma mark Private Declarations
-
-void TYVLinkedListSetRootNode(TYVLinkedList *list, TYVLinkedListNode *node);
-
-TYVLinkedListNode *TYVLinkedListGetRootNode(TYVLinkedList *list);
+#include "TYVLinkedListPrivate.h"
+#include "TYVPropertySetters.h"
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -73,3 +68,19 @@ uint64_t TYVLinkedListGetCount(TYVLinkedList *list) {
 
 #pragma mark -
 #pragma mark Private Implementations
+
+void TYVLinkedListSetRootNode(TYVLinkedList *list, TYVLinkedListNode *node) {
+    if (NULL == list || NULL == node) {
+        return;
+    }
+    
+    TYVPropertySetRetain(list->_rootNode, node);
+}
+
+TYVLinkedListNode *TYVLinkedListGetRootNode(TYVLinkedList *list) {
+    return (NULL != list) ? list->_rootNode : NULL;
+}
+
+uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list) {
+    return (NULL != list) ? list->_mutationCount : 0;
+}

@@ -27,12 +27,16 @@ struct TYVLinkedListEnumerator {
     bool _valid;
 };
 
+extern
 TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreate(TYVLinkedList *list);
 
+extern
 void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator);
 
+extern
 TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator);
 
+extern
 bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator);
 
 #endif /* defined(__IDAPCoursesHomework__TYVLinkedListEnumerator__) */
