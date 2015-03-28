@@ -10,6 +10,7 @@
 #include "TYVLinkedListNode.h"
 #include "TYVLinkedListPrivate.h"
 #include "TYVPropertySetters.h"
+#include "TYVLinkedListEnumerator.h"
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -48,6 +49,13 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
     if (NULL == list || NULL == object) {
         return;
     }
+    
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreate(list);
+    while (TYVLinkedListEnumeratorIsValid(enumerator)) {
+        if (TYVLinkedListEnumeratorNextObject(enumerator) == object) {
+            //delete object
+        }
+    }
 }
 
 extern
@@ -78,7 +86,7 @@ void TYVLinkedListSetRootNode(TYVLinkedList *list, TYVLinkedListNode *node) {
         return;
     }
     
-    TYVPropertySetRetain(list->_rootNode, node);
+    TYVPropertySetRetain(&list->_rootNode, node);
 }
 
 TYVLinkedListNode *TYVLinkedListGetRootNode(TYVLinkedList *list) {
