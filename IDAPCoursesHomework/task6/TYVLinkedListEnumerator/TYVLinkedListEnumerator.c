@@ -36,25 +36,13 @@ void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator) {
 }
 
 TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator) {
-    if (NULL == enumerator
-        || !TYVLinkedListEnumeratorIsValid(enumerator)
-        || !TYVLinkedListEnumeratorCheckMutation(enumerator))
-    {
+    if (NULL == enumerator) {
         return NULL;
     }
     
-    TYVLinkedListNode *node = TYVLinkedListEnumeratorGetNode(enumerator);
-    TYVLinkedListNode *nextNode = TYVLinkedListNodeGetNextNode(node);
-    TYVLinkedListEnumeratorSetNode(enumerator, nextNode);
-    
-    if (NULL == nextNode) {
-        enumerator->_valid = false;
-    }
-    
-    return TYVLinkedListNodeGetObject(nextNode);
+    return TYVLinkedListNodeGetObject(TYVLinkedListEnumeratorNextNode(enumerator));
 }
 
-extern
 bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator) {
     return ((NULL != enumerator) && enumerator->_valid);
 }
@@ -100,4 +88,27 @@ uint64_t TYVLinkedListEnumeratorGetMutationCount(TYVLinkedListEnumerator *enumer
 
 bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator) {
     return (NULL != enumerator) ? TYVLinkedListGetMutationCount(TYVLinkedListEnumeratorGetList(enumerator)) == TYVLinkedListEnumeratorGetMutationCount(enumerator) : false;
+}
+
+TYVLinkedListNode *TYVLinkedListEnumeratorNextNode(TYVLinkedListEnumerator *enumerator) {
+    if (NULL == enumerator
+        || !TYVLinkedListEnumeratorIsValid(enumerator)
+        || !TYVLinkedListEnumeratorCheckMutation(enumerator))
+    {
+        return NULL;
+    }
+    
+    TYVLinkedListNode *node = TYVLinkedListEnumeratorGetNode(enumerator);
+    if (NULL == node) {
+        TYVLinkedListNode *listNode = TYVLinkedListGetRootNode(TYVLinkedListEnumeratorGetList(enumerator));
+        TYVLinkedListEnumeratorSetNode(enumerator, listNode);
+    }
+    TYVLinkedListNode *nextNode = TYVLinkedListNodeGetNextNode(node);
+    TYVLinkedListEnumeratorSetNode(enumerator, nextNode);
+    
+    if (NULL == nextNode) {
+        enumerator->_valid = false;
+    }
+    
+    return nextNode;
 }
