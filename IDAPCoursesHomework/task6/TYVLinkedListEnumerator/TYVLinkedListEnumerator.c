@@ -91,7 +91,10 @@ bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator) {
 }
 
 TYVLinkedListNode *TYVLinkedListEnumeratorNextNode(TYVLinkedListEnumerator *enumerator) {
-    if (NULL == enumerator || !TYVLinkedListEnumeratorIsValid(enumerator)) {
+    if (NULL == enumerator
+        || !TYVLinkedListEnumeratorIsValid(enumerator)
+        || !TYVLinkedListEnumeratorCheckMutation(enumerator))
+    {
         return NULL;
     }
     
