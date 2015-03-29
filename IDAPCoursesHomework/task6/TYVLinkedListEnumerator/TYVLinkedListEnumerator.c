@@ -96,14 +96,18 @@ TYVLinkedListNode *TYVLinkedListEnumeratorNextNode(TYVLinkedListEnumerator *enum
     }
     
     TYVLinkedListNode *node = TYVLinkedListEnumeratorGetNode(enumerator);
+    TYVLinkedListNode *nextNode = NULL;
     if (NULL == node) {
-        TYVLinkedListNode *newNode = TYVLinkedListGetRootNode(TYVLinkedListEnumeratorGetList(enumerator));
-        TYVLinkedListEnumeratorSetNode(enumerator, newNode);
-        return newNode;
+        nextNode = TYVLinkedListGetRootNode(TYVLinkedListEnumeratorGetList(enumerator));
+    } else {
+        nextNode = TYVLinkedListNodeGetNextNode(node);
     }
     
-    TYVLinkedListNode *nextNode = TYVLinkedListNodeGetNextNode(node);
     TYVLinkedListEnumeratorSetNode(enumerator, nextNode);
+    
+    if (NULL == nextNode) {
+        enumerator->_valid = false;
+    }
     
     return nextNode;
 }
