@@ -15,7 +15,7 @@
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreate(TYVLinkedList *list) {
+TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreateWithList(TYVLinkedList *list) {
     if (NULL == list) {
         return NULL;
     }
@@ -56,11 +56,7 @@ TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator
 
 extern
 bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator) {
-    if (NULL == enumerator ||TYVLinkedListEnumeratorNextObject(enumerator) == NULL) {
-        return false;
-    }
-    
-    return true;
+    return ((NULL != enumerator) && enumerator->_valid);
 }
 
 #pragma mark -
@@ -71,7 +67,7 @@ void TYVLinkedListEnumeratorSetList(TYVLinkedListEnumerator *enumerator, TYVLink
         return;
     }
     
-    TYVPropertySetRetain(enumerator->_list, list);
+    TYVPropertySetRetain(&enumerator->_list, list);
 }
 
 TYVLinkedList *TYVLinkedListEnumeratorGetList(TYVLinkedListEnumerator *enumerator) {
@@ -83,7 +79,7 @@ void TYVLinkedListEnumeratorSetNode(TYVLinkedListEnumerator *enumerator, TYVLink
         return;
     }
     
-    TYVPropertySetRetain(enumerator->_node, node);
+    TYVPropertySetRetain(&enumerator->_node, node);
 }
 
 TYVLinkedListNode *TYVLinkedListEnumeratorGetNode(TYVLinkedListEnumerator *enumerator) {

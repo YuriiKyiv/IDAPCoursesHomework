@@ -17,7 +17,7 @@ void TYVLinkedListContainsTest();
 
 void TYVLinkedListPerfomTest() {
     printf("TASK 6 LinkedList PERFOM TEST\n");
-//    TYVLinkedListCreateTest();
+    TYVLinkedListCreateTest();
     TYVLinkedListContainsTest();
 }
 

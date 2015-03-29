@@ -50,7 +50,7 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
         return;
     }
     
-    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreate(list);
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
     while (TYVLinkedListEnumeratorIsValid(enumerator)) {
         if (TYVLinkedListEnumeratorNextObject(enumerator) == object) {
             //delete object
@@ -63,13 +63,15 @@ void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
 
 extern
 bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
-    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreate(list);
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
     while (TYVLinkedListEnumeratorIsValid(enumerator)) {
         if (TYVLinkedListEnumeratorNextObject(enumerator) == object) {
+            TYVObjectRelease(enumerator);
             return true;
         }
     }
     
+    TYVObjectRelease(enumerator);
     return false;
 }
 

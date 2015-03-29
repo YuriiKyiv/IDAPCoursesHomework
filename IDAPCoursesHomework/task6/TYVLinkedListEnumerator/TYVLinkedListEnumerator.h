@@ -28,7 +28,7 @@ struct TYVLinkedListEnumerator {
 };
 
 extern
-TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreate(TYVLinkedList *list);
+TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreateWithList(TYVLinkedList *list);
 
 extern
 void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator);
