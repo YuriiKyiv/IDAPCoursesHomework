@@ -11,6 +11,7 @@
 #include "TYVLinkedListPrivate.h"
 #include "TYVPropertySetters.h"
 #include "TYVLinkedListEnumerator.h"
+#include "TYVLinkedListEnumeratorPrivate.h"
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -106,6 +107,22 @@ TYVLinkedListNode *TYVLinkedListGetRootNode(TYVLinkedList *list) {
 
 uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list) {
     return (NULL != list) ? list->_mutationCount : 0;
+}
+
+TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVObject *object, TYVLinkedList *list, TYVCompare function, TYVContext *context) {
+    if (NULL == object || NULL == list || NULL == function || NULL == context) {
+        return NULL;
+    }
+    
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
+    while (TYVLinkedListEnumeratorIsValid(enumerator)) {
+        TYVLinkedListEnumeratorNextObject(enumerator);
+        if (function(TYVLinkedListEnumeratorGetNode(enumerator), context)) {
+            return context->currentNode;
+        }
+    }
+    
+    return NULL;
 }
 
 #pragma mark -
