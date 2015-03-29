@@ -107,3 +107,17 @@ TYVLinkedListNode *TYVLinkedListGetRootNode(TYVLinkedList *list) {
 uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list) {
     return (NULL != list) ? list->_mutationCount : 0;
 }
+
+#pragma mark -
+#pragma mark Comparators
+
+bool TYVComparing(TYVLinkedListNode *node, TYVContext *context) {
+    if (NULL == node || NULL == context) {
+        return false;
+    }
+    
+    context->prevNode = context->currentNode;
+    context->currentNode = node;
+    
+    return TYVLinkedListNodeGetObject(node) == context->comparable;
+}
