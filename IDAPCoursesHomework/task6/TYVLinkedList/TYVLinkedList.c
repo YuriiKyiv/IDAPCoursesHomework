@@ -62,7 +62,16 @@ extern
 void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
 
 extern
-void TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object);
+bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreate(list);
+    while (TYVLinkedListEnumeratorIsValid(enumerator)) {
+        if (TYVLinkedListEnumeratorNextObject(enumerator) == object) {
+            return true;
+        }
+    }
+    
+    return false;
+}
 
 extern
 void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);

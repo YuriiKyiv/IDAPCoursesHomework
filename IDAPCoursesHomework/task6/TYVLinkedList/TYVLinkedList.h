@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "TYVObject.h"
+#include <stdbool.h>
 
 typedef struct TYVLinkedListNode TYVLinkedListNode;
 
@@ -40,7 +41,7 @@ extern
 void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
 
 extern
-void TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object);
+bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object);
 
 extern
 void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
