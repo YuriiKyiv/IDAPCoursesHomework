@@ -91,24 +91,19 @@ bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator) {
 }
 
 TYVLinkedListNode *TYVLinkedListEnumeratorNextNode(TYVLinkedListEnumerator *enumerator) {
-    if (NULL == enumerator
-        || !TYVLinkedListEnumeratorIsValid(enumerator)
-        || !TYVLinkedListEnumeratorCheckMutation(enumerator))
-    {
+    if (NULL == enumerator || !TYVLinkedListEnumeratorIsValid(enumerator)) {
         return NULL;
     }
     
     TYVLinkedListNode *node = TYVLinkedListEnumeratorGetNode(enumerator);
     if (NULL == node) {
-        TYVLinkedListNode *listNode = TYVLinkedListGetRootNode(TYVLinkedListEnumeratorGetList(enumerator));
-        TYVLinkedListEnumeratorSetNode(enumerator, listNode);
+        TYVLinkedListNode *newNode = TYVLinkedListGetRootNode(TYVLinkedListEnumeratorGetList(enumerator));
+        TYVLinkedListEnumeratorSetNode(enumerator, newNode);
+        return newNode;
     }
+    
     TYVLinkedListNode *nextNode = TYVLinkedListNodeGetNextNode(node);
     TYVLinkedListEnumeratorSetNode(enumerator, nextNode);
-    
-    if (NULL == nextNode) {
-        enumerator->_valid = false;
-    }
     
     return nextNode;
 }
