@@ -51,6 +51,8 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
         return;
     }
     
+    list->_mutationCount++;
+    
     TYVContext context;
     context.comparable = object;
     context.currentNode = NULL;
@@ -62,11 +64,25 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
     }
     
     if (NULL == context.prevNode && NULL != context.currentNode) {
-        // remove a first object
+        TYVLinkedListRemoveFirstObject(list);
     } else {
         TYVLinkedListNodeSetNextNode(context.prevNode, TYVLinkedListNodeGetNextNode(context.currentNode));
         list->_count--;
     }
+}
+
+void TYVLinkedListRemoveFirstObject(TYVLinkedList *list) {
+    if (NULL == list) {
+        return;
+    }
+    
+    list->_mutationCount++;
+    
+    TYVLinkedListNode *rootNode = TYVLinkedListGetRootNode(list);
+    TYVLinkedListNode *node = TYVLinkedListNodeGetNextNode(rootNode);
+    TYVLinkedListSetRootNode(list, node);
+    
+    list->_count--;
 }
 
 extern

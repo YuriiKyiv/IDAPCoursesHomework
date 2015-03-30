@@ -38,6 +38,9 @@ extern
 void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object);
 
 extern
+void TYVLinkedListRemoveFirstObject(TYVLinkedList *list);
+
+extern
 void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
 
 extern
