@@ -85,10 +85,18 @@ void TYVLinkedListRemoveFirstObject(TYVLinkedList *list) {
     list->_count--;
 }
 
-extern
-void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
+void TYVLinkedListRemoveAllObjects(TYVLinkedList *list) {
+    if (NULL == list) {
+        return;
+    }
+    
+    list->_mutationCount++;
+    
+    while (TYVLinkedListGetCount(list) > 0) {
+        TYVLinkedListRemoveFirstObject(list);
+    }
+}
 
-extern
 bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
     TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
     while (TYVLinkedListEnumeratorIsValid(enumerator)) {
