@@ -65,8 +65,6 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
         // remove a first object
     } else {
         TYVLinkedListNodeSetNextNode(context.prevNode, TYVLinkedListNodeGetNextNode(context.currentNode));
-        TYVLinkedListNodeSetNextNode(context.currentNode, NULL);
-        TYVLinkedListNodeSetObject(context.currentNode, NULL);
         list->_count--;
     }
 }
