@@ -51,11 +51,23 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
         return;
     }
     
-    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
-    while (TYVLinkedListEnumeratorIsValid(enumerator)) {
-        if (TYVLinkedListEnumeratorNextObject(enumerator) == object) {
-            //delete object
-        }
+    TYVContext context;
+    context.comparable = object;
+    context.currentNode = NULL;
+    context.prevNode = NULL;
+    
+    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    if (NULL == node) {
+        return;
+    }
+    
+    if (NULL == context.prevNode && NULL != context.currentNode) {
+        // remove a first object
+    } else {
+        TYVLinkedListNodeSetNextNode(context.prevNode, TYVLinkedListNodeGetNextNode(context.currentNode));
+        TYVLinkedListNodeSetNextNode(context.currentNode, NULL);
+        TYVLinkedListNodeSetObject(context.currentNode, NULL);
+        list->_count--;
     }
 }
 
@@ -109,8 +121,8 @@ uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list) {
     return (NULL != list) ? list->_mutationCount : 0;
 }
 
-TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVObject *object, TYVLinkedList *list, TYVCompare function, TYVContext *context) {
-    if (NULL == object || NULL == list || NULL == function || NULL == context) {
+TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompare function, TYVContext *context) {
+    if (NULL == list || NULL == function || NULL == context || NULL == context->comparable) {
         return NULL;
     }
     
@@ -129,7 +141,7 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVObject *object, TYVLinkedL
 #pragma mark Comparators
 
 bool TYVComparing(TYVLinkedListNode *node, TYVContext *context) {
-    if (NULL == node || NULL == context) {
+    if (NULL == node || NULL == context || NULL == context->comparable) {
         return false;
     }
     
