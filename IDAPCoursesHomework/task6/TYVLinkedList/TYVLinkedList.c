@@ -158,6 +158,25 @@ void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoi
     
 }
 
+TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *object) {
+    TYVContext context;
+    context.comparable = object;
+    context.currentNode = NULL;
+    context.prevNode = NULL;
+    
+    if (NULL == list || NULL == object) {
+        return context;
+    }
+    
+    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    if (NULL == node) {
+        context.currentNode = NULL;
+        context.prevNode = NULL;
+    }
+    
+    return context;
+}
+
 TYVObject *TYVLinkedListGetFirstObject(TYVLinkedList *list) {
     return (NULL != list) ? TYVLinkedListNodeGetObject(TYVLinkedListGetRootNode(list)) : NULL;
 }

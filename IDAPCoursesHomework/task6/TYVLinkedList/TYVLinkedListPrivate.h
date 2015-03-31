@@ -36,4 +36,7 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompa
 extern
 bool TYVComparing(TYVLinkedListNode *node, TYVContext *context);
 
+extern
+TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *object);
+
 #endif
