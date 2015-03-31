@@ -98,16 +98,12 @@ void TYVLinkedListRemoveAllObjects(TYVLinkedList *list) {
 }
 
 bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
-    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
-    while (TYVLinkedListEnumeratorIsValid(enumerator)) {
-        if (TYVLinkedListEnumeratorNextObject(enumerator) == object) {
-            TYVObjectRelease(enumerator);
-            return true;
-        }
-    }
+    TYVContext context;
+    context.comparable = object;
+    context.currentNode = NULL;
+    context.prevNode = NULL;
     
-    TYVObjectRelease(enumerator);
-    return false;
+    return (NULL != TYVLinkedListFindNodeWithObject(list, TYVComparing, &context));
 }
 
 extern
