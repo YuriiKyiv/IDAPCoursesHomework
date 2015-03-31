@@ -121,6 +121,10 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
     context.prevNode = NULL;
     
     TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    if (NULL == node) {
+        return;
+    }
+    
     if (TYVLinkedListGetRootNode(list) == node) {
         TYVLinkedListAddObject(list, object);
     } else {
@@ -132,8 +136,27 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
     
 }
 
-extern
-void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
+void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object) {
+    if (NULL == list || NULL == insertionPoint || NULL == object) {
+        return;
+    }
+    
+    TYVContext context;
+    context.comparable = object;
+    context.currentNode = NULL;
+    context.prevNode = NULL;
+    
+    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    if (NULL == node) {
+        return;
+    }
+    
+    TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, node);
+    TYVLinkedListNodeSetNextNode(newNode, TYVLinkedListNodeGetNextNode(context.currentNode));
+    TYVLinkedListNodeSetNextNode(context.currentNode, newNode);
+    list->_mutationCount++;
+    
+}
 
 TYVObject *TYVLinkedListGetFirstObject(TYVLinkedList *list) {
     return (NULL != list) ? TYVLinkedListNodeGetObject(TYVLinkedListGetRootNode(list)) : NULL;
