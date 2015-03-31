@@ -141,17 +141,12 @@ void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoi
         return;
     }
     
-    TYVContext context;
-    context.comparable = object;
-    context.currentNode = NULL;
-    context.prevNode = NULL;
-    
-    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
-    if (NULL == node) {
+    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    if (NULL == context.currentNode && NULL == context.prevNode) {
         return;
     }
     
-    TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, node);
+    TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
     TYVLinkedListNodeSetNextNode(newNode, TYVLinkedListNodeGetNextNode(context.currentNode));
     TYVLinkedListNodeSetNextNode(context.currentNode, newNode);
     list->_mutationCount++;
