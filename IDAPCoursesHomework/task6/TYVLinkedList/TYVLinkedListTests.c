@@ -13,9 +13,12 @@
 
 void TYVLinkedListCreateTest();
 
+void TYVLinkedListContainsTest();
+
 void TYVLinkedListPerfomTest() {
     printf("TASK 6 LinkedList PERFOM TEST\n");
     TYVLinkedListCreateTest();
+    TYVLinkedListContainsTest();
 }
 
 void TYVLinkedListCreateTest() {
@@ -28,6 +31,17 @@ void TYVLinkedListCreateTest() {
     assert(1 == TYVLinkedListGetCount(list));
     assert(TYVLinkedListGetFirstObject(list) == object);
     assert(2 == object->_referenceCount);
+    
+    TYVObjectRelease(list);
+    TYVObjectRelease(object);
+}
+
+void TYVLinkedListContainsTest() {
+    TYVObject *object = TYVObjectCreate(TYVObject);
+    TYVLinkedList *list =  TYVLinkedListCreate();
+    assert(!TYVLinkedListContainsObject(list, object));
+    TYVLinkedListAddObject(list, object);
+    assert(TYVLinkedListContainsObject(list, object));
     
     TYVObjectRelease(list);
     TYVObjectRelease(object);

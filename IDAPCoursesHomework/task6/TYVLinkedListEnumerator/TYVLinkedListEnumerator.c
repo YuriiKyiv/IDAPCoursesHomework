@@ -15,7 +15,7 @@
 #pragma mark -
 #pragma mark Public Implementations
 
-TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreate(TYVLinkedList *list) {
+TYVLinkedListEnumerator *TYVLinkedListEnumeratorCreateWithList(TYVLinkedList *list) {
     if (NULL == list) {
         return NULL;
     }
@@ -36,31 +36,15 @@ void __TYVLinkedListEnumeratorDeallocate(TYVLinkedListEnumerator *enumerator) {
 }
 
 TYVObject *TYVLinkedListEnumeratorNextObject(TYVLinkedListEnumerator *enumerator) {
-    if (NULL == enumerator
-        || !TYVLinkedListEnumeratorIsValid(enumerator)
-        || !TYVLinkedListEnumeratorCheckMutation(enumerator))
-    {
+    if (NULL == enumerator) {
         return NULL;
     }
     
-    TYVLinkedListNode *node = TYVLinkedListEnumeratorGetNode(enumerator);
-    TYVLinkedListNode *nextNode = TYVLinkedListNodeGetNextNode(node);
-    TYVLinkedListEnumeratorSetNode(enumerator, nextNode);
-    
-    if (NULL == nextNode) {
-        enumerator->_valid = false;
-    }
-    
-    return TYVLinkedListNodeGetObject(nextNode);
+    return TYVLinkedListNodeGetObject(TYVLinkedListEnumeratorNextNode(enumerator));
 }
 
-extern
 bool TYVLinkedListEnumeratorIsValid(TYVLinkedListEnumerator *enumerator) {
-    if (NULL == enumerator ||TYVLinkedListEnumeratorNextObject(enumerator) == NULL) {
-        return false;
-    }
-    
-    return true;
+    return ((NULL != enumerator) && enumerator->_valid);
 }
 
 #pragma mark -
@@ -71,7 +55,7 @@ void TYVLinkedListEnumeratorSetList(TYVLinkedListEnumerator *enumerator, TYVLink
         return;
     }
     
-    TYVPropertySetRetain(enumerator->_list, list);
+    TYVPropertySetRetain(&enumerator->_list, list);
 }
 
 TYVLinkedList *TYVLinkedListEnumeratorGetList(TYVLinkedListEnumerator *enumerator) {
@@ -83,7 +67,7 @@ void TYVLinkedListEnumeratorSetNode(TYVLinkedListEnumerator *enumerator, TYVLink
         return;
     }
     
-    TYVPropertySetRetain(enumerator->_node, node);
+    TYVPropertySetRetain(&enumerator->_node, node);
 }
 
 TYVLinkedListNode *TYVLinkedListEnumeratorGetNode(TYVLinkedListEnumerator *enumerator) {
@@ -104,4 +88,29 @@ uint64_t TYVLinkedListEnumeratorGetMutationCount(TYVLinkedListEnumerator *enumer
 
 bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator) {
     return (NULL != enumerator) ? TYVLinkedListGetMutationCount(TYVLinkedListEnumeratorGetList(enumerator)) == TYVLinkedListEnumeratorGetMutationCount(enumerator) : false;
+}
+
+TYVLinkedListNode *TYVLinkedListEnumeratorNextNode(TYVLinkedListEnumerator *enumerator) {
+    if (NULL == enumerator
+        || !TYVLinkedListEnumeratorIsValid(enumerator)
+        || !TYVLinkedListEnumeratorCheckMutation(enumerator))
+    {
+        return NULL;
+    }
+    
+    TYVLinkedListNode *node = TYVLinkedListEnumeratorGetNode(enumerator);
+    TYVLinkedListNode *nextNode = NULL;
+    if (NULL == node) {
+        nextNode = TYVLinkedListGetRootNode(TYVLinkedListEnumeratorGetList(enumerator));
+    } else {
+        nextNode = TYVLinkedListNodeGetNextNode(node);
+    }
+    
+    TYVLinkedListEnumeratorSetNode(enumerator, nextNode);
+    
+    if (NULL == nextNode) {
+        enumerator->_valid = false;
+    }
+    
+    return nextNode;
 }

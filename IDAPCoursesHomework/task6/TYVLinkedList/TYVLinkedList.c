@@ -11,6 +11,7 @@
 #include "TYVLinkedListPrivate.h"
 #include "TYVPropertySetters.h"
 #include "TYVLinkedListEnumerator.h"
+#include "TYVLinkedListEnumeratorPrivate.h"
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -50,25 +51,121 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
         return;
     }
     
-    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreate(list);
-    while (TYVLinkedListEnumeratorIsValid(enumerator)) {
-        if (TYVLinkedListEnumeratorNextObject(enumerator) == object) {
-            //delete object
-        }
+    list->_mutationCount++;
+    
+    TYVContext context;
+    context.comparable = object;
+    context.currentNode = NULL;
+    context.prevNode = NULL;
+    
+    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    if (NULL == node) {
+        return;
+    }
+    
+    if (NULL == context.prevNode && NULL != context.currentNode) {
+        TYVLinkedListRemoveFirstObject(list);
+    } else {
+        TYVLinkedListNodeSetNextNode(context.prevNode, TYVLinkedListNodeGetNextNode(context.currentNode));
+        list->_count--;
     }
 }
 
-extern
-void TYVLinkedListRemoveAllObjects(TYVLinkedList *list);
+void TYVLinkedListRemoveFirstObject(TYVLinkedList *list) {
+    if (NULL == list) {
+        return;
+    }
+    
+    list->_mutationCount++;
+    
+    TYVLinkedListNode *rootNode = TYVLinkedListGetRootNode(list);
+    TYVLinkedListNode *node = TYVLinkedListNodeGetNextNode(rootNode);
+    TYVLinkedListSetRootNode(list, node);
+    
+    list->_count--;
+}
 
-extern
-void TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object);
+void TYVLinkedListRemoveAllObjects(TYVLinkedList *list) {
+    if (NULL == list) {
+        return;
+    }
+    
+    list->_mutationCount++;
+    
+    while (TYVLinkedListGetCount(list) > 0) {
+        TYVLinkedListRemoveFirstObject(list);
+    }
+}
 
-extern
-void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
+bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
+    if (NULL == list || NULL == object) {
+        return false;
+    }
+    
+    TYVContext context;
+    context.comparable = object;
+    context.currentNode = NULL;
+    context.prevNode = NULL;
+    
+    return (NULL != TYVLinkedListFindNodeWithObject(list, TYVComparing, &context));
+}
 
-extern
-void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object);
+void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object) {
+    if (NULL == list || NULL == insertionPoint || NULL == object) {
+        return;
+    }
+    
+    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    if (NULL == context.currentNode && NULL == context.prevNode) {
+        return;
+    }
+    
+    if (TYVLinkedListGetRootNode(list) == context.currentNode) {
+        TYVLinkedListAddObject(list, object);
+    } else {
+        TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
+        TYVLinkedListNodeSetNextNode(context.prevNode, newNode);
+        TYVObjectRelease(newNode);
+        list->_mutationCount++;
+    }
+    
+}
+
+void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object) {
+    if (NULL == list || NULL == insertionPoint || NULL == object) {
+        return;
+    }
+    
+    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    if (NULL == context.currentNode && NULL == context.prevNode) {
+        return;
+    }
+    
+    TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
+    TYVLinkedListNodeSetNextNode(newNode, TYVLinkedListNodeGetNextNode(context.currentNode));
+    TYVLinkedListNodeSetNextNode(context.currentNode, newNode);
+    list->_mutationCount++;
+    
+}
+
+TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *object) {
+    TYVContext context;
+    context.comparable = object;
+    context.currentNode = NULL;
+    context.prevNode = NULL;
+    
+    if (NULL == list || NULL == object) {
+        return context;
+    }
+    
+    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    if (NULL == node) {
+        context.currentNode = NULL;
+        context.prevNode = NULL;
+    }
+    
+    return context;
+}
 
 TYVObject *TYVLinkedListGetFirstObject(TYVLinkedList *list) {
     return (NULL != list) ? TYVLinkedListNodeGetObject(TYVLinkedListGetRootNode(list)) : NULL;
@@ -95,4 +192,34 @@ TYVLinkedListNode *TYVLinkedListGetRootNode(TYVLinkedList *list) {
 
 uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list) {
     return (NULL != list) ? list->_mutationCount : 0;
+}
+
+TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompare function, TYVContext *context) {
+    if (NULL == list || NULL == function || NULL == context || NULL == context->comparable) {
+        return NULL;
+    }
+    
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
+    while (TYVLinkedListEnumeratorIsValid(enumerator)) {
+        TYVLinkedListEnumeratorNextObject(enumerator);
+        if (function(TYVLinkedListEnumeratorGetNode(enumerator), context)) {
+            return context->currentNode;
+        }
+    }
+    
+    return NULL;
+}
+
+#pragma mark -
+#pragma mark Comparators
+
+bool TYVComparing(TYVLinkedListNode *node, TYVContext *context) {
+    if (NULL == node || NULL == context || NULL == context->comparable) {
+        return false;
+    }
+    
+    context->prevNode = context->currentNode;
+    context->currentNode = node;
+    
+    return TYVLinkedListNodeGetObject(node) == context->comparable;
 }
