@@ -115,20 +115,15 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
         return;
     }
     
-    TYVContext context;
-    context.comparable = object;
-    context.currentNode = NULL;
-    context.prevNode = NULL;
-    
-    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
-    if (NULL == node) {
+    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    if (NULL == context.currentNode && NULL == context.prevNode) {
         return;
     }
     
-    if (TYVLinkedListGetRootNode(list) == node) {
+    if (TYVLinkedListGetRootNode(list) == context.currentNode) {
         TYVLinkedListAddObject(list, object);
     } else {
-        TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, node);
+        TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
         TYVLinkedListNodeSetNextNode(context.prevNode, newNode);
         TYVObjectRelease(newNode);
         list->_mutationCount++;
