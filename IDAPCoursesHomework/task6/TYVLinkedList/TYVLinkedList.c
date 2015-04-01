@@ -107,7 +107,7 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
         return;
     }
     
-    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    TYVContext context = TYVLinkedListGetContextForObject(list, insertionPoint);
     if (NULL == context.currentNode && NULL == context.previousNode) {
         return;
     }
@@ -128,7 +128,7 @@ void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoi
         return;
     }
     
-    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    TYVContext context = TYVLinkedListGetContextForObject(list, insertionPoint);
     if (NULL == context.currentNode && NULL == context.previousNode) {
         return;
     }
