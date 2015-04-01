@@ -40,7 +40,7 @@ void TYVLinkedListAddObject(TYVLinkedList *list, TYVObject *object) {
     TYVLinkedListSetRootNode(list, newNode);
     
     list->_count++;
-    list->_mutationCount++;
+    TYVLinkedListMutate(list);
     
     TYVObjectRelease(newNode);
     
@@ -51,7 +51,7 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
         return;
     }
     
-    list->_mutationCount++;
+    TYVLinkedListMutate(list);
     
     TYVContext context = TYVLinkedListGetContextForObject(list, object);
     if (NULL == context.currentNode && NULL == context.previousNode) {
@@ -71,7 +71,7 @@ void TYVLinkedListRemoveFirstObject(TYVLinkedList *list) {
         return;
     }
     
-    list->_mutationCount++;
+    TYVLinkedListMutate(list);
     
     TYVLinkedListNode *rootNode = TYVLinkedListGetRootNode(list);
     TYVLinkedListNode *node = TYVLinkedListNodeGetNextNode(rootNode);
@@ -85,7 +85,7 @@ void TYVLinkedListRemoveAllObjects(TYVLinkedList *list) {
         return;
     }
     
-    list->_mutationCount++;
+    TYVLinkedListMutate(list);
     
     while (TYVLinkedListGetCount(list) > 0) {
         TYVLinkedListRemoveFirstObject(list);
@@ -118,7 +118,7 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
         TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
         TYVLinkedListNodeSetNextNode(context.previousNode, newNode);
         TYVObjectRelease(newNode);
-        list->_mutationCount++;
+        TYVLinkedListMutate(list);
     }
     
 }
@@ -136,7 +136,7 @@ void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoi
     TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
     TYVLinkedListNodeSetNextNode(newNode, TYVLinkedListNodeGetNextNode(context.currentNode));
     TYVLinkedListNodeSetNextNode(context.currentNode, newNode);
-    list->_mutationCount++;
+    TYVLinkedListMutate(list);
     
 }
 
@@ -165,6 +165,14 @@ TYVObject *TYVLinkedListGetFirstObject(TYVLinkedList *list) {
 
 uint64_t TYVLinkedListGetCount(TYVLinkedList *list) {
     return (NULL != list) ? list->_count : 0;
+}
+
+void TYVLinkedListMutate(TYVLinkedList *list) {
+    if (NULL == list) {
+        return;
+    }
+    
+    list->_mutationCount++;
 }
 
 #pragma mark -

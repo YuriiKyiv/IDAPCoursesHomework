@@ -39,4 +39,7 @@ bool TYVLinkedListNodeContainsObject(TYVLinkedListNode *node, TYVContext *contex
 extern
 TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *object);
 
+extern
+void TYVLinkedListMutate(TYVLinkedList *list);
+
 #endif
