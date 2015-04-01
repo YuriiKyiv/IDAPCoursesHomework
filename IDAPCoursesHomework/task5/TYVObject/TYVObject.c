@@ -40,3 +40,7 @@ void TYVObjectRelease(void *voidObject){
 void __TYVObjectDeallocate(void *object){
     free(object);
 }
+
+uint64_t TYVObjectGetReferenceCount(TYVObject *object) {
+    return (NULL != object) ? object->_referenceCount : 0;
+}
