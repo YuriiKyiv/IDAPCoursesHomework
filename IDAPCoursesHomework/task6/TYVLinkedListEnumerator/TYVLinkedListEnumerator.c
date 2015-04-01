@@ -11,6 +11,7 @@
 #include "TYVLinkedListEnumeratorPrivate.h"
 #include "TYVPropertySetters.h"
 #include "TYVLinkedListNode.h"
+#include <assert.h>
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -86,17 +87,22 @@ uint64_t TYVLinkedListEnumeratorGetMutationCount(TYVLinkedListEnumerator *enumer
     return (NULL != enumerator) ? enumerator->_mutationCount : 0;
 }
 
-bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator) {
-    return (NULL != enumerator) ? TYVLinkedListGetMutationCount(TYVLinkedListEnumeratorGetList(enumerator)) == TYVLinkedListEnumeratorGetMutationCount(enumerator) : false;
+void TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator) {
+    if (NULL != enumerator) {
+        return;
+    }
+    
+    assert(TYVLinkedListGetMutationCount(TYVLinkedListEnumeratorGetList(enumerator)) == TYVLinkedListEnumeratorGetMutationCount(enumerator));
 }
 
 TYVLinkedListNode *TYVLinkedListEnumeratorNextNode(TYVLinkedListEnumerator *enumerator) {
     if (NULL == enumerator
-        || !TYVLinkedListEnumeratorIsValid(enumerator)
-        || !TYVLinkedListEnumeratorCheckMutation(enumerator))
+        || !TYVLinkedListEnumeratorIsValid(enumerator))
     {
         return NULL;
     }
+    
+    TYVLinkedListEnumeratorCheckMutation(enumerator);
     
     TYVLinkedListNode *node = TYVLinkedListEnumeratorGetNode(enumerator);
     TYVLinkedListNode *nextNode = NULL;
