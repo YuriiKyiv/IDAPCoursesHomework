@@ -58,7 +58,7 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
     context.currentNode = NULL;
     context.prevNode = NULL;
     
-    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, &TYVComparing, &context);
     if (NULL == node) {
         return;
     }
@@ -102,12 +102,12 @@ bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
         return false;
     }
     
-    TYVContext context;
-    context.comparable = object;
-    context.currentNode = NULL;
-    context.prevNode = NULL;
-    
-    return (NULL != TYVLinkedListFindNodeWithObject(list, TYVComparing, &context));
+    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    if (NULL == context.currentNode && NULL == context.prevNode) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object) {
@@ -155,10 +155,11 @@ TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *obje
     context.prevNode = NULL;
     
     if (NULL == list || NULL == object) {
+        context.comparable = object;
         return context;
     }
     
-    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, TYVComparing, &context);
+    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, &TYVComparing, &context);
     if (NULL == node) {
         context.currentNode = NULL;
         context.prevNode = NULL;
@@ -194,7 +195,7 @@ uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list) {
     return (NULL != list) ? list->_mutationCount : 0;
 }
 
-TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompare function, TYVContext *context) {
+TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompare *function, TYVContext *context) {
     if (NULL == list || NULL == function || NULL == context || NULL == context->comparable) {
         return NULL;
     }

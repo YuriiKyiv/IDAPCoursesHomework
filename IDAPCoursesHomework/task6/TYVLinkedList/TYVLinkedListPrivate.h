@@ -31,7 +31,7 @@ extern
 uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list);
 
 extern
-TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompare function, TYVContext *context);
+TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompare *function, TYVContext *context);
 
 extern
 bool TYVComparing(TYVLinkedListNode *node, TYVContext *context);
