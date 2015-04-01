@@ -14,12 +14,12 @@
 
 typedef struct TYVContext TYVContext;
 struct TYVContext {
-    TYVLinkedListNode *prevNode;
+    TYVLinkedListNode *previousNode;
     TYVLinkedListNode *currentNode;
-    TYVObject *comparable;
+    TYVObject *object;
 };
 
-typedef bool(TYVCompare)(TYVLinkedListNode *node, TYVContext *context);
+typedef bool(TYVComparisonFunction)(TYVLinkedListNode *node, TYVContext *context);
 
 extern
 void TYVLinkedListSetRootNode(TYVLinkedList *list, TYVLinkedListNode *node);
@@ -31,12 +31,15 @@ extern
 uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list);
 
 extern
-TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompare function, TYVContext *context);
+TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVComparisonFunction *function, TYVContext *context);
 
 extern
-bool TYVComparing(TYVLinkedListNode *node, TYVContext *context);
+bool TYVLinkedListNodeContainsObject(TYVLinkedListNode *node, TYVContext *context);
 
 extern
 TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *object);
+
+extern
+void TYVLinkedListMutate(TYVLinkedList *list);
 
 #endif

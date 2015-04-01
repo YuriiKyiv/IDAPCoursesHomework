@@ -33,4 +33,7 @@ void TYVObjectRelease(void *object);
 extern
 void __TYVObjectDeallocate(void *object);
 
+extern
+uint64_t TYVObjectGetReferenceCount(TYVObject *object);
+
 #endif /* defined(__IDAPCoursesHomework__TYVObject__) */

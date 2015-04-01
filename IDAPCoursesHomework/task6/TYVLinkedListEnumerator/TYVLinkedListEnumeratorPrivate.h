@@ -31,7 +31,7 @@ extern
 uint64_t TYVLinkedListEnumeratorGetMutationCount(TYVLinkedListEnumerator *enumerator);
 
 extern
-bool TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator);
+void TYVLinkedListEnumeratorCheckMutation(TYVLinkedListEnumerator *enumerator);
 
 extern
 TYVLinkedListNode *TYVLinkedListEnumeratorNextNode(TYVLinkedListEnumerator *enumerator);
