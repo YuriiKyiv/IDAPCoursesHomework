@@ -53,13 +53,8 @@ void TYVLinkedListRemoveObject(TYVLinkedList *list, TYVObject *object) {
     
     list->_mutationCount++;
     
-    TYVContext context;
-    context.comparable = object;
-    context.currentNode = NULL;
-    context.prevNode = NULL;
-    
-    TYVLinkedListNode *node = TYVLinkedListFindNodeWithObject(list, &TYVComparing, &context);
-    if (NULL == node) {
+    TYVContext context = TYVLinkedListGetContextForObject(list, object);
+    if (NULL == context.currentNode && NULL == context.prevNode) {
         return;
     }
     
@@ -103,11 +98,8 @@ bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
     }
     
     TYVContext context = TYVLinkedListGetContextForObject(list, object);
-    if (NULL == context.currentNode && NULL == context.prevNode) {
-        return false;
-    } else {
-        return true;
-    }
+    
+    return (NULL != context.currentNode);
 }
 
 void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPoint, TYVObject *object) {
@@ -155,7 +147,6 @@ TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *obje
     context.prevNode = NULL;
     
     if (NULL == list || NULL == object) {
-        context.comparable = object;
         return context;
     }
     
