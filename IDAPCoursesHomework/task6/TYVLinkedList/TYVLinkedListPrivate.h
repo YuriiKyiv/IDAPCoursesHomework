@@ -16,7 +16,7 @@ typedef struct TYVContext TYVContext;
 struct TYVContext {
     TYVLinkedListNode *previousNode;
     TYVLinkedListNode *currentNode;
-    TYVObject *comparable;
+    TYVObject *object;
 };
 
 typedef bool(TYVComparisonFunction)(TYVLinkedListNode *node, TYVContext *context);

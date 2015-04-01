@@ -142,7 +142,7 @@ void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoi
 
 TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *object) {
     TYVContext context;
-    context.comparable = object;
+    context.object = object;
     context.currentNode = NULL;
     context.previousNode = NULL;
     
@@ -195,7 +195,7 @@ uint64_t TYVLinkedListGetMutationCount(TYVLinkedList *list) {
 }
 
 TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVComparisonFunction *function, TYVContext *context) {
-    if (NULL == list || NULL == function || NULL == context || NULL == context->comparable) {
+    if (NULL == list || NULL == function || NULL == context || NULL == context->object) {
         return NULL;
     }
     
@@ -214,12 +214,12 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompa
 #pragma mark Comparators
 
 bool TYVLinkedListNodeContainsObject(TYVLinkedListNode *node, TYVContext *context) {
-    if (NULL == node || NULL == context || NULL == context->comparable) {
+    if (NULL == node || NULL == context || NULL == context->object) {
         return false;
     }
     
     context->previousNode = context->currentNode;
     context->currentNode = node;
     
-    return TYVLinkedListNodeGetObject(node) == context->comparable;
+    return TYVLinkedListNodeGetObject(node) == context->object;
 }
