@@ -210,13 +210,14 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompa
     while (TYVLinkedListEnumeratorIsValid(enumerator)) {
         TYVLinkedListEnumeratorNextObject(enumerator);
         if (function(TYVLinkedListEnumeratorGetNode(enumerator), context)) {
-            break;
+            TYVObjectRelease(enumerator);
+            return context->currentNode;
         }
     }
     
     TYVObjectRelease(enumerator);
     
-    return context->currentNode;
+    return NULL;
 }
 
 #pragma mark -
