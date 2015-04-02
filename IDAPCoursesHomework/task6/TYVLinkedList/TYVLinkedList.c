@@ -35,12 +35,13 @@ void TYVLinkedListAddObject(TYVLinkedList *list, TYVObject *object) {
         return;
     }
     
+    TYVLinkedListMutate(list);
+    
     TYVLinkedListNode *rootNode = TYVLinkedListGetRootNode(list);
     TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, rootNode);
     TYVLinkedListSetRootNode(list, newNode);
     
     list->_count++;
-    TYVLinkedListMutate(list);
     
     TYVObjectRelease(newNode);
     
@@ -115,10 +116,11 @@ void TYVLinkedListInsertBeforeObject(TYVLinkedList *list, TYVObject *insertionPo
     if (TYVLinkedListGetRootNode(list) == context.currentNode) {
         TYVLinkedListAddObject(list, object);
     } else {
+        TYVLinkedListMutate(list);
         TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
         TYVLinkedListNodeSetNextNode(context.previousNode, newNode);
         TYVObjectRelease(newNode);
-        TYVLinkedListMutate(list);
+        list->_count++;
     }
     
 }
@@ -133,10 +135,15 @@ void TYVLinkedListInsertAfterObject(TYVLinkedList *list, TYVObject *insertionPoi
         return;
     }
     
+    TYVLinkedListMutate(list);
+    
     TYVLinkedListNode *newNode = TYVLinkedListNodeCreateWithObjectAndNextNode(object, context.currentNode);
     TYVLinkedListNodeSetNextNode(newNode, TYVLinkedListNodeGetNextNode(context.currentNode));
     TYVLinkedListNodeSetNextNode(context.currentNode, newNode);
-    TYVLinkedListMutate(list);
+    
+    list->_count++;
+    
+    TYVObjectRelease(newNode);
     
 }
 
@@ -203,9 +210,12 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompa
     while (TYVLinkedListEnumeratorIsValid(enumerator)) {
         TYVLinkedListEnumeratorNextObject(enumerator);
         if (function(TYVLinkedListEnumeratorGetNode(enumerator), context)) {
+            TYVObjectRelease(enumerator);
             return context->currentNode;
         }
     }
+    
+    TYVObjectRelease(enumerator);
     
     return NULL;
 }

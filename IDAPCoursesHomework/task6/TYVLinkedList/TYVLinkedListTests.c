@@ -19,99 +19,104 @@ void TYVLinkedListContainsTest();
 void TYVLinkedlistBehaviorTest();
 
 void TYVLinkedlistBehaviorTest() {
-//  after creating a list
+//    after creating a list
     TYVLinkedList *list =  TYVLinkedListCreate();
     
-//  list count equals 0
-    assert(0 == TYVLinkedListGetCount(list));
-    
-//  the firt object of list equals NULL
-    assert(NULL == TYVLinkedListGetFirstObject(list));
-    
-    TYVObject *object = TYVObjectCreate(TYVObject);
-    
-//      after adding TYVObject object into the list
-    TYVLinkedListAddObject(list, object);
-    
-//      The list count equals 1
-    assert(1 == TYVLinkedListGetCount(list));
-    
-//      The first object of list equals object
-    assert(TYVLinkedListGetFirstObject(list) == object);
-    
-//      the object reference count equals 2
-    assert(2 == object->_referenceCount);
-    
-//      the list contains object
-    assert(TYVLinkedListContainsObject(list, object));
-    
-//          after adding 5 times object
-    for (int i = 0; i < 5; i++) {
-        TYVLinkedListAddObject(list, object);
-    }
-    
-//          the object reference count equals 7
-    assert(7 == object->_referenceCount);
-    
-//          the list count equals 6
-    assert(6 == TYVLinkedListGetCount(list));
-    
-    TYVString *string = TYVStringCreate("mamaPapa");
-    
-//          after inserting string after object
-    TYVLinkedListInsertAfterObject(list, object, (TYVObject *)string);
-    
-//              the string reference count equals 2
-    assert(2 == TYVObjectGetReferenceCount((TYVObject *)string));
-    
-//              the list contains object
-    assert(TYVLinkedListContainsObject(list, (TYVObject *)string));
-    
-//              after removing a firt objectin a list
-    TYVLinkedListRemoveFirstObject(list);
-    
-//                  the list count equals 5
-    assert(5 == TYVLinkedListGetCount(list));
-
-//                  the first object have to be string
-    assert(TYVLinkedListGetFirstObject(list) == (TYVObject *)string);
-
-//                  after inserting object before string
-    TYVLinkedListInsertBeforeObject(list, (TYVObject *)string, object);
-    
-//                      the list count equals 6
-    assert(6 == TYVLinkedListGetCount(list));
- 
-//                      the first object have to be object
-    assert(TYVLinkedListGetFirstObject(list) == object);
-
-//                      after removing string
-    TYVLinkedListRemoveObject(list, (TYVObject *)string);
-    
-//                          sting reference count equals 1
-    assert(TYVObjectGetReferenceCount((TYVObject *)string) == 1);
-    
-//                          the list doesnt contain string
-    assert(!TYVLinkedListContainsObject(list, (TYVObject *)string));
-    
-//                          the list count equals 5
-    assert(5 == TYVLinkedListGetCount(list));
-
-//                          after removing all objects
-    TYVLinkedListRemoveAllObjects(list);
-    
-//                              the list count equals 0
+//    list count equals 0
     assert(TYVLinkedListGetCount(list) == 0);
     
-//                              the first object equals NULL
+//    the firt object of list equals NULL
     assert(TYVLinkedListGetFirstObject(list) == NULL);
     
-//                              the object reference count equals 1
-    assert(TYVObjectGetReferenceCount(object) == 1);
+    TYVObject *object1 = TYVObjectCreate(TYVObject);
     
+//    after adding TYVObject object1 into the list
+    TYVLinkedListAddObject(list, object1);
+    
+//    The list count equals 1
+    assert(TYVLinkedListGetCount(list) == 1);
+    
+//    The first object of list equals object1
+    assert(TYVLinkedListGetFirstObject(list) == object1);
+    
+//    the object1 reference count equals 2
+    assert(TYVObjectGetReferenceCount(object1) == 2);
+    
+//    the list contains object1
+    assert(TYVLinkedListContainsObject(list, object1));
+    
+//    after adding 5 times objects
+    for (int i = 0; i < 5; i++) {
+        TYVLinkedListAddObject(list, object1);
+    }
+    
+//    the object reference count equals 7
+    assert(TYVObjectGetReferenceCount(object1) == 7);
+    
+//    the list count equals 6
+    assert(TYVLinkedListGetCount(list) == 6);
+    
+    TYVString *string = TYVStringCreate("ONE");
+    
+//    after inserting string after object1
+    TYVLinkedListInsertAfterObject(list, object1, (TYVObject *)string);
+    
+//    the string reference count equals 2
+    assert(TYVObjectGetReferenceCount((TYVObject *)string) == 2);
+    
+//    the list contains object
+    assert(TYVLinkedListContainsObject(list, (TYVObject *)string));
+    
+//    the list count equals 7
+    assert(TYVLinkedListGetCount(list) == 7);
+    
+//    after removing a firt objectin a list
+    TYVLinkedListRemoveFirstObject(list);
+    
+//    the list count equals 6
+    assert(TYVLinkedListGetCount(list) == 6);
+    
+//    the first object have to be string
+    assert(TYVLinkedListGetFirstObject(list) == (TYVObject *)string);
+    
+//    the object1 reference count equals 6
+    assert(TYVObjectGetReferenceCount(object1));
+    
+//    after inserting object1 before string
+    TYVLinkedListInsertBeforeObject(list, (TYVObject *)string, object1);
+    
+//    the list count equals 7
+    assert(TYVLinkedListGetCount(list) == 7);
+    
+//    the first object have to be object1
+    assert(TYVLinkedListGetFirstObject(list) == object1);
+    
+//    after removing string
+    TYVLinkedListRemoveObject(list, (TYVObject *)string);
+    
+//    sting reference count equals 1
+    assert(TYVObjectGetReferenceCount((TYVObject *)string) == 1);
+    
+//    the list doesnt contain string
+    assert(!TYVLinkedListContainsObject(list, (TYVObject *)string));
+    
+//    the list count equals 6
+    assert(TYVLinkedListGetCount(list) == 6);
+    
+//    after removing all objects
+    TYVLinkedListRemoveAllObjects(list);
+    
+//    the list count equals 0
+    assert(TYVLinkedListGetCount(list) == 0);
+    
+//    the first object equals NULL
+    assert(TYVLinkedListGetFirstObject(list) == NULL);
+    
+//    the object reference count equals 1
+    assert(TYVObjectGetReferenceCount(object1) == 1);
     
     TYVObjectRelease(string);
-    TYVObjectRelease(object);
+    TYVObjectRelease(object1);
     TYVObjectRelease(list);
 }
 
