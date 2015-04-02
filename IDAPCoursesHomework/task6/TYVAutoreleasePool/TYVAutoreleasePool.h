@@ -27,6 +27,9 @@ extern
 TYVAutoreleasePool *TYVAutoreleasePoolCreate();
 
 extern
+void __TYVAutoreleasePoolDeallocate(TYVAutoreleasePool * pool);
+
+extern
 void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object);
 
 extern
