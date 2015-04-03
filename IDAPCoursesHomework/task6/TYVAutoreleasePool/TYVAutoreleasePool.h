@@ -20,6 +20,7 @@ struct TYVAutoreleasePool {
     TYVLinkedList *_list;
     
     TYVAutoReleaseStack *_currentStack;
+    TYVAutoReleaseStack *_previousStack;
     uint64_t _emptyStackCount;
 };
 
