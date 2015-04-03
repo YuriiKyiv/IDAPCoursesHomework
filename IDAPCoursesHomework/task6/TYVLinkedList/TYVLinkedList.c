@@ -206,18 +206,19 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompa
         return NULL;
     }
     
+    TYVLinkedListNode *result = NULL;
     TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
     while (TYVLinkedListEnumeratorIsValid(enumerator)) {
         TYVLinkedListEnumeratorNextObject(enumerator);
         if (function(TYVLinkedListEnumeratorGetNode(enumerator), context)) {
-            TYVObjectRelease(enumerator);
-            return context->currentNode;
+            result = context->currentNode;
+            break;
         }
     }
     
     TYVObjectRelease(enumerator);
     
-    return NULL;
+    return result;
 }
 
 #pragma mark -
