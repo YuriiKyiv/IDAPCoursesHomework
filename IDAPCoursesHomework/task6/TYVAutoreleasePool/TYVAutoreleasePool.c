@@ -14,6 +14,7 @@
 #include "TYVLinkedList.h"
 #include "TYVAutoReleaseStack.h"
 #include "TYVPropertySetters.h"
+#include "TYVLinkedListEnumerator.h"
 
 static
 const uint64_t TYVAutoreleasingStackMaxCount = 512;
@@ -78,8 +79,35 @@ void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object) {
     TYVAutoreleasePoolInsertObject(pool, object);
 }
 
-extern
-void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool);
+void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
+    if (NULL == pool) {
+        return;
+    }
+    
+    TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
+    TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
+    TYVAutoReleaseStackPopType popType;
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
+    
+    do {
+        popType = TYVAutoReleaseStackPopItems(stack);
+        if (TYVAutoReleaseStackIsEmpty(stack)) {
+            pool->_emptyStackCount++;
+            while (TYVLinkedListEnumeratorIsValid(enumerator)
+                   && TYVLinkedListEnumeratorNextObject(enumerator) != (TYVObject *)stack)
+            {
+            }
+        
+            stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
+        } 
+    }
+    while (popType != TYVAutoReleaseStackPopNULL);
+    
+    TYVAutoreleasePoolSetCurrentStack(pool, stack);
+    
+    TYVObjectRelease(enumerator);
+    
+}
 
 #pragma mark -
 #pragma mark Private Implementations
