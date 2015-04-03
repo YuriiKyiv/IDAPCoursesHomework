@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 typedef struct TYVLinkedList TYVLinkedList;
+typedef struct TYVLinkedListNode TYVLinkedListNode;
 typedef struct TYVAutoReleaseStack TYVAutoReleaseStack;
 typedef struct TYVAutoreleasePool TYVAutoreleasePool;
 typedef struct TYVObject TYVObject;
@@ -20,7 +21,7 @@ struct TYVAutoreleasePool {
     TYVLinkedList *_list;
     
     TYVAutoReleaseStack *_currentStack;
-    TYVAutoReleaseStack *_previousStack;
+    TYVLinkedListNode *_previousStackNode;
     uint64_t _emptyStackCount;
 };
 
