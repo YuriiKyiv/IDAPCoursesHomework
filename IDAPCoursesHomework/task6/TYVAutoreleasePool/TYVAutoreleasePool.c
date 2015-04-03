@@ -15,6 +15,8 @@
 #include "TYVAutoReleaseStack.h"
 #include "TYVPropertySetters.h"
 #include "TYVLinkedListEnumerator.h"
+#include "TYVLinkedListPrivate.h"
+#include "TYVLinkedListNode.h"
 
 static
 const uint64_t TYVAutoreleasingStackMaxCount = 512;
@@ -97,15 +99,23 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
                    && TYVLinkedListEnumeratorNextObject(enumerator) != (TYVObject *)stack)
             {
             }
-        
+            
+#warning    add removing the empty stacks if emptyStackCount > 1
+#warning    HAVE TO USE A NEW ENUMERATOR NOT THIS
+//            if (1 < pool->_emptyStackCount++) {
+//                TYVLinkedListSetRootNode(list, TYVLinkedListNodeCreate((TYVObject *)stack));
+//            }
+            
+            pool->_previousStack = stack;
             stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
-        } 
+        }
     }
     while (popType != TYVAutoReleaseStackPopNULL);
     
     TYVAutoreleasePoolSetCurrentStack(pool, stack);
-    
     TYVObjectRelease(enumerator);
+    
+#warning add removing empty stacks if needed
     
 }
 
