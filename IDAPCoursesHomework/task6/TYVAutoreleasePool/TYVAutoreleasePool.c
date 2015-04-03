@@ -7,6 +7,7 @@
 //
 
 #include <stdlib.h>
+#include <assert.h>
 
 #include "TYVAutoreleasePool.h"
 #include "TYVObject.h"
@@ -72,19 +73,9 @@ void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object) {
         return;
     }
     
-    uint64_t size = TYVAutoreleasingStackMaxCount;
+    assert(NULL == object);
     
-    TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
-    TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
-    if (NULL == stack || TYVAutoReleaseStackIsFull(stack)) {
-        TYVAutoReleaseStack *newStack = TYVAutoReleaseStackCreateWithSize(size);
-        TYVLinkedListAddObject(list, (TYVObject *)newStack);
-        TYVAutoreleasePoolSetCurrentStack(pool, newStack);
-        
-        TYVObjectRelease(newStack);
-    }
-    
-    TYVAutoReleaseStackPushItem(stack, object);
+    TYVAutoreleasePoolInsertObject(pool, object);
 }
 
 extern
@@ -122,7 +113,19 @@ void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object)
         return;
     }
     
+    uint64_t size = TYVAutoreleasingStackMaxCount;
     
+    TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
+    TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
+    if (NULL == stack || TYVAutoReleaseStackIsFull(stack)) {
+        TYVAutoReleaseStack *newStack = TYVAutoReleaseStackCreateWithSize(size);
+        TYVLinkedListAddObject(list, (TYVObject *)newStack);
+        TYVAutoreleasePoolSetCurrentStack(pool, newStack);
+        
+        TYVObjectRelease(newStack);
+    }
+    
+    TYVAutoReleaseStackPushItem(stack, object);
 }
 
 void TYVAutoreleasePoolSetCurrentStack(TYVAutoreleasePool *pool, TYVAutoReleaseStack *stack) {
