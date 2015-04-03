@@ -14,6 +14,9 @@
 #include "TYVAutoReleaseStack.h"
 #include "TYVPropertySetters.h"
 
+static
+const uint64_t TYVAutoreleasingStackMaxCount = 512;
+
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -23,9 +26,13 @@ void TYVAutoreleasePoolSetPool(TYVAutoreleasePool * pool);
 
 void TYVAutoreleasePoolSetList(TYVAutoreleasePool *pool, TYVLinkedList *list);
 
+TYVLinkedList *TYVAutoreleasePoolGetList(TYVAutoreleasePool *pool);
+
 void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object);
 
 void TYVAutoreleasePoolSetCurrentStack(TYVAutoreleasePool *pool, TYVAutoReleaseStack *stack);
+
+TYVAutoReleaseStack *TYVAutoreleasePoolGetCurrentStack(TYVAutoreleasePool *pool);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -57,13 +64,27 @@ void __TYVAutoreleasePoolDeallocate(TYVAutoreleasePool * pool) {
     
     TYVAutoreleasePoolSetList(pool, NULL);
     TYVAutoreleasePoolSetCurrentStack(pool, NULL);
-    pool->_emptyStackCount = 0;
+    free(pool);
 }
 
 void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object) {
-    if (NULL == pool || NULL == object) {
+    if (NULL == pool) {
         return;
     }
+    
+    uint64_t size = TYVAutoreleasingStackMaxCount;
+    
+    TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
+    TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
+    if (NULL == stack || TYVAutoReleaseStackIsFull(stack)) {
+        TYVAutoReleaseStack *newStack = TYVAutoReleaseStackCreateWithSize(size);
+        TYVLinkedListAddObject(list, (TYVObject *)newStack);
+        TYVAutoreleasePoolSetCurrentStack(pool, newStack);
+        
+        TYVObjectRelease(newStack);
+    }
+    
+    TYVAutoReleaseStackPushItem(stack, object);
 }
 
 extern
@@ -92,7 +113,13 @@ void TYVAutoreleasePoolSetList(TYVAutoreleasePool *pool, TYVLinkedList *list) {
     TYVPropertySetRetain(&pool->_list, list);
 }
 
-void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object);
+void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object) {
+    if (NULL == pool || NULL == object) {
+        return;
+    }
+    
+    
+}
 
 void TYVAutoreleasePoolSetCurrentStack(TYVAutoreleasePool *pool, TYVAutoReleaseStack *stack) {
     if (NULL == pool || NULL == stack) {
