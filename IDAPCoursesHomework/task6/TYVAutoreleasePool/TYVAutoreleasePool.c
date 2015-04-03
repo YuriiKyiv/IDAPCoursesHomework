@@ -113,6 +113,10 @@ void TYVAutoreleasePoolSetList(TYVAutoreleasePool *pool, TYVLinkedList *list) {
     TYVPropertySetRetain(&pool->_list, list);
 }
 
+TYVLinkedList *TYVAutoreleasePoolGetList(TYVAutoreleasePool *pool) {
+    return (NULL != pool) ? pool->_list : NULL;
+}
+
 void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object) {
     if (NULL == pool || NULL == object) {
         return;
@@ -127,4 +131,8 @@ void TYVAutoreleasePoolSetCurrentStack(TYVAutoreleasePool *pool, TYVAutoReleaseS
     }
     
     TYVPropertySetRetain(&pool->_currentStack, stack);
+}
+
+TYVAutoReleaseStack *TYVAutoreleasePoolGetCurrentStack(TYVAutoreleasePool *pool) {
+    return (NULL != pool) ? pool->_currentStack : NULL;
 }
