@@ -39,6 +39,10 @@ void TYVAutoreleasePoolSetCurrentStack(TYVAutoreleasePool *pool, TYVAutoReleaseS
 
 TYVAutoReleaseStack *TYVAutoreleasePoolGetCurrentStack(TYVAutoreleasePool *pool);
 
+void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool);
+
+void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -100,12 +104,6 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
                    && TYVLinkedListEnumeratorNextObject(enumerator) != (TYVObject *)stack)
             {
             }
-            
-#warning    add removing the empty stacks if emptyStackCount > 1
-#warning    HAVE TO USE A NEW ENUMERATOR NOT THIS
-//            if (1 < pool->_emptyStackCount++) {
-//                TYVLinkedListSetRootNode(list, pool->_previousStackNode);
-//            }
           
             pool->_previousStackNode = TYVLinkedListEnumeratorGetNode(enumerator);
             stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
@@ -116,7 +114,7 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
     TYVAutoreleasePoolSetCurrentStack(pool, stack);
     TYVObjectRelease(enumerator);
     
-#warning add removing empty stacks if needed
+    TYVAutoreleasePoolDeflateIfNeeded(pool);
     
 }
 
@@ -177,4 +175,23 @@ void TYVAutoreleasePoolSetCurrentStack(TYVAutoreleasePool *pool, TYVAutoReleaseS
 
 TYVAutoReleaseStack *TYVAutoreleasePoolGetCurrentStack(TYVAutoreleasePool *pool) {
     return (NULL != pool) ? pool->_currentStack : NULL;
+}
+
+void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
+    if (NULL == pool) {
+        return;
+    }
+    
+    if (1 > pool->_emptyStackCount) {
+        TYVAutoreleasePoolDeflating(pool);
+    }
+}
+
+void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool) {
+    if (NULL == pool) {
+        return;
+    }
+    
+    TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
+    TYVLinkedListSetRootNode(list, pool->_previousStackNode);
 }
