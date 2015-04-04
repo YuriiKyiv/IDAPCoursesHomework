@@ -43,6 +43,8 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool);
 
 void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool);
 
+void TYVAutoreleasePoolValidate(TYVAutoreleasePool *pool);
+
 #pragma mark -
 #pragma mark Public Implementations
 
@@ -188,10 +190,24 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
 }
 
 void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool) {
-    if (NULL == pool) {
+    if (NULL == pool || pool->_previousStackNode == NULL) {
         return;
     }
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
     TYVLinkedListSetRootNode(list, pool->_previousStackNode);
+    pool->_emptyStackCount = 0;
+    pool->_previousStackNode = NULL;
+}
+
+void TYVAutoreleasePoolValidate(TYVAutoreleasePool *pool) {
+    if (NULL == pool) {
+        return;
+    }
+    
+    TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
+    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
+    TYVAutoReleaseStack *stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
+
+    assert(NULL == TYVLinkedListEnumeratorNextObject(enumerator) && TYVAutoReleaseStackIsEmpty(stack));
 }
