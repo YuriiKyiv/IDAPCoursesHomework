@@ -11,4 +11,7 @@
 
 #include <stdio.h>
 
+extern
+void TYVAutoreleasePoolPerfomTest();
+
 #endif /* defined(__IDAPCoursesHomework__TYVAutoreleasePoolTests__) */

@@ -83,9 +83,9 @@ void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object) {
         return;
     }
     
-    assert(NULL == object);
+    assert(NULL != object);
     
-    TYVAutoreleasePoolValidate(pool);
+//    TYVAutoreleasePoolValidate(pool);
     
     TYVAutoreleasePoolInsertObject(pool, object);
 }
@@ -166,7 +166,7 @@ void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object)
         TYVObjectRelease(newStack);
     }
     
-    TYVAutoReleaseStackPushItem(stack, object);
+    TYVAutoReleaseStackPushItem(TYVAutoreleasePoolGetCurrentStack(pool), object);
 }
 
 void TYVAutoreleasePoolSetCurrentStack(TYVAutoreleasePool *pool, TYVAutoReleaseStack *stack) {
