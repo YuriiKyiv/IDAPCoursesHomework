@@ -85,6 +85,8 @@ void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object) {
     
     assert(NULL == object);
     
+    TYVAutoreleasePoolValidate(pool);
+    
     TYVAutoreleasePoolInsertObject(pool, object);
 }
 
