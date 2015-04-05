@@ -20,7 +20,7 @@
 #include "TYVLinkedListEnumeratorPrivate.h"
 
 static
-const uint64_t TYVAutoreleasingStackMaxCount = 1;
+const uint64_t TYVAutoreleasingStackMaxCount = 512;
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -100,25 +100,28 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
     TYVAutoReleaseStackPopType popType;
     TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
     
-    do {
-        popType = TYVAutoReleaseStackPopItems(stack);
-        if (TYVAutoReleaseStackIsEmpty(stack)) {
-            pool->_emptyStackCount++;
-            while (TYVLinkedListEnumeratorIsValid(enumerator)
-                   && TYVLinkedListEnumeratorNextObject(enumerator) != (TYVObject *)stack)
-            {
+    popType = TYVAutoReleaseStackPopItems(stack);
+    
+    if (TYVAutoReleaseStackPopNULL != popType) {
+        while (TYVLinkedListEnumeratorIsValid(enumerator)
+               && TYVLinkedListEnumeratorNextObject(enumerator) != (TYVObject *)stack)
+        {
+        }
+    
+        do {
+            if (TYVAutoReleaseStackIsEmpty(stack)) {
+                pool->_emptyStackCount++;
             }
-          
             pool->_previousStackNode = TYVLinkedListEnumeratorGetNode(enumerator);
             stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
-        }
+            popType = TYVAutoReleaseStackPopItems(stack);
+        } while (TYVAutoReleaseStackPopNULL != stack);
     }
-    while (popType != TYVAutoReleaseStackPopNULL);
     
-    TYVAutoreleasePoolSetCurrentStack(pool, stack);
     TYVObjectRelease(enumerator);
     
-//    TYVAutoreleasePoolDeflateIfNeeded(pool);
+    
+    TYVAutoreleasePoolDeflateIfNeeded(pool);
     
 }
 
@@ -158,11 +161,7 @@ void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object)
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
     TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
-    if (NULL == stack || TYVAutoReleaseStackIsFull(stack)) {
-        if (TYVAutoReleaseStackIsFull(stack)) {
-            pool->_emptyStackCount--;
-        }
-        
+    if (NULL == stack || TYVAutoReleaseStackIsFull(stack)) {       
         TYVAutoReleaseStack *newStack = TYVAutoReleaseStackCreateWithSize(size);
         TYVLinkedListAddObject(list, (TYVObject *)newStack);
         TYVAutoreleasePoolSetCurrentStack(pool, newStack);
@@ -190,7 +189,7 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
         return;
     }
     
-    if (1 < pool->_emptyStackCount) {
+    if (2 < pool->_emptyStackCount) {
         TYVAutoreleasePoolDeflating(pool);
     }
 }

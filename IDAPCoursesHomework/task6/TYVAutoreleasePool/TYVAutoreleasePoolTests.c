@@ -61,6 +61,13 @@ void TYVAutoreleasePoolBehaviorTest() {
     TYVAutoreleasePool *pool2 = TYVAutoreleasePoolCreate();
     TYVAutoreleasePoolDrain(pool2);
     assert(TYVObjectGetReferenceCount(object1) == count + 1);
+    TYVObjectRetain(object1);
+    TYVAutoreleasePoolAddObject(pool, object1);
+    assert(TYVObjectGetReferenceCount(object1) == count + 2);
+    TYVAutoreleasePoolDrain(pool1);
+    assert(TYVObjectGetReferenceCount(object1) == count + 1);
+    TYVAutoreleasePoolDrain(pool);
+    assert(TYVObjectGetReferenceCount(object1) == 1);
     
     TYVObjectRelease(object1);
 }
