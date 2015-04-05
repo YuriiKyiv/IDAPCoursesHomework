@@ -14,6 +14,8 @@
 
 void TYVAutoreleasePoolBehaviorTest();
 
+void YVAutoreleasePoolGeneralTest();
+
 // IDPAutoreleasePool
 //  after calling new and receiving pool
 //      after adding IDPObject *value
@@ -37,6 +39,7 @@ void TYVAutoreleasePoolBehaviorTest();
 
 void TYVAutoreleasePoolPerfomTest() {
     TYVAutoreleasePoolBehaviorTest();
+    YVAutoreleasePoolGeneralTest();
 }
 
 void TYVAutoreleasePoolBehaviorTest() {
@@ -68,6 +71,38 @@ void TYVAutoreleasePoolBehaviorTest() {
     assert(TYVObjectGetReferenceCount(object1) == count + 1);
     TYVAutoreleasePoolDrain(pool);
     assert(TYVObjectGetReferenceCount(object1) == 1);
+    
+    TYVObjectRelease(object1);
+}
+
+void YVAutoreleasePoolGeneralTest() {
+    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
+    TYVObject *object1 = TYVObjectCreate(TYVObject);
+    TYVObjectRetain(object1);
+    TYVAutoreleasePoolAddObject(pool, object1);
+    assert(TYVObjectGetReferenceCount(object1) == 2);
+    
+    TYVObjectRetain(object1);
+    TYVAutoreleasePoolAddObject(pool, object1);
+    assert(TYVObjectGetReferenceCount(object1) == 3);
+    
+    TYVObjectRetain(object1);
+    TYVAutoreleasePoolAddObject(pool, object1);
+    assert(TYVObjectGetReferenceCount(object1) == 4);
+    
+    TYVAutoreleasePoolDrain(pool);
+    assert(TYVObjectGetReferenceCount(object1) == 1);
+    
+    TYVAutoreleasePool *pool1 = TYVAutoreleasePoolCreate();
+    
+    TYVAutoreleasePool *pool2 = TYVAutoreleasePoolCreate();
+    
+    TYVAutoreleasePoolDrain(pool2);
+    
+    TYVObjectRetain(object1);
+    TYVAutoreleasePoolAddObject(pool, object1);
+    
+    TYVAutoreleasePoolDrain(pool1);
     
     TYVObjectRelease(object1);
 }
