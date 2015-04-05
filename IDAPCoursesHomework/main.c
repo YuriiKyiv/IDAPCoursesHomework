@@ -111,12 +111,12 @@ void TYVTask5Perform() {
     //TYVStringTestsPerfom();
     //TYVHumanTests();
     //TYVArrayListPerfomTests();
-    TYVStackTestPerfom();
 }
 
 inline
 void TYVTask6Perfom() {
 //    TYVLinkedListNodePerfomTest();
 //    TYVLinkedListPerfomTest();
-    TYVAutoreleasePoolPerfomTest();
+    TYVStackTestPerfom();
+//    TYVAutoreleasePoolPerfomTest();
 }

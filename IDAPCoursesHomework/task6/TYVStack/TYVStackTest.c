@@ -30,15 +30,67 @@ void TYVStackTestPerfom(){
 //          after adding TYVObject object1
 //              count equals 1
 //              reference count of object equals 1
+//              stack should not be empty
+//              after adding TYVObject object1 15 times
+//                  it has count 16
+//                  after addinh NULL
+//                      it has count 17
+//                      after adding TYVObject object1 10 times
+//                          it has count 27
+
+
 
 void TYVAutoReleaseStackBehaviorTest(){
     TYVAutoReleaseStack *stack = TYVAutoReleaseStackCreateWithSize(100);
     assert(TYVAutoReleaseStackIsEmpty(stack));
     
     TYVObject *object1 = TYVObjectCreate(TYVObject);
+    TYVObjectRetain(object1);
     TYVAutoReleaseStackPushItem(stack, object1);
     assert(TYVAutoReleaseStackGetCount(stack) == 1);
-    assert(1 == object1->_referenceCount);
+    assert(TYVObjectGetReferenceCount(object1) == 2);
+    assert(!TYVAutoReleaseStackIsEmpty(stack));
+    
+    for (int i = 0; i < 15; i++) {
+        TYVObjectRetain(object1);
+        TYVAutoReleaseStackPushItem(stack, object1);
+    }
+    assert(TYVObjectGetReferenceCount(object1) == 17);
+    assert(TYVAutoReleaseStackGetCount(stack) == 16);
+    
+    TYVAutoReleaseStackPushItem(stack, NULL);
+    assert(TYVAutoReleaseStackGetCount(stack) == 17);
+    for (int i = 0; i < 10; i++) {
+        TYVObjectRetain(object1);
+        TYVAutoReleaseStackPushItem(stack, object1);
+    }
+    assert(TYVAutoReleaseStackGetCount(stack) == 27);
+    assert(TYVObjectGetReferenceCount(object1) == 27);
+    
+    TYVAutoReleaseStackPopType type =  TYVAutoReleaseStackPopItem(stack);
+    assert(TYVAutoReleaseStackPopObject == type);
+    assert(TYVAutoReleaseStackGetCount(stack) == 26);
+    
+    type =  TYVAutoReleaseStackPopItems(stack);
+    assert(TYVAutoReleaseStackPopNULL == type);
+    assert(TYVAutoReleaseStackGetCount(stack) == 16);
+    
+    type =  TYVAutoReleaseStackPopItems(stack);
+    assert(TYVAutoReleaseStackPopObject == type);
+    assert(TYVAutoReleaseStackGetCount(stack) == 0);
+    assert(TYVAutoReleaseStackIsEmpty(stack));
+    
+    for (int i = 0; i < 10; i++) {
+        TYVObjectRetain(object1);
+        TYVAutoReleaseStackPushItem(stack, object1);
+    }
+    assert(TYVObjectGetReferenceCount(object1) == 11);
+    assert(TYVAutoReleaseStackGetCount(stack) == 10);
+    TYVAutoReleaseStackPopAllItems(stack);
+    assert(TYVAutoReleaseStackGetCount(stack) == 0);
+    assert(TYVAutoReleaseStackIsEmpty(stack));
+    assert(TYVObjectGetReferenceCount(object1) == 1);
+    
     
     TYVObjectRelease(object1);
     TYVObjectRelease(stack);
