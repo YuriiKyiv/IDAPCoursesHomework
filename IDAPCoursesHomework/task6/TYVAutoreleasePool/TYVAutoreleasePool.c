@@ -20,7 +20,7 @@
 #include "TYVLinkedListEnumeratorPrivate.h"
 
 static
-const uint64_t TYVAutoreleasingStackMaxCount = 512;
+const uint64_t TYVAutoreleasingStackMaxCount = 1;
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -118,7 +118,7 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
     TYVAutoreleasePoolSetCurrentStack(pool, stack);
     TYVObjectRelease(enumerator);
     
-    TYVAutoreleasePoolDeflateIfNeeded(pool);
+//    TYVAutoreleasePoolDeflateIfNeeded(pool);
     
 }
 
@@ -150,7 +150,7 @@ TYVLinkedList *TYVAutoreleasePoolGetList(TYVAutoreleasePool *pool) {
 }
 
 void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object) {
-    if (NULL == pool || NULL == object) {
+    if (NULL == pool) {
         return;
     }
     
@@ -159,6 +159,10 @@ void TYVAutoreleasePoolInsertObject(TYVAutoreleasePool *pool, TYVObject *object)
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
     TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
     if (NULL == stack || TYVAutoReleaseStackIsFull(stack)) {
+        if (TYVAutoReleaseStackIsFull(stack)) {
+            pool->_emptyStackCount--;
+        }
+        
         TYVAutoReleaseStack *newStack = TYVAutoReleaseStackCreateWithSize(size);
         TYVLinkedListAddObject(list, (TYVObject *)newStack);
         TYVAutoreleasePoolSetCurrentStack(pool, newStack);

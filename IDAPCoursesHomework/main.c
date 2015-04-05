@@ -117,6 +117,6 @@ inline
 void TYVTask6Perfom() {
 //    TYVLinkedListNodePerfomTest();
 //    TYVLinkedListPerfomTest();
-    TYVStackTestPerfom();
-//    TYVAutoreleasePoolPerfomTest();
+//    TYVStackTestPerfom();
+    TYVAutoreleasePoolPerfomTest();
 }
