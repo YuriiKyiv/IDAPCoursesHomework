@@ -186,7 +186,7 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
         return;
     }
     
-    if (1 > pool->_emptyStackCount) {
+    if (1 < pool->_emptyStackCount) {
         TYVAutoreleasePoolDeflating(pool);
     }
 }
@@ -211,5 +211,7 @@ void TYVAutoreleasePoolValidate(TYVAutoreleasePool *pool) {
     TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
     TYVAutoReleaseStack *stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
 
-    assert(NULL == TYVLinkedListEnumeratorNextObject(enumerator) && TYVAutoReleaseStackIsEmpty(stack));
+    assert(NULL != TYVLinkedListEnumeratorNextObject(enumerator) && !TYVAutoReleaseStackIsEmpty(stack));
+    
+    TYVObjectRelease(enumerator);
 }
