@@ -31,7 +31,7 @@ extern
 void TYVObjectRelease(void *object);
 
 extern
-void TYVAutorelease(void *object);
+TYVObject *TYVObjectAutorelease(void *object);
 
 extern
 void __TYVObjectDeallocate(void *object);

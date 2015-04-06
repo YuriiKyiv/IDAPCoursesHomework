@@ -43,12 +43,14 @@ void TYVObjectRelease(void *voidObject){
     }
 }
 
-void TYVAutorelease(void *object) {
+TYVObject *TYVObjectAutorelease(void *object) {
     if (NULL == object) {
-        return;
+        return NULL;
     }
     
     TYVAutoreleasePoolAddObject(TYVAutoreleasePoolGetPool(), object);
+    
+    return object;
 }
 
 uint64_t TYVObjectGetReferenceCount(TYVObject *object) {
