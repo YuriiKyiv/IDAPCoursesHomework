@@ -31,3 +31,7 @@ void TYVPropertySetAssign(void **field, void *value) {
     
     *field = value;
 }
+
+void *TYVAutoreleasingGetter(void **field) {
+    return (NULL != field) ? TYVObjectAutorelease(TYVObjectRetain(*field)) : NULL;
+}

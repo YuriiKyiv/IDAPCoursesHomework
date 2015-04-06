@@ -23,4 +23,7 @@ void TYVPropertySetAssign(void **field, void *value);
 #define TYVPropertySetAssign(field, value) \
 TYVPropertySetAssign((void **)field, value);
 
+extern
+void *TYVAutoreleasingGetter(void **field);
+
 #endif /* defined(__IDAPCoursesHomework__TYVPropertySetters__) */
