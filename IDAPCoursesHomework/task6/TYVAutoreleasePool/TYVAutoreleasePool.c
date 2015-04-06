@@ -20,7 +20,7 @@
 #include "TYVLinkedListEnumeratorPrivate.h"
 
 static
-const uint64_t TYVAutoreleasingStackMaxCount = 512;
+const uint64_t TYVAutoreleasingStackMaxCount = 2;
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -99,24 +99,23 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
     TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
     TYVAutoReleaseStackPopType popType;
     TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
+
+    while (TYVLinkedListEnumeratorIsValid(enumerator)
+           && TYVLinkedListEnumeratorNextObject(enumerator) != (TYVObject *)stack)
+    {
+    }
     
-    popType = TYVAutoReleaseStackPopItems(stack);
-    
-    if (TYVAutoReleaseStackPopNULL != popType) {
-        while (TYVLinkedListEnumeratorIsValid(enumerator)
-               && TYVLinkedListEnumeratorNextObject(enumerator) != (TYVObject *)stack)
-        {
-        }
-    
-        do {
-            if (TYVAutoReleaseStackIsEmpty(stack)) {
-                pool->_emptyStackCount++;
-            }
+    do {
+        popType = TYVAutoReleaseStackPopItems(stack);
+        if (TYVAutoReleaseStackIsEmpty(stack)) {
             pool->_previousStackNode = TYVLinkedListEnumeratorGetNode(enumerator);
             stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
-            popType = TYVAutoReleaseStackPopItems(stack);
-        } while (TYVAutoReleaseStackPopNULL != stack);
-    }
+            TYVAutoreleasePoolSetCurrentStack(pool, stack);
+            pool->_emptyStackCount++;
+        }
+        
+    } while (TYVAutoReleaseStackIsEmpty((TYVAutoReleaseStack *)TYVLinkedListNodeGetObject(pool->_previousStackNode))
+             && popType == TYVAutoReleaseStackPopObject);
     
     TYVObjectRelease(enumerator);
     
@@ -201,7 +200,7 @@ void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool) {
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
     TYVLinkedListSetRootNode(list, pool->_previousStackNode);
-    pool->_emptyStackCount = 0;
+    pool->_emptyStackCount = 1;
     pool->_previousStackNode = NULL;
 }
 
