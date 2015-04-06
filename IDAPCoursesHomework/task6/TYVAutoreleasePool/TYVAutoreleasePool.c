@@ -28,8 +28,6 @@ const uint64_t TYVAutoreleasingStackDeflatingCount = 2;
 #pragma mark -
 #pragma mark Private Declarations
 
-TYVAutoreleasePool *TYVAutoreleasePoolGetPool();
-
 void TYVAutoreleasePoolSetPool(TYVAutoreleasePool * pool);
 
 void TYVAutoreleasePoolSetList(TYVAutoreleasePool *pool, TYVLinkedList *list);
@@ -127,12 +125,12 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
     
 }
 
-#pragma mark -
-#pragma mark Private Implementations
-
 TYVAutoreleasePool *TYVAutoreleasePoolGetPool() {
     return __TYVAutoreleasePool;
 }
+
+#pragma mark -
+#pragma mark Private Implementations
 
 void TYVAutoreleasePoolSetPool(TYVAutoreleasePool * pool) {
     if (NULL == pool) {
