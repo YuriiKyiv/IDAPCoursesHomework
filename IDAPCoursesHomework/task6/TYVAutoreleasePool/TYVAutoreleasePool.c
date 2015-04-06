@@ -22,6 +22,9 @@
 static
 const uint64_t TYVAutoreleasingStackMaxCount = 512;
 
+static
+const uint64_t TYVAutoreleasingStackDeflatingCount = 2;
+
 #pragma mark -
 #pragma mark Private Declarations
 
@@ -85,7 +88,7 @@ void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object) {
     
     assert(NULL != object);
     
-//    TYVAutoreleasePoolValidate(pool);
+    TYVAutoreleasePoolValidate(pool);
     
     TYVAutoreleasePoolInsertObject(pool, object);
 }
@@ -188,7 +191,8 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
         return;
     }
     
-    if (1 < pool->_emptyStackCount) {
+    uint64_t deflatingCount = TYVAutoreleasingStackDeflatingCount;
+    if (deflatingCount < pool->_emptyStackCount) {
         TYVAutoreleasePoolDeflating(pool);
     }
 }
@@ -212,11 +216,16 @@ void TYVAutoreleasePoolValidate(TYVAutoreleasePool *pool) {
         return;
     }
     
+    uint64_t deflatingCount = TYVAutoreleasingStackDeflatingCount;
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
-    TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
-    TYVAutoReleaseStack *stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
-
-    assert(NULL != TYVLinkedListEnumeratorNextObject(enumerator) && !TYVAutoReleaseStackIsEmpty(stack));
-    
-    TYVObjectRelease(enumerator);
+    if (TYVLinkedListGetCount(list) <= deflatingCount) {
+        TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
+        TYVAutoReleaseStack *stack = NULL;
+        while (TYVLinkedListEnumeratorIsValid(enumerator)) {
+            stack = (TYVAutoReleaseStack *)TYVLinkedListEnumeratorNextObject(enumerator);
+        }
+        
+        TYVObjectRelease(enumerator);
+        assert(!TYVAutoReleaseStackIsEmpty(stack));
+    }
 }
