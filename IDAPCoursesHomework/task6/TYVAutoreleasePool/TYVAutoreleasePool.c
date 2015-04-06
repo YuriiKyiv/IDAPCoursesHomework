@@ -20,7 +20,7 @@
 #include "TYVLinkedListEnumeratorPrivate.h"
 
 static
-const uint64_t TYVAutoreleasingStackMaxCount = 2;
+const uint64_t TYVAutoreleasingStackMaxCount = 512;
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -188,7 +188,7 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
         return;
     }
     
-    if (2 < pool->_emptyStackCount) {
+    if (1 < pool->_emptyStackCount) {
         TYVAutoreleasePoolDeflating(pool);
     }
 }
@@ -199,7 +199,10 @@ void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool) {
     }
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
+    list->_mutationCount++;
     TYVLinkedListSetRootNode(list, pool->_previousStackNode);
+#warning is a count correct?
+    list->_count -= pool->_emptyStackCount - 1;
     pool->_emptyStackCount = 1;
     pool->_previousStackNode = NULL;
 }
