@@ -39,7 +39,7 @@ void YVAutoreleasePoolGeneralTest();
 
 void TYVAutoreleasePoolPerfomTest() {
     TYVAutoreleasePoolBehaviorTest();
-    YVAutoreleasePoolGeneralTest();
+//    YVAutoreleasePoolGeneralTest();
 }
 
 void TYVAutoreleasePoolBehaviorTest() {
