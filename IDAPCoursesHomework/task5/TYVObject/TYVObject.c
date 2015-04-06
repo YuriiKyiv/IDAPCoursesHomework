@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 YURII. All rights reserved.
 //
 
+#include <stdlib.h>
+
 #include "TYVObject.h"
-#include "stdlib.h"
+#include "TYVAutoreleasePool.h"
 
 void *__TYVObjectCreate(size_t objectSize, TYVDeallocateCallback deallocateCallback){
     TYVObject *object = calloc(1, objectSize);
@@ -15,6 +17,10 @@ void *__TYVObjectCreate(size_t objectSize, TYVDeallocateCallback deallocateCallb
     object->_deallocateCallback = deallocateCallback;
     
     return object;
+}
+
+void __TYVObjectDeallocate(void *object){
+    free(object);
 }
 
 void *TYVObjectRetain(void *object){
@@ -37,8 +43,12 @@ void TYVObjectRelease(void *voidObject){
     }
 }
 
-void __TYVObjectDeallocate(void *object){
-    free(object);
+void TYVAutorelease(void *object) {
+    if (NULL == object) {
+        return;
+    }
+    
+    TYVAutoreleasePoolAddObject(TYVAutoreleasePoolGetPool(), object);
 }
 
 uint64_t TYVObjectGetReferenceCount(TYVObject *object) {
