@@ -20,6 +20,7 @@
 #include "TYVStackTest.h"
 #include "TYVLinkedListNodeTests.h"
 #include "TYVLinkedListTests.h"
+#include "TYVAutoreleasePoolTests.h"
 
 #define TYVValueOutputGenerate(type, spec) \
     type TYVOutput_##type(type value) { \
@@ -110,11 +111,12 @@ void TYVTask5Perform() {
     //TYVStringTestsPerfom();
     //TYVHumanTests();
     //TYVArrayListPerfomTests();
-    TYVStackTestPerfom();
 }
 
 inline
 void TYVTask6Perfom() {
 //    TYVLinkedListNodePerfomTest();
-    TYVLinkedListPerfomTest();
+//    TYVLinkedListPerfomTest();
+//    TYVStackTestPerfom();
+    TYVAutoreleasePoolPerfomTest();
 }

@@ -37,4 +37,7 @@ void TYVAutoreleasePoolAddObject(TYVAutoreleasePool *pool, TYVObject *object);
 extern
 void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool);
 
+extern
+TYVAutoreleasePool *TYVAutoreleasePoolGetPool();
+
 #endif /* defined(__IDAPCoursesHomework__TYVAutoreleasePool__) */
