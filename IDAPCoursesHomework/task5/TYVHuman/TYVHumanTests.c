@@ -6,11 +6,13 @@
 //  Copyright (c) 2015 YURII. All rights reserved.
 //
 
+#include <assert.h>
+
 #include "TYVHumanTests.h"
 #include "TYVHuman.h"
 #include "TYVString.h"
-#include "assert.h"
 #include "TYVObject.h"
+#include "TYVAutoreleasePool.h"
 
 static
 void TYVHumanCreateTest();
@@ -18,10 +20,37 @@ void TYVHumanCreateTest();
 static
 void TYVHumanGetMarriedAndDivorceTest();
 
+static
+void TYVHumanAutoreleasingGetterTest();
+
 void TYVHumanTests(){
     printf("HUMAN TESTS\n");
     TYVHumanCreateTest();
     TYVHumanGetMarriedAndDivorceTest();
+    TYVHumanAutoreleasingGetterTest();
+}
+
+void TYVHumanAutoreleasingGetterTest() {
+    printf("HUMAN AUTORELEASE TEST\n");
+    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
+    
+    char nameOne[] = "Vasya Pupkin";
+    TYVString *stringOne = TYVStringCreate(nameOne);
+    TYVHuman *humanMale = TYVHumanCreate(stringOne, 11, TYVMale);
+    TYVAutoreleasePoolAddObject(pool, (TYVObject *)stringOne);
+    TYVAutoreleasePoolAddObject(pool, (TYVObject *)humanMale);
+    
+    char nameTwo[] = "Masha Dasha";
+    TYVString *stringTwo = TYVStringCreate(nameTwo);
+    TYVHuman *humanFemale = TYVHumanCreate(stringTwo, 9, TYVFemale);
+    TYVAutoreleasePoolAddObject(pool, (TYVObject *)stringTwo);
+    TYVAutoreleasePoolAddObject(pool, (TYVObject *)humanFemale);
+    
+    TYVHumanGetMarried(humanMale, humanFemale);
+    TYVHuman *partner = TYVHumanGetPartner(humanMale);
+    assert(partner == humanFemale);
+    
+    TYVAutoreleasePoolDrain(pool);
 }
 
 void TYVHumanCreateTest(){
