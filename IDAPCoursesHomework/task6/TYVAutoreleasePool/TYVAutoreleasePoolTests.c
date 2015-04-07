@@ -52,7 +52,7 @@ void TYVAutoreleasePoolBehaviorTest() {
     assert(TYVObjectGetReferenceCount(object1) == 1);
     
     
-    int count = 10000;
+    int count = 1000000;
     for (int i = 0; i < count; i++) {
         TYVObjectRetain(object1);
         TYVAutoreleasePoolAddObject(pool, object1);

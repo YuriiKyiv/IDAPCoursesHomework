@@ -63,7 +63,7 @@ int main(int argc, const char * argv[]) {
 //    
 //    TYVTask4Perform();
     
-//    TYVTask5Perform();
+    TYVTask5Perform();
     
     TYVTask6Perfom();
     
@@ -109,7 +109,7 @@ void TYVTask4Perform() {
 inline
 void TYVTask5Perform() {
     //TYVStringTestsPerfom();
-    //TYVHumanTests();
+    TYVHumanTests();
     //TYVArrayListPerfomTests();
 }
 
