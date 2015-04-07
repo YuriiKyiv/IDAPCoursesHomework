@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 YURII. All rights reserved.
 //
 
+#include <stdlib.h>
+
 #include "TYVHuman.h"
 #include "TYVString.h"
-#include "stdlib.h"
 #include "TYVPropertySetters.h"
+#include "TYVAutoreleasePool.h"
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -53,7 +55,7 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender) {
     TYVArrayList *array = TYVArrayListCreateWithSize(2);
     TYVHumanSetArray(human, array);
     
-    TYVObjectRelease(array);
+    TYVObjectAutorelease(array);
     
     return human;
 }
@@ -108,7 +110,7 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender) {
     TYVHumanAddChild(human, child);
     TYVHumanAddChild(TYVHumanGetPartner(human), child);
     
-    TYVObjectRelease(child);
+    TYVObjectAutorelease(child);
     
     return child;
 }
