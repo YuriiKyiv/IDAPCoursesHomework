@@ -155,7 +155,7 @@ TYVHuman *TYVHumanGetFather(TYVHuman *human) {
 }
 
 TYVHuman *TYVHumanGetPartner(TYVHuman *human) {
-    return (NULL != human) ? human->_partner : NULL;
+    return TYVAutoreleasingGetter((void **)&human->_partner);
 }
 
 TYVArrayList *TYVHumanGetArray(TYVHuman *human) {
