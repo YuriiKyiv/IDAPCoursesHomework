@@ -201,7 +201,7 @@ void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool) {
     }
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
-    list->_mutationCount++;
+    TYVLinkedListMutate(list);
     TYVLinkedListSetRootNode(list, pool->_previousStackNode);
 #warning is a count correct?
     list->_count -= pool->_emptyStackCount - 1;

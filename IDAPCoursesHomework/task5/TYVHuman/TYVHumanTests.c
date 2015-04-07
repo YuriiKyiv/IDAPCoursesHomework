@@ -25,32 +25,36 @@ void TYVHumanAutoreleasingGetterTest();
 
 void TYVHumanTests(){
     printf("HUMAN TESTS\n");
+    
+    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
+    
     TYVHumanCreateTest();
     TYVHumanGetMarriedAndDivorceTest();
     TYVHumanAutoreleasingGetterTest();
+    
+    TYVAutoreleasePoolDrain(pool);
 }
 
 void TYVHumanAutoreleasingGetterTest() {
     printf("HUMAN AUTORELEASE TEST\n");
-    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
     
     char nameOne[] = "Vasya Pupkin";
     TYVString *stringOne = TYVStringCreate(nameOne);
     TYVHuman *humanMale = TYVHumanCreate(stringOne, 11, TYVMale);
-    TYVAutoreleasePoolAddObject(pool, (TYVObject *)stringOne);
-    TYVAutoreleasePoolAddObject(pool, (TYVObject *)humanMale);
+    TYVObjectAutorelease(stringOne);
+    TYVObjectAutorelease(humanMale);
     
     char nameTwo[] = "Masha Dasha";
     TYVString *stringTwo = TYVStringCreate(nameTwo);
     TYVHuman *humanFemale = TYVHumanCreate(stringTwo, 9, TYVFemale);
-    TYVAutoreleasePoolAddObject(pool, (TYVObject *)stringTwo);
-    TYVAutoreleasePoolAddObject(pool, (TYVObject *)humanFemale);
+    TYVObjectAutorelease(stringTwo);
+    TYVObjectAutorelease(humanFemale);
     
     TYVHumanGetMarried(humanMale, humanFemale);
     TYVHuman *partner = TYVHumanGetPartner(humanMale);
     assert(partner == humanFemale);
-    
-    TYVAutoreleasePoolDrain(pool);
+    partner = TYVHumanGetPartner(humanFemale);
+    assert(partner == humanMale);
 }
 
 void TYVHumanCreateTest(){
@@ -60,8 +64,8 @@ void TYVHumanCreateTest(){
     TYVHumanNameOutput(human);
     assert(11 == TYVHumanGetAge(human));
     
-    TYVObjectRelease(human);
-    TYVObjectRelease(string);
+    TYVObjectAutorelease(string);
+    TYVObjectAutorelease(human);
 }
 
 void TYVHumanGetMarriedAndDivorceTest(){
@@ -86,8 +90,8 @@ void TYVHumanGetMarriedAndDivorceTest(){
     assert(NULL == TYVHumanGetPartner(human));
     assert(NULL == TYVHumanGetPartner(partnerHuman));
     
-    TYVObjectRelease(human);
-    TYVObjectRelease(string);
-    TYVObjectRelease(partnerString);
-    TYVObjectRelease(partnerHuman);
+    TYVObjectAutorelease(human);
+    TYVObjectAutorelease(string);
+    TYVObjectAutorelease(partnerString);
+    TYVObjectAutorelease(partnerHuman);
 }
