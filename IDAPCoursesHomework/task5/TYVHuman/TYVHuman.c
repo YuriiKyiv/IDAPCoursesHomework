@@ -122,7 +122,11 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string) {
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human) {
-    return (NULL != human) ? human->_name : NULL;
+    if (NULL == human) {
+        return NULL;
+    }
+    
+    return TYVAutoreleasingGetter(&human->_name);
 }
 
 void TYVHumanNameOutput(TYVHuman *human) {
@@ -147,19 +151,35 @@ TYVGender TYVHumanGetGender(TYVHuman *human) {
 }
 
 TYVHuman *TYVHumanGetMother(TYVHuman *human) {
-    return (NULL != human) ? human->_mother : NULL;
+    if (NULL == human) {
+        return NULL;
+    }
+    
+    return TYVAutoreleasingGetter(&human->_mother);
 }
 
 TYVHuman *TYVHumanGetFather(TYVHuman *human) {
-    return (NULL != human) ? human->_father : NULL;
+    if (NULL == human) {
+        return NULL;
+    }
+    
+    return TYVAutoreleasingGetter(&human->_father);
 }
 
 TYVHuman *TYVHumanGetPartner(TYVHuman *human) {
-    return TYVAutoreleasingGetter((void **)&human->_partner);
+    if (NULL == human) {
+        return NULL;
+    }
+    
+    return TYVAutoreleasingGetter(&human->_partner);
 }
 
 TYVArrayList *TYVHumanGetArray(TYVHuman *human) {
-    return (NULL != human) ? human->_childrenArray : NULL;
+    if (NULL == human) {
+        return NULL;
+    }
+    
+    return TYVAutoreleasingGetter(&human->_childrenArray);
 }
 
 uint64_t TYVHumanGetChildrenCount(TYVHuman *human) {
