@@ -47,15 +47,18 @@ void TYVHumanRemoveAllChildren(TYVHuman *human);
 #pragma mark Public Implementations
 
 TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender) {
+    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
     TYVHuman *human = TYVObjectCreate(TYVHuman);
     TYVHumanSetName(human, string);
     TYVHumanSetGender(human, gender);
     TYVHumanSetAge(human, age);
     
     TYVArrayList *array = TYVArrayListCreateWithSize(2);
+    TYVObjectAutorelease(array);
+    
     TYVHumanSetArray(human, array);
     
-    TYVObjectAutorelease(array);
+    TYVAutoreleasePoolDrain(pool);
     
     return human;
 }
@@ -98,6 +101,7 @@ void TYVHumanDivorce(TYVHuman *human){
 }
 
 TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender) {
+    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
     if (NULL == human
         || NULL == name
         || NULL == TYVHumanGetPartner(human))
@@ -106,11 +110,12 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender) {
     }
     
     TYVHuman *child = TYVHumanCreate(name, 0, gender);
+    TYVObjectAutorelease(child);
     
     TYVHumanAddChild(human, child);
     TYVHumanAddChild(TYVHumanGetPartner(human), child);
     
-    TYVObjectAutorelease(child);
+    TYVAutoreleasePoolDrain(pool);
     
     return child;
 }
