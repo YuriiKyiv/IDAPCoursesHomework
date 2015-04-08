@@ -88,9 +88,8 @@ void TYVLinkedListRemoveAllObjects(TYVLinkedList *list) {
     
     TYVLinkedListMutate(list);
     
-    while (TYVLinkedListGetCount(list) > 0) {
-        TYVLinkedListRemoveFirstObject(list);
-    }
+    TYVLinkedListSetRootNode(list, NULL);
+    list->_count = 0;
 }
 
 bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
