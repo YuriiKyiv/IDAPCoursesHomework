@@ -238,7 +238,6 @@ void TYVAutoreleasePoolSetDeflatingCount(TYVAutoreleasePool *pool, uint64_t coun
     pool->_deflatingCount = count;
 }
 
-
 uint64_t TYVAutoreleasePoolGetDeflatingCount(TYVAutoreleasePool *pool) {
     return  (NULL != pool) ? pool->_deflatingCount : 0;
 }
