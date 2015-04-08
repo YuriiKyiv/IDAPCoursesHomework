@@ -51,19 +51,14 @@ TYVHuman *TYVHumanCreate(TYVString *string, uint8_t age, TYVGender gender) {
         return NULL;
     }
     
-    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
-    
     TYVHuman *human = TYVObjectCreate(TYVHuman);
     TYVHumanSetName(human, string);
     TYVHumanSetGender(human, gender);
     TYVHumanSetAge(human, age);
     
-    TYVArrayList *array = TYVArrayListCreateWithSize(2);
-    TYVObjectAutorelease(array);
+    TYVArrayList *array = (TYVArrayList *)TYVObjectAutorelease(TYVArrayListCreateWithSize(2));
     
     TYVHumanSetArray(human, array);
-    
-    TYVAutoreleasePoolDrain(pool);
     
     return human;
 }
@@ -113,15 +108,10 @@ TYVHuman *TYVHumanMate(TYVHuman *human, TYVString *name, TYVGender gender) {
         return NULL;
     }
     
-    TYVAutoreleasePool *pool = TYVAutoreleasePoolCreate();
-    
-    TYVHuman *child = TYVHumanCreate(name, 0, gender);
-    TYVObjectAutorelease(child);
+    TYVHuman *child = (TYVHuman *)TYVObjectAutorelease(TYVHumanCreate(name, 0, gender));
     
     TYVHumanAddChild(human, child);
     TYVHumanAddChild(TYVHumanGetPartner(human), child);
-    
-    TYVAutoreleasePoolDrain(pool);
     
     return child;
 }
@@ -135,11 +125,7 @@ void TYVHumanSetName(TYVHuman *human, TYVString *string) {
 }
 
 TYVString *TYVHumanGetName(TYVHuman *human) {
-    if (NULL == human) {
-        return NULL;
-    }
-    
-    return TYVAutoreleasingGetter(&human->_name);
+    return (NULL != human) ? TYVAutoreleasingGetter(&human->_name) : NULL;
 }
 
 void TYVHumanNameOutput(TYVHuman *human) {
@@ -164,39 +150,23 @@ TYVGender TYVHumanGetGender(TYVHuman *human) {
 }
 
 TYVHuman *TYVHumanGetMother(TYVHuman *human) {
-    if (NULL == human) {
-        return NULL;
-    }
-    
-    return TYVAutoreleasingGetter(&human->_mother);
+    return (NULL != human) ? TYVAutoreleasingGetter(&human->_mother) : NULL;
 }
 
 TYVHuman *TYVHumanGetFather(TYVHuman *human) {
-    if (NULL == human) {
-        return NULL;
-    }
-    
-    return TYVAutoreleasingGetter(&human->_father);
+    return (NULL != human) ? TYVAutoreleasingGetter(&human->_father) : NULL;
 }
 
 TYVHuman *TYVHumanGetPartner(TYVHuman *human) {
-    if (NULL == human) {
-        return NULL;
-    }
-    
-    return TYVAutoreleasingGetter(&human->_partner);
+    return (NULL != human) ? TYVAutoreleasingGetter(&human->_partner) : NULL;
 }
 
 TYVArrayList *TYVHumanGetArray(TYVHuman *human) {
-    if (NULL == human) {
-        return NULL;
-    }
-    
-    return TYVAutoreleasingGetter(&human->_childrenArray);
+    return (NULL != human) ? TYVAutoreleasingGetter(&human->_childrenArray) : NULL;
 }
 
 uint64_t TYVHumanGetChildrenCount(TYVHuman *human) {
-    return TYVArrayListGetCount(TYVHumanGetArray(human));
+    return (NULL != human) ? TYVArrayListGetCount(TYVHumanGetArray(human)) : 0;
 }
 
 
