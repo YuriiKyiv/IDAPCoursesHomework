@@ -98,7 +98,7 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
     TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
-    TYVAutoReleaseStackPopType popType;
+    TYVAutoReleaseStackPopType popType = TYVAutoReleaseStackPopNULL;
     TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
 
     while (TYVLinkedListEnumeratorIsValid(enumerator)
@@ -201,10 +201,7 @@ void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool) {
     }
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
-    TYVLinkedListMutate(list);
-    TYVLinkedListSetRootNode(list, pool->_previousStackNode);
-#warning is a count correct?
-    list->_count -= pool->_emptyStackCount - 1;
+    TYVLinkedListCutToNode(list, pool->_previousStackNode, pool->_emptyStackCount);
     pool->_emptyStackCount = 1;
     pool->_previousStackNode = NULL;
 }
