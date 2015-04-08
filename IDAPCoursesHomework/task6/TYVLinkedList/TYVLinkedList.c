@@ -221,6 +221,16 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompa
     return result;
 }
 
+void TYVLinkedListCutToNode(TYVLinkedList *list, TYVLinkedListNode *node, uint64_t emptyStackCount) {
+    if (NULL == list || NULL == node) {
+        return;
+    }
+    
+    TYVLinkedListMutate(list);
+    TYVLinkedListSetRootNode(list, node);
+    list->_count -= emptyStackCount - 1;
+}
+
 #pragma mark -
 #pragma mark Comparators
 

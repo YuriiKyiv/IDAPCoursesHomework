@@ -42,4 +42,7 @@ TYVContext TYVLinkedListGetContextForObject(TYVLinkedList *list, TYVObject *obje
 extern
 void TYVLinkedListMutate(TYVLinkedList *list);
 
+extern
+void TYVLinkedListCutToNode(TYVLinkedList *list, TYVLinkedListNode *node, uint64_t emptyStackCount);
+
 #endif
