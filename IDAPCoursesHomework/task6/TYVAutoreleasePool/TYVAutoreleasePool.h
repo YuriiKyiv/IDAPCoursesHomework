@@ -23,6 +23,7 @@ struct TYVAutoreleasePool {
     TYVAutoReleaseStack *_currentStack;
     TYVLinkedListNode *_previousStackNode;
     uint64_t _emptyStackCount;
+    uint64_t _deflatingCount;
 };
 
 extern

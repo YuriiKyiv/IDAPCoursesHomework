@@ -106,4 +106,3 @@ void YVAutoreleasePoolGeneralTest() {
     
     TYVObjectRelease(object1);
 }
-

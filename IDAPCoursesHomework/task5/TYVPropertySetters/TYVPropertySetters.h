@@ -15,18 +15,18 @@ extern
 void TYVPropertySetRetain(void **field, void *value);
 
 #define TYVPropertySetRetain(field, value) \
-    TYVPropertySetRetain((void **)field, value);
+    TYVPropertySetRetain((void **)field, value)
 
 extern
 void TYVPropertySetAssign(void **field, void *value);
 
 #define TYVPropertySetAssign(field, value) \
-    TYVPropertySetAssign((void **)field, value);
+    TYVPropertySetAssign((void **)field, value)
 
 extern
 void *TYVAutoreleasingGetter(void **field);
 
 #define TYVAutoreleasingGetter(field) \
-    TYVAutoreleasingGetter((void **)field);
+    TYVAutoreleasingGetter((void **)field)
 
 #endif /* defined(__IDAPCoursesHomework__TYVPropertySetters__) */

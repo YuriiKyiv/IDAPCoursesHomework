@@ -88,9 +88,8 @@ void TYVLinkedListRemoveAllObjects(TYVLinkedList *list) {
     
     TYVLinkedListMutate(list);
     
-    while (TYVLinkedListGetCount(list) > 0) {
-        TYVLinkedListRemoveFirstObject(list);
-    }
+    TYVLinkedListSetRootNode(list, NULL);
+    list->_count = 0;
 }
 
 bool TYVLinkedListContainsObject(TYVLinkedList *list, TYVObject *object) {
@@ -219,6 +218,16 @@ TYVLinkedListNode *TYVLinkedListFindNodeWithObject(TYVLinkedList *list, TYVCompa
     TYVObjectRelease(enumerator);
     
     return result;
+}
+
+void TYVLinkedListCutToNode(TYVLinkedList *list, TYVLinkedListNode *node, uint64_t emptyStackCount) {
+    if (NULL == list || NULL == node) {
+        return;
+    }
+    
+    TYVLinkedListMutate(list);
+    TYVLinkedListSetRootNode(list, node);
+    list->_count -= emptyStackCount - 1;
 }
 
 #pragma mark -

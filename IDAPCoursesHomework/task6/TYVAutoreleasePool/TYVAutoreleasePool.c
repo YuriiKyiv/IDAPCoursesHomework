@@ -42,9 +42,13 @@ TYVAutoReleaseStack *TYVAutoreleasePoolGetCurrentStack(TYVAutoreleasePool *pool)
 
 void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool);
 
-void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool);
+void TYVAutoreleasePoolDeflate(TYVAutoreleasePool *pool);
 
 void TYVAutoreleasePoolValidate(TYVAutoreleasePool *pool);
+
+void TYVAutoreleasePoolSetDeflatingCount(TYVAutoreleasePool *pool, uint64_t count);
+
+uint64_t TYVAutoreleasePoolGetDeflatingCount(TYVAutoreleasePool *pool);
 
 #pragma mark -
 #pragma mark Public Implementations
@@ -60,6 +64,7 @@ TYVAutoreleasePool *TYVAutoreleasePoolCreate() {
         
         TYVLinkedList *list = TYVLinkedListCreate();
         TYVAutoreleasePoolSetList(pool, list);
+        TYVAutoreleasePoolSetDeflatingCount(pool, TYVAutoreleasingStackDeflatingCount);
         
         TYVObjectRelease(list);
     }
@@ -98,7 +103,7 @@ void TYVAutoreleasePoolDrain(TYVAutoreleasePool *pool) {
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
     TYVAutoReleaseStack *stack = TYVAutoreleasePoolGetCurrentStack(pool);
-    TYVAutoReleaseStackPopType popType;
+    TYVAutoReleaseStackPopType popType = TYVAutoReleaseStackPopNULL;
     TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
 
     while (TYVLinkedListEnumeratorIsValid(enumerator)
@@ -191,20 +196,17 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
     
     uint64_t deflatingCount = TYVAutoreleasingStackDeflatingCount;
     if (deflatingCount < pool->_emptyStackCount) {
-        TYVAutoreleasePoolDeflating(pool);
+        TYVAutoreleasePoolDeflate(pool);
     }
 }
 
-void TYVAutoreleasePoolDeflating(TYVAutoreleasePool *pool) {
+void TYVAutoreleasePoolDeflate(TYVAutoreleasePool *pool) {
     if (NULL == pool || pool->_previousStackNode == NULL) {
         return;
     }
     
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
-    TYVLinkedListMutate(list);
-    TYVLinkedListSetRootNode(list, pool->_previousStackNode);
-#warning is a count correct?
-    list->_count -= pool->_emptyStackCount - 1;
+    TYVLinkedListCutToNode(list, pool->_previousStackNode, pool->_emptyStackCount);
     pool->_emptyStackCount = 1;
     pool->_previousStackNode = NULL;
 }
@@ -214,7 +216,7 @@ void TYVAutoreleasePoolValidate(TYVAutoreleasePool *pool) {
         return;
     }
     
-    uint64_t deflatingCount = TYVAutoreleasingStackDeflatingCount;
+    uint64_t deflatingCount = TYVAutoreleasePoolGetDeflatingCount(pool);
     TYVLinkedList *list = TYVAutoreleasePoolGetList(pool);
     if (TYVLinkedListGetCount(list) <= deflatingCount) {
         TYVLinkedListEnumerator *enumerator = TYVLinkedListEnumeratorCreateWithList(list);
@@ -226,4 +228,16 @@ void TYVAutoreleasePoolValidate(TYVAutoreleasePool *pool) {
         TYVObjectRelease(enumerator);
         assert(!TYVAutoReleaseStackIsEmpty(stack));
     }
+}
+
+void TYVAutoreleasePoolSetDeflatingCount(TYVAutoreleasePool *pool, uint64_t count) {
+    if (NULL == pool) {
+        return;
+    }
+    
+    pool->_deflatingCount = count;
+}
+
+uint64_t TYVAutoreleasePoolGetDeflatingCount(TYVAutoreleasePool *pool) {
+    return  (NULL != pool) ? pool->_deflatingCount : 0;
 }
