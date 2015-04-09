@@ -10,4 +10,8 @@
 
 @implementation TYVCar (TYVTimeCar)
 
+- (void)BackToFuture: (uint64_t) time {
+    NSLog(@"HELLO WORLD");
+}
+
 @end

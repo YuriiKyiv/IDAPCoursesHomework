@@ -10,4 +10,6 @@
 
 @interface TYVCar (TYVTimeCar)
 
+- (void)BackToFuture: (uint64_t) time;
+
 @end

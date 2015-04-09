@@ -7,7 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVEngine.h"
 
-@interface TYVCar : NSObject
+static
+const uint8_t TYVDoorMaxCount = 20;
+
+@interface TYVCar : NSObject {
+    @private
+    BOOL doors[TYVDoorMaxCount];
+}
+
+@property (nonatomic, retain) TYVEngine* engine;
+
+- (void)openDoorAtIndex:(uint8) doorIndex;
+
+- (void)closeDoorAtIndex:(uint8) doorIndex;
+
+- (BOOL)isOpenedDoorAtIndex: (uint8) doorIndex;
+
 
 @end
