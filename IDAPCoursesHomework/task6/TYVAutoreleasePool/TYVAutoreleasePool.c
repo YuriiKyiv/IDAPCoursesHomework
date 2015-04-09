@@ -194,7 +194,7 @@ void TYVAutoreleasePoolDeflateIfNeeded(TYVAutoreleasePool *pool) {
         return;
     }
     
-    uint64_t deflatingCount = TYVAutoreleasingStackDeflatingCount;
+    uint64_t deflatingCount = TYVAutoreleasePoolGetDeflatingCount(pool);
     if (deflatingCount < pool->_emptyStackCount) {
         TYVAutoreleasePoolDeflate(pool);
     }
