@@ -10,4 +10,20 @@
 
 @implementation TYVEngine
 
++ (instancetype)newEngineWithType:(TYVTypeOfEngine)engineType {
+    id object = [[[self alloc] init] autorelease];
+    [object setType:engineType];
+    return object;
+}
+
+- (void)start {
+    if (false == [self isWorking]) {
+        [self setIsWorking:true];
+    }
+}
+
+- (void)stop {
+    [self setIsWorking:false];
+}
+
 @end

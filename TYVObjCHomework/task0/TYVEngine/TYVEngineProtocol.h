@@ -10,4 +10,8 @@
 
 @protocol TYVEngineProtocol <NSObject>
 
+- (void)start;
+
+- (void)stop;
+
 @end
