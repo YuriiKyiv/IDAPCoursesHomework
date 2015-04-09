@@ -20,8 +20,12 @@
 		5A5BF99B1AADF4AE00388CA8 /* TYVArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF9991AADF4AE00388CA8 /* TYVArrayList.c */; };
 		5A5BF99F1AADF92800388CA8 /* TYVArrayListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF99D1AADF92800388CA8 /* TYVArrayListTests.c */; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
+		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
+		5AACA14A1AD682E400DEE7EF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
+		5AACA1541AD684C700DEE7EF /* TYVCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA1531AD684C700DEE7EF /* TYVCar.m */; };
+		5AACA1581AD6876E00DEE7EF /* TYVEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA1571AD6876E00DEE7EF /* TYVEngine.m */; };
+		5AACA15C1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA15B1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m */; };
 		5AADBF3C1AA487A600B29A88 /* TYVArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AADBF3A1AA487A600B29A88 /* TYVArray.c */; };
-		5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
 		5AF089801ABC4562008BF7C9 /* TYVRange.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0897E1ABC4562008BF7C9 /* TYVRange.c */; };
 		5AF30FB91AC2CE10000D40E9 /* TYVAutoReleaseStack.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AF30FB71AC2CE10000D40E9 /* TYVAutoReleaseStack.c */; };
 		5AFD29FC1A9DE189007EFFB5 /* TYVMultiples.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD29F81A9DE189007EFFB5 /* TYVMultiples.c */; };
@@ -41,6 +45,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		5AACA1391AD6804700DEE7EF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		5ABCB6DD1A8CD25B00CD71E2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,6 +94,15 @@
 		5A5BF99E1AADF92800388CA8 /* TYVArrayListTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArrayListTests.h; path = TYVArrayList/TYVArrayListTests.h; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
+		5AACA13B1AD6804700DEE7EF /* TYVObjCHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TYVObjCHomework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AACA13D1AD6804700DEE7EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5AACA1521AD684C700DEE7EF /* TYVCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVCar.h; sourceTree = "<group>"; };
+		5AACA1531AD684C700DEE7EF /* TYVCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVCar.m; sourceTree = "<group>"; };
+		5AACA1561AD6876E00DEE7EF /* TYVEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVEngine.h; path = task0/TYVEngine/TYVEngine.h; sourceTree = "<group>"; };
+		5AACA1571AD6876E00DEE7EF /* TYVEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVEngine.m; path = task0/TYVEngine/TYVEngine.m; sourceTree = "<group>"; };
+		5AACA1591AD691AC00DEE7EF /* TYVEngineProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVEngineProtocol.h; path = task0/TYVEngine/TYVEngineProtocol.h; sourceTree = "<group>"; };
+		5AACA15A1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TYVCar+TYVTimeCar.h"; sourceTree = "<group>"; };
+		5AACA15B1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TYVCar+TYVTimeCar.m"; sourceTree = "<group>"; };
 		5AADBF3A1AA487A600B29A88 /* TYVArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVArray.c; path = TYVArray/TYVArray.c; sourceTree = "<group>"; };
 		5AADBF3B1AA487A600B29A88 /* TYVArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArray.h; path = TYVArray/TYVArray.h; sourceTree = "<group>"; };
 		5ABCB6DF1A8CD25B00CD71E2 /* IDAPCoursesHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IDAPCoursesHomework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +142,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5AACA1381AD6804700DEE7EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5ABCB6DC1A8CD25B00CD71E2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,6 +264,46 @@
 			name = TYVArrayList;
 			sourceTree = "<group>";
 		};
+		5AACA13C1AD6804700DEE7EF /* TYVObjCHomework */ = {
+			isa = PBXGroup;
+			children = (
+				5AACA14B1AD6838000DEE7EF /* task0 */,
+				5AACA13D1AD6804700DEE7EF /* main.m */,
+			);
+			path = TYVObjCHomework;
+			sourceTree = "<group>";
+		};
+		5AACA14B1AD6838000DEE7EF /* task0 */ = {
+			isa = PBXGroup;
+			children = (
+				5AACA1551AD6873B00DEE7EF /* TYVEngine */,
+				5AACA1501AD6842200DEE7EF /* TYVCar */,
+			);
+			name = task0;
+			sourceTree = "<group>";
+		};
+		5AACA1501AD6842200DEE7EF /* TYVCar */ = {
+			isa = PBXGroup;
+			children = (
+				5AACA1521AD684C700DEE7EF /* TYVCar.h */,
+				5AACA1531AD684C700DEE7EF /* TYVCar.m */,
+				5AACA15A1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.h */,
+				5AACA15B1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m */,
+			);
+			name = TYVCar;
+			path = task0/TYVCar;
+			sourceTree = "<group>";
+		};
+		5AACA1551AD6873B00DEE7EF /* TYVEngine */ = {
+			isa = PBXGroup;
+			children = (
+				5AACA1561AD6876E00DEE7EF /* TYVEngine.h */,
+				5AACA1571AD6876E00DEE7EF /* TYVEngine.m */,
+				5AACA1591AD691AC00DEE7EF /* TYVEngineProtocol.h */,
+			);
+			name = TYVEngine;
+			sourceTree = "<group>";
+		};
 		5AADBF3D1AA487AD00B29A88 /* TYVArray */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				5ABCB6E11A8CD25B00CD71E2 /* IDAPCoursesHomework */,
+				5AACA13C1AD6804700DEE7EF /* TYVObjCHomework */,
 				5ABCB6E01A8CD25B00CD71E2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -256,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				5ABCB6DF1A8CD25B00CD71E2 /* IDAPCoursesHomework */,
+				5AACA13B1AD6804700DEE7EF /* TYVObjCHomework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -374,6 +445,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5AACA13A1AD6804700DEE7EF /* TYVObjCHomework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AACA13F1AD6804700DEE7EF /* Build configuration list for PBXNativeTarget "TYVObjCHomework" */;
+			buildPhases = (
+				5AACA1371AD6804700DEE7EF /* Sources */,
+				5AACA1381AD6804700DEE7EF /* Frameworks */,
+				5AACA1391AD6804700DEE7EF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TYVObjCHomework;
+			productName = TYVObjCHomework;
+			productReference = 5AACA13B1AD6804700DEE7EF /* TYVObjCHomework */;
+			productType = "com.apple.product-type.tool";
+		};
 		5ABCB6DE1A8CD25B00CD71E2 /* IDAPCoursesHomework */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5ABCB6E61A8CD25B00CD71E2 /* Build configuration list for PBXNativeTarget "IDAPCoursesHomework" */;
@@ -400,6 +488,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = YURII;
 				TargetAttributes = {
+					5AACA13A1AD6804700DEE7EF = {
+						CreatedOnToolsVersion = 6.2;
+					};
 					5ABCB6DE1A8CD25B00CD71E2 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -417,12 +508,24 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				5AACA13A1AD6804700DEE7EF /* TYVObjCHomework */,
 				5ABCB6DE1A8CD25B00CD71E2 /* IDAPCoursesHomework */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5AACA1371AD6804700DEE7EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AACA1541AD684C700DEE7EF /* TYVCar.m in Sources */,
+				5AACA1581AD6876E00DEE7EF /* TYVEngine.m in Sources */,
+				5AACA15C1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m in Sources */,
+				5AACA13E1AD6804700DEE7EF /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5ABCB6DB1A8CD25B00CD71E2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -431,7 +534,6 @@
 				5A302C931AC193B400E784ED /* TYVStackTest.c in Sources */,
 				5AFD2A2D1A9E0F97007EFFB5 /* TYVHumanTests.c in Sources */,
 				5AFD2A161A9E0E98007EFFB5 /* TYVEndian.c in Sources */,
-				5ABCB6E31A8CD25B00CD71E2 /* main.c in Sources */,
 				5AF089801ABC4562008BF7C9 /* TYVRange.c in Sources */,
 				5A5BF99B1AADF4AE00388CA8 /* TYVArrayList.c in Sources */,
 				5AFD2A2F1A9E0F97007EFFB5 /* TYVStringTests.c in Sources */,
@@ -442,6 +544,7 @@
 				5A51A9C71AA095F3003CC905 /* TYVObject.c in Sources */,
 				5A5647BA1ACD49C400177C10 /* TYVAutoreleasePool.c in Sources */,
 				5A45A7E61AC42B9A007FAB8F /* TYVLinkedList.c in Sources */,
+				5AACA14A1AD682E400DEE7EF /* main.c in Sources */,
 				5A33B5201AC7350C002591DE /* TYVLinkedListTests.c in Sources */,
 				5AFD2A171A9E0E98007EFFB5 /* TYVValueBitOutput.c in Sources */,
 				5AFD2A151A9E0E98007EFFB5 /* TYVBitReverse.c in Sources */,
@@ -464,6 +567,25 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		5AACA1401AD6804700DEE7EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5AACA1411AD6804700DEE7EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		5ABCB6E41A8CD25B00CD71E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -471,7 +593,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -511,7 +633,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -555,6 +677,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5AACA13F1AD6804700DEE7EF /* Build configuration list for PBXNativeTarget "TYVObjCHomework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AACA1401AD6804700DEE7EF /* Debug */,
+				5AACA1411AD6804700DEE7EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5ABCB6DA1A8CD25B00CD71E2 /* Build configuration list for PBXProject "IDAPCoursesHomework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
