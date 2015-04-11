@@ -35,6 +35,10 @@
 }
 
 - (void)addChild:(TYVBeing *)aChild {
+    if (self == aChild) {
+        return;
+    }
+    
     NSMutableArray *array = [[[NSMutableArray alloc] initWithArray:[self chidren]]autorelease];
     [array addObject:aChild];
     self.chidren = [[array copy] autorelease];
@@ -50,6 +54,9 @@
 
 - (void)sayHi {
     [self sayMessage:@"Hi"];
+    for (TYVBeing * child in [self chidren]) {
+        [child sayHi];
+    }
 }
 
 #pragma mark -
