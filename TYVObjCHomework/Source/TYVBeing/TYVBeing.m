@@ -35,10 +35,16 @@
 }
 
 - (void)addChild:(TYVBeing *)aChild {
+    NSMutableArray *array = [[[NSMutableArray alloc] initWithArray:[self chidren]]autorelease];
+    [array addObject:aChild];
+    self.chidren = [[array copy] autorelease];
     [self sayMessage:@"add"];
 }
 
 - (void)removeChild:(TYVBeing *)aChild {
+    NSMutableArray *array = [[[NSMutableArray alloc] initWithArray:[self chidren]]autorelease];
+    [array removeObject:aChild];
+    self.chidren = [[array copy] autorelease];
     [self sayMessage:@"remove"];
 }
 
