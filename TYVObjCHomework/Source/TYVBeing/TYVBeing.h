@@ -23,6 +23,8 @@ enum TYVGender {
 @property (nonatomic, assign, readonly) uint8_t     weight;
 @property (nonatomic, assign, readonly) uint8_t     age;
 
+- (id) initWithName:(NSString *)name age:(uint8_t)age;
+
 - (void)fight;
 
 - (TYVBeing *)giveBirth;

@@ -26,6 +26,23 @@
 #pragma mark -
 #pragma mark Public Methods
 
+- (instancetype) initWithName:(NSString *)name age:(uint8_t)age {
+    self = [super init];
+    if (self) {
+        [self name];
+        [self age];
+    }
+    
+    return self;
+}
+
+- (void) dealloc {
+    [self setName:NULL];
+    [self setChidren:NULL];
+    
+    [super dealloc];
+}
+
 - (void)fight {
     [self sayMessage:@"fight"];
 }
