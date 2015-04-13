@@ -26,9 +26,9 @@
 @dynamic children;
 
 #pragma mark -
-#pragma mark Public Methods
+#pragma mark Initializations and Deallocations
 
-- (instancetype) initWithName:(NSString *)name age:(uint8_t)age gender:(TYVGender)gender {
+- (instancetype)initWithName:(NSString *)name age:(uint8_t)age gender:(TYVGender)gender {
     self = [super init];
     if (self) {
         [self setName:name];
@@ -39,16 +39,22 @@
     return self;
 }
 
-- (void) dealloc {
+- (void)dealloc {
     [self setName:NULL];
     [self setMutableChildrenArray:NULL];
     
     [super dealloc];
 }
 
-- (NSArray *) children {
+#pragma mark -
+#pragma mark Accessors
+
+- (NSArray *)children {
     return [[[self mutableChildrenArray] copy] autorelease];
 }
+
+#pragma mark -
+#pragma mark Public Methods
 
 - (void)fight {
     [self sayMessage:@"fight"];
