@@ -14,4 +14,8 @@
     return [[[TYVBeing alloc] init] autorelease];
 }
 
+- (void)performGenderSpecificOperation {
+    [self giveBirth];
+}
+
 @end

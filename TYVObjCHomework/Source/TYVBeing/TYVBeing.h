@@ -30,4 +30,6 @@ enum TYVGender {
 
 - (void)sayHi;
 
+- (void)performGenderSpecificOperation;
+
 @end
