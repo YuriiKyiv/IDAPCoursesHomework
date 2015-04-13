@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSObject+TYVNSObjectCategory.h"
 
 typedef enum TYVGender TYVGender;
 enum TYVGender {
@@ -19,20 +20,17 @@ enum TYVGender {
 @property (nonatomic, copy, readonly)   NSString    *name;
 @property (nonatomic, copy, readonly)   NSArray     *children;
 
-@property (nonatomic, assign, readonly) TYVGender   gender;
 @property (nonatomic, assign, readonly) uint8_t     weight;
 @property (nonatomic, assign, readonly) uint8_t     age;
 
-- (instancetype) initWithName:(NSString *)name age:(uint8_t)age gender:(TYVGender)gender ;
-
-- (void)fight;
-
-- (TYVBeing *)giveBirth;
+- (instancetype) initWithName:(NSString *)name age:(uint8_t)age;
 
 - (void)addChild:(TYVBeing *)aChild;
 
 - (void)removeChild:(TYVBeing *)aChild;
 
 - (void)sayHi;
+
+- (void)performGenderSpecificOperation;
 
 @end

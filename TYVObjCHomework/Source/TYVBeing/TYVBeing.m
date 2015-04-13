@@ -28,12 +28,11 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)initWithName:(NSString *)name age:(uint8_t)age gender:(TYVGender)gender {
+- (instancetype) initWithName:(NSString *)name age:(uint8_t)age {
     self = [super init];
     if (self) {
         [self setName:name];
         [self setAge:age];
-        [self setGender:gender];
     }
     
     return self;
@@ -56,15 +55,6 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)fight {
-    [self sayMessage:@"fight"];
-}
-
-- (TYVBeing *)giveBirth {
-    [self sayMessage:@"giveBirth"];
-    return [[[TYVBeing alloc] init] autorelease];
-}
-
 - (void)addChild:(TYVBeing *)aChild {
     [[self mutableChildrenArray] addObject:aChild];
     [self sayMessage:@"add"];
@@ -80,6 +70,10 @@
     for (TYVBeing * child in [self mutableChildrenArray]) {
         [child sayHi];
     }
+}
+
+- (void)performGenderSpecificOperation {
+    
 }
 
 #pragma mark -
