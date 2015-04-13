@@ -17,7 +17,7 @@ enum TYVGender {
 @interface TYVBeing : NSObject
 
 @property (nonatomic, copy, readonly)   NSString    *name;
-@property (nonatomic, copy, readonly)   NSArray     *chidren;
+@property (nonatomic, copy, readonly)   NSArray     *children;
 
 @property (nonatomic, assign, readonly) TYVGender   gender;
 @property (nonatomic, assign, readonly) uint8_t     weight;

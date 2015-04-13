@@ -10,18 +10,20 @@
 
 @interface TYVBeing ()
 
-@property (nonatomic, copy)   NSString    *name;
-@property (nonatomic, copy)   NSArray     *chidren;
+@property (nonatomic, copy)   NSString          *name;
+@property (nonatomic, copy)   NSMutableArray    *mutableChildrenArray;
 
-@property (nonatomic, assign) TYVGender   gender;
-@property (nonatomic, assign) uint8_t     weight;
-@property (nonatomic, assign) uint8_t     age;
+@property (nonatomic, assign) TYVGender         gender;
+@property (nonatomic, assign) uint8_t           weight;
+@property (nonatomic, assign) uint8_t           age;
 
 - (void)sayMessage:(NSString *)aMessage;
 
 @end
 
 @implementation TYVBeing
+
+@dynamic children;
 
 #pragma mark -
 #pragma mark Public Methods
@@ -38,9 +40,13 @@
 
 - (void) dealloc {
     [self setName:NULL];
-    [self setChidren:NULL];
+    [self setMutableChildrenArray:NULL];
     
     [super dealloc];
+}
+
+- (NSArray *) children {
+    return [[[self mutableChildrenArray] copy] autorelease];
 }
 
 - (void)fight {
@@ -52,26 +58,18 @@
 }
 
 - (void)addChild:(TYVBeing *)aChild {
-    if (self == aChild) {
-        return;
-    }
-    
-    NSMutableArray *array = [[[NSMutableArray alloc] initWithArray:[self chidren]]autorelease];
-    [array addObject:aChild];
-    self.chidren = [[array copy] autorelease];
+    [[self mutableChildrenArray] addObject:aChild];
     [self sayMessage:@"add"];
 }
 
 - (void)removeChild:(TYVBeing *)aChild {
-    NSMutableArray *array = [[[NSMutableArray alloc] initWithArray:[self chidren]]autorelease];
-    [array removeObject:aChild];
-    self.chidren = [[array copy] autorelease];
+    [[self mutableChildrenArray] removeObject:aChild];
     [self sayMessage:@"remove"];
 }
 
 - (void)sayHi {
     [self sayMessage:@"Hi"];
-    for (TYVBeing * child in [self chidren]) {
+    for (TYVBeing * child in [self mutableChildrenArray]) {
         [child sayHi];
     }
 }
