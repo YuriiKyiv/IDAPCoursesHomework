@@ -28,12 +28,11 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)initWithName:(NSString *)name age:(uint8_t)age gender:(TYVGender)gender {
+- (instancetype) initWithName:(NSString *)name age:(uint8_t)age {
     self = [super init];
     if (self) {
         [self setName:name];
         [self setAge:age];
-        [self setGender:gender];
     }
     
     return self;

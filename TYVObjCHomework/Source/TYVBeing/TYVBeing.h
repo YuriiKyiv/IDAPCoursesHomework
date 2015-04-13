@@ -19,11 +19,10 @@ enum TYVGender {
 @property (nonatomic, copy, readonly)   NSString    *name;
 @property (nonatomic, copy, readonly)   NSArray     *children;
 
-@property (nonatomic, assign, readonly) TYVGender   gender;
 @property (nonatomic, assign, readonly) uint8_t     weight;
 @property (nonatomic, assign, readonly) uint8_t     age;
 
-- (instancetype) initWithName:(NSString *)name age:(uint8_t)age gender:(TYVGender)gender ;
+- (instancetype) initWithName:(NSString *)name age:(uint8_t)age;
 
 - (void)fight;
 
