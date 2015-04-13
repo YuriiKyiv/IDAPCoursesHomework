@@ -10,9 +10,13 @@
 
 @implementation TYVFemaleBeing
 
+#pragma mark -
+#pragma mark Public Methods
+
 - (TYVBeing *)giveBirth {
     NSLog(@"giveBirth");
-    return [[[TYVBeing alloc] init] autorelease];
+    
+    return [self object];
 }
 
 - (void)performGenderSpecificOperation {

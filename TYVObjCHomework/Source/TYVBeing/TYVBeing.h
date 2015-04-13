@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSObject+TYVNSObjectCategory.h"
 
 typedef enum TYVGender TYVGender;
 enum TYVGender {

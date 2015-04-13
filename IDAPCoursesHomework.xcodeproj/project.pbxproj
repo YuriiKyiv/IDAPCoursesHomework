@@ -11,6 +11,7 @@
 		5A302C931AC193B400E784ED /* TYVStackTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A302C911AC193B400E784ED /* TYVStackTest.c */; };
 		5A320EE11ADC3CBB00E7A67B /* TYVMaleBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A320EE01ADC3CBB00E7A67B /* TYVMaleBeing.m */; };
 		5A320EE51ADC3CF600E7A67B /* TYVFemaleBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A320EE41ADC3CF600E7A67B /* TYVFemaleBeing.m */; };
+		5A320EE91ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A320EE81ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.m */; };
 		5A33B5171AC6F817002591DE /* TYVLinkedListEnumerator.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A33B5151AC6F817002591DE /* TYVLinkedListEnumerator.c */; };
 		5A33B51D1AC71DAD002591DE /* TYVLinkedListNodeTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A33B51B1AC71DAD002591DE /* TYVLinkedListNodeTests.c */; };
 		5A33B5201AC7350C002591DE /* TYVLinkedListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A33B51E1AC7350C002591DE /* TYVLinkedListTests.c */; };
@@ -77,6 +78,8 @@
 		5A320EE01ADC3CBB00E7A67B /* TYVMaleBeing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVMaleBeing.m; path = Source/TYVMaleBeing/TYVMaleBeing.m; sourceTree = "<group>"; };
 		5A320EE31ADC3CF600E7A67B /* TYVFemaleBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVFemaleBeing.h; path = Source/TYVFemaleBeing/TYVFemaleBeing.h; sourceTree = "<group>"; };
 		5A320EE41ADC3CF600E7A67B /* TYVFemaleBeing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVFemaleBeing.m; path = Source/TYVFemaleBeing/TYVFemaleBeing.m; sourceTree = "<group>"; };
+		5A320EE71ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+TYVNSObjectCategory.h"; path = "Source/TYVNSObjectCategory/NSObject+TYVNSObjectCategory.h"; sourceTree = "<group>"; };
+		5A320EE81ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+TYVNSObjectCategory.m"; path = "Source/TYVNSObjectCategory/NSObject+TYVNSObjectCategory.m"; sourceTree = "<group>"; };
 		5A33B5151AC6F817002591DE /* TYVLinkedListEnumerator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedListEnumerator.c; path = task6/TYVLinkedListEnumerator/TYVLinkedListEnumerator.c; sourceTree = "<group>"; };
 		5A33B5161AC6F817002591DE /* TYVLinkedListEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListEnumerator.h; path = task6/TYVLinkedListEnumerator/TYVLinkedListEnumerator.h; sourceTree = "<group>"; };
 		5A33B5191AC6FE3B002591DE /* TYVLinkedListPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListPrivate.h; path = task6/TYVLinkedList/TYVLinkedListPrivate.h; sourceTree = "<group>"; };
@@ -218,6 +221,15 @@
 			name = TYVFemaleBeing;
 			sourceTree = "<group>";
 		};
+		5A320EEA1ADC4B9800E7A67B /* TYVNSObjectCategory */ = {
+			isa = PBXGroup;
+			children = (
+				5A320EE71ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.h */,
+				5A320EE81ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.m */,
+			);
+			name = TYVNSObjectCategory;
+			sourceTree = "<group>";
+		};
 		5A33B5181AC6F81B002591DE /* TYVLinkedListEnumerator */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +309,7 @@
 				5AAAAC661AD83410008E51AF /* TYVBeing */,
 				5A320EE21ADC3CC000E7A67B /* TYVMaleBeing */,
 				5A320EE61ADC3CFD00E7A67B /* TYVFemaleBeing */,
+				5A320EEA1ADC4B9800E7A67B /* TYVNSObjectCategory */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -571,6 +584,7 @@
 				5AACA1541AD684C700DEE7EF /* TYVCar.m in Sources */,
 				5AACA1581AD6876E00DEE7EF /* TYVEngine.m in Sources */,
 				5AACA15C1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m in Sources */,
+				5A320EE91ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.m in Sources */,
 				5A320EE51ADC3CF600E7A67B /* TYVFemaleBeing.m in Sources */,
 				5AACA13E1AD6804700DEE7EF /* main.m in Sources */,
 			);

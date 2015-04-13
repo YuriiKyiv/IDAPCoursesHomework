@@ -10,6 +10,9 @@
 
 @implementation TYVMaleBeing
 
+#pragma mark -
+#pragma mark Public Methods
+
 - (void)fight {
     NSLog(@"Fight");
 }
