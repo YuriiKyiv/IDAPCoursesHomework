@@ -10,4 +10,8 @@
 
 @implementation TYVMaleBeing
 
+- (void)fight {
+    NSLog(@"Fight");
+}
+
 @end

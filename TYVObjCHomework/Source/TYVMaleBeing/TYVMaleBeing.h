@@ -10,4 +10,6 @@
 
 @interface TYVMaleBeing : TYVBeing
 
+- (void)fight;
+
 @end

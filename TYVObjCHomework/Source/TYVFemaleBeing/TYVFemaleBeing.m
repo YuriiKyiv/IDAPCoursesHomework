@@ -10,4 +10,8 @@
 
 @implementation TYVFemaleBeing
 
+- (TYVBeing *)giveBirth {
+    return [[[TYVBeing alloc] init] autorelease];
+}
+
 @end

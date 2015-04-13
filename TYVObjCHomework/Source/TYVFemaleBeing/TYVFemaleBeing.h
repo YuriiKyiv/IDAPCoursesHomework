@@ -10,4 +10,6 @@
 
 @interface TYVFemaleBeing : TYVBeing
 
+- (TYVBeing *)giveBirth;
+
 @end
