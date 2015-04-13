@@ -28,11 +28,12 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (instancetype) initWithName:(NSString *)name age:(uint8_t)age {
+- (instancetype) initWithName:(NSString *)name age:(uint8_t)age gender:(TYVGender)gender {
     self = [super init];
     if (self) {
-        [self name];
-        [self age];
+        [self setName:name];
+        [self setAge:age];
+        [self setGender:gender];
     }
     
     return self;
@@ -54,6 +55,7 @@
 }
 
 - (TYVBeing *)giveBirth {
+    [self sayMessage:@"giveBirth"];
     return [[[TYVBeing alloc] init] autorelease];
 }
 
