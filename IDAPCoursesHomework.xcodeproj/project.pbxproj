@@ -20,6 +20,7 @@
 		5A5BF99B1AADF4AE00388CA8 /* TYVArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF9991AADF4AE00388CA8 /* TYVArrayList.c */; };
 		5A5BF99F1AADF92800388CA8 /* TYVArrayListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF99D1AADF92800388CA8 /* TYVArrayListTests.c */; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
+		5AAAAC641AD833D8008E51AF /* TYVBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAAC631AD833D8008E51AF /* TYVBeing.m */; };
 		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
 		5AACA14A1AD682E400DEE7EF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
 		5AACA1541AD684C700DEE7EF /* TYVCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA1531AD684C700DEE7EF /* TYVCar.m */; };
@@ -94,6 +95,8 @@
 		5A5BF99E1AADF92800388CA8 /* TYVArrayListTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArrayListTests.h; path = TYVArrayList/TYVArrayListTests.h; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
+		5AAAAC621AD833D8008E51AF /* TYVBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVBeing.h; path = Source/TYVBeing/TYVBeing.h; sourceTree = "<group>"; };
+		5AAAAC631AD833D8008E51AF /* TYVBeing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVBeing.m; path = Source/TYVBeing/TYVBeing.m; sourceTree = "<group>"; };
 		5AACA13B1AD6804700DEE7EF /* TYVObjCHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TYVObjCHomework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AACA13D1AD6804700DEE7EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5AACA1521AD684C700DEE7EF /* TYVCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVCar.h; sourceTree = "<group>"; };
@@ -264,11 +267,29 @@
 			name = TYVArrayList;
 			sourceTree = "<group>";
 		};
+		5AAAAC651AD833EA008E51AF /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5AAAAC661AD83410008E51AF /* TYVBeing */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		5AAAAC661AD83410008E51AF /* TYVBeing */ = {
+			isa = PBXGroup;
+			children = (
+				5AAAAC621AD833D8008E51AF /* TYVBeing.h */,
+				5AAAAC631AD833D8008E51AF /* TYVBeing.m */,
+			);
+			name = TYVBeing;
+			sourceTree = "<group>";
+		};
 		5AACA13C1AD6804700DEE7EF /* TYVObjCHomework */ = {
 			isa = PBXGroup;
 			children = (
 				5AACA14B1AD6838000DEE7EF /* task0 */,
 				5AACA13D1AD6804700DEE7EF /* main.m */,
+				5AAAAC651AD833EA008E51AF /* Source */,
 			);
 			path = TYVObjCHomework;
 			sourceTree = "<group>";
@@ -519,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AAAAC641AD833D8008E51AF /* TYVBeing.m in Sources */,
 				5AACA1541AD684C700DEE7EF /* TYVCar.m in Sources */,
 				5AACA1581AD6876E00DEE7EF /* TYVEngine.m in Sources */,
 				5AACA15C1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m in Sources */,
@@ -684,6 +706,7 @@
 				5AACA1411AD6804700DEE7EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5ABCB6DA1A8CD25B00CD71E2 /* Build configuration list for PBXProject "IDAPCoursesHomework" */ = {
 			isa = XCConfigurationList;
