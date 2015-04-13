@@ -11,6 +11,7 @@
 @implementation TYVFemaleBeing
 
 - (TYVBeing *)giveBirth {
+    NSLog(@"giveBirth");
     return [[[TYVBeing alloc] init] autorelease];
 }
 
