@@ -24,10 +24,6 @@ enum TYVGender {
 
 - (instancetype) initWithName:(NSString *)name age:(uint8_t)age;
 
-- (void)fight;
-
-- (TYVBeing *)giveBirth;
-
 - (void)addChild:(TYVBeing *)aChild;
 
 - (void)removeChild:(TYVBeing *)aChild;

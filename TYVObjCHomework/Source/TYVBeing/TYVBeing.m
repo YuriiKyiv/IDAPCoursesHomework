@@ -55,15 +55,6 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)fight {
-    [self sayMessage:@"fight"];
-}
-
-- (TYVBeing *)giveBirth {
-    [self sayMessage:@"giveBirth"];
-    return [[[TYVBeing alloc] init] autorelease];
-}
-
 - (void)addChild:(TYVBeing *)aChild {
     [[self mutableChildrenArray] addObject:aChild];
     [self sayMessage:@"add"];
