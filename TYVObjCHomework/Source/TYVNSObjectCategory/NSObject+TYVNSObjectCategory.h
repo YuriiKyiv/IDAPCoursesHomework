@@ -10,6 +10,6 @@
 
 @interface NSObject (TYVNSObjectCategory)
 
-- (id)object;
++ (id)object;
 
 @end
