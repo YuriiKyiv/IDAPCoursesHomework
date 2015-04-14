@@ -16,7 +16,7 @@
 - (TYVBeing *)giveBirth {
     NSLog(@"giveBirth");
     
-    return [self object];
+    return [[self class] object];
 }
 
 - (void)performGenderSpecificOperation {
