@@ -29,6 +29,7 @@
 		5A5E9F771ADE7DE7002C1BB8 /* TYVEmployeeWasher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F761ADE7DE7002C1BB8 /* TYVEmployeeWasher.m */; };
 		5A5E9F7B1ADE7E31002C1BB8 /* TYVEmployeeAccountant.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F7A1ADE7E31002C1BB8 /* TYVEmployeeAccountant.m */; };
 		5A5E9F7F1ADE7E75002C1BB8 /* TYVEmployeeDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F7E1ADE7E75002C1BB8 /* TYVEmployeeDirector.m */; };
+		5A5E9F831ADE8520002C1BB8 /* TYVCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F821ADE8520002C1BB8 /* TYVCar.m */; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
 		5AAAAC641AD833D8008E51AF /* TYVBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAAC631AD833D8008E51AF /* TYVBeing.m */; };
 		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
@@ -123,6 +124,8 @@
 		5A5E9F7A1ADE7E31002C1BB8 /* TYVEmployeeAccountant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVEmployeeAccountant.m; path = Source/TYVEmployeeAccountant/TYVEmployeeAccountant.m; sourceTree = "<group>"; };
 		5A5E9F7D1ADE7E75002C1BB8 /* TYVEmployeeDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVEmployeeDirector.h; path = Source/TYVEmployeeDirector/TYVEmployeeDirector.h; sourceTree = "<group>"; };
 		5A5E9F7E1ADE7E75002C1BB8 /* TYVEmployeeDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVEmployeeDirector.m; path = Source/TYVEmployeeDirector/TYVEmployeeDirector.m; sourceTree = "<group>"; };
+		5A5E9F811ADE8520002C1BB8 /* TYVCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVCar.h; path = Source/TYVCar/TYVCar.h; sourceTree = "<group>"; };
+		5A5E9F821ADE8520002C1BB8 /* TYVCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVCar.m; path = Source/TYVCar/TYVCar.m; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
 		5AAAAC621AD833D8008E51AF /* TYVBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVBeing.h; path = Source/TYVBeing/TYVBeing.h; sourceTree = "<group>"; };
@@ -387,6 +390,15 @@
 			name = TYVEmployeeDirector;
 			sourceTree = "<group>";
 		};
+		5A5E9F841ADE8528002C1BB8 /* TYVCar */ = {
+			isa = PBXGroup;
+			children = (
+				5A5E9F811ADE8520002C1BB8 /* TYVCar.h */,
+				5A5E9F821ADE8520002C1BB8 /* TYVCar.m */,
+			);
+			name = TYVCar;
+			sourceTree = "<group>";
+		};
 		5AAAAC651AD833EA008E51AF /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +413,7 @@
 				5A5E9F781ADE7E12002C1BB8 /* TYVEmployeeWasher */,
 				5A5E9F7C1ADE7E48002C1BB8 /* TYVEmployeeAccountant */,
 				5A5E9F801ADE7E78002C1BB8 /* TYVEmployeeDirector */,
+				5A5E9F841ADE8528002C1BB8 /* TYVCar */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -682,6 +695,7 @@
 				5A5E9F721ADE7A21002C1BB8 /* TYVEmployee.m in Sources */,
 				5A5E9F6F1ADE785F002C1BB8 /* TYVHuman.m in Sources */,
 				5A320EE51ADC3CF600E7A67B /* TYVFemaleBeing.m in Sources */,
+				5A5E9F831ADE8520002C1BB8 /* TYVCar.m in Sources */,
 				5AACA13E1AD6804700DEE7EF /* main.m in Sources */,
 				5A5E9F671ADE7586002C1BB8 /* TYVBuilding.m in Sources */,
 				5A5E9F7B1ADE7E31002C1BB8 /* TYVEmployeeAccountant.m in Sources */,
