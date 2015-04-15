@@ -25,6 +25,7 @@
 		5A5E9F671ADE7586002C1BB8 /* TYVBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F661ADE7586002C1BB8 /* TYVBuilding.m */; };
 		5A5E9F6A1ADE768B002C1BB8 /* TYVRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F691ADE768B002C1BB8 /* TYVRoom.m */; };
 		5A5E9F6F1ADE785F002C1BB8 /* TYVHuman.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F6E1ADE785F002C1BB8 /* TYVHuman.m */; };
+		5A5E9F721ADE7A21002C1BB8 /* TYVEmployee.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F711ADE7A21002C1BB8 /* TYVEmployee.m */; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
 		5AAAAC641AD833D8008E51AF /* TYVBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAAC631AD833D8008E51AF /* TYVBeing.m */; };
 		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
@@ -111,6 +112,8 @@
 		5A5E9F691ADE768B002C1BB8 /* TYVRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVRoom.m; path = Source/TYVRoom/TYVRoom.m; sourceTree = "<group>"; };
 		5A5E9F6D1ADE785F002C1BB8 /* TYVHuman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVHuman.h; path = Source/TYVHuman/TYVHuman.h; sourceTree = "<group>"; };
 		5A5E9F6E1ADE785F002C1BB8 /* TYVHuman.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVHuman.m; path = Source/TYVHuman/TYVHuman.m; sourceTree = "<group>"; };
+		5A5E9F701ADE7A21002C1BB8 /* TYVEmployee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVEmployee.h; path = Source/TYVEmployee/TYVEmployee.h; sourceTree = "<group>"; };
+		5A5E9F711ADE7A21002C1BB8 /* TYVEmployee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVEmployee.m; path = Source/TYVEmployee/TYVEmployee.m; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
 		5AAAAC621AD833D8008E51AF /* TYVBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVBeing.h; path = Source/TYVBeing/TYVBeing.h; sourceTree = "<group>"; };
@@ -330,6 +333,24 @@
 			name = TYVBuilding;
 			sourceTree = "<group>";
 		};
+		5A5E9F731ADE7A27002C1BB8 /* TYVEmployee */ = {
+			isa = PBXGroup;
+			children = (
+				5A5E9F701ADE7A21002C1BB8 /* TYVEmployee.h */,
+				5A5E9F711ADE7A21002C1BB8 /* TYVEmployee.m */,
+			);
+			name = TYVEmployee;
+			sourceTree = "<group>";
+		};
+		5A5E9F741ADE7A40002C1BB8 /* TYVHuman */ = {
+			isa = PBXGroup;
+			children = (
+				5A5E9F6D1ADE785F002C1BB8 /* TYVHuman.h */,
+				5A5E9F6E1ADE785F002C1BB8 /* TYVHuman.m */,
+			);
+			name = TYVHuman;
+			sourceTree = "<group>";
+		};
 		5AAAAC651AD833EA008E51AF /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,8 +360,8 @@
 				5A320EEA1ADC4B9800E7A67B /* TYVNSObjectCategory */,
 				5A5E9F6C1ADE769D002C1BB8 /* TYVBuilding */,
 				5A5E9F6B1ADE7690002C1BB8 /* TYVRoom */,
-				5A5E9F6D1ADE785F002C1BB8 /* TYVHuman.h */,
-				5A5E9F6E1ADE785F002C1BB8 /* TYVHuman.m */,
+				5A5E9F741ADE7A40002C1BB8 /* TYVHuman */,
+				5A5E9F731ADE7A27002C1BB8 /* TYVEmployee */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -617,6 +638,7 @@
 				5AACA1581AD6876E00DEE7EF /* TYVEngine.m in Sources */,
 				5AACA15C1AD69B2000DEE7EF /* TYVCar+TYVTimeCar.m in Sources */,
 				5A320EE91ADC4A6100E7A67B /* NSObject+TYVNSObjectCategory.m in Sources */,
+				5A5E9F721ADE7A21002C1BB8 /* TYVEmployee.m in Sources */,
 				5A5E9F6F1ADE785F002C1BB8 /* TYVHuman.m in Sources */,
 				5A320EE51ADC3CF600E7A67B /* TYVFemaleBeing.m in Sources */,
 				5AACA13E1AD6804700DEE7EF /* main.m in Sources */,
