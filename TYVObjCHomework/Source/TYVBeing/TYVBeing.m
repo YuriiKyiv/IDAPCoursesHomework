@@ -31,16 +31,16 @@
 - (instancetype) initWithName:(NSString *)name age:(uint8_t)age {
     self = [super init];
     if (self) {
-        [self setName:name];
-        [self setAge:age];
+        self.name = name;
+        self.age = age;
     }
     
     return self;
 }
 
 - (void)dealloc {
-    [self setName:NULL];
-    [self setMutableChildrenArray:NULL];
+    self.name = nil;
+    self.mutableChildrenArray = nil;
     
     [super dealloc];
 }

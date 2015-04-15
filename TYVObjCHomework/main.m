@@ -16,13 +16,13 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
         
-        NSMutableArray *array = [[[NSMutableArray alloc] init] autorelease];
+        NSMutableArray *array = [NSMutableArray object];
         TYVBeing *being = NULL;
         for(int i = 0; i < 1000; i++) {
             if (i % 2 == 0) {
-                being = [[[TYVMaleBeing alloc] init] autorelease];
+                being = [TYVMaleBeing object];
             } else {
-                being = [[[TYVFemaleBeing alloc] init] autorelease];
+                being = [TYVFemaleBeing object];
             }
             
             [array addObject:being];
