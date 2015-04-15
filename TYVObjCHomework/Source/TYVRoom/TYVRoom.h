@@ -7,9 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVHuman.h"
 
 @interface TYVRoom : NSObject
-@property   (nonatomic, readonly)   uint8_t maxHumanCount;
-@property   (nonatomic, readonly)   uint8_t currentHumanCount;
+@property   (nonatomic, copy, readonly)             NSArray  *humans;
+
+@property   (nonatomic, readonly, getter=isFull)    BOOL     full;
+@property   (nonatomic, readonly)                   uint8_t  maxHumanCount;
+
+- (instancetype)initWithMaxHumanCount:(uint8_t)count;
+
+- (void)addHuman:(TYVHuman *)aHuman;
+
+- (void)removeHuman:(TYVHuman *)aHuman;
 
 @end
