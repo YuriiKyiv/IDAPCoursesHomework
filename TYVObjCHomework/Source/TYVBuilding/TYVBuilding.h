@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVRoom.h"
 
 @interface TYVBuilding : NSObject
 @property (nonatomic, copy, readonly)   NSArray *rooms;
+
+- (void)addRoom:(TYVRoom *)aRoom;
+
+- (void)removeRoom:(TYVRoom *)aRoom;
 
 @end
