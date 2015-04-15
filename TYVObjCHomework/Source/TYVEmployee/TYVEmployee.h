@@ -18,8 +18,8 @@
 @property (nonatomic, copy, readonly)   NSString        *duty;
 
 //@property (nonatomic, readonly)         TYVEmployeeType employeeType;
-@property (nonatomic, readonly)         float           salary;
-@property (nonatomic, readonly)         uint8_t         experience;
+@property (nonatomic, assign, readonly)         float           salary;
+@property (nonatomic, assign, readonly)         uint8_t         experience;
 
 - (void)work;
 
