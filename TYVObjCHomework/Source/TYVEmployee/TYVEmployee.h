@@ -8,17 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum TYVEmployeeType {
-    TYVEmployeeWasher,
-    TYVEmployeeAccountant,
-    TYVEmployeeDirector
-} TYVEmployeeType;
+//typedef enum TYVEmployeeType {
+//    TYVEmployeeWasher,
+//    TYVEmployeeAccountant,
+//    TYVEmployeeDirector
+//} TYVEmployeeType;
 
 @interface TYVEmployee : NSObject
 @property (nonatomic, copy, readonly)   NSString        *duty;
 
-@property (nonatomic, readonly)         TYVEmployeeType employeeType;
+//@property (nonatomic, readonly)         TYVEmployeeType employeeType;
 @property (nonatomic, readonly)         float           salary;
 @property (nonatomic, readonly)         uint8_t         experience;
+
+- (void)work;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  TYVEmployee.m
+//  TYVEmployeeDirector.h
 //  IDAPCoursesHomework
 //
 //  Created by YURII on 15.04.15.
@@ -8,10 +8,6 @@
 
 #import "TYVEmployee.h"
 
-@implementation TYVEmployee
-
-- (void)work {
-    
-}
+@interface TYVEmployeeDirector : TYVEmployee
 
 @end

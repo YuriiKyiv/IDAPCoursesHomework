@@ -9,9 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface TYVHuman : NSObject
-@property (nonatomic, copy, readonly)   NSString    *duty;
-
-@property (nonatomic, assign, readonly) float       salary;
-@property (nonatomic, assign, readonly) uint8_t     experience;
 
 @end

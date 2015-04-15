@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface TYVRoom : NSObject
-@property   (nonatomic, assign, readonly)   uint8_t maxHumanCount;
-@property   (nonatomic, assign, readonly)   uint8_t currentHumanCount;
+@property   (nonatomic, readonly)   uint8_t maxHumanCount;
+@property   (nonatomic, readonly)   uint8_t currentHumanCount;
 
 @end
