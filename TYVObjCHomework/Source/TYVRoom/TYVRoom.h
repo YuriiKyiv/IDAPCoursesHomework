@@ -12,8 +12,8 @@
 @interface TYVRoom : NSObject
 @property   (nonatomic, copy, readonly)             NSArray  *humans;
 
-@property   (nonatomic, readonly, getter=isFull)    BOOL     full;
-@property   (nonatomic, readonly)                   uint8_t  maxHumanCount;
+@property   (nonatomic, assign, readonly, getter=isFull)    BOOL     full;
+@property   (nonatomic, assign, readonly)                   uint8_t  maxHumanCount;
 
 - (instancetype)initWithMaxHumanCount:(uint8_t)count;
 

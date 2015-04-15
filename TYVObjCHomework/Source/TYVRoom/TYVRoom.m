@@ -22,10 +22,20 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.mutableHumansArray = [NSMutableArray array];
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithMaxHumanCount:(uint8_t)count {
     self = [super init];
     if (self) {
         self.maxHumanCount = count;
+        self.mutableHumansArray = [NSMutableArray array];
     }
     
     return self;
