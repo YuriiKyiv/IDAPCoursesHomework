@@ -10,7 +10,7 @@
 
 @interface TYVCar ()
 @property (nonatomic, assign, getter=isClear)  BOOL        clear;
-@property (nonatomic, assign)                                   NSDecimal   money;
+@property (nonatomic, assign)                  NSDecimal   money;
 
 @end
 
