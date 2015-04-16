@@ -7,7 +7,12 @@
 //
 
 #import "TYVEmployee.h"
+#import "TYVCar.h"
 
 @interface TYVEmployeeWasher : TYVEmployee
+
+- (void)take:(TYVCar *)aCar;
+
+- (void)wash:(TYVCar *)aCar;
 
 @end
