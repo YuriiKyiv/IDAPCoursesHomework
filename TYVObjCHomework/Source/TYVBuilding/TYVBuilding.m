@@ -9,7 +9,7 @@
 #import "TYVBuilding.h"
 
 @interface TYVBuilding ()
-@property (nonatomic, copy, readwrite)   NSMutableArray *mutableRoomsArray;
+@property (nonatomic, retain)   NSMutableArray *mutableRoomsArray;
 
 @end
 
@@ -19,6 +19,12 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
+- (void)dealloc {
+    self.mutableRoomsArray = nil;
+    
+    [super dealloc];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -26,13 +32,6 @@
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    self.mutableRoomsArray = nil;
-    
-    [super dealloc];
 }
 
 #pragma mark -

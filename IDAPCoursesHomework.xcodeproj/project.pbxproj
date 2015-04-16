@@ -29,7 +29,6 @@
 		5A5E9F7B1ADE7E31002C1BB8 /* TYVEmployeeAccountant.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F7A1ADE7E31002C1BB8 /* TYVEmployeeAccountant.m */; };
 		5A5E9F7F1ADE7E75002C1BB8 /* TYVEmployeeDirector.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F7E1ADE7E75002C1BB8 /* TYVEmployeeDirector.m */; };
 		5A5E9F831ADE8520002C1BB8 /* TYVCar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F821ADE8520002C1BB8 /* TYVCar.m */; };
-		5A5E9F881ADE9205002C1BB8 /* TYVHuman.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E9F871ADE9205002C1BB8 /* TYVHuman.m */; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
 		5AAAAC641AD833D8008E51AF /* TYVBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAAAC631AD833D8008E51AF /* TYVBeing.m */; };
 		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
@@ -121,8 +120,6 @@
 		5A5E9F7E1ADE7E75002C1BB8 /* TYVEmployeeDirector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVEmployeeDirector.m; path = Source/TYVEmployeeDirector/TYVEmployeeDirector.m; sourceTree = "<group>"; };
 		5A5E9F811ADE8520002C1BB8 /* TYVCar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVCar.h; path = Source/TYVCar/TYVCar.h; sourceTree = "<group>"; };
 		5A5E9F821ADE8520002C1BB8 /* TYVCar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVCar.m; path = Source/TYVCar/TYVCar.m; sourceTree = "<group>"; };
-		5A5E9F861ADE9205002C1BB8 /* TYVHuman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVHuman.h; sourceTree = "<group>"; };
-		5A5E9F871ADE9205002C1BB8 /* TYVHuman.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVHuman.m; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
 		5AAAAC621AD833D8008E51AF /* TYVBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVBeing.h; path = Source/TYVBeing/TYVBeing.h; sourceTree = "<group>"; };
@@ -380,16 +377,6 @@
 			name = TYVCar;
 			sourceTree = "<group>";
 		};
-		5A5E9F851ADE9205002C1BB8 /* TYVHuman */ = {
-			isa = PBXGroup;
-			children = (
-				5A5E9F861ADE9205002C1BB8 /* TYVHuman.h */,
-				5A5E9F871ADE9205002C1BB8 /* TYVHuman.m */,
-			);
-			name = TYVHuman;
-			path = Source/TYVHuman;
-			sourceTree = "<group>";
-		};
 		5AAAAC651AD833EA008E51AF /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,7 +384,6 @@
 				5A320EE21ADC3CC000E7A67B /* TYVMaleBeing */,
 				5A320EE61ADC3CFD00E7A67B /* TYVFemaleBeing */,
 				5A320EEA1ADC4B9800E7A67B /* TYVNSObjectCategory */,
-				5A5E9F851ADE9205002C1BB8 /* TYVHuman */,
 				5A5E9F731ADE7A27002C1BB8 /* TYVEmployee */,
 				5A5E9F781ADE7E12002C1BB8 /* TYVEmployeeWasher */,
 				5A5E9F7C1ADE7E48002C1BB8 /* TYVEmployeeAccountant */,
@@ -643,7 +629,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A5E9F771ADE7DE7002C1BB8 /* TYVEmployeeWasher.m in Sources */,
-				5A5E9F881ADE9205002C1BB8 /* TYVHuman.m in Sources */,
 				5A5E9F6A1ADE768B002C1BB8 /* TYVRoom.m in Sources */,
 				5A320EE11ADC3CBB00E7A67B /* TYVMaleBeing.m in Sources */,
 				5AAAAC641AD833D8008E51AF /* TYVBeing.m in Sources */,

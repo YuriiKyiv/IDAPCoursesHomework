@@ -9,50 +9,44 @@
 #import "TYVRoom.h"
 
 @interface TYVRoom ()
-@property   (nonatomic, copy, readwrite)    NSMutableArray  *mutableHumansArray;
-
-@property   (nonatomic, assign, readwrite)  uint8_t         maxHumanCount;
+@property   (nonatomic, retain)    NSMutableArray  *mutableHumansArray;
+@property   (nonatomic, assign)  uint8_t         humanCount;
 
 @end
 
 @implementation TYVRoom
+
 @dynamic full;
 @dynamic humans;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.mutableHumansArray = [NSMutableArray array];
-    }
-    
-    return self;
-}
-
-- (instancetype)initWithMaxHumanCount:(uint8_t)count {
-    self = [super init];
-    if (self) {
-        self.maxHumanCount = count;
-        self.mutableHumansArray = [NSMutableArray array];
-    }
-    
-    return self;
-}
-
-- (void)dealloc
-{
+- (void)dealloc {
     self.mutableHumansArray = nil;
     
     [super dealloc];
+}
+
+- (instancetype)init {
+    return [self initWithHumanCount:0];
+}
+
+- (instancetype)initWithHumanCount:(uint8_t)count {
+    self = [super init];
+    if (self) {
+        self.humanCount = count;
+        self.mutableHumansArray = [NSMutableArray array];
+    }
+    
+    return self;
 }
 
 #pragma mark -
 #pragma mark Accessors
 
 - (BOOL)isFull {
-    return [[self mutableHumansArray] count] >= self.maxHumanCount;
+    return [[self mutableHumansArray] count] >= self.humanCount;
 }
 
 - (NSArray *)getHumans {
@@ -64,12 +58,12 @@
 
 - (void)addHuman:(TYVHuman *)aHuman {
     if (!self.isFull) {
-        [[self mutableHumansArray] addObject:aHuman];
+        [[self mutableHumansArray] addObject:(id)aHuman];
     }
 }
 
 - (void)removeHuman:(TYVHuman *)aHuman {
-    [[self mutableHumansArray] removeObject:aHuman];
+    [[self mutableHumansArray] removeObject:(id)aHuman];
 }
 
 @end

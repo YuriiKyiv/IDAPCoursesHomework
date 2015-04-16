@@ -8,6 +8,25 @@
 
 #import "TYVCar.h"
 
+@interface TYVCar ()
+@property (nonatomic, assign, getter=isClear)  BOOL        clear;
+@property (nonatomic, assign)                                   NSDecimal   money;
+
+@end
+
 @implementation TYVCar
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (instancetype)initWithMoney:(NSDecimal)money isClear:(BOOL)isClear {
+    self = [super init];
+    if (self) {
+        self.money = money;
+        self.clear = isClear;
+    }
+    
+    return self;
+}
 
 @end

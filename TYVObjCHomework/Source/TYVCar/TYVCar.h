@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface TYVCar : NSObject
-@property (nonatomic, assign, readonly, getter=isClear)     BOOL        clear;
-@property (nonatomic, assign, readonly)                     uint8_t     money;
+@property (nonatomic, readonly, getter=isClear)     BOOL        clear;
+@property (nonatomic, readonly)                     NSDecimal   money;
+
+- (instancetype)initWithMoney:(NSDecimal)money isClear:(BOOL)isClear;
 
 @end
