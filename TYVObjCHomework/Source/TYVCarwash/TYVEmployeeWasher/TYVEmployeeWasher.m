@@ -10,4 +10,12 @@
 
 @implementation TYVEmployeeWasher
 
+- (void)take:(TYVCar *)aCar {
+    
+}
+
+- (void)wash:(TYVCar *)aCar {
+    
+}
+
 @end
