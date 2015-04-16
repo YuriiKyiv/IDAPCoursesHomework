@@ -9,8 +9,8 @@
 #import "TYVCarwashRoom.h"
 
 @interface TYVCarwashRoom ()
-@property   (nonatomic, retain)  NSMutableArray  *mutableCarsArray;
-@property   (nonatomic, assign)  uint8_t         carCount;
+@property (nonatomic, retain)  NSMutableArray  *mutableCarsArray;
+@property (nonatomic, assign)  uint8_t         carCount;
 
 @end
 

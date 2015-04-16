@@ -38,18 +38,18 @@
 #pragma mark Accessors
 
 - (NSArray *)getRooms {
-    return [[[self mutableRoomsArray] copy] autorelease];
+    return [[self.mutableRoomsArray copy] autorelease];
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)addRoom:(TYVRoom *)aRoom {
-    [[self mutableRoomsArray] addObject:aRoom];
+    [self.mutableRoomsArray addObject:aRoom];
 }
 
 - (void)removeRoom:(TYVRoom *)aRoom {
-    [[self mutableRoomsArray] removeObject:aRoom];
+    [self.mutableRoomsArray removeObject:aRoom];
 }
 
 @end

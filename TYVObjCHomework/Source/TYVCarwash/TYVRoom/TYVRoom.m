@@ -9,8 +9,8 @@
 #import "TYVRoom.h"
 
 @interface TYVRoom ()
-@property   (nonatomic, retain)    NSMutableArray  *mutableHumansArray;
-@property   (nonatomic, assign)  uint8_t         humanCount;
+@property (nonatomic, retain)  NSMutableArray  *mutableHumansArray;
+@property (nonatomic, assign)  uint8_t         humanCount;
 
 @end
 
@@ -46,11 +46,11 @@
 #pragma mark Accessors
 
 - (BOOL)isFull {
-    return [[self mutableHumansArray] count] >= self.humanCount;
+    return [self.mutableHumansArray count] >= self.humanCount;
 }
 
 - (NSArray *)getHumans {
-    return [[[self mutableHumansArray] copy] autorelease];
+    return [[self.mutableHumansArray copy] autorelease];
 }
 
 #pragma mark -
@@ -58,12 +58,12 @@
 
 - (void)addHuman:(TYVHuman *)aHuman {
     if (!self.isFull) {
-        [[self mutableHumansArray] addObject:(id)aHuman];
+        [self.mutableHumansArray addObject:(id)aHuman];
     }
 }
 
 - (void)removeHuman:(TYVHuman *)aHuman {
-    [[self mutableHumansArray] removeObject:(id)aHuman];
+    [self.mutableHumansArray removeObject:(id)aHuman];
 }
 
 @end

@@ -10,8 +10,8 @@
 #import "TYVCar.h"
 
 @interface TYVCarwashRoom : TYVRoom
-@property   (nonatomic, readonly)   NSArray  *cars;
-@property   (nonatomic, readonly)   uint8_t  carCount;
+@property (nonatomic, readonly)   NSArray  *cars;
+@property (nonatomic, readonly)   uint8_t  carCount;
 
 - (instancetype)initWithHumanCount:(uint8_t)humanCount carCount:(uint8_t)carCount;
 
