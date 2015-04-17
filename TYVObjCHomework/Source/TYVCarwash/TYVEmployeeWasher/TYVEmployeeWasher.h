@@ -8,11 +8,16 @@
 
 #import "TYVEmployee.h"
 #import "TYVCar.h"
+#import "TYVEmployeeAccountant.h"
 
 @interface TYVEmployeeWasher : TYVEmployee
 
-- (void)take:(TYVCar *)aCar;
+@property (nonatomic, retain)   TYVCar  *car;
 
-- (void)wash:(TYVCar *)aCar;
+- (void)wash;
+
+- (void)takeMoney;
+
+- (void)giveMoneyToAccountant:(TYVEmployeeAccountant *)accountant;
 
 @end

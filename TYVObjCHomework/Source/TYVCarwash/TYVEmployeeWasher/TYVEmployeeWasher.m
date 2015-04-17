@@ -10,11 +10,15 @@
 
 @implementation TYVEmployeeWasher
 
-- (void)take:(TYVCar *)aCar {
-    
+- (void)wash {
+    self.car.isClear = true;
 }
 
-- (void)wash:(TYVCar *)aCar {
+- (void)takeMoney {
+    [self.car takeMoney:[NSDecimalNumber decimalNumberWithString:@"100"]];
+}
+
+- (void)giveMoneyToAccountant:(TYVEmployeeAccountant *)accountant {
     
 }
 

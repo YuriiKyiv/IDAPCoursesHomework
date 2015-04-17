@@ -42,6 +42,9 @@
     return self;
 }
 
+#pragma mark -
+#pragma mark Public Methods
+
 - (void)takeMoney:(NSDecimalNumber *)money {
     self.money = [self.money decimalNumberBySubtracting:money];
 }
