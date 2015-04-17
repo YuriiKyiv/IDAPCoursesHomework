@@ -10,4 +10,8 @@
 
 @implementation NSObject (TYVNSObjectExtensions)
 
++ (id)object {
+    return [[[self alloc] init] autorelease];
+}
+
 @end
