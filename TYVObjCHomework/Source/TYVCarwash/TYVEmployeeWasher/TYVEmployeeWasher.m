@@ -8,17 +8,37 @@
 
 #import "TYVEmployeeWasher.h"
 
+@interface TYVEmployeeWasher ()
+
+@property (nonatomic, readonly)    NSString    *price;
+
+@end
+
 @implementation TYVEmployeeWasher
+
+@dynamic price;
+
+#pragma mark -
+#pragma mark Accessors
+
+- (NSString *)price {
+    return @"100";
+}
+
+#pragma mark -
+#pragma mark Public Methods
 
 - (void)wash {
     self.car.isClear = true;
 }
 
 - (void)takeMoney {
-    [self.car takeMoney:[NSDecimalNumber decimalNumberWithString:@"100"]];
+    [self.car giveMoney:[NSDecimalNumber decimalNumberWithString:self.price]];
+    self.car = nil;
 }
 
 - (void)giveMoneyToAccountant:(TYVEmployeeAccountant *)accountant {
+    [[accountant retain] autorelease];
     
 }
 

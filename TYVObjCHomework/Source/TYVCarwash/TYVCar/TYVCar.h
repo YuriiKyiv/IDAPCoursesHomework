@@ -14,6 +14,6 @@
 
 - (instancetype)initWithMoney:(NSDecimalNumber *)money isClear:(BOOL)isClear;
 
-- (void)takeMoney:(NSDecimalNumber *)money;
+- (void)giveMoney:(NSDecimalNumber *)money;
 
 @end
