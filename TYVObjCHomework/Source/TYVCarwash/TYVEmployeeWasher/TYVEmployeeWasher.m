@@ -18,6 +18,16 @@
 
 @dynamic price;
 
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.car = nil;
+    
+    [super dealloc];
+}
+
 #pragma mark -
 #pragma mark Accessors
 

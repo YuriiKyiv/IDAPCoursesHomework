@@ -10,4 +10,6 @@
 
 @interface TYVEmployeeDirector : TYVEmployee
 
+- (void)takeMoney:(NSDecimalNumber *)money;
+
 @end

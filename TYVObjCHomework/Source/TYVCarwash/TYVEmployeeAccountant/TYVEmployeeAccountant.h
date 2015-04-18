@@ -7,7 +7,14 @@
 //
 
 #import "TYVEmployee.h"
+#import "TYVEmployeeDirector.h"
 
 @interface TYVEmployeeAccountant : TYVEmployee
+
+- (void)count;
+
+- (void)giveMoneyToDirector:(TYVEmployeeDirector *)aDirector;
+
+- (void)takeMoney:(NSDecimalNumber *)money;
 
 @end
