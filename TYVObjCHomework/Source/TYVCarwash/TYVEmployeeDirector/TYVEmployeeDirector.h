@@ -10,6 +10,8 @@
 
 @interface TYVEmployeeDirector : TYVEmployee
 
+@property (nonatomic, readonly)    NSDecimalNumber    *money;
+
 - (void)takeMoney:(NSDecimalNumber *)money;
 
 @end

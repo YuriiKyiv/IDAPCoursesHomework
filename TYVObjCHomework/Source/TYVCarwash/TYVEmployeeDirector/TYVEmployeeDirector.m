@@ -8,6 +8,41 @@
 
 #import "TYVEmployeeDirector.h"
 
+@interface TYVEmployeeDirector ()
+
+@property (nonatomic, retain)   NSDecimalNumber    *money;
+
+@end
+
 @implementation TYVEmployeeDirector
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.money = nil;
+    
+    [super dealloc];
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.money = [NSDecimalNumber decimalNumberWithString:@"0"];
+    }
+    
+    return self;
+}
+
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)takeMoney:(NSDecimalNumber *)money {
+    self.money = [self.money decimalNumberBySubtracting:money];
+}
+
+- (void)profit {
+    NSLog(@"%@\n", self.money);
+}
 
 @end
