@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A09C32A1AE17637006CD48C /* NSObject+TYVNSObjectExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A09C3291AE17637006CD48C /* NSObject+TYVNSObjectExtensions.m */; };
 		5A2F2C861AB6F19C00BBF458 /* TYVPropertySetters.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A2F2C841AB6F19C00BBF458 /* TYVPropertySetters.c */; };
 		5A302C931AC193B400E784ED /* TYVStackTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A302C911AC193B400E784ED /* TYVStackTest.c */; };
 		5A320EE11ADC3CBB00E7A67B /* TYVMaleBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A320EE01ADC3CBB00E7A67B /* TYVMaleBeing.m */; };
@@ -77,6 +78,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5A09C3281AE17637006CD48C /* NSObject+TYVNSObjectExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+TYVNSObjectExtensions.h"; path = "Source/TYVNSObjectExtensions/NSObject+TYVNSObjectExtensions.h"; sourceTree = "<group>"; };
+		5A09C3291AE17637006CD48C /* NSObject+TYVNSObjectExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+TYVNSObjectExtensions.m"; path = "Source/TYVNSObjectExtensions/NSObject+TYVNSObjectExtensions.m"; sourceTree = "<group>"; };
 		5A2F2C841AB6F19C00BBF458 /* TYVPropertySetters.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVPropertySetters.c; path = TYVPropertySetters/TYVPropertySetters.c; sourceTree = "<group>"; };
 		5A2F2C851AB6F19C00BBF458 /* TYVPropertySetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVPropertySetters.h; path = TYVPropertySetters/TYVPropertySetters.h; sourceTree = "<group>"; };
 		5A302C911AC193B400E784ED /* TYVStackTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVStackTest.c; path = task6/TYVStack/TYVStackTest.c; sourceTree = "<group>"; };
@@ -191,6 +194,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A09C32B1AE1763B006CD48C /* TYVNSObjectExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				5A09C3281AE17637006CD48C /* NSObject+TYVNSObjectExtensions.h */,
+				5A09C3291AE17637006CD48C /* NSObject+TYVNSObjectExtensions.m */,
+			);
+			name = TYVNSObjectExtensions;
+			sourceTree = "<group>";
+		};
 		5A2F2C871AB6F1D900BBF458 /* TYVPropertySetters */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,6 +469,7 @@
 			children = (
 				5AACA13D1AD6804700DEE7EF /* main.m */,
 				5AAAAC651AD833EA008E51AF /* Source */,
+				5A09C32B1AE1763B006CD48C /* TYVNSObjectExtensions */,
 			);
 			path = TYVObjCHomework;
 			sourceTree = "<group>";
@@ -678,6 +691,7 @@
 			files = (
 				5A5B29801ADFD97900B8BD04 /* TYVEmployeeWasher.m in Sources */,
 				5A320EE11ADC3CBB00E7A67B /* TYVMaleBeing.m in Sources */,
+				5A09C32A1AE17637006CD48C /* NSObject+TYVNSObjectExtensions.m in Sources */,
 				5A5B297B1ADFD97900B8BD04 /* TYVCarwashBuilding.m in Sources */,
 				5AAAAC641AD833D8008E51AF /* TYVBeing.m in Sources */,
 				5A5B297E1ADFD97900B8BD04 /* TYVEmployeeAccountant.m in Sources */,

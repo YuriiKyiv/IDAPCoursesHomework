@@ -37,7 +37,7 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (NSArray *)getRooms {
+- (NSArray *)rooms {
     return [[self.mutableRoomsArray copy] autorelease];
 }
 

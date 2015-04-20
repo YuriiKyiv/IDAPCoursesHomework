@@ -7,7 +7,14 @@
 //
 
 #import "TYVBuilding.h"
+#import "TYVCarwashRoom.h"
 
 @interface TYVCarwashBuilding : TYVBuilding
+
+@property (nonatomic, readonly)    NSArray    *carwashrooms;
+
+- (void)addCarwashRoom:(TYVCarwashRoom *)aCarwashRoom;
+
+- (void)removeCarwashRoom:(TYVCarwashRoom *)aCarwashRoom;
 
 @end

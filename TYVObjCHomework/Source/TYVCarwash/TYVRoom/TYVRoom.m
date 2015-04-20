@@ -49,20 +49,20 @@
     return [self.mutableHumansArray count] >= self.humanCount;
 }
 
-- (NSArray *)getHumans {
+- (NSArray *)humans {
     return [[self.mutableHumansArray copy] autorelease];
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)addHuman:(TYVHuman *)aHuman {
+- (void)addHuman:(TYVEmployee *)aHuman {
     if (!self.isFull) {
         [self.mutableHumansArray addObject:(id)aHuman];
     }
 }
 
-- (void)removeHuman:(TYVHuman *)aHuman {
+- (void)removeHuman:(TYVEmployee *)aHuman {
     [self.mutableHumansArray removeObject:(id)aHuman];
 }
 

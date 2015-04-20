@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface TYVCar : NSObject
-@property (nonatomic, readonly, getter=isClear)     BOOL        clear;
-@property (nonatomic, readonly)                     NSDecimal   money;
+@property (nonatomic, assign)      BOOL               isClear;
+@property (nonatomic, readonly)    NSDecimalNumber    *money;
 
-- (instancetype)initWithMoney:(NSDecimal)money isClear:(BOOL)isClear;
+- (instancetype)initWithMoney:(NSDecimalNumber *)money isClear:(BOOL)isClear;
+
+- (void)giveMoney:(NSDecimalNumber *)money;
 
 @end

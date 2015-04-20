@@ -7,10 +7,10 @@
 //
 
 #import "TYVCar.h"
+#import "NSObject+TYVNSObjectExtensions.h"
 
 @interface TYVCar ()
-@property (nonatomic, assign, getter=isClear)  BOOL        clear;
-@property (nonatomic, assign)                  NSDecimal   money;
+@property (nonatomic, retain)   NSDecimalNumber   *money;
 
 @end
 
@@ -19,14 +19,35 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (instancetype)initWithMoney:(NSDecimal)money isClear:(BOOL)isClear {
+- (void)dealloc {
+    self.money = nil;
+    
+    [super dealloc];
+}
+
+- (instancetype)init {
     self = [super init];
     if (self) {
-        self.money = money;
-        self.clear = isClear;
+        [self initWithMoney:0 isClear:false];
+    }
+    return self;
+}
+
+- (instancetype)initWithMoney:(NSDecimalNumber *)money isClear:(BOOL)isClear {
+    self = [super init];
+    if (self) {
+        self.money = [[money copy] autorelease];
     }
     
     return self;
 }
+
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)giveMoney:(NSDecimalNumber *)money {
+    self.money = [self.money decimalNumberBySubtracting:money];
+}
+
 
 @end

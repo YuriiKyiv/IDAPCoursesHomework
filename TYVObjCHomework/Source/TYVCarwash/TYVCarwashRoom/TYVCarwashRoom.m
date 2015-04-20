@@ -16,7 +16,8 @@
 
 @implementation TYVCarwashRoom
 
-@dynamic humanCount;
+@dynamic fullForCar;
+@dynamic fullForHuman;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -43,11 +44,19 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (BOOL)isFull {
-    return ([[self humans] count] >= self.humanCount) || ([[self mutableCarsArray] count] >= self.carCount);
+- (BOOL)isFullForCar {
+    return [self.cars count] >= self.carCount;
 }
 
-- (NSArray *)getCars {
+- (BOOL)isFullForHuman {
+    return [self.humans count] >= self.humanCount;
+}
+
+- (BOOL)isFull {
+    return self.isFullForHuman && self.isFullForCar;
+}
+
+- (NSArray *)cars {
     return [[[self mutableCarsArray] copy] autorelease];
 }
 
@@ -56,7 +65,9 @@
 #pragma mark Public Methods
 
 - (void)addCar:(TYVCar *)aCar {
-    [self.mutableCarsArray addObject:aCar];
+    if (!self.isFullForCar) {
+        [self.mutableCarsArray addObject:aCar];
+    }
 }
 
 - (void)removeCar:(TYVCar *)aCar {
