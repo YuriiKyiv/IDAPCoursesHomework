@@ -65,7 +65,9 @@
 #pragma mark Public Methods
 
 - (void)addCar:(TYVCar *)aCar {
-    [self.mutableCarsArray addObject:aCar];
+    if (!self.isFullForCar) {
+        [self.mutableCarsArray addObject:aCar];
+    }
 }
 
 - (void)removeCar:(TYVCar *)aCar {
