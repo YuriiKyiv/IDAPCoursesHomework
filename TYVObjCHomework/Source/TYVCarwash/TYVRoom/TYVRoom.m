@@ -56,13 +56,13 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)addHuman:(TYVHuman *)aHuman {
+- (void)addHuman:(TYVEmployee *)aHuman {
     if (!self.isFull) {
         [self.mutableHumansArray addObject:(id)aHuman];
     }
 }
 
-- (void)removeHuman:(TYVHuman *)aHuman {
+- (void)removeHuman:(TYVEmployee *)aHuman {
     [self.mutableHumansArray removeObject:(id)aHuman];
 }
 

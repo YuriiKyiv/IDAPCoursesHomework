@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYVHuman.h"
+#import "TYVEmployee.h"
 
 @interface TYVRoom : NSObject
 @property (nonatomic, readonly)                   NSArray  *humans;
@@ -17,8 +17,8 @@
 
 - (instancetype)initWithHumanCount:(uint8_t)count;
 
-- (void)addHuman:(TYVHuman *)aHuman;
+- (void)addHuman:(TYVEmployee *)aHuman;
 
-- (void)removeHuman:(TYVHuman *)aHuman;
+- (void)removeHuman:(TYVEmployee *)aHuman;
 
 @end

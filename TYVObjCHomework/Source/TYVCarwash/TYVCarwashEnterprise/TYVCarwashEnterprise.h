@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "TYVCarwashBuilding.h"
+#import "TYVBuilding.h"
 
 @interface TYVCarwashEnterprise : NSObject
+
+@property (nonatomic, readonly)    TYVCarwashBuilding    *carwashBuilding;
+@property (nonatomic, readonly)    TYVBuilding           *building;
+
+- (void)hirePersonal;
 
 @end
