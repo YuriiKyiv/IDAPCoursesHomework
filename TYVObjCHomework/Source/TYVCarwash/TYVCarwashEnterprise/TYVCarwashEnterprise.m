@@ -13,11 +13,17 @@
 #import "TYVEmployeeDirector.h"
 #import "TYVRoom.h"
 #import "TYVCarwashRoom.h"
+#import "TYVCar.h"
 
 @interface TYVCarwashEnterprise ()
 
-@property (nonatomic, retain)    TYVCarwashBuilding    *carwashBuilding;
-@property (nonatomic, retain)    TYVBuilding           *building;
+@property (nonatomic, retain)    TYVCarwashBuilding         *carwashBuilding;
+@property (nonatomic, retain)    TYVBuilding                *building;
+
+@property (nonatomic, retain)    NSMutableArray             *mutableWashers;
+@property (nonatomic, retain)    NSMutableArray             *mutableAccountants;
+
+@property (nonatomic, retain)    TYVEmployeeDirector        *director;
 
 @end
 
@@ -26,11 +32,23 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
+- (void)dealloc {
+    self.carwashBuilding = nil;
+    self.building = nil;
+    self.mutableAccountants = nil;
+    self.mutableWashers = nil;
+    self.director = nil;
+    
+    [super dealloc];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.carwashBuilding = [TYVCarwashBuilding object];
         self.building = [TYVBuilding object];
+        self.mutableAccountants = [NSMutableArray array];
+        self.mutableWashers = [NSMutableArray array];
     }
     
     return self;
@@ -41,8 +59,11 @@
 
 - (void)hirePersonal {
     TYVEmployeeWasher *washer = [TYVEmployeeWasher object];
+    [self.mutableWashers addObject:washer];
     TYVEmployeeAccountant *accountant = [TYVEmployeeAccountant object];
+    [self.mutableAccountants addObject:accountant];
     TYVEmployeeDirector *director = [TYVEmployeeDirector object];
+    self.director = director;
     
     TYVRoom *room = [[[TYVRoom alloc] initWithHumanCount:2] autorelease];
     [room addHuman:accountant];
@@ -53,6 +74,12 @@
     
     [self.carwashBuilding addCarwashRoom:carwashRoom];
     [self.building addRoom:room];
+}
+
+- (void)work {
+    TYVCar *car = [TYVCar object];
+    NSArray * carwashrooms = self.carwashBuilding.carwashrooms;
+    [[carwashrooms lastObject] addCar:car];
 }
 
 @end

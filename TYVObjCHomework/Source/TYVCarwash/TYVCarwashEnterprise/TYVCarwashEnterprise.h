@@ -17,4 +17,6 @@
 
 - (void)hirePersonal;
 
+- (void)work;
+
 @end
