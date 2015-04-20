@@ -49,7 +49,7 @@
     return [self.mutableHumansArray count] >= self.humanCount;
 }
 
-- (NSArray *)getHumans {
+- (NSArray *)humans {
     return [[self.mutableHumansArray copy] autorelease];
 }
 
