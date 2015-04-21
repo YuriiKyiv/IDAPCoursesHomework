@@ -11,7 +11,6 @@
 #import "TYVEmployeeAccountant.h"
 
 @interface TYVEmployeeWasher : TYVEmployee
-
 @property (nonatomic, retain)   TYVCar  *car;
 
 - (void)wash;

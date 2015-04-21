@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVMoneyTransfer.h"
 
-@interface TYVEmployee : NSObject
-@property (nonatomic, readonly)    NSString    *duty;
+@interface TYVEmployee : NSObject <TYVMoneyTransfer>
+@property (nonatomic, readonly)    NSString     *duty;
 
-@property (nonatomic, readonly)    float       salary;
-@property (nonatomic, readonly)    uint8_t     experience;
+@property (nonatomic, readonly)    float        salary;
+@property (nonatomic, readonly)    NSUInteger   experience;
 
 - (void)work;
 

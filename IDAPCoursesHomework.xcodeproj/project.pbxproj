@@ -141,6 +141,7 @@
 		5AF254601AE6640600CB51FA /* TYVMaleBeing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVMaleBeing.m; sourceTree = "<group>"; };
 		5AF254651AE6640600CB51FA /* NSObject+TYVNSObjectExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+TYVNSObjectExtensions.h"; sourceTree = "<group>"; };
 		5AF254661AE6640600CB51FA /* NSObject+TYVNSObjectExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TYVNSObjectExtensions.m"; sourceTree = "<group>"; };
+		5AF254761AE6675D00CB51FA /* TYVMoneyTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVMoneyTransfer.h; path = TYVMoneyTransfer/TYVMoneyTransfer.h; sourceTree = "<group>"; };
 		5AF30FB71AC2CE10000D40E9 /* TYVAutoReleaseStack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoReleaseStack.c; path = task6/TYVStack/TYVAutoReleaseStack.c; sourceTree = "<group>"; };
 		5AF30FB81AC2CE10000D40E9 /* TYVAutoReleaseStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoReleaseStack.h; path = task6/TYVStack/TYVAutoReleaseStack.h; sourceTree = "<group>"; };
 		5AFD29F81A9DE189007EFFB5 /* TYVMultiples.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVMultiples.c; path = IDAPCoursesHomework/task1/TYVMultiples.c; sourceTree = "<group>"; };
@@ -362,6 +363,7 @@
 				5AF2545B1AE6640600CB51FA /* TYVFemaleBeing */,
 				5AF2545E1AE6640600CB51FA /* TYVMaleBeing */,
 				5AF254641AE6640600CB51FA /* TYVNSObjectExtensions */,
+				5AF254771AE6676600CB51FA /* TYVMoneTransfer */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -531,6 +533,14 @@
 				5AF254661AE6640600CB51FA /* NSObject+TYVNSObjectExtensions.m */,
 			);
 			path = TYVNSObjectExtensions;
+			sourceTree = "<group>";
+		};
+		5AF254771AE6676600CB51FA /* TYVMoneTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				5AF254761AE6675D00CB51FA /* TYVMoneyTransfer.h */,
+			);
+			name = TYVMoneTransfer;
 			sourceTree = "<group>";
 		};
 		5AFD29FE1A9DE191007EFFB5 /* task1 */ = {
