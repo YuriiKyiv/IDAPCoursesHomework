@@ -10,12 +10,12 @@
 #import "TYVEmployee.h"
 
 @interface TYVRoom : NSObject
-@property (nonatomic, readonly)                   NSArray  *humans;
+@property (nonatomic, readonly)                   NSArray       *humans;
 
-@property (nonatomic, readonly, getter=isFull)    BOOL     full;
-@property (nonatomic, readonly)                   uint8_t  humanCount;
+@property (nonatomic, readonly, getter=isFull)    BOOL          full;
+@property (nonatomic, readonly)                   NSUInteger    humanCount;
 
-- (instancetype)initWithHumanCount:(uint8_t)count;
+- (instancetype)initWithHumanCount:(NSUInteger)count;
 
 - (void)addHuman:(TYVEmployee *)aHuman;
 

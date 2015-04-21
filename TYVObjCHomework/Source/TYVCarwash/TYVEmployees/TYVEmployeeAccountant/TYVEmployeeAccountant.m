@@ -9,7 +9,6 @@
 #import "TYVEmployeeAccountant.h"
 
 @interface TYVEmployeeAccountant ()
-
 @property (nonatomic, retain)   NSDecimalNumber    *money;
 
 @end

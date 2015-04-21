@@ -16,7 +16,6 @@
 #import "TYVCar.h"
 
 @interface TYVCarwashEnterprise ()
-
 @property (nonatomic, retain)    TYVCarwashBuilding         *carwashBuilding;
 @property (nonatomic, retain)    TYVBuilding                *building;
 
