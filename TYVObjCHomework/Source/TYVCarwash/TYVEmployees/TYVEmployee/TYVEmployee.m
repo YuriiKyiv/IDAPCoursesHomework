@@ -27,8 +27,10 @@
 }
 
 - (void)takeMoney:(NSDecimalNumber *)money From:(TYVEmployee *)aMoneykeeper {
-    self.money = [self.money decimalNumberByAdding:money];
-    [aMoneykeeper.money decimalNumberBySubtracting:money];
+    if ([aMoneykeeper respondsToSelector:_cmd]) {
+        self.money = [self.money decimalNumberByAdding:money];
+        [aMoneykeeper.money decimalNumberBySubtracting:money];
+    }
 }
 
 
