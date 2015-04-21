@@ -9,8 +9,8 @@
 #import "TYVRoom.h"
 
 @interface TYVRoom ()
-@property (nonatomic, retain)  NSMutableArray  *mutableHumansArray;
-@property (nonatomic, assign)  uint8_t         humanCount;
+@property (nonatomic, retain)  NSMutableArray   *mutableHumansArray;
+@property (nonatomic, assign)  NSUInteger       humanCount;
 
 @end
 
@@ -32,7 +32,7 @@
     return [self initWithHumanCount:0];
 }
 
-- (instancetype)initWithHumanCount:(uint8_t)count {
+- (instancetype)initWithHumanCount:(NSUInteger)count {
     self = [super init];
     if (self) {
         self.humanCount = count;

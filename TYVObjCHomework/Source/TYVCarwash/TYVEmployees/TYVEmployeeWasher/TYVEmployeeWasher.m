@@ -9,7 +9,6 @@
 #import "TYVEmployeeWasher.h"
 
 @interface TYVEmployeeWasher ()
-
 @property (nonatomic, readonly)    NSString    *price;
 
 @end

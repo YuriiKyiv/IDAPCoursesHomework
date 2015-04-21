@@ -9,8 +9,8 @@
 #import "TYVCarwashRoom.h"
 
 @interface TYVCarwashRoom ()
-@property (nonatomic, retain)  NSMutableArray  *mutableCarsArray;
-@property (nonatomic, assign)  uint8_t         carCount;
+@property (nonatomic, retain)  NSMutableArray   *mutableCarsArray;
+@property (nonatomic, assign)  NSUInteger       carCount;
 
 @end
 
@@ -23,7 +23,7 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-
+    self.mutableCarsArray = nil;
     
     [super dealloc];
 }
@@ -32,7 +32,7 @@
     return [self initWithHumanCount:0 carCount:0];
 }
 
-- (instancetype)initWithHumanCount:(uint8_t)humanCount carCount:(uint8_t)carCount {
+- (instancetype)initWithHumanCount:(NSUInteger)humanCount carCount:(NSUInteger)carCount {
     self = [super initWithHumanCount:humanCount];
     if (self) {
         self.carCount = carCount;
@@ -57,7 +57,7 @@
 }
 
 - (NSArray *)cars {
-    return [[[self mutableCarsArray] copy] autorelease];
+    return [[self.mutableCarsArray copy] autorelease];
 }
 
 
