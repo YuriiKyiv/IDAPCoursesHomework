@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "TYVMoneyTransfer.h"
 
-@interface TYVEmployee : NSObject <TYVMoneyTransfer>
-@property (nonatomic, readonly)    NSString     *duty;
+#import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
-@property (nonatomic, readonly)    float        salary;
-@property (nonatomic, readonly)    NSUInteger   experience;
+@interface TYVEmployee : NSObject <TYVMoneyTransfer>
+@property (nonatomic, readonly)    NSDecimalNumber    *money;
+@property (nonatomic, readonly)    NSString           *duty;
+
+@property (nonatomic, readonly)    NSDecimalNumber    *salary;
+@property (nonatomic, readonly)    NSUInteger         experience;
 
 - (void)work;
 

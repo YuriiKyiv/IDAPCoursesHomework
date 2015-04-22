@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVMoneyTransfer.h"
 
-@interface TYVCar : NSObject
+@interface TYVCar : NSObject <TYVMoneyTransfer>
 @property (nonatomic, assign)      BOOL               isClear;
-@property (nonatomic, readonly)    NSDecimalNumber    *money;
 
-- (instancetype)initWithMoney:(NSDecimalNumber *)money isClear:(BOOL)isClear;
-
-- (void)giveMoney:(NSDecimalNumber *)money;
+- (instancetype)initWithMoney:(NSDecimalNumber *)money;
 
 @end

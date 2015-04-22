@@ -8,15 +8,48 @@
 
 #import "TYVEmployee.h"
 
+#import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
+
 @interface TYVEmployee ()
-@property (nonatomic,  retain)   NSDecimalNumber    *money;
+@property (nonatomic, retain)    NSString           *duty;
+@property (nonatomic, retain)    NSDecimalNumber    *salary;
+@property (nonatomic, assign)    NSUInteger         experience;
 
 @end
 
 @implementation TYVEmployee
 
+@dynamic money;
+
+@synthesize privateMoney = _privateMoney;
+
 #pragma mark -
 #pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.privateMoney = nil;
+    self.duty = nil;
+    self.salary = nil;
+    
+    [super dealloc];
+}
+
+- (instancetype)initWithDuty:(NSString *)duty salary:(NSDecimalNumber *)salary {
+    self = [super init];
+    if (self) {
+        self.duty = duty;
+        self.salary = salary;
+        self.privateMoney = [NSDecimalNumber zero];
+    }
+    return self;
+}
+
+#pragma mark -
+#pragma mark Accessors
+
+- (NSDecimalNumber *)money {
+    return [[self.privateMoney copy] autorelease];
+}
 
 
 #pragma mark -
@@ -26,17 +59,18 @@
     
 }
 
-- (void)takeMoney:(NSDecimalNumber *)money From:(TYVEmployee *)aMoneykeeper {
-    if ([aMoneykeeper respondsToSelector:_cmd]) {
-        self.money = [self.money decimalNumberByAdding:money];
-        [aMoneykeeper.money decimalNumberBySubtracting:money];
-    }
+#pragma mark -
+#pragma mark TYVMoneyTransfer Methods
+
+- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
+        self.privateMoney = [self.privateMoney decimalNumberByAdding:money];
+        aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberBySubtracting:money];
 }
 
 
-- (void)giveMoney:(NSDecimalNumber *)money To:(TYVEmployee *)aMoneykeeper {
-    self.money = [self.money decimalNumberBySubtracting:money];
-    [aMoneykeeper.money decimalNumberByAdding:money];
+- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
+    self.privateMoney = [self.privateMoney decimalNumberBySubtracting:money];
+    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberByAdding:money];
 }
 
 @end
