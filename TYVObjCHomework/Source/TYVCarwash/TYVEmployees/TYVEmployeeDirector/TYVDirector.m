@@ -6,19 +6,20 @@
 //  Copyright (c) 2015 YURII. All rights reserved.
 //
 
-#import "TYVEmployeeDirector.h"
+#import "TYVDirector.h"
 
-@interface TYVEmployeeDirector ()
+@interface TYVDirector ()
+@property (nonatomic, retain)    NSDecimalNumber    *capital;
 
 @end
 
-@implementation TYVEmployeeDirector
+@implementation TYVDirector
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.money = nil;
+    self.capital = nil;
     
     [super dealloc];
 }
@@ -26,7 +27,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.money = [NSDecimalNumber decimalNumberWithString:@"0"];
+        self.capital = [NSDecimalNumber zero];
     }
     
     return self;
@@ -35,12 +36,8 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)takeMoney:(NSDecimalNumber *)money {
-    self.money = [self.money decimalNumberBySubtracting:money];
-}
-
 - (void)profit {
-    NSLog(@"%@\n", self.money);
+    self.capital = [self.capital decimalNumberByAdding:self.privateMoney];
 }
 
 @end
