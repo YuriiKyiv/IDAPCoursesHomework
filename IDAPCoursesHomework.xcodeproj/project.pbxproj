@@ -23,6 +23,7 @@
 		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
 		5AACA14A1AD682E400DEE7EF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
 		5AADBF3C1AA487A600B29A88 /* TYVArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AADBF3A1AA487A600B29A88 /* TYVArray.c */; };
+		5ADD4E4D1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADD4E4C1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m */; };
 		5AF089801ABC4562008BF7C9 /* TYVRange.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0897E1ABC4562008BF7C9 /* TYVRange.c */; };
 		5AF254671AE6640600CB51FA /* TYVBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF254381AE6640600CB51FA /* TYVBeing.m */; };
 		5AF254681AE6640600CB51FA /* TYVBuilding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF2543D1AE6640600CB51FA /* TYVBuilding.m */; };
@@ -112,6 +113,8 @@
 		5ABCB6DF1A8CD25B00CD71E2 /* IDAPCoursesHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IDAPCoursesHomework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ABCB6E21A8CD25B00CD71E2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		5ADD4E4A1AE7B5FF005E6BB2 /* TYVMoneyTransferPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVMoneyTransferPrivate.h; path = TYVMoneyTransfer/TYVMoneyTransferPrivate.h; sourceTree = "<group>"; };
+		5ADD4E4B1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"; path = "TYVNSDecimalNumberExtensions/NSDecimalNumber+TYVNSDecimalNumberExtensions.h"; sourceTree = "<group>"; };
+		5ADD4E4C1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDecimalNumber+TYVNSDecimalNumberExtensions.m"; path = "TYVNSDecimalNumberExtensions/NSDecimalNumber+TYVNSDecimalNumberExtensions.m"; sourceTree = "<group>"; };
 		5AF0897E1ABC4562008BF7C9 /* TYVRange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVRange.c; path = TYVRange/TYVRange.c; sourceTree = "<group>"; };
 		5AF0897F1ABC4562008BF7C9 /* TYVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVRange.h; path = TYVRange/TYVRange.h; sourceTree = "<group>"; };
 		5AF254371AE6640600CB51FA /* TYVBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVBeing.h; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				5AF2545E1AE6640600CB51FA /* TYVMaleBeing */,
 				5AF254641AE6640600CB51FA /* TYVNSObjectExtensions */,
 				5AF254771AE6676600CB51FA /* TYVMoneTransfer */,
+				5ADD4E4B1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.h */,
+				5ADD4E4C1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -720,6 +725,7 @@
 				5AF2546E1AE6640600CB51FA /* TYVEmployeeDirector.m in Sources */,
 				5AF2546D1AE6640600CB51FA /* TYVEmployeeAccountant.m in Sources */,
 				5AF2546C1AE6640600CB51FA /* TYVEmployee.m in Sources */,
+				5ADD4E4D1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m in Sources */,
 				5AF254681AE6640600CB51FA /* TYVBuilding.m in Sources */,
 				5AACA13E1AD6804700DEE7EF /* main.m in Sources */,
 				5AF254671AE6640600CB51FA /* TYVBeing.m in Sources */,
