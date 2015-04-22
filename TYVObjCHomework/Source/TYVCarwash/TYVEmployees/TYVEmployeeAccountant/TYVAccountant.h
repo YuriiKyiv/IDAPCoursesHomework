@@ -1,5 +1,5 @@
 //
-//  TYVEmployeeAccountant.h
+//  TYVAccountant.h
 //  IDAPCoursesHomework
 //
 //  Created by YURII on 15.04.15.
@@ -9,12 +9,9 @@
 #import "TYVEmployee.h"
 #import "TYVEmployeeDirector.h"
 
-@interface TYVEmployeeAccountant : TYVEmployee
+@interface TYVAccountant : TYVEmployee
+@property (nonatomic, readonly)    NSDecimalNumber    *capital;
 
 - (void)count;
-
-- (void)giveMoneyToDirector:(TYVEmployeeDirector *)aDirector;
-
-- (void)takeMoney:(NSDecimalNumber *)money;
 
 @end
