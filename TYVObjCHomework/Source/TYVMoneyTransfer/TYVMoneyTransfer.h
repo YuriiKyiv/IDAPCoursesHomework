@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol TYVMoneyTransfer <NSObject>
-@property (nonatomic, retain)    NSDecimalNumber    *money;
+@property (nonatomic, retain)    NSDecimalNumber    *privateMoney;
 
 - (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper;
 

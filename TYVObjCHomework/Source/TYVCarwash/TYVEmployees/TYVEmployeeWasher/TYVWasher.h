@@ -1,5 +1,5 @@
 //
-//  TYVEmployeeWasher.h
+//  TYVWasher.h
 //  IDAPCoursesHomework
 //
 //  Created by YURII on 15.04.15.
@@ -10,7 +10,7 @@
 #import "TYVCar.h"
 #import "TYVEmployeeAccountant.h"
 
-@interface TYVEmployeeWasher : TYVEmployee
+@interface TYVWasher : TYVEmployee
 @property (nonatomic, retain)       TYVCar             *car;
 @property (nonatomic, readonly)     NSDecimalNumber    *price;
 

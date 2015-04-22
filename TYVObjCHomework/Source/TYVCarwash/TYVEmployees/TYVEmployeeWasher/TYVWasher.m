@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 YURII. All rights reserved.
 //
 
-#import "TYVEmployeeWasher.h"
+#import "TYVWasher.h"
 
-@interface TYVEmployeeWasher ()
+@interface TYVWasher ()
 
 @end
 
-@implementation TYVEmployeeWasher
+@implementation TYVWasher
 
 @dynamic price;
 
