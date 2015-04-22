@@ -8,9 +8,9 @@
 
 #import "TYVCarwashEnterprise.h"
 #import "NSObject+TYVNSObjectExtensions.h"
-#import "TYVEmployeeWasher.h"
-#import "TYVEmployeeAccountant.h"
-#import "TYVEmployeeDirector.h"
+#import "TYVWasher.h"
+#import "TYVAccountant.h"
+#import "TYVDirector.h"
 #import "TYVRoom.h"
 #import "TYVCarwashRoom.h"
 #import "TYVCar.h"
@@ -22,7 +22,7 @@
 @property (nonatomic, retain)    NSMutableArray             *mutableWashers;
 @property (nonatomic, retain)    NSMutableArray             *mutableAccountants;
 
-@property (nonatomic, retain)    TYVEmployeeDirector        *director;
+@property (nonatomic, retain)    TYVDirector        *director;
 
 @end
 
@@ -57,11 +57,11 @@
 #pragma mark Public Methods
 
 - (void)hirePersonal {
-    TYVEmployeeWasher *washer = [TYVEmployeeWasher object];
+    TYVWasher *washer = [TYVWasher object];
     [self.mutableWashers addObject:washer];
-    TYVEmployeeAccountant *accountant = [TYVEmployeeAccountant object];
+    TYVAccountant *accountant = [TYVAccountant object];
     [self.mutableAccountants addObject:accountant];
-    TYVEmployeeDirector *director = [TYVEmployeeDirector object];
+    TYVDirector *director = [TYVDirector object];
     self.director = director;
     
     TYVRoom *room = [[[TYVRoom alloc] initWithHumanCount:2] autorelease];

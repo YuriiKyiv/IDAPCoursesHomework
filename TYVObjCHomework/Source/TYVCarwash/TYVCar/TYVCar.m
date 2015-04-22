@@ -40,9 +40,6 @@
 }
 
 #pragma mark -
-#pragma mark Public Methods
-
-#pragma mark -
 #pragma mark TYVMoneyTransfer Methods
 
 - (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {

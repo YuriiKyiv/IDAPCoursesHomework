@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TYVMoneyTransfer.h"
+
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
 @interface TYVEmployee : NSObject <TYVMoneyTransfer>

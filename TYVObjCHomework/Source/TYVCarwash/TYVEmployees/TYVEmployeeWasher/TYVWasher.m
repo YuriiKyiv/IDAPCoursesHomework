@@ -8,14 +8,9 @@
 
 #import "TYVWasher.h"
 
-@interface TYVWasher ()
-
-@end
-
 @implementation TYVWasher
 
 @dynamic price;
-
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
