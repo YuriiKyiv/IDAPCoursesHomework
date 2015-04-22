@@ -10,11 +10,12 @@
 #import "NSObject+TYVNSObjectExtensions.h"
 
 @interface TYVCar ()
-@property (nonatomic, retain)   NSDecimalNumber   *money;
 
 @end
 
 @implementation TYVCar
+
+@synthesize money = _money;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -45,8 +46,18 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)giveMoney:(NSDecimalNumber *)money {
+#pragma mark -
+#pragma mark TYVMoneyTransfer Methods
+
+- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
+    self.money = [self.money decimalNumberByAdding:money];
+    aMoneykeeper.money = [aMoneykeeper.money decimalNumberBySubtracting:money];
+}
+
+
+- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
     self.money = [self.money decimalNumberBySubtracting:money];
+    aMoneykeeper.money = [aMoneykeeper.money decimalNumberByAdding:money];
 }
 
 

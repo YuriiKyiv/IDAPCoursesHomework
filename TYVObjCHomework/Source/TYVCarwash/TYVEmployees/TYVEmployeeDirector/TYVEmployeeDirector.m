@@ -9,7 +9,6 @@
 #import "TYVEmployeeDirector.h"
 
 @interface TYVEmployeeDirector ()
-@property (nonatomic, retain)   NSDecimalNumber    *money;
 
 @end
 

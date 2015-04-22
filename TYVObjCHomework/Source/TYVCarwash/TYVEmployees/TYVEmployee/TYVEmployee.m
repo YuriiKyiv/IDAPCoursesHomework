@@ -9,11 +9,12 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic,  retain)   NSDecimalNumber    *money;
 
 @end
 
 @implementation TYVEmployee
+
+@synthesize money = _money;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -26,17 +27,18 @@
     
 }
 
-- (void)takeMoney:(NSDecimalNumber *)money From:(TYVEmployee *)aMoneykeeper {
-    if ([aMoneykeeper respondsToSelector:_cmd]) {
+#pragma mark -
+#pragma mark TYVMoneyTransfer Methods
+
+- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
         self.money = [self.money decimalNumberByAdding:money];
-        [aMoneykeeper.money decimalNumberBySubtracting:money];
-    }
+        aMoneykeeper.money = [aMoneykeeper.money decimalNumberBySubtracting:money];
 }
 
 
-- (void)giveMoney:(NSDecimalNumber *)money To:(TYVEmployee *)aMoneykeeper {
+- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
     self.money = [self.money decimalNumberBySubtracting:money];
-    [aMoneykeeper.money decimalNumberByAdding:money];
+    aMoneykeeper.money = [aMoneykeeper.money decimalNumberByAdding:money];
 }
 
 @end

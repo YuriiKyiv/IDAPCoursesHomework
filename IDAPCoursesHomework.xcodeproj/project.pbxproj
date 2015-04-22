@@ -111,6 +111,7 @@
 		5AADBF3B1AA487A600B29A88 /* TYVArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArray.h; path = TYVArray/TYVArray.h; sourceTree = "<group>"; };
 		5ABCB6DF1A8CD25B00CD71E2 /* IDAPCoursesHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IDAPCoursesHomework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ABCB6E21A8CD25B00CD71E2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		5ADD4E4A1AE7B5FF005E6BB2 /* TYVMoneyTransferPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVMoneyTransferPrivate.h; path = TYVMoneyTransfer/TYVMoneyTransferPrivate.h; sourceTree = "<group>"; };
 		5AF0897E1ABC4562008BF7C9 /* TYVRange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVRange.c; path = TYVRange/TYVRange.c; sourceTree = "<group>"; };
 		5AF0897F1ABC4562008BF7C9 /* TYVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVRange.h; path = TYVRange/TYVRange.h; sourceTree = "<group>"; };
 		5AF254371AE6640600CB51FA /* TYVBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVBeing.h; sourceTree = "<group>"; };
@@ -539,6 +540,7 @@
 			isa = PBXGroup;
 			children = (
 				5AF254761AE6675D00CB51FA /* TYVMoneyTransfer.h */,
+				5ADD4E4A1AE7B5FF005E6BB2 /* TYVMoneyTransferPrivate.h */,
 			);
 			name = TYVMoneTransfer;
 			sourceTree = "<group>";
