@@ -81,4 +81,7 @@
     [[carwashrooms lastObject] addCar:car];
 }
 
+#pragma mark -
+#pragma mark Private Methods
+
 @end

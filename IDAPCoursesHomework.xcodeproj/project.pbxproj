@@ -350,6 +350,15 @@
 			path = IDAPCoursesHomework;
 			sourceTree = "<group>";
 		};
+		5ADD4E571AE7E045005E6BB2 /* TYVNSDecimanNumber */ = {
+			isa = PBXGroup;
+			children = (
+				5ADD4E4B1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.h */,
+				5ADD4E4C1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m */,
+			);
+			name = TYVNSDecimanNumber;
+			sourceTree = "<group>";
+		};
 		5AF089811ABC4569008BF7C9 /* TYVRange */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,8 +377,7 @@
 				5AF2545E1AE6640600CB51FA /* TYVMaleBeing */,
 				5AF254641AE6640600CB51FA /* TYVNSObjectExtensions */,
 				5AF254771AE6676600CB51FA /* TYVMoneTransfer */,
-				5ADD4E4B1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.h */,
-				5ADD4E4C1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m */,
+				5ADD4E571AE7E045005E6BB2 /* TYVNSDecimanNumber */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -444,9 +452,9 @@
 			isa = PBXGroup;
 			children = (
 				5AF254481AE6640600CB51FA /* TYVEmployee */,
-				5AF2544B1AE6640600CB51FA /* TYVEmployeeAccountant */,
-				5AF2544E1AE6640600CB51FA /* TYVEmployeeDirector */,
-				5AF254511AE6640600CB51FA /* TYVEmployeeWasher */,
+				5AF2544B1AE6640600CB51FA /* TYVAccountant */,
+				5AF2544E1AE6640600CB51FA /* TYVDirector */,
+				5AF254511AE6640600CB51FA /* TYVWasher */,
 			);
 			path = TYVEmployees;
 			sourceTree = "<group>";
@@ -460,30 +468,33 @@
 			path = TYVEmployee;
 			sourceTree = "<group>";
 		};
-		5AF2544B1AE6640600CB51FA /* TYVEmployeeAccountant */ = {
+		5AF2544B1AE6640600CB51FA /* TYVAccountant */ = {
 			isa = PBXGroup;
 			children = (
 				5ADD4E511AE7C966005E6BB2 /* TYVAccountant.h */,
 				5ADD4E521AE7C966005E6BB2 /* TYVAccountant.m */,
 			);
+			name = TYVAccountant;
 			path = TYVEmployeeAccountant;
 			sourceTree = "<group>";
 		};
-		5AF2544E1AE6640600CB51FA /* TYVEmployeeDirector */ = {
+		5AF2544E1AE6640600CB51FA /* TYVDirector */ = {
 			isa = PBXGroup;
 			children = (
 				5ADD4E541AE7CE66005E6BB2 /* TYVDirector.h */,
 				5ADD4E551AE7CE66005E6BB2 /* TYVDirector.m */,
 			);
+			name = TYVDirector;
 			path = TYVEmployeeDirector;
 			sourceTree = "<group>";
 		};
-		5AF254511AE6640600CB51FA /* TYVEmployeeWasher */ = {
+		5AF254511AE6640600CB51FA /* TYVWasher */ = {
 			isa = PBXGroup;
 			children = (
 				5ADD4E4E1AE7C89D005E6BB2 /* TYVWasher.h */,
 				5ADD4E4F1AE7C89D005E6BB2 /* TYVWasher.m */,
 			);
+			name = TYVWasher;
 			path = TYVEmployeeWasher;
 			sourceTree = "<group>";
 		};
