@@ -12,6 +12,6 @@
 @interface TYVCar : NSObject <TYVMoneyTransfer>
 @property (nonatomic, assign)      BOOL               isClear;
 
-- (instancetype)initWithMoney:(NSDecimalNumber *)money isClear:(BOOL)isClear;
+- (instancetype)initWithMoney:(NSDecimalNumber *)money;
 
 @end

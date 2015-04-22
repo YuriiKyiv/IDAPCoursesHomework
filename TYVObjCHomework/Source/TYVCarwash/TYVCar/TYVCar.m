@@ -15,13 +15,13 @@
 
 @implementation TYVCar
 
-@synthesize money = _money;
+@synthesize privateMoney = _privateMoney;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.money = nil;
+    self.privateMoney = nil;
     
     [super dealloc];
 }
@@ -29,15 +29,15 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self initWithMoney:0 isClear:false];
+        [self initWithMoney:[NSDecimalNumber zero]];
     }
     return self;
 }
 
-- (instancetype)initWithMoney:(NSDecimalNumber *)money isClear:(BOOL)isClear {
+- (instancetype)initWithMoney:(NSDecimalNumber *)money {
     self = [super init];
     if (self) {
-        self.money = [[money copy] autorelease];
+        self.privateMoney = money;
     }
     
     return self;
@@ -50,14 +50,14 @@
 #pragma mark TYVMoneyTransfer Methods
 
 - (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
-    self.money = [self.money decimalNumberByAdding:money];
-    aMoneykeeper.money = [aMoneykeeper.money decimalNumberBySubtracting:money];
+    self.privateMoney = [self.privateMoney decimalNumberByAdding:money];
+    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberBySubtracting:money];
 }
 
 
 - (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
-    self.money = [self.money decimalNumberBySubtracting:money];
-    aMoneykeeper.money = [aMoneykeeper.money decimalNumberByAdding:money];
+    self.privateMoney = [self.privateMoney decimalNumberBySubtracting:money];
+    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberByAdding:money];
 }
 
 

@@ -39,7 +39,7 @@
     if (self) {
         self.duty = duty;
         self.salary = salary;
-        self.privateMoney = [NSDecimalNumber number:@"0"];
+        self.privateMoney = [NSDecimalNumber zero];
     }
     return self;
 }
