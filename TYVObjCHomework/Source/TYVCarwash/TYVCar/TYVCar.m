@@ -9,10 +9,6 @@
 #import "TYVCar.h"
 #import "NSObject+TYVNSObjectExtensions.h"
 
-@interface TYVCar ()
-
-@end
-
 @implementation TYVCar
 
 @synthesize privateMoney = _privateMoney;
