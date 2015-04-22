@@ -11,12 +11,9 @@
 #import "TYVEmployeeAccountant.h"
 
 @interface TYVEmployeeWasher : TYVEmployee
-@property (nonatomic, retain)   TYVCar  *car;
+@property (nonatomic, retain)       TYVCar             *car;
+@property (nonatomic, readonly)     NSDecimalNumber    *price;
 
 - (void)wash;
-
-- (void)takeMoney;
-
-- (void)giveMoneyToAccountant:(TYVEmployeeAccountant *)accountant;
 
 @end

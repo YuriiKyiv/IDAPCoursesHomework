@@ -9,7 +9,6 @@
 #import "TYVEmployeeWasher.h"
 
 @interface TYVEmployeeWasher ()
-@property (nonatomic, readonly)    NSString    *price;
 
 @end
 
@@ -30,8 +29,8 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (NSString *)price {
-    return @"100";
+- (NSDecimalNumber *)price {
+    return [NSDecimalNumber number:@"100"];
 }
 
 #pragma mark -
@@ -39,16 +38,6 @@
 
 - (void)wash {
     self.car.isClear = true;
-}
-
-- (void)takeMoney {
-    [self.car giveMoney:[NSDecimalNumber decimalNumberWithString:self.price]];
-    self.car = nil;
-}
-
-- (void)giveMoneyToAccountant:(TYVEmployeeAccountant *)accountant {
-    [[accountant retain] autorelease];
-    
 }
 
 @end
