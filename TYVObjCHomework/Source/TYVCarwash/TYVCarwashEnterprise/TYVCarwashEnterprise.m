@@ -27,6 +27,8 @@
 
 @property (nonatomic, retain)    TYVDirector                *director;
 
+- (TYVEmployee *)getFreeEmployee:(NSMutableArray *)array;
+
 @end
 
 @implementation TYVCarwashEnterprise
@@ -92,7 +94,7 @@
     NSArray * carwashrooms = self.carwashBuilding.carwashrooms;
     [[carwashrooms lastObject] addCar:car];
     
-    TYVWasher *washer = self.mutableWashers[0];
+    TYVWasher *washer = (TYVWasher *)[self getFreeEmployee:self.mutableWashers];
     washer.car = car;
     [washer wash];
     washer.car = nil;
@@ -108,5 +110,15 @@
 
 #pragma mark -
 #pragma mark Private Methods
+
+- (TYVEmployee *)getFreeEmployee:(NSMutableArray *)array {
+    for (TYVEmployee *employee in array) {
+        if (employee.isFree) {
+            return employee;
+        }
+    }
+    
+    return nil;
+}
 
 @end
