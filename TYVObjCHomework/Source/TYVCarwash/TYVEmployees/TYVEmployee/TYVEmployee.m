@@ -9,16 +9,16 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, retain)    NSString           *duty;
-@property (nonatomic, retain)    NSDecimalNumber    *salary;
-@property (nonatomic, assign)    NSUInteger         experience;
+@property (nonatomic, retain)                   NSString           *duty;
+@property (nonatomic, retain)                   NSDecimalNumber    *salary;
+@property (nonatomic, assign)                   NSUInteger         experience;
+@property (nonatomic, assign, getter=isFree)    BOOL               free;
 
 @end
 
 @implementation TYVEmployee
 
 @dynamic money;
-@dynamic free;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -37,6 +37,7 @@
         self.duty = duty;
         self.salary = salary;
         self.privateMoney = [NSDecimalNumber zero];
+        self.free = YES;
     }
     return self;
 }
@@ -47,11 +48,6 @@
 - (NSDecimalNumber *)money {
     return [[self.privateMoney copy] autorelease];
 }
-
-- (BOOL)isFree {
-    return true;
-}
-
 
 #pragma mark -
 #pragma mark Public Methods

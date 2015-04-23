@@ -9,11 +9,14 @@
 #import "TYVAccountant.h"
 
 @interface TYVAccountant ()
-@property (nonatomic, retain)    NSDecimalNumber    *capital;
+@property (nonatomic, retain)                   NSDecimalNumber    *capital;
+@property (nonatomic, assign, getter=isFree)    BOOL               free;
 
 @end
 
 @implementation TYVAccountant
+
+@synthesize free;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -36,7 +39,9 @@
 #pragma mark Public Methods
 
 - (void)count {
+    self.free = NO;
     self.capital = [self.capital decimalNumberByAdding:self.privateMoney];
+    self.free = YES;
 }
 
 @end
