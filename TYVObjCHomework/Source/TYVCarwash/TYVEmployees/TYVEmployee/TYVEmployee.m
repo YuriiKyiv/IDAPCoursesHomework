@@ -8,8 +8,6 @@
 
 #import "TYVEmployee.h"
 
-#import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
-
 @interface TYVEmployee ()
 @property (nonatomic, retain)    NSString           *duty;
 @property (nonatomic, retain)    NSDecimalNumber    *salary;
@@ -20,8 +18,6 @@
 @implementation TYVEmployee
 
 @dynamic money;
-
-@synthesize privateMoney = _privateMoney;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -57,20 +53,6 @@
 
 - (void)work {
     
-}
-
-#pragma mark -
-#pragma mark TYVMoneyTransfer Methods
-
-- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
-        self.privateMoney = [self.privateMoney decimalNumberByAdding:money];
-        aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberBySubtracting:money];
-}
-
-
-- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
-    self.privateMoney = [self.privateMoney decimalNumberBySubtracting:money];
-    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberByAdding:money];
 }
 
 @end

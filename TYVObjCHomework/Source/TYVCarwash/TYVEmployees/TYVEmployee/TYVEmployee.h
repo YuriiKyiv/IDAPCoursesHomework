@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYVMoneyTransfer.h"
+#import "TYVMoneyFlow.h"
 
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
-@interface TYVEmployee : NSObject <TYVMoneyTransfer>
+@interface TYVEmployee : TYVMoneyFlow
 @property (nonatomic, readonly)    NSDecimalNumber    *money;
 @property (nonatomic, readonly)    NSString           *duty;
 
