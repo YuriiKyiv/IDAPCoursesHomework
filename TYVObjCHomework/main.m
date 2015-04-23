@@ -10,6 +10,7 @@
 #import "TYVBeing.h"
 #import "TYVMaleBeing.h"
 #import "TYVFemaleBeing.h"
+#import "TYVCarwashEnterprise.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -32,6 +33,9 @@ int main(int argc, const char * argv[]) {
         for (TYVBeing *being in array) {
             [being performGenderSpecificOperation];
         }
+        
+        TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
+        [enterprise work];
     }
     
     return 0;
