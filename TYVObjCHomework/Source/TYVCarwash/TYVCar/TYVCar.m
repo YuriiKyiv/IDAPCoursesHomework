@@ -11,8 +11,6 @@
 
 @implementation TYVCar
 
-@synthesize privateMoney = _privateMoney;
-
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
@@ -38,20 +36,5 @@
     
     return self;
 }
-
-#pragma mark -
-#pragma mark TYVMoneyTransfer Methods
-
-- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
-    self.privateMoney = [self.privateMoney decimalNumberByAdding:money];
-    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberBySubtracting:money];
-}
-
-
-- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(id<TYVMoneyTransfer>)aMoneykeeper {
-    self.privateMoney = [self.privateMoney decimalNumberBySubtracting:money];
-    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberByAdding:money];
-}
-
 
 @end
