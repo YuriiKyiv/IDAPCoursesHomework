@@ -10,4 +10,6 @@
 
 @interface TYVDirector : TYVEmployee
 
+- (void)profit;
+
 @end

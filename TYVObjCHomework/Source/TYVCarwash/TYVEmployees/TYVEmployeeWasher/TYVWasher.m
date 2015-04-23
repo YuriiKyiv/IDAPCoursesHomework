@@ -7,9 +7,16 @@
 //
 
 #import "TYVWasher.h"
+#import "TYVCar.h"
+
+@interface TYVWasher ()
+@property (nonatomic, assign, getter=isFree)    BOOL    free;
+
+@end
 
 @implementation TYVWasher
 
+@synthesize free;
 @dynamic price;
 
 #pragma mark -
@@ -28,11 +35,14 @@
     return [NSDecimalNumber number:@"100"];
 }
 
+
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)wash {
+    self.free = NO;
     self.car.isClear = true;
+    self.free = YES;
 }
 
 @end

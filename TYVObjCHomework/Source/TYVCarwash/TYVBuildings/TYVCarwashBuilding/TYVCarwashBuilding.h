@@ -7,7 +7,8 @@
 //
 
 #import "TYVBuilding.h"
-#import "TYVCarwashRoom.h"
+
+@class TYVCarwashRoom;
 
 @interface TYVCarwashBuilding : TYVBuilding
 @property (nonatomic, readonly)    NSArray    *carwashrooms;

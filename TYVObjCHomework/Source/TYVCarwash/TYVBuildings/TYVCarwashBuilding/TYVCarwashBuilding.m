@@ -7,6 +7,7 @@
 //
 
 #import "TYVCarwashBuilding.h"
+#import "TYVCarwashRoom.h"
 
 @interface TYVCarwashBuilding ()
 @property (nonatomic, retain)    NSMutableArray    *mutableCarwashrooms;

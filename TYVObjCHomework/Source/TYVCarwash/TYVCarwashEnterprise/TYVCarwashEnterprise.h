@@ -7,14 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYVCarwashBuilding.h"
-#import "TYVBuilding.h"
+
+@class TYVCarwashBuilding;
+@class TYVBuilding;
 
 @interface TYVCarwashEnterprise : NSObject
 @property (nonatomic, readonly)    TYVCarwashBuilding    *carwashBuilding;
 @property (nonatomic, readonly)    TYVBuilding           *building;
 
-- (void)hirePersonal;
+- (void)hireStaff;
+
+- (void)prepareBuildings;
 
 - (void)work;
 

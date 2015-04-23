@@ -19,6 +19,7 @@
 		5A5647BA1ACD49C400177C10 /* TYVAutoreleasePool.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5647B81ACD49C400177C10 /* TYVAutoreleasePool.c */; };
 		5A5BF99B1AADF4AE00388CA8 /* TYVArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF9991AADF4AE00388CA8 /* TYVArrayList.c */; };
 		5A5BF99F1AADF92800388CA8 /* TYVArrayListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF99D1AADF92800388CA8 /* TYVArrayListTests.c */; };
+		5A80DF061AE8FF8500B4233B /* TYVMoneyFlow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A80DF051AE8FF8500B4233B /* TYVMoneyFlow.m */; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
 		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
 		5AACA14A1AD682E400DEE7EF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
@@ -104,6 +105,8 @@
 		5A5BF99A1AADF4AE00388CA8 /* TYVArrayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArrayList.h; path = TYVArrayList/TYVArrayList.h; sourceTree = "<group>"; };
 		5A5BF99D1AADF92800388CA8 /* TYVArrayListTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVArrayListTests.c; path = TYVArrayList/TYVArrayListTests.c; sourceTree = "<group>"; };
 		5A5BF99E1AADF92800388CA8 /* TYVArrayListTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArrayListTests.h; path = TYVArrayList/TYVArrayListTests.h; sourceTree = "<group>"; };
+		5A80DF041AE8FF8500B4233B /* TYVMoneyFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVMoneyFlow.h; path = TYVMoneyFlow/TYVMoneyFlow.h; sourceTree = "<group>"; };
+		5A80DF051AE8FF8500B4233B /* TYVMoneyFlow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVMoneyFlow.m; path = TYVMoneyFlow/TYVMoneyFlow.m; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
 		5AACA13B1AD6804700DEE7EF /* TYVObjCHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TYVObjCHomework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,6 +304,16 @@
 			name = TYVArrayList;
 			sourceTree = "<group>";
 		};
+		5A80DF071AE8FF8900B4233B /* TYVMoneyFlow */ = {
+			isa = PBXGroup;
+			children = (
+				5A80DF041AE8FF8500B4233B /* TYVMoneyFlow.h */,
+				5A80DF051AE8FF8500B4233B /* TYVMoneyFlow.m */,
+			);
+			name = TYVMoneyFlow;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		5AACA13C1AD6804700DEE7EF /* TYVObjCHomework */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,7 +389,7 @@
 				5AF2545B1AE6640600CB51FA /* TYVFemaleBeing */,
 				5AF2545E1AE6640600CB51FA /* TYVMaleBeing */,
 				5AF254641AE6640600CB51FA /* TYVNSObjectExtensions */,
-				5AF254771AE6676600CB51FA /* TYVMoneTransfer */,
+				5AF254771AE6676600CB51FA /* TYVMoneyTransfer */,
 				5ADD4E571AE7E045005E6BB2 /* TYVNSDecimanNumber */,
 			);
 			path = Source;
@@ -394,6 +407,7 @@
 		5AF254391AE6640600CB51FA /* TYVCarwash */ = {
 			isa = PBXGroup;
 			children = (
+				5A80DF071AE8FF8900B4233B /* TYVMoneyFlow */,
 				5AF2543A1AE6640600CB51FA /* TYVBuildings */,
 				5AF254411AE6640600CB51FA /* TYVCar */,
 				5AF254441AE6640600CB51FA /* TYVCarwashEnterprise */,
@@ -552,13 +566,13 @@
 			path = TYVNSObjectExtensions;
 			sourceTree = "<group>";
 		};
-		5AF254771AE6676600CB51FA /* TYVMoneTransfer */ = {
+		5AF254771AE6676600CB51FA /* TYVMoneyTransfer */ = {
 			isa = PBXGroup;
 			children = (
 				5AF254761AE6675D00CB51FA /* TYVMoneyTransfer.h */,
 				5ADD4E4A1AE7B5FF005E6BB2 /* TYVMoneyTransferPrivate.h */,
 			);
-			name = TYVMoneTransfer;
+			name = TYVMoneyTransfer;
 			sourceTree = "<group>";
 		};
 		5AFD29FE1A9DE191007EFFB5 /* task1 */ = {
@@ -732,6 +746,7 @@
 				5AF254691AE6640600CB51FA /* TYVCarwashBuilding.m in Sources */,
 				5ADD4E501AE7C89D005E6BB2 /* TYVWasher.m in Sources */,
 				5AF254721AE6640600CB51FA /* TYVFemaleBeing.m in Sources */,
+				5A80DF061AE8FF8500B4233B /* TYVMoneyFlow.m in Sources */,
 				5AF254731AE6640600CB51FA /* TYVMaleBeing.m in Sources */,
 				5AF2546C1AE6640600CB51FA /* TYVEmployee.m in Sources */,
 				5ADD4E4D1AE7C43D005E6BB2 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m in Sources */,

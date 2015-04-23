@@ -7,6 +7,7 @@
 //
 
 #import "TYVBuilding.h"
+#import "TYVRoom.h"
 
 @interface TYVBuilding ()
 @property (nonatomic, retain)   NSMutableArray *mutableRoomsArray;
