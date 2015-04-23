@@ -12,11 +12,13 @@
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
 @interface TYVEmployee : TYVMoneyFlow
-@property (nonatomic, readonly)    NSDecimalNumber    *money;
-@property (nonatomic, readonly)    NSString           *duty;
+@property (nonatomic, readonly)                   NSDecimalNumber    *money;
+@property (nonatomic, readonly)                   NSString           *duty;
 
-@property (nonatomic, readonly)    NSDecimalNumber    *salary;
-@property (nonatomic, readonly)    NSUInteger         experience;
+@property (nonatomic, readonly)                   NSDecimalNumber    *salary;
+@property (nonatomic, readonly)                   NSUInteger         experience;
+
+@property (nonatomic, readonly, getter=isFree)    BOOL               free;
 
 - (void)work;
 

@@ -7,7 +7,8 @@
 //
 
 #import "TYVEmployee.h"
-#import "TYVCar.h"
+
+@class TYVCar;
 
 @interface TYVWasher : TYVEmployee
 @property (nonatomic, retain)       TYVCar             *car;

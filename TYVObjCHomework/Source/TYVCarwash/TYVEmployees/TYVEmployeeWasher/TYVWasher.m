@@ -7,6 +7,7 @@
 //
 
 #import "TYVWasher.h"
+#import "TYVCar.h"
 
 @implementation TYVWasher
 

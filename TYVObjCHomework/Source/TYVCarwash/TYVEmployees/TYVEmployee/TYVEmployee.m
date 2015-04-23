@@ -18,6 +18,7 @@
 @implementation TYVEmployee
 
 @dynamic money;
+@dynamic free;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -45,6 +46,10 @@
 
 - (NSDecimalNumber *)money {
     return [[self.privateMoney copy] autorelease];
+}
+
+- (BOOL)isFree {
+    return true;
 }
 
 
