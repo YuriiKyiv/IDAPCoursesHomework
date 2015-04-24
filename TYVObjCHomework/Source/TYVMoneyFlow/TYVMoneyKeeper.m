@@ -35,6 +35,7 @@
     if (self) {
         self.privateMoney = money;
     }
+    
     return self;
 }
 

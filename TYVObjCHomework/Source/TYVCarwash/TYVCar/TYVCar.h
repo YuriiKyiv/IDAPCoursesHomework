@@ -7,11 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYVMoneyFlow.h"
+#import "TYVMoneyKeeper.h"
 
-@interface TYVCar : TYVMoneyFlow
+@interface TYVCar : TYVMoneyKeeper
 @property (nonatomic, assign)   BOOL    isClear;
-
-- (instancetype)initWithMoney:(NSDecimalNumber *)money;
 
 @end
