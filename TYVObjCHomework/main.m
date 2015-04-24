@@ -34,8 +34,8 @@ int main(int argc, const char * argv[]) {
             [being performGenderSpecificOperation];
         }
         
-        TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
-        [enterprise work];
+//        TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
+//        [enterprise work];
     }
     
     return 0;
