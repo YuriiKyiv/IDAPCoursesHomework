@@ -35,6 +35,36 @@ describe(@"ClassName", ^{
         });
 
     });
+    
+    context(@"when taking money", ^{
+        
+        beforeAll(^{
+            moneyKeeperOne = [[[TYVMoneyKeeper alloc] initWithMoney:[NSDecimalNumber one]] autorelease];
+            moneyKeeperTwo = [[[TYVMoneyKeeper alloc] initWithMoney:[NSDecimalNumber one]] autorelease];
+            [moneyKeeperTwo takeMoney:[NSDecimalNumber one] fromMoneykeeper:moneyKeeperOne];
+        });
+        
+        it(@"should have 1 value of money", ^{
+            [[moneyKeeperOne.money should] equal:[NSDecimalNumber zero]];
+            [[moneyKeeperTwo.money should] equal:[NSDecimalNumber decimalNumberWithString:@"2"]];
+        });
+        
+    });
+    
+    context(@"when giving money", ^{
+        
+        beforeAll(^{
+            moneyKeeperOne = [[[TYVMoneyKeeper alloc] initWithMoney:[NSDecimalNumber one]] autorelease];
+            moneyKeeperTwo = [[[TYVMoneyKeeper alloc] initWithMoney:[NSDecimalNumber one]] autorelease];
+            [moneyKeeperTwo giveMoney:[NSDecimalNumber one] toMoneykeeper:moneyKeeperOne];
+        });
+        
+        it(@"should have 1 value of money", ^{
+            [[moneyKeeperOne.money should] equal:[NSDecimalNumber decimalNumberWithString:@"2"]];
+            [[moneyKeeperTwo.money should] equal:[NSDecimalNumber zero]];
+        });
+        
+    });
 });
 
 SPEC_END
