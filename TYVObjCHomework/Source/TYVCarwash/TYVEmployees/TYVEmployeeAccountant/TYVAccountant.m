@@ -9,14 +9,11 @@
 #import "TYVAccountant.h"
 
 @interface TYVAccountant ()
-@property (nonatomic, retain)                   NSDecimalNumber    *capital;
-@property (nonatomic, assign, getter=isFree)    BOOL               free;
+@property (nonatomic, retain)   NSDecimalNumber    *capital;
 
 @end
 
 @implementation TYVAccountant
-
-@synthesize free;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -28,10 +25,13 @@
 }
 
 - (instancetype)init {
-    self = [super init];
+    self = [super initWithDuty:@"Count"
+                        salary:[NSDecimalNumber number:@"100"]
+                         money:[NSDecimalNumber number:@"100"]];
     if (self) {
         self.capital = [NSDecimalNumber number:@"0"];
     }
+    
     return self;
 }
 
@@ -40,7 +40,7 @@
 
 - (void)count {
     self.free = NO;
-    self.capital = [self.capital decimalNumberByAdding:self.privateMoney];
+    self.capital = [self.capital decimalNumberByAdding:self.money];
     self.free = YES;
 }
 

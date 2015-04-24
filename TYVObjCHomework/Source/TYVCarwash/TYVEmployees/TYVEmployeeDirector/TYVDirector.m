@@ -37,7 +37,7 @@
 #pragma mark Public Methods
 
 - (void)profit {
-    self.capital = [self.capital decimalNumberByAdding:self.privateMoney];
+    self.capital = [self.capital decimalNumberByAdding:self.money];
 }
 
 @end

@@ -9,14 +9,8 @@
 #import "TYVWasher.h"
 #import "TYVCar.h"
 
-@interface TYVWasher ()
-@property (nonatomic, assign, getter=isFree)    BOOL    free;
-
-@end
-
 @implementation TYVWasher
 
-@synthesize free;
 @dynamic price;
 
 #pragma mark -

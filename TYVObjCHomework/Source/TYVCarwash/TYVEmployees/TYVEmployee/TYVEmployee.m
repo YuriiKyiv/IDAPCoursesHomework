@@ -9,10 +9,9 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, retain)                   NSString           *duty;
-@property (nonatomic, retain)                   NSDecimalNumber    *salary;
-@property (nonatomic, assign)                   NSUInteger         experience;
-@property (nonatomic, assign, getter=isFree)    BOOL               free;
+@property (nonatomic, retain)   NSString           *duty;
+@property (nonatomic, retain)   NSDecimalNumber    *salary;
+@property (nonatomic, assign)   NSUInteger         experience;
 
 @end
 
