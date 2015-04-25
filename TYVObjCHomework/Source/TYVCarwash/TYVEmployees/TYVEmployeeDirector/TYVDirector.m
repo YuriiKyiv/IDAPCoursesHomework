@@ -33,6 +33,19 @@
     return self;
 }
 
+- (instancetype)initWithDuty:(NSString *)duty
+                      salary:(NSDecimalNumber *)salary
+                       money:(NSDecimalNumber *)money
+                     capital:(NSDecimalNumber *)capital
+{
+    self = [super initWithDuty:duty salary:salary money:money];
+    if (self) {
+        self.capital = capital;
+    }
+    
+    return self;
+}
+
 #pragma mark -
 #pragma mark Public Methods
 

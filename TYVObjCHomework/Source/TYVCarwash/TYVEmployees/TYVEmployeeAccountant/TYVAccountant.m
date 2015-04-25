@@ -24,15 +24,27 @@
     [super dealloc];
 }
 
-- (instancetype)init {
-    self = [super initWithDuty:@"Count"
-                        salary:[NSDecimalNumber number:@"100"]
-                         money:[NSDecimalNumber number:@"100"]];
+- (instancetype)initWithDuty:(NSString *)duty
+                      salary:(NSDecimalNumber *)salary
+                       money:(NSDecimalNumber *)money
+                     capital:(NSDecimalNumber *)capital
+{
+    self = [super initWithDuty:duty
+                        salary:salary
+                         money:money];
     if (self) {
-        self.capital = [NSDecimalNumber number:@"0"];
+        self.capital = capital;
     }
     
     return self;
+}
+
+- (instancetype)init
+{
+    return [self initWithDuty:@""
+                       salary:[NSDecimalNumber zero]
+                        money:[NSDecimalNumber zero]
+                      capital:[NSDecimalNumber zero]];
 }
 
 #pragma mark -

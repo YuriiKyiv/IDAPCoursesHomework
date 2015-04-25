@@ -90,22 +90,22 @@
 }
 
 - (void)work {
-    TYVCar *car = [TYVCar object];
-    NSArray * carwashrooms = self.carwashBuilding.carwashrooms;
-    [[carwashrooms lastObject] addCar:car];
-    
-    TYVWasher *washer = (TYVWasher *)[self getFreeEmployee:self.mutableWashers];
-    washer.car = car;
-    [washer wash];
-    washer.car = nil;
-    
-    TYVAccountant * accountant = self.mutableAccountants[0];
-    [accountant takeMoney:washer.money fromMoneykeeper:washer];
-    [accountant count];
-    
-    TYVDirector *director = self.director;
-    [director takeMoney:accountant.money fromMoneykeeper:accountant];
-    [director profit];
+//    TYVCar *car = [TYVCar object];
+//    NSArray * carwashrooms = self.carwashBuilding.carwashrooms;
+//    [[carwashrooms lastObject] addCar:car];
+//    
+//    TYVWasher *washer = (TYVWasher *)[self getFreeEmployee:self.mutableWashers];
+//    washer.car = car;
+//    [washer wash];
+//    washer.car = nil;
+//    
+//    TYVAccountant * accountant = self.mutableAccountants[0];
+//    [accountant takeMoney:washer.money fromMoneykeeper:washer];
+//    [accountant count];
+//    
+//    TYVDirector *director = self.director;
+//    [director takeMoney:accountant.money fromMoneykeeper:accountant];
+//    [director profit];
 }
 
 #pragma mark -

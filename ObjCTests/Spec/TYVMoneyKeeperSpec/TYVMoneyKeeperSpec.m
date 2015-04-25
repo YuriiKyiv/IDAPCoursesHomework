@@ -44,7 +44,7 @@ describe(@"ClassName", ^{
             [moneyKeeperTwo takeMoney:[NSDecimalNumber one] fromMoneykeeper:moneyKeeperOne];
         });
         
-        it(@"should have 1 value of money", ^{
+        it(@"should have 2 and 0 values", ^{
             [[moneyKeeperOne.money should] equal:[NSDecimalNumber zero]];
             [[moneyKeeperTwo.money should] equal:[NSDecimalNumber decimalNumberWithString:@"2"]];
         });
@@ -59,7 +59,7 @@ describe(@"ClassName", ^{
             [moneyKeeperTwo giveMoney:[NSDecimalNumber one] toMoneykeeper:moneyKeeperOne];
         });
         
-        it(@"should have 1 value of money", ^{
+        it(@"should have 2 and 0 values", ^{
             [[moneyKeeperOne.money should] equal:[NSDecimalNumber decimalNumberWithString:@"2"]];
             [[moneyKeeperTwo.money should] equal:[NSDecimalNumber zero]];
         });

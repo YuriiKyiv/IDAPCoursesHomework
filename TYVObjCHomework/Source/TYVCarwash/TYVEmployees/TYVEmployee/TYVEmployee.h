@@ -23,6 +23,4 @@
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
 
-- (void)work;
-
 @end

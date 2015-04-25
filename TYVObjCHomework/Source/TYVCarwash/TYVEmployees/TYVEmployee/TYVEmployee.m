@@ -27,9 +27,17 @@
     [super dealloc];
 }
 
+- (instancetype)init
+{
+    return [self initWithDuty:@""
+                       salary:[NSDecimalNumber zero]
+                        money:[NSDecimalNumber zero]];
+}
+
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
-                       money:(NSDecimalNumber *)money {
+                       money:(NSDecimalNumber *)money
+{
     self = [super initWithMoney:money];
     if (self) {
         self.duty = duty;
@@ -38,16 +46,6 @@
     }
     
     return self;
-}
-
-#pragma mark -
-#pragma mark Accessors
-
-#pragma mark -
-#pragma mark Public Methods
-
-- (void)work {
-    
 }
 
 @end

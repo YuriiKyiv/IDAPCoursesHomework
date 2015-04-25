@@ -10,6 +10,11 @@
 
 @interface TYVDirector : TYVEmployee
 
+- (instancetype)initWithDuty:(NSString *)duty
+                      salary:(NSDecimalNumber *)salary
+                       money:(NSDecimalNumber *)money
+                     capital:(NSDecimalNumber *)capital;
+
 - (void)profit;
 
 @end
