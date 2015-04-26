@@ -12,12 +12,18 @@
 
 @interface TYVEmployeesPool : NSObject
 
-- (void) addEmployee:(TYVEmployee *)enEmployee;
+- (void) addEmployee:(TYVEmployee *)anEmployee;
 
-- (void) removeEmployee:(TYVEmployee *)enEmployee;
+- (void) removeEmployee:(TYVEmployee *)anEmployee;
 
 - (TYVEmployee *) freeEmployeeWithClass:(Class)class;
 
 - (NSArray *) freeEmployeesWithClass:(Class)class;
+
+- (NSArray *) employeesWithClass:(Class)class;
+
+- (BOOL) containsEmployee:(TYVEmployee *)anEmployee;
+
+- (NSUInteger) count;
 
 @end

@@ -12,12 +12,12 @@
 
 SPEC_BEGIN(TYVMoneyKeeperSpec)
 
-describe(@"ClassName", ^{
+describe(@"TYVMoneyKeeper", ^{
     
     __block TYVMoneyKeeper *moneyKeeperOne = nil;
     __block TYVMoneyKeeper *moneyKeeperTwo = nil;
     
-    context(@"when create object of TYVMoneyKeeper", ^{
+    context(@"when creating object of TYVMoneyKeeper", ^{
         
         beforeAll(^{
             moneyKeeperOne = [[[TYVMoneyKeeper alloc] init] autorelease];

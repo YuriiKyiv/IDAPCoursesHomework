@@ -10,11 +10,11 @@
 
 @implementation TYVEmployeesPool
 
-- (void) addEmployee:(TYVEmployee *)enEmployee {
+- (void) addEmployee:(TYVEmployee *)anEmployee {
     
 }
 
-- (void) removeEmployee:(TYVEmployee *)enEmployee {
+- (void) removeEmployee:(TYVEmployee *)anEmployee {
     
 }
 
@@ -23,6 +23,10 @@
 }
 
 - (NSArray *) freeEmployeesWithClass:(Class)class {
+    return nil;
+}
+
+- (NSArray *) employeesWithClass:(Class)class {
     return nil;
 }
 
