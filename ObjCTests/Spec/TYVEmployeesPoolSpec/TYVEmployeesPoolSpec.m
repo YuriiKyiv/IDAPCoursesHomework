@@ -32,12 +32,11 @@ describe(@"TYVEmployeesPool", ^{
     __block TYVEmployeesPool *employeesPool = nil;
     __block TYVEmployee *employee = nil;
     
-    beforeAll(^{
-        employeesPool = [[[TYVEmployeesPool alloc] init] autorelease];
-        employee = [[[TYVEmployee alloc] init] autorelease];
-    });
-    
     context(@"when creating object of TYVEmployeesPool", ^{
+        
+        beforeAll(^{
+            employeesPool = [[[TYVEmployeesPool alloc] init] autorelease];
+        });
         
         it(@"should not be nil", ^{
             [[employeesPool shouldNot] beNil];
@@ -51,9 +50,11 @@ describe(@"TYVEmployeesPool", ^{
     
     context(@"when adding one object", ^{
         
-//        beforeAll(^{
-//            [employeesPool addEmployee:employee];
-//        });
+        beforeAll(^{
+            employeesPool = [[TYVEmployeesPool alloc] init];
+            employee = [[TYVEmployee alloc] init];
+            [employeesPool addEmployee:employee];
+        });
         
         it(@"should contains object", ^{
             [theValue([employeesPool containsEmployee:employee]) beYes];
