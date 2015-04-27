@@ -12,6 +12,8 @@
 
 @interface TYVEmployeesPool : NSObject
 
++ (TYVEmployeesPool *) pool;
+
 - (void) addEmployee:(TYVEmployee *)anEmployee;
 
 - (void) removeEmployee:(TYVEmployee *)anEmployee;
