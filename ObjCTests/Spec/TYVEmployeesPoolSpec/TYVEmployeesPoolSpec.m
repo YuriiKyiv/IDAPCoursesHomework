@@ -57,7 +57,7 @@ describe(@"TYVEmployeesPool", ^{
         });
         
         it(@"should contains object", ^{
-            [theValue([employeesPool containsEmployee:employee]) beYes];
+            [[theValue([employeesPool containsEmployee:employee]) should] beYes];
         });
         
         it(@"should have count equls 1", ^{
