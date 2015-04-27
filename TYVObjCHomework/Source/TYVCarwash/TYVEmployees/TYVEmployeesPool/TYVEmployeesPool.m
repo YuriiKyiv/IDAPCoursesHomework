@@ -16,6 +16,8 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 
 - (TYVfunction) comparatorEmployeeWithClass;
 
+- (BOOL) findEmployee:(TYVEmployee *)anEmployee withClass:(Class)aClass;
+
 @end
 
 @implementation TYVEmployeesPool
@@ -106,6 +108,10 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 //    
 //    return [[function copy] autorelease];
     return nil;
+}
+
+- (BOOL) findEmployee:(TYVEmployee *)anEmployee withClass:(Class)aClass {
+    return [anEmployee isKindOfClass:aClass];
 }
 
 @end
