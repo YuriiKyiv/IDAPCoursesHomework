@@ -20,8 +20,8 @@
 		5A5BF99B1AADF4AE00388CA8 /* TYVArrayList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF9991AADF4AE00388CA8 /* TYVArrayList.c */; };
 		5A5BF99F1AADF92800388CA8 /* TYVArrayListTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5BF99D1AADF92800388CA8 /* TYVArrayListTests.c */; };
 		5A6691A81AEBCE110082F749 /* TYVEmployeesPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6691A71AEBCE110082F749 /* TYVEmployeesPool.m */; };
-		5A6691A91AEBCE110082F749 /* TYVEmployeesPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6691A71AEBCE110082F749 /* TYVEmployeesPool.m */; };
-		5A6691AC1AEBE8C00082F749 /* TYVEmployeesPoolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6691AB1AEBE8C00082F749 /* TYVEmployeesPoolSpec.m */; };
+		5A6691A91AEBCE110082F749 /* TYVEmployeesPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6691A71AEBCE110082F749 /* TYVEmployeesPool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5A6691AC1AEBE8C00082F749 /* TYVEmployeesPoolSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6691AB1AEBE8C00082F749 /* TYVEmployeesPoolSpec.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5A73B5A61AEAB3B9002B31AF /* TYVMoneyKeeperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A73B5A51AEAB3B9002B31AF /* TYVMoneyKeeperSpec.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
 		5AAB27EE1AEAB1080014D965 /* TYVBeing.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB27BC1AEAB1080014D965 /* TYVBeing.m */; };

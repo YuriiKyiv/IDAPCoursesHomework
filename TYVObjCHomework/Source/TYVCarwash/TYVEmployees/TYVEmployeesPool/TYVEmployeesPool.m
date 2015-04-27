@@ -30,4 +30,12 @@
     return nil;
 }
 
+- (BOOL) containsEmployee:(TYVEmployee *)anEmployee {
+    return NO;
+}
+
+- (NSUInteger) count {
+    return 0;
+}
+
 @end

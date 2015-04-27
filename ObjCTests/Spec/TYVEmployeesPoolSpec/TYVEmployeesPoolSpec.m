@@ -8,6 +8,7 @@
 
 #import "Kiwi.h"
 #import "TYVEmployeesPool.h"
+#import "TYVEmployee.h"
 
 SPEC_BEGIN(TYVEmployeesPoolSpec)
 
@@ -28,18 +29,38 @@ SPEC_BEGIN(TYVEmployeesPoolSpec)
 
 describe(@"TYVEmployeesPool", ^{
     
+    __block TYVEmployeesPool *employeesPool = nil;
+    __block TYVEmployee *employee = nil;
+    
+    beforeAll(^{
+        employeesPool = [[[TYVEmployeesPool alloc] init] autorelease];
+    });
+    
     context(@"when creating object of TYVEmployeesPool", ^{
         
-        beforeAll(^{
-            
+        it(@"should not be nil", ^{
+            [[employeesPool shouldNot] beNil];
         });
         
-        it(@"should be objects of TYVMoneyKeeper class", ^{
-
+        it(@"should have count equls 0", ^{
+            [[theValue([employeesPool count]) should] equal:theValue(0)];
         });
         
-        it(@"should have 0 value of money", ^{
-
+    });
+    
+    beforeAll(^{
+        employee = [[[TYVEmployee alloc] init] autorelease];
+        [employeesPool addEmployee:employee];
+    });
+    
+    context(@"when adding one object", ^{
+        
+        it(@"should contains object", ^{
+            [theValue([employeesPool containsEmployee:employee]) beYes];
+        });
+        
+        it(@"should have count equls 1", ^{
+            [[theValue([employeesPool count]) should] equal:theValue(1)];
         });
         
     });
