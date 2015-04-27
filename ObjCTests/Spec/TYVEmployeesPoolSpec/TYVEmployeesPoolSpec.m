@@ -51,9 +51,9 @@ describe(@"TYVEmployeesPool", ^{
     
     context(@"when adding one object", ^{
         
-        beforeAll(^{
-            [employeesPool addEmployee:employee];
-        });
+//        beforeAll(^{
+//            [employeesPool addEmployee:employee];
+//        });
         
         it(@"should contains object", ^{
             [theValue([employeesPool containsEmployee:employee]) beYes];
