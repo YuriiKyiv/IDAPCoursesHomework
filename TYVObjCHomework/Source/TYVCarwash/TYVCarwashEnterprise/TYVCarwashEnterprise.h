@@ -10,10 +10,11 @@
 
 @class TYVCarwashBuilding;
 @class TYVBuilding;
+@class TYVEmployeesPool;
 
 @interface TYVCarwashEnterprise : NSObject
-@property (nonatomic, readonly)    TYVCarwashBuilding    *carwashBuilding;
-@property (nonatomic, readonly)    TYVBuilding           *building;
+//@property (nonatomic, readonly)    NSArray             *Buildings;
+//@property (nonatomic, readonly)    TYVEmployeesPool    *employees;
 
 - (void)hireStaff;
 

@@ -9,24 +9,9 @@
 #import "TYVWasher.h"
 #import "TYVCar.h"
 
-@interface TYVWasher ()
-@property (nonatomic, assign, getter=isFree)    BOOL    free;
-
-@end
-
 @implementation TYVWasher
 
-@synthesize free;
 @dynamic price;
-
-#pragma mark -
-#pragma mark Initializations and Deallocations
-
-- (void)dealloc {
-    self.car = nil;
-    
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark Accessors
@@ -39,9 +24,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)wash {
+- (void)washCar:(TYVCar *)aCar {
     self.free = NO;
-    self.car.isClear = true;
+    aCar.isClear = YES;
     self.free = YES;
 }
 

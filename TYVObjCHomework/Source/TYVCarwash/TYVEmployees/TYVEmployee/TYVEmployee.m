@@ -9,51 +9,43 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, retain)                   NSString           *duty;
-@property (nonatomic, retain)                   NSDecimalNumber    *salary;
-@property (nonatomic, assign)                   NSUInteger         experience;
-@property (nonatomic, assign, getter=isFree)    BOOL               free;
+@property (nonatomic, retain)   NSString           *duty;
+@property (nonatomic, retain)   NSDecimalNumber    *salary;
+@property (nonatomic, assign)   NSUInteger         experience;
 
 @end
 
 @implementation TYVEmployee
 
-@dynamic money;
-
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.privateMoney = nil;
     self.duty = nil;
     self.salary = nil;
     
     [super dealloc];
 }
 
-- (instancetype)initWithDuty:(NSString *)duty salary:(NSDecimalNumber *)salary {
-    self = [super init];
+- (instancetype)init
+{
+    return [self initWithDuty:@""
+                       salary:[NSDecimalNumber zero]
+                        money:[NSDecimalNumber zero]];
+}
+
+- (instancetype)initWithDuty:(NSString *)duty
+                      salary:(NSDecimalNumber *)salary
+                       money:(NSDecimalNumber *)money
+{
+    self = [super initWithMoney:money];
     if (self) {
         self.duty = duty;
         self.salary = salary;
-        self.privateMoney = [NSDecimalNumber zero];
         self.free = YES;
     }
-    return self;
-}
-
-#pragma mark -
-#pragma mark Accessors
-
-- (NSDecimalNumber *)money {
-    return [[self.privateMoney copy] autorelease];
-}
-
-#pragma mark -
-#pragma mark Public Methods
-
-- (void)work {
     
+    return self;
 }
 
 @end

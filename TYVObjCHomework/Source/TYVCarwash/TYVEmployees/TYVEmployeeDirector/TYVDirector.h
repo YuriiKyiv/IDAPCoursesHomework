@@ -9,6 +9,12 @@
 #import "TYVEmployee.h"
 
 @interface TYVDirector : TYVEmployee
+@property (nonatomic, readonly)    NSDecimalNumber    *capital;
+
+- (instancetype)initWithDuty:(NSString *)duty
+                      salary:(NSDecimalNumber *)salary
+                       money:(NSDecimalNumber *)money
+                     capital:(NSDecimalNumber *)capital;
 
 - (void)profit;
 

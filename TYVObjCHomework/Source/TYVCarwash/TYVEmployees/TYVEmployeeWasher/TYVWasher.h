@@ -11,9 +11,8 @@
 @class TYVCar;
 
 @interface TYVWasher : TYVEmployee
-@property (nonatomic, retain)       TYVCar             *car;
 @property (nonatomic, readonly)     NSDecimalNumber    *price;
 
-- (void)wash;
+- (void)washCar:(TYVCar *)aCar;
 
 @end

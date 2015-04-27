@@ -18,21 +18,21 @@ int main(int argc, const char * argv[]) {
         NSLog(@"Hello, World!");
 
         
-        NSMutableArray *array = [NSMutableArray object];
-        TYVBeing *being = NULL;
-        for(int i = 0; i < 1000; i++) {
-            if (i % 2 == 0) {
-                being = [TYVMaleBeing object];
-            } else {
-                being = [TYVFemaleBeing object];
-            }
-            
-            [array addObject:being];
-        }
-        
-        for (TYVBeing *being in array) {
-            [being performGenderSpecificOperation];
-        }
+//        NSMutableArray *array = [NSMutableArray object];
+//        TYVBeing *being = NULL;
+//        for(int i = 0; i < 1000; i++) {
+//            if (i % 2 == 0) {
+//                being = [TYVMaleBeing object];
+//            } else {
+//                being = [TYVFemaleBeing object];
+//            }
+//            
+//            [array addObject:being];
+//        }
+//        
+//        for (TYVBeing *being in array) {
+//            [being performGenderSpecificOperation];
+//        }
         
         TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
         [enterprise work];
