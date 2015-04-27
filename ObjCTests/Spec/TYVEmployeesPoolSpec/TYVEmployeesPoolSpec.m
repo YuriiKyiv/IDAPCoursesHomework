@@ -34,6 +34,7 @@ describe(@"TYVEmployeesPool", ^{
     
     beforeAll(^{
         employeesPool = [[[TYVEmployeesPool alloc] init] autorelease];
+        employee = [[[TYVEmployee alloc] init] autorelease];
     });
     
     context(@"when creating object of TYVEmployeesPool", ^{
@@ -48,12 +49,11 @@ describe(@"TYVEmployeesPool", ^{
         
     });
     
-    beforeAll(^{
-        employee = [[[TYVEmployee alloc] init] autorelease];
-        [employeesPool addEmployee:employee];
-    });
-    
     context(@"when adding one object", ^{
+        
+        beforeAll(^{
+            [employeesPool addEmployee:employee];
+        });
         
         it(@"should contains object", ^{
             [theValue([employeesPool containsEmployee:employee]) beYes];

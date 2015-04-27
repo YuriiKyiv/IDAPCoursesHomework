@@ -9,8 +9,12 @@
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
 
+typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
+
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableArray    *employees;
+
+- (TYVfunction) comparatorEmployeeWithClass;
 
 @end
 
@@ -54,7 +58,7 @@
 
 - (TYVEmployee *) freeEmployeeWithClass:(Class)class {
     for (TYVEmployee *employee in self.employees) {
-        if ([employee class] == class && employee.isFree) {
+        if ([employee isKindOfClass:class] && employee.isFree) {
             return employee;
         }
     }
@@ -65,7 +69,7 @@
 - (NSArray *) freeEmployeesWithClass:(Class)class {
     NSMutableArray *classEmployees = [NSMutableArray array];
     for (TYVEmployee *employee in self.employees) {
-        if ([employee class] == class && employee.isFree) {
+        if ([employee isKindOfClass:class] && employee.isFree) {
             [classEmployees addObject:employee];
         }
     }
@@ -76,7 +80,7 @@
 - (NSArray *) employeesWithClass:(Class)class {
     NSMutableArray *classEmployees = [NSMutableArray array];
     for (TYVEmployee *employee in self.employees) {
-        if ([employee class] == class) {
+        if ([employee isKindOfClass:class]) {
             [classEmployees addObject:employee];
         }
     }
@@ -90,6 +94,18 @@
 
 - (NSUInteger) count {
     return [self.employees count];
+}
+
+#pragma mark -
+#pragma mark Comparators
+
+- (TYVfunction) comparatorEmployeeWithClass {
+//    TYVfunction function = ^(TYVEmployee *employee, Class class) {
+//        return ([employee isKindOfClass:class]);
+//    };
+//    
+//    return [[function copy] autorelease];
+    return nil;
 }
 
 @end
