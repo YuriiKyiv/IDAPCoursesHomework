@@ -54,7 +54,13 @@
 #pragma mark Public Methods
 
 - (void)prepareBuildings {
-    self.MutableBuildings = [NSMutableArray array];
+    NSMutableArray *buildings = [NSMutableArray array];
+    
+    for(int i = 0; i < 2; i++) {
+        [buildings addObject:[TYVBuilding object]];
+    }
+    
+    self.MutableBuildings = buildings;
 }
 
 - (void)hireStaff {
@@ -67,10 +73,26 @@
     [self.employees addEmployee:washer];
     [self.employees addEmployee:accountant];
     self.director = director;
+    
+    TYVRoom *adminRoom = [[[TYVRoom alloc] initWithHumanCount:2] autorelease];
+    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCount:1 carCount:1] autorelease];
+    
+    [adminRoom addHuman:director];
+    [adminRoom addHuman:accountant];
+    
+    [carwashRoom addHuman:washer];
+    
+#warning fix - add rooms into building[index] not buildings
+    [self.MutableBuildings addObject:adminRoom];
+    [self.MutableBuildings addObject:carwashRoom];
 }
 
 - (void)work {
     TYVCar *car = [TYVCar object];
+    NSMutableArray *buildings = self.MutableBuildings;
+    
+    NSArray *rooms = [[self.MutableBuildings objectAtIndex:1] rooms];
+    [rooms[0] addCar:car];
     
     TYVWasher *washer = (TYVWasher *)[self.employees freeEmployeeWithClass:[TYVWasher class]];
     [washer washCar:car];

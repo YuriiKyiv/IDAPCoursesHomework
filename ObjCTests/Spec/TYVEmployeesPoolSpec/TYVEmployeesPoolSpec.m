@@ -31,11 +31,12 @@ describe(@"TYVEmployeesPool", ^{
     
     __block TYVEmployeesPool *employeesPool = nil;
     __block TYVEmployee *employee = nil;
+    __block NSArray *filteredArray = nil;
     
     context(@"when creating object of TYVEmployeesPool", ^{
         
         beforeAll(^{
-            employeesPool = [[[TYVEmployeesPool alloc] init] autorelease];
+            employeesPool = [[TYVEmployeesPool alloc] init];
         });
         
         it(@"should not be nil", ^{
@@ -62,6 +63,32 @@ describe(@"TYVEmployeesPool", ^{
         
         it(@"should have count equls 1", ^{
             [[theValue([employeesPool count]) should] equal:theValue(1)];
+        });
+        
+    });
+    
+    context(@"when filtering array", ^{
+        
+        beforeAll(^{
+            employeesPool = [[TYVEmployeesPool alloc] init];
+            for (int i = 0; i < 100; i++) {
+                employee = [[TYVEmployee alloc] init];
+                if (i % 2 == 0) {
+                    employee.free = NO;
+                }
+                
+                [employeesPool addEmployee:employee];
+            }
+            
+            filteredArray = [[employeesPool freeEmployeesWithClass:[TYVEmployee class]] copy];
+        });
+        
+        it(@"should have count equls 100", ^{
+            [[theValue([employeesPool count]) should] equal:theValue(100)];
+        });
+        
+        it(@"should have count equls 50", ^{
+            [[theValue([filteredArray count]) should] equal:theValue(50)];
         });
         
     });

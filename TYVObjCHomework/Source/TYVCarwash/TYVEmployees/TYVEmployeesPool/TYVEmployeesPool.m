@@ -59,24 +59,20 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 }
 
 - (TYVEmployee *) freeEmployeeWithClass:(Class)class {
-    for (TYVEmployee *employee in self.employees) {
-        if ([employee isKindOfClass:class] && employee.isFree) {
-            return employee;
+    __block TYVEmployee *employee = nil;
+    [self.employees enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        employee = obj;
+        if ([employee isKindOfClass:class] && employee.isFree == YES) {
+            *stop = YES;
         }
-    }
+    }];
     
-    return nil;
+    return employee;
 }
 
 - (NSArray *) freeEmployeesWithClass:(Class)class {
-    NSMutableArray *classEmployees = [NSMutableArray array];
-    for (TYVEmployee *employee in self.employees) {
-        if ([employee isKindOfClass:class] && employee.isFree) {
-            [classEmployees addObject:employee];
-        }
-    }
-    
-    return [[classEmployees copy] autorelease];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.isFree == YES"];
+    return [self.employees filteredArrayUsingPredicate:predicate];
 }
 
 - (NSArray *) employeesWithClass:(Class)class {
