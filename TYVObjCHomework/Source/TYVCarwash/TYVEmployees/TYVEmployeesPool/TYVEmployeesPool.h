@@ -18,7 +18,7 @@
 
 - (void)removeEmployee:(TYVEmployee *)anEmployee;
 
-- (TYVEmployee *)freeEmployeeWithClass:(Class)class;
+- (id)freeEmployeeWithClass:(Class)class;
 
 - (NSArray *)freeEmployeesWithClass:(Class)class;
 

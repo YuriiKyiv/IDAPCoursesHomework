@@ -14,10 +14,6 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableArray    *employees;
 
-- (TYVfunction)comparatorEmployeeWithClass;
-
-- (BOOL)findEmployee:(TYVEmployee *)anEmployee withClass:(Class)aClass;
-
 @end
 
 @implementation TYVEmployeesPool
@@ -58,7 +54,7 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
     [self.employees removeObject:anEmployee];
 }
 
-- (TYVEmployee *)freeEmployeeWithClass:(Class)class {
+- (id)freeEmployeeWithClass:(Class)class {
     __block TYVEmployee *employee = nil;
     [self.employees enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         employee = obj;
@@ -92,22 +88,6 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 
 - (NSUInteger)count {
     return [self.employees count];
-}
-
-#pragma mark -
-#pragma mark Comparators
-
-- (TYVfunction)comparatorEmployeeWithClass {
-//    TYVfunction function = ^(TYVEmployee *employee, Class class) {
-//        return ([employee isKindOfClass:class]);
-//    };
-//    
-//    return [[function copy] autorelease];
-    return nil;
-}
-
-- (BOOL)findEmployee:(TYVEmployee *)anEmployee withClass:(Class)aClass {
-    return [anEmployee isKindOfClass:aClass];
 }
 
 @end

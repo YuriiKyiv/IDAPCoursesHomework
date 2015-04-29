@@ -82,23 +82,19 @@
     
     [carwashRoom addHuman:washer];
     
-#warning fix - add rooms into building[index] not buildings
-    [self.MutableBuildings addObject:adminRoom];
-    [self.MutableBuildings addObject:carwashRoom];
+    NSMutableArray *buildings = self.MutableBuildings;
+    [buildings[0] addRoom:adminRoom];
+    [buildings[1] addRoom:carwashRoom];
 }
 
 - (void)work {
     TYVCar *car = [TYVCar object];
-    NSMutableArray *buildings = self.MutableBuildings;
     
-    NSArray *rooms = [[self.MutableBuildings objectAtIndex:1] rooms];
-    [rooms[0] addCar:car];
-    
-    TYVWasher *washer = (TYVWasher *)[self.employees freeEmployeeWithClass:[TYVWasher class]];
+    TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
     [washer washCar:car];
     [washer takeMoney:washer.price fromMoneykeeper:car];
     
-    TYVAccountant *accountant = (TYVAccountant *)[self.employees freeEmployeeWithClass:[TYVAccountant class]];
+    TYVAccountant *accountant = [self.employees freeEmployeeWithClass:[TYVAccountant class]];
     [accountant takeMoney:washer.money fromMoneykeeper:washer];
     [accountant count];
     
