@@ -59,6 +59,8 @@
 		5AACA13E1AD6804700DEE7EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AACA13D1AD6804700DEE7EF /* main.m */; };
 		5AACA14A1AD682E400DEE7EF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5ABCB6E21A8CD25B00CD71E2 /* main.c */; };
 		5AADBF3C1AA487A600B29A88 /* TYVArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AADBF3A1AA487A600B29A88 /* TYVArray.c */; };
+		5ACB6C6F1AF23CB000A622C4 /* NSString+TYVExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB6C6E1AF23CB000A622C4 /* NSString+TYVExtensions.m */; };
+		5ACB6C701AF23CB000A622C4 /* NSString+TYVExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ACB6C6E1AF23CB000A622C4 /* NSString+TYVExtensions.m */; };
 		5AF089801ABC4562008BF7C9 /* TYVRange.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AF0897E1ABC4562008BF7C9 /* TYVRange.c */; };
 		5AF30FB91AC2CE10000D40E9 /* TYVAutoReleaseStack.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AF30FB71AC2CE10000D40E9 /* TYVAutoReleaseStack.c */; };
 		5AFD29FC1A9DE189007EFFB5 /* TYVMultiples.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD29F81A9DE189007EFFB5 /* TYVMultiples.c */; };
@@ -174,6 +176,8 @@
 		5AADBF3B1AA487A600B29A88 /* TYVArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVArray.h; path = TYVArray/TYVArray.h; sourceTree = "<group>"; };
 		5ABCB6DF1A8CD25B00CD71E2 /* IDAPCoursesHomework */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IDAPCoursesHomework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ABCB6E21A8CD25B00CD71E2 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		5ACB6C6D1AF23CB000A622C4 /* NSString+TYVExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+TYVExtensions.h"; path = "NSString+TYVExtensions/NSString+TYVExtensions.h"; sourceTree = "<group>"; };
+		5ACB6C6E1AF23CB000A622C4 /* NSString+TYVExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+TYVExtensions.m"; path = "NSString+TYVExtensions/NSString+TYVExtensions.m"; sourceTree = "<group>"; };
 		5AF0897E1ABC4562008BF7C9 /* TYVRange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVRange.c; path = TYVRange/TYVRange.c; sourceTree = "<group>"; };
 		5AF0897F1ABC4562008BF7C9 /* TYVRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVRange.h; path = TYVRange/TYVRange.h; sourceTree = "<group>"; };
 		5AF30FB71AC2CE10000D40E9 /* TYVAutoReleaseStack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoReleaseStack.c; path = task6/TYVStack/TYVAutoReleaseStack.c; sourceTree = "<group>"; };
@@ -392,6 +396,7 @@
 				5AAB27E51AEAB1080014D965 /* TYVMoneyKeeper */,
 				5AAB27E81AEAB1080014D965 /* TYVNSDecimalNumberExtensions */,
 				5AAB27EB1AEAB1080014D965 /* TYVNSObjectExtensions */,
+				5ACB6C711AF23CC100A622C4 /* NSString+TYVExtensions */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -643,6 +648,15 @@
 				5A302C891AC17D0B00E784ED /* task6 */,
 			);
 			path = IDAPCoursesHomework;
+			sourceTree = "<group>";
+		};
+		5ACB6C711AF23CC100A622C4 /* NSString+TYVExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				5ACB6C6D1AF23CB000A622C4 /* NSString+TYVExtensions.h */,
+				5ACB6C6E1AF23CB000A622C4 /* NSString+TYVExtensions.m */,
+			);
+			name = "NSString+TYVExtensions";
 			sourceTree = "<group>";
 		};
 		5AF089811ABC4569008BF7C9 /* TYVRange */ = {
@@ -904,6 +918,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AAB27F71AEAB1080014D965 /* TYVCarwashEnterprise.m in Sources */,
+				5ACB6C701AF23CB000A622C4 /* NSString+TYVExtensions.m in Sources */,
 				5AAB28091AEAB1080014D965 /* TYVMoneyKeeper.m in Sources */,
 				5AAB28011AEAB1080014D965 /* TYVCarwashRoom.m in Sources */,
 				5AAB27F51AEAB1080014D965 /* TYVCar.m in Sources */,
@@ -939,6 +954,7 @@
 				5AAB27FE1AEAB1080014D965 /* TYVWasher.m in Sources */,
 				5AACA13E1AD6804700DEE7EF /* main.m in Sources */,
 				5AAB280A1AEAB1080014D965 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m in Sources */,
+				5ACB6C6F1AF23CB000A622C4 /* NSString+TYVExtensions.m in Sources */,
 				5AAB27F21AEAB1080014D965 /* TYVCarwashBuilding.m in Sources */,
 				5AAB27EE1AEAB1080014D965 /* TYVBeing.m in Sources */,
 				5AAB27FA1AEAB1080014D965 /* TYVAccountant.m in Sources */,
