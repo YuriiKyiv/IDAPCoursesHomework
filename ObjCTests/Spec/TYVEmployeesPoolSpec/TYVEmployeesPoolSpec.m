@@ -9,6 +9,7 @@
 #import "Kiwi.h"
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
+#import "TYVWasher.h"
 
 SPEC_BEGIN(TYVEmployeesPoolSpec)
 
@@ -74,7 +75,10 @@ describe(@"TYVEmployeesPool", ^{
             for (int i = 0; i < 100; i++) {
                 employee = [[TYVEmployee alloc] init];
                 if (i % 2 == 0) {
+                    employee = [[TYVEmployee alloc] init];
                     employee.free = NO;
+                } else if (i % 3 == 0) {
+                    employee = [[TYVWasher alloc] init];
                 }
                 
                 [employeesPool addEmployee:employee];
