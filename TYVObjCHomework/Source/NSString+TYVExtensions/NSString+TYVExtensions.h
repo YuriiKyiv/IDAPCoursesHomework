@@ -20,4 +20,6 @@
 
 + (instancetype)letterAlphabet;
 
++ (instancetype)сyrillicAlphabet;
+
 @end

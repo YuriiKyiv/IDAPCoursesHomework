@@ -39,6 +39,18 @@ describe(@"NSString+TYVExtensionsSpec", ^{
         });
 
     });
+    
+    context(@"when initialized with +сyrillicAlphabet", ^{
+        
+        beforeAll(^{
+            alphabet = [NSString сyrillicAlphabet];
+        });
+        
+        it(@"should be NSString", ^{
+            [[alphabet should] beKindOfClass:[NSString class]];
+        });
+        
+    });
 
 });
 

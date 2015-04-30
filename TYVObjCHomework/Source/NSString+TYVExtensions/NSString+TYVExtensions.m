@@ -42,4 +42,9 @@
     
 }
 
++ (instancetype)сyrillicAlphabet {
+    NSRange range = {0x0400, 0x04FF - 0x0400 + 1};
+    return [self alphabetWithUnicodeRange:range];
+}
+
 @end
