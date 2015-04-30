@@ -18,6 +18,14 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 
 @implementation TYVEmployeesPool
 
+
+#pragma mark -
+#pragma mark Class Methods
+
++ (TYVEmployeesPool *)pool {
+    return [[[TYVEmployeesPool alloc] init] autorelease];
+}
+
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
@@ -34,13 +42,6 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
     }
     
     return self;
-}
-
-#pragma mark -
-#pragma mark Class Methods
-
-+ (TYVEmployeesPool *)pool {
-    return [[[TYVEmployeesPool alloc] init] autorelease];
 }
 
 #pragma mark -
