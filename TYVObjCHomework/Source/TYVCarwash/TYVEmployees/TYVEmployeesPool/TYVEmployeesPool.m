@@ -14,13 +14,17 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableArray    *employees;
 
-- (TYVfunction) comparatorEmployeeWithClass;
-
-- (BOOL) findEmployee:(TYVEmployee *)anEmployee withClass:(Class)aClass;
-
 @end
 
 @implementation TYVEmployeesPool
+
+
+#pragma mark -
+#pragma mark Class Methods
+
++ (TYVEmployeesPool *)pool {
+    return [[[TYVEmployeesPool alloc] init] autorelease];
+}
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -41,77 +45,44 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 }
 
 #pragma mark -
-#pragma mark Class Methods
-
-+ (TYVEmployeesPool *) pool {
-    return [[[TYVEmployeesPool alloc] init] autorelease];
-}
-
-#pragma mark -
 #pragma mark Public Methods
 
-- (void) addEmployee:(TYVEmployee *)anEmployee {
+- (void)addEmployee:(TYVEmployee *)anEmployee {
     [self.employees addObject:anEmployee];
 }
 
-- (void) removeEmployee:(TYVEmployee *)anEmployee {
+- (void)removeEmployee:(TYVEmployee *)anEmployee {
     [self.employees removeObject:anEmployee];
 }
 
-- (TYVEmployee *) freeEmployeeWithClass:(Class)class {
-    for (TYVEmployee *employee in self.employees) {
-        if ([employee isKindOfClass:class] && employee.isFree) {
-            return employee;
+- (id)freeEmployeeWithClass:(Class)class {
+    __block TYVEmployee *employee = nil;
+    [self.employees enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        employee = obj;
+        if ([employee isKindOfClass:class] && employee.isFree == YES) {
+            *stop = YES;
         }
-    }
+    }];
     
-    return nil;
+    return employee;
 }
 
-- (NSArray *) freeEmployeesWithClass:(Class)class {
-    NSMutableArray *classEmployees = [NSMutableArray array];
-    for (TYVEmployee *employee in self.employees) {
-        if ([employee isKindOfClass:class] && employee.isFree) {
-            [classEmployees addObject:employee];
-        }
-    }
-    
-    return [[classEmployees copy] autorelease];
+- (NSArray *)freeEmployeesWithClass:(Class)class {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF isKindOfClass: %@ && SELF.isFree == YES", class];
+    return [self.employees filteredArrayUsingPredicate:predicate];
 }
 
-- (NSArray *) employeesWithClass:(Class)class {
-    NSMutableArray *classEmployees = [NSMutableArray array];
-    for (TYVEmployee *employee in self.employees) {
-        if ([employee isKindOfClass:class]) {
-            [classEmployees addObject:employee];
-        }
-    }
-    
-    return [[classEmployees copy] autorelease];
+- (NSArray *)employeesWithClass:(Class)class {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF isKindOfClass: %@", class];
+    return [self.employees filteredArrayUsingPredicate:predicate];
 }
 
-- (BOOL) containsEmployee:(TYVEmployee *)anEmployee {
+- (BOOL)containsEmployee:(TYVEmployee *)anEmployee {
     return [self.employees containsObject:anEmployee];
 }
 
-- (NSUInteger) count {
+- (NSUInteger)count {
     return [self.employees count];
-}
-
-#pragma mark -
-#pragma mark Comparators
-
-- (TYVfunction) comparatorEmployeeWithClass {
-//    TYVfunction function = ^(TYVEmployee *employee, Class class) {
-//        return ([employee isKindOfClass:class]);
-//    };
-//    
-//    return [[function copy] autorelease];
-    return nil;
-}
-
-- (BOOL) findEmployee:(TYVEmployee *)anEmployee withClass:(Class)aClass {
-    return [anEmployee isKindOfClass:aClass];
 }
 
 @end

@@ -14,18 +14,18 @@
 
 + (TYVEmployeesPool *) pool;
 
-- (void) addEmployee:(TYVEmployee *)anEmployee;
+- (void)addEmployee:(TYVEmployee *)anEmployee;
 
-- (void) removeEmployee:(TYVEmployee *)anEmployee;
+- (void)removeEmployee:(TYVEmployee *)anEmployee;
 
-- (TYVEmployee *) freeEmployeeWithClass:(Class)class;
+- (id)freeEmployeeWithClass:(Class)class;
 
-- (NSArray *) freeEmployeesWithClass:(Class)class;
+- (NSArray *)freeEmployeesWithClass:(Class)class;
 
-- (NSArray *) employeesWithClass:(Class)class;
+- (NSArray *)employeesWithClass:(Class)class;
 
-- (BOOL) containsEmployee:(TYVEmployee *)anEmployee;
+- (BOOL)containsEmployee:(TYVEmployee *)anEmployee;
 
-- (NSUInteger) count;
+- (NSUInteger)count;
 
 @end

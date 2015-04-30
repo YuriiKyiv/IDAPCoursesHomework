@@ -54,7 +54,13 @@
 #pragma mark Public Methods
 
 - (void)prepareBuildings {
-    self.MutableBuildings = [NSMutableArray array];
+    NSMutableArray *buildings = [NSMutableArray array];
+    
+    for(int i = 0; i < 2; i++) {
+        [buildings addObject:[TYVBuilding object]];
+    }
+    
+    self.MutableBuildings = buildings;
 }
 
 - (void)hireStaff {
@@ -67,16 +73,28 @@
     [self.employees addEmployee:washer];
     [self.employees addEmployee:accountant];
     self.director = director;
+    
+    TYVRoom *adminRoom = [[[TYVRoom alloc] initWithHumanCount:2] autorelease];
+    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCount:1 carCount:1] autorelease];
+    
+    [adminRoom addHuman:director];
+    [adminRoom addHuman:accountant];
+    
+    [carwashRoom addHuman:washer];
+    
+    NSMutableArray *buildings = self.MutableBuildings;
+    [buildings[0] addRoom:adminRoom];
+    [buildings[1] addRoom:carwashRoom];
 }
 
 - (void)work {
     TYVCar *car = [TYVCar object];
     
-    TYVWasher *washer = (TYVWasher *)[self.employees freeEmployeeWithClass:[TYVWasher class]];
+    TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
     [washer washCar:car];
     [washer takeMoney:washer.price fromMoneykeeper:car];
     
-    TYVAccountant *accountant = (TYVAccountant *)[self.employees freeEmployeeWithClass:[TYVAccountant class]];
+    TYVAccountant *accountant = [self.employees freeEmployeeWithClass:[TYVAccountant class]];
     [accountant takeMoney:washer.money fromMoneykeeper:washer];
     [accountant count];
     
