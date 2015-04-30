@@ -20,6 +20,12 @@
 
 + (instancetype)letterAlphabet;
 
-+ (instancetype)сyrillicAlphabet;
++ (instancetype)сyrillicSymbols;
+
++ (instancetype)randomStringWithLength:(NSUInteger)length alphabet:(NSString *)alphabet;
+
++ (instancetype)randomString;
+
++ (instancetype)randomStringWithLength:(NSUInteger)length;
 
 @end

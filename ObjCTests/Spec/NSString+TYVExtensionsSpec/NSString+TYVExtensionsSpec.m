@@ -40,10 +40,10 @@ describe(@"NSString+TYVExtensionsSpec", ^{
 
     });
     
-    context(@"when initialized with +сyrillicAlphabet", ^{
+    context(@"when initialized with +сyrillicSymbols", ^{
         
         beforeAll(^{
-            alphabet = [NSString сyrillicAlphabet];
+            alphabet = [NSString сyrillicSymbols];
         });
         
         it(@"should be NSString", ^{

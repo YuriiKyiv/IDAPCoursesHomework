@@ -8,6 +8,8 @@
 
 #import "NSString+TYVExtensions.h"
 
+static const NSUInteger kNSStringDefaultRandomStringLength  = 25;
+
 @implementation NSString (TYVExtensions)
 
 + (instancetype)alphabetWithUnicodeRange:(NSRange)range {
@@ -42,9 +44,28 @@
     
 }
 
-+ (instancetype)сyrillicAlphabet {
++ (instancetype)сyrillicSymbols {
     NSRange range = {0x0400, 0x04FF - 0x0400 + 1};
     return [self alphabetWithUnicodeRange:range];
+}
+
++ (instancetype)randomStringWithLength:(NSUInteger)length alphabet:(NSString *)alphabet {
+    NSMutableString *result = [NSMutableString stringWithCapacity:length];
+    NSUInteger alphabetLength = [alphabet length];
+    for (NSUInteger i = 0; i < length; i++) {
+        unichar randomChar = [alphabet characterAtIndex:arc4random_uniform((u_int32_t)alphabetLength)];
+        [result appendFormat:@"%c", randomChar];
+    }
+    
+    return [self stringWithString:result];
+}
+
++ (instancetype)randomString {
+    return [self randomStringWithLength:kNSStringDefaultRandomStringLength alphabet:[self letterAlphabet]];
+}
+
++ (instancetype)randomStringWithLength:(NSUInteger)length {
+    return [self randomStringWithLength:length alphabet:[self letterAlphabet]];
 }
 
 @end
