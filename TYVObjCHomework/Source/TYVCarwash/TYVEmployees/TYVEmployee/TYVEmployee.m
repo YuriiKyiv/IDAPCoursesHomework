@@ -48,4 +48,11 @@
     return self;
 }
 
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)perfomWorkWithObject:(id)anObject {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
 @end

@@ -23,4 +23,7 @@
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
 
+// the method should be overriden
+- (void)perfomWorkWithObject:(id)anObject;
+
 @end
