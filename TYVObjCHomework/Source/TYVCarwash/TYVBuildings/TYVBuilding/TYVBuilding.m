@@ -10,18 +10,19 @@
 #import "TYVRoom.h"
 
 @interface TYVBuilding ()
-@property (nonatomic, retain)   NSMutableArray *mutableRoomsArray;
+@property (nonatomic, copy)   NSMutableSet *mutableRoomsSet;
 
 @end
 
 @implementation TYVBuilding
+
 @dynamic rooms;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.mutableRoomsArray = nil;
+    self.mutableRoomsSet = nil;
     
     [super dealloc];
 }
@@ -29,7 +30,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.mutableRoomsArray = [NSMutableArray array];
+        self.mutableRoomsSet = [NSMutableSet set];
     }
     
     return self;
@@ -38,19 +39,19 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (NSArray *)rooms {
-    return [[self.mutableRoomsArray copy] autorelease];
+- (NSSet *)rooms {
+    return [[self.mutableRoomsSet copy] autorelease];
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)addRoom:(TYVRoom *)aRoom {
-    [self.mutableRoomsArray addObject:aRoom];
+    [self.mutableRoomsSet addObject:aRoom];
 }
 
 - (void)removeRoom:(TYVRoom *)aRoom {
-    [self.mutableRoomsArray removeObject:aRoom];
+    [self.mutableRoomsSet removeObject:aRoom];
 }
 
 @end

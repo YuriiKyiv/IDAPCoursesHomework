@@ -11,7 +11,7 @@
 @class TYVRoom;
 
 @interface TYVBuilding : NSObject
-@property (nonatomic, readonly)   NSArray *rooms;
+@property (nonatomic, readonly)   NSSet *rooms;
 
 - (void)addRoom:(TYVRoom *)aRoom;
 

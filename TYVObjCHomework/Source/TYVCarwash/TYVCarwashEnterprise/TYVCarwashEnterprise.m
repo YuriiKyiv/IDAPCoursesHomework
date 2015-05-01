@@ -19,8 +19,7 @@
 #import "NSObject+TYVNSObjectExtensions.h"
 
 @interface TYVCarwashEnterprise ()
-
-@property (nonatomic, retain)    NSMutableArray      *MutableBuildings;
+@property (nonatomic, retain)    NSMutableArray      *mutableBuildings;
 @property (nonatomic, retain)    TYVEmployeesPool    *employees;
 
 @property (nonatomic, retain)    TYVDirector         *director;
@@ -82,7 +81,7 @@
     
     [carwashRoom addHuman:washer];
     
-    NSMutableArray *buildings = self.MutableBuildings;
+    NSMutableArray *buildings = self.mutableBuildings;
     [buildings[0] addRoom:adminRoom];
     [buildings[1] addRoom:carwashRoom];
 }
