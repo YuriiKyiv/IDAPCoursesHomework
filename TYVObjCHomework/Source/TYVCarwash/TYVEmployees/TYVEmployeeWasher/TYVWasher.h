@@ -13,6 +13,6 @@
 @interface TYVWasher : TYVEmployee
 @property (nonatomic, readonly)     NSDecimalNumber    *price;
 
-- (void)washCar:(TYVCar *)aCar;
+- (void)perfomWorkWithObject:(TYVCar *)aCar;
 
 @end

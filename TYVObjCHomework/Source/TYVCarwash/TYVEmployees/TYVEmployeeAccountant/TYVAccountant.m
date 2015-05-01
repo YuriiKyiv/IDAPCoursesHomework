@@ -7,9 +7,12 @@
 //
 
 #import "TYVAccountant.h"
+#import "TYVWasher.h"
 
 @interface TYVAccountant ()
 @property (nonatomic, retain)   NSDecimalNumber    *capital;
+
+- (void)count;
 
 @end
 
@@ -49,6 +52,14 @@
 
 #pragma mark -
 #pragma mark Public Methods
+
+- (void)perfomWorkWithObject:(TYVWasher *)aWasher {
+    [self takeMoney:aWasher.money fromMoneykeeper:aWasher];
+    [self count];
+}
+
+#pragma mark -
+#pragma mark Private Methods
 
 - (void)count {
     self.free = NO;

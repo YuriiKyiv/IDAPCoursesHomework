@@ -8,6 +8,8 @@
 
 #import "TYVEmployee.h"
 
+@class TYVWasher;
+
 @interface TYVAccountant : TYVEmployee
 @property (nonatomic, readonly)    NSDecimalNumber    *capital;
 
@@ -16,6 +18,6 @@
                        money:(NSDecimalNumber *)money
                      capital:(NSDecimalNumber *)capital;
 
-- (void)count;
+- (void)perfomWorkWithObject:(TYVWasher *)aWasher;
 
 @end

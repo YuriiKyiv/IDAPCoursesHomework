@@ -14,7 +14,6 @@
 #import "TYVCarwashRoom.h"
 #import "TYVCar.h"
 #import "TYVBuilding.h"
-#import "TYVCarwashBuilding.h"
 #import "TYVEmployeesPool.h"
 
 #import "NSObject+TYVNSObjectExtensions.h"

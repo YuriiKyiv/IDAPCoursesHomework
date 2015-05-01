@@ -8,6 +8,8 @@
 
 #import "TYVEmployee.h"
 
+@class TYVAccountant;
+
 @interface TYVDirector : TYVEmployee
 @property (nonatomic, readonly)    NSDecimalNumber    *capital;
 
@@ -16,6 +18,6 @@
                        money:(NSDecimalNumber *)money
                      capital:(NSDecimalNumber *)capital;
 
-- (void)profit;
+- (void)perfomWorkWithObject:(TYVAccountant *)anAccountant;
 
 @end
