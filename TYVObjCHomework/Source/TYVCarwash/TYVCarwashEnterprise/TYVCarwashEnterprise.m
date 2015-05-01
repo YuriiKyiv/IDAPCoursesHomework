@@ -19,6 +19,7 @@
 #import "NSObject+TYVNSObjectExtensions.h"
 
 @interface TYVCarwashEnterprise ()
+
 @property (nonatomic, retain)    NSMutableArray      *MutableBuildings;
 @property (nonatomic, retain)    TYVEmployeesPool    *employees;
 
@@ -90,16 +91,13 @@
     TYVCar *car = [TYVCar object];
     
     TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-    [washer washCar:car];
-    [washer takeMoney:washer.price fromMoneykeeper:car];
+    [washer perfomWorkWithObject:car];
     
     TYVAccountant *accountant = [self.employees freeEmployeeWithClass:[TYVAccountant class]];
-    [accountant takeMoney:washer.money fromMoneykeeper:washer];
-    [accountant count];
+    [accountant perfomWorkWithObject:washer];
     
     TYVDirector *director = self.director;
-    [director takeMoney:accountant.capital fromMoneykeeper:accountant];
-    [director profit];
+    [director perfomWorkWithObject:accountant];
 }
 
 #pragma mark -
