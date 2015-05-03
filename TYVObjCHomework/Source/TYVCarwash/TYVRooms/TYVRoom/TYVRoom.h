@@ -15,7 +15,7 @@
 @property (nonatomic, readonly, getter=isFull)    BOOL          full;
 @property (nonatomic, readonly)                   NSUInteger    humanCount;
 
-- (instancetype)initWithHumanCount:(NSUInteger)count;
+- (instancetype)initWithHumanCapacity:(NSUInteger)capacity;
 
 - (void)addHuman:(TYVEmployee *)aHuman;
 
