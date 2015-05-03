@@ -57,7 +57,7 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 
 - (id)freeEmployeeWithClass:(Class)class {
     __block TYVEmployee *employee = nil;
-    [self.employeesSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         employee = obj;
         if ([employee isKindOfClass:class] && employee.isFree == YES) {
             *stop = YES;
