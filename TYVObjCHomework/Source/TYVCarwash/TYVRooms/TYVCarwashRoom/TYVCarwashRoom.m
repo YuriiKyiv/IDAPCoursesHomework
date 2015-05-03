@@ -9,8 +9,8 @@
 #import "TYVCarwashRoom.h"
 
 @interface TYVCarwashRoom ()
-@property (nonatomic, retain)  NSMutableArray   *mutableCarsArray;
-@property (nonatomic, assign)  NSUInteger       carCount;
+@property (nonatomic, retain)  NSMutableSet   *mutableCarsSet;
+@property (nonatomic, assign)  NSUInteger     carCount;
 
 @end
 
@@ -23,19 +23,20 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.mutableCarsArray = nil;
+    self.mutableCarsSet = nil;
     
     [super dealloc];
 }
 
 - (instancetype)init {
-    return [self initWithHumanCount:0 carCount:0];
+    return [self initWithHumanCapacity:0 carCapacity:0];
 }
 
-- (instancetype)initWithHumanCount:(NSUInteger)humanCount carCount:(NSUInteger)carCount {
-    self = [super initWithHumanCount:humanCount];
+- (instancetype)initWithHumanCapacity:(NSUInteger)humanCapacity carCapacity:(NSUInteger)carCapacity {
+    self = [super initWithHumanCapacity:humanCapacity];
     if (self) {
-        self.carCount = carCount;
+        self.carCount = carCapacity;
+        self.mutableCarsSet = [NSMutableSet set];
     }
     
     return self;
@@ -45,11 +46,11 @@
 #pragma mark Accessors
 
 - (BOOL)isFullForCar {
-    return [self.cars count] >= self.carCount;
+    return [self.cars count] >= self.carCapacity;
 }
 
 - (BOOL)isFullForHuman {
-    return [self.humans count] >= self.humanCount;
+    return [self.humans count] >= self.humanCapacity;
 }
 
 - (BOOL)isFull {
@@ -57,7 +58,7 @@
 }
 
 - (NSArray *)cars {
-    return [[self.mutableCarsArray copy] autorelease];
+    return [[self.mutableCarsSet copy] autorelease];
 }
 
 
@@ -66,12 +67,12 @@
 
 - (void)addCar:(TYVCar *)aCar {
     if (!self.isFullForCar) {
-        [self.mutableCarsArray addObject:aCar];
+        [self.mutableCarsSet addObject:aCar];
     }
 }
 
 - (void)removeCar:(TYVCar *)aCar {
-    [self.mutableCarsArray  removeObject:aCar];
+    [self.mutableCarsSet  removeObject:aCar];
 }
 
 @end

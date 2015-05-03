@@ -13,7 +13,7 @@
 @property (nonatomic, readonly)                   NSArray       *humans;
 
 @property (nonatomic, readonly, getter=isFull)    BOOL          full;
-@property (nonatomic, readonly)                   NSUInteger    humanCount;
+@property (nonatomic, readonly)                   NSUInteger    humanCapacity;
 
 - (instancetype)initWithHumanCapacity:(NSUInteger)capacity;
 

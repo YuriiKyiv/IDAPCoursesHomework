@@ -74,7 +74,7 @@
     self.director = director;
     
     TYVRoom *adminRoom = [[[TYVRoom alloc] initWithHumanCapacity:2] autorelease];
-    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCount:1 carCount:1] autorelease];
+    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCapacity:1 carCapacity:1] autorelease];
     
     [adminRoom addHuman:director];
     [adminRoom addHuman:accountant];
