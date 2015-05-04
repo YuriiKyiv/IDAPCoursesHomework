@@ -9,8 +9,8 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, retain)   NSString           *duty;
-@property (nonatomic, retain)   NSDecimalNumber    *salary;
+@property (nonatomic, copy)     NSString           *duty;
+@property (nonatomic, copy)     NSDecimalNumber    *salary;
 @property (nonatomic, assign)   NSUInteger         experience;
 
 @end
@@ -46,6 +46,24 @@
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Comparison
+
+- (NSUInteger)hash {
+    return [self.duty hash] ^ [self.salary hash] ^ self.experience;
+}
+
+- (BOOL)isEqual:(id)object {
+    return ([object isMemberOfClass:[self class]]
+            && [self isEqualToEqualityObject:object]);
+}
+
+- (BOOL)isEqualToEqualityObject:(TYVEmployee *)object {
+    return ([self.duty isEqual:object.duty]
+            && [self.salary isEqual:object.salary]
+            && self.experience == object.experience);
 }
 
 #pragma mark -
