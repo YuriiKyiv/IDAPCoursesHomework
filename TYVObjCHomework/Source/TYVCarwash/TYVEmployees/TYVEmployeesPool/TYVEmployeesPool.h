@@ -20,9 +20,9 @@
 
 - (id)freeEmployeeWithClass:(Class)class;
 
-- (NSArray *)freeEmployeesWithClass:(Class)class;
+- (NSSet *)freeEmployeesWithClass:(Class)class;
 
-- (NSArray *)employeesWithClass:(Class)class;
+- (NSSet *)employeesWithClass:(Class)class;
 
 - (BOOL)containsEmployee:(TYVEmployee *)anEmployee;
 

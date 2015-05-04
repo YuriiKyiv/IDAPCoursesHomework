@@ -9,6 +9,12 @@
 #import "TYVWasher.h"
 #import "TYVCar.h"
 
+@interface TYVWasher ()
+
+- (void)washCar:(TYVCar *)aCar;
+
+@end
+
 @implementation TYVWasher
 
 @dynamic price;
@@ -20,9 +26,16 @@
     return [NSDecimalNumber number:@"100"];
 }
 
-
 #pragma mark -
 #pragma mark Public Methods
+
+- (void)perfomWorkWithObject:(TYVCar *)aCar {
+    [self takeMoney:aCar.money fromMoneykeeper:aCar];
+    [self washCar:aCar];
+}
+
+#pragma mark -
+#pragma mark Private Methods
 
 - (void)washCar:(TYVCar *)aCar {
     self.free = NO;

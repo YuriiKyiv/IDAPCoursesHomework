@@ -12,15 +12,20 @@
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
 @interface TYVEmployee : TYVMoneyKeeper
-@property (nonatomic, readonly)                 NSString           *duty;
+@property (nonatomic, readonly)               NSString           *duty;
 
-@property (nonatomic, readonly)                 NSDecimalNumber    *salary;
-@property (nonatomic, readonly)                 NSUInteger         experience;
+@property (nonatomic, readonly)               NSDecimalNumber    *salary;
+@property (nonatomic, assign)                 NSUInteger         experience;
 
-@property (nonatomic, assign, getter=isFree)    BOOL               free;
+@property (nonatomic, assign, getter=isFree)  BOOL               free;
 
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
+
+// the method should be overriden
+- (void)perfomWorkWithObject:(id)anObject;
+
+- (BOOL)isEqualToEqualityObject:(TYVEmployee *)object;
 
 @end

@@ -9,19 +9,17 @@
 #import "TYVMoneyKeeper.h"
 
 @interface TYVMoneyKeeper ()
-@property (nonatomic, retain)   NSDecimalNumber    *privateMoney;
+@property (nonatomic, retain)   NSDecimalNumber    *money;
 
 @end
 
 @implementation TYVMoneyKeeper
 
-@dynamic money;
-
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.privateMoney = nil;
+    self.money = nil;
     
     [super dealloc];
 }
@@ -33,31 +31,24 @@
 - (instancetype)initWithMoney:(NSDecimalNumber *)money {
     self = [super init];
     if (self) {
-        self.privateMoney = money;
+        self.money = money;
     }
     
     return self;
 }
 
 #pragma mark -
-#pragma mark Accessors
-
-- (NSDecimalNumber *)money {
-    return self.privateMoney;
-}
-
-#pragma mark -
 #pragma mark Public Methods
 
 - (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(TYVMoneyKeeper *)aMoneykeeper {
-    self.privateMoney = [self.privateMoney decimalNumberByAdding:money];
-    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberBySubtracting:money];
+    self.money = [self.money decimalNumberByAdding:money];
+    aMoneykeeper.money = [aMoneykeeper.money decimalNumberBySubtracting:money];
 }
 
 
 - (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(TYVMoneyKeeper *)aMoneykeeper {
-    self.privateMoney = [self.privateMoney decimalNumberBySubtracting:money];
-    aMoneykeeper.privateMoney = [aMoneykeeper.privateMoney decimalNumberByAdding:money];
+    self.money = [self.money decimalNumberBySubtracting:money];
+    aMoneykeeper.money = [aMoneykeeper.money decimalNumberByAdding:money];
 }
 
 @end

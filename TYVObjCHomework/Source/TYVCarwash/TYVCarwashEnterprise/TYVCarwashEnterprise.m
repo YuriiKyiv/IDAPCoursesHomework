@@ -14,13 +14,12 @@
 #import "TYVCarwashRoom.h"
 #import "TYVCar.h"
 #import "TYVBuilding.h"
-#import "TYVCarwashBuilding.h"
 #import "TYVEmployeesPool.h"
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
 @interface TYVCarwashEnterprise ()
-@property (nonatomic, retain)    NSMutableArray      *MutableBuildings;
+@property (nonatomic, retain)    NSMutableArray      *mutableBuildings;
 @property (nonatomic, retain)    TYVEmployeesPool    *employees;
 
 @property (nonatomic, retain)    TYVDirector         *director;
@@ -74,15 +73,15 @@
     [self.employees addEmployee:accountant];
     self.director = director;
     
-    TYVRoom *adminRoom = [[[TYVRoom alloc] initWithHumanCount:2] autorelease];
-    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCount:1 carCount:1] autorelease];
+    TYVRoom *adminRoom = [[[TYVRoom alloc] initWithHumanCapacity:2] autorelease];
+    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCapacity:1 carCapacity:1] autorelease];
     
     [adminRoom addHuman:director];
     [adminRoom addHuman:accountant];
     
     [carwashRoom addHuman:washer];
     
-    NSMutableArray *buildings = self.MutableBuildings;
+    NSMutableArray *buildings = self.mutableBuildings;
     [buildings[0] addRoom:adminRoom];
     [buildings[1] addRoom:carwashRoom];
 }
@@ -91,16 +90,13 @@
     TYVCar *car = [TYVCar object];
     
     TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-    [washer washCar:car];
-    [washer takeMoney:washer.price fromMoneykeeper:car];
+    [washer perfomWorkWithObject:car];
     
     TYVAccountant *accountant = [self.employees freeEmployeeWithClass:[TYVAccountant class]];
-    [accountant takeMoney:washer.money fromMoneykeeper:washer];
-    [accountant count];
+    [accountant perfomWorkWithObject:washer];
     
     TYVDirector *director = self.director;
-    [director takeMoney:accountant.capital fromMoneykeeper:accountant];
-    [director profit];
+    [director perfomWorkWithObject:accountant];
 }
 
 #pragma mark -

@@ -10,12 +10,12 @@
 #import "TYVCar.h"
 
 @interface TYVCarwashRoom : TYVRoom
-@property (nonatomic, readonly)                           NSArray       *cars;
-@property (nonatomic, readonly)                           NSUInteger    carCount;
+@property (nonatomic, readonly)                           NSSet         *cars;
+@property (nonatomic, readonly)                           NSUInteger    carCapacity;
 @property (nonatomic, readonly, getter=isFullForHuman)    BOOL          fullForHuman;
 @property (nonatomic, readonly, getter=isFullForCar)      BOOL          fullForCar;
 
-- (instancetype)initWithHumanCount:(NSUInteger)humanCount carCount:(NSUInteger)carCount;
+- (instancetype)initWithHumanCapacity:(NSUInteger)humanCapacity carCapacity:(NSUInteger)carCapacity;
 
 - (void)addCar:(TYVCar *)aCar;
 

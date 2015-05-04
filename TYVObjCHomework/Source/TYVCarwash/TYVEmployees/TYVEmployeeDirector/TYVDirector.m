@@ -7,9 +7,12 @@
 //
 
 #import "TYVDirector.h"
+#import "TYVAccountant.h"
 
 @interface TYVDirector ()
 @property (nonatomic, retain)    NSDecimalNumber    *capital;
+
+- (void)profit;
 
 @end
 
@@ -48,6 +51,14 @@
 
 #pragma mark -
 #pragma mark Public Methods
+
+- (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
+    [self takeMoney:anAccountant.capital fromMoneykeeper:anAccountant];
+    [self profit];
+}
+
+#pragma mark -
+#pragma mark Private Methods
 
 - (void)profit {
     self.capital = [self.capital decimalNumberByAdding:self.money];

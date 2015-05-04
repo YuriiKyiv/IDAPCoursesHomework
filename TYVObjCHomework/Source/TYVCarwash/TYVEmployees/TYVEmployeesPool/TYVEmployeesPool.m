@@ -9,10 +9,8 @@
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
 
-typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
-
 @interface TYVEmployeesPool ()
-@property (nonatomic, retain)   NSMutableArray    *employees;
+@property (nonatomic, retain)   NSMutableSet    *employeesSet;
 
 @end
 
@@ -30,7 +28,7 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.employees = nil;
+    self.employeesSet = nil;
     
     [super dealloc];
 }
@@ -38,7 +36,7 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.employees = [NSMutableArray array];
+        self.employeesSet = [NSMutableSet set];
     }
     
     return self;
@@ -48,16 +46,16 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 #pragma mark Public Methods
 
 - (void)addEmployee:(TYVEmployee *)anEmployee {
-    [self.employees addObject:anEmployee];
+        [self.employeesSet addObject:anEmployee];
 }
 
 - (void)removeEmployee:(TYVEmployee *)anEmployee {
-    [self.employees removeObject:anEmployee];
+    [self.employeesSet removeObject:anEmployee];
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
     __block TYVEmployee *employee = nil;
-    [self.employees enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         employee = obj;
         if ([employee isKindOfClass:class] && employee.isFree == YES) {
             *stop = YES;
@@ -67,22 +65,29 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
     return employee;
 }
 
-- (NSArray *)freeEmployeesWithClass:(Class)class {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF isKindOfClass: %@ && SELF.isFree == YES", class];
-    return [self.employees filteredArrayUsingPredicate:predicate];
+- (NSSet *)freeEmployeesWithClass:(Class)class {
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
+        return ([evaluatedObject isKindOfClass:class]
+                && evaluatedObject.isFree);
+    }];
+    
+    return [self.employeesSet filteredSetUsingPredicate:predicate];
 }
 
-- (NSArray *)employeesWithClass:(Class)class {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF isKindOfClass: %@", class];
-    return [self.employees filteredArrayUsingPredicate:predicate];
+- (NSSet *)employeesWithClass:(Class)class {
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ([evaluatedObject isKindOfClass:class]);
+    }];
+    
+    return [self.employeesSet filteredSetUsingPredicate:predicate];
 }
 
 - (BOOL)containsEmployee:(TYVEmployee *)anEmployee {
-    return [self.employees containsObject:anEmployee];
+    return [self.employeesSet containsObject:anEmployee];
 }
 
 - (NSUInteger)count {
-    return [self.employees count];
+    return [self.employeesSet count];
 }
 
 @end
