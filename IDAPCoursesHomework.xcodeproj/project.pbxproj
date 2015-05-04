@@ -287,13 +287,13 @@
 			name = TYVLinkedListEnumerator;
 			sourceTree = "<group>";
 		};
-		5A365D811AF7941500DEAAE3 /* TYVrange */ = {
+		5A365D811AF7941500DEAAE3 /* TYVRange */ = {
 			isa = PBXGroup;
 			children = (
 				5A365D7D1AF7940E00DEAAE3 /* TYVRange.h */,
 				5A365D7E1AF7940E00DEAAE3 /* TYVRange.m */,
 			);
-			name = TYVrange;
+			name = TYVRange;
 			sourceTree = "<group>";
 		};
 		5A45A7E31AC427DA007FAB8F /* TYVLinkedListNode */ = {
@@ -412,7 +412,7 @@
 				5AAB27E81AEAB1080014D965 /* TYVNSDecimalNumberExtensions */,
 				5AAB27EB1AEAB1080014D965 /* TYVNSObjectExtensions */,
 				5ACB6C711AF23CC100A622C4 /* NSString+TYVExtensions */,
-				5A365D811AF7941500DEAAE3 /* TYVrange */,
+				5A365D811AF7941500DEAAE3 /* TYVRange */,
 			);
 			path = Source;
 			sourceTree = "<group>";
