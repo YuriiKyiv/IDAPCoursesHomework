@@ -11,6 +11,8 @@
 #import "TYVMaleBeing.h"
 #import "TYVFemaleBeing.h"
 #import "TYVCarwashEnterprise.h"
+#import "TYVEmployeesPool.h"
+#import "TYVEmployee.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -36,6 +38,7 @@ int main(int argc, const char * argv[]) {
         
         TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
         [enterprise work];
+
     }
     
     return 0;

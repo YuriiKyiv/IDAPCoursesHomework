@@ -9,10 +9,8 @@
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
 
-typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
-
 @interface TYVEmployeesPool ()
-@property (nonatomic, copy)   NSMutableSet    *employeesSet;
+@property (nonatomic, retain)   NSMutableSet    *employeesSet;
 
 @end
 
@@ -48,7 +46,7 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 #pragma mark Public Methods
 
 - (void)addEmployee:(TYVEmployee *)anEmployee {
-    [self.employeesSet addObject:anEmployee];
+        [self.employeesSet addObject:anEmployee];
 }
 
 - (void)removeEmployee:(TYVEmployee *)anEmployee {
@@ -68,12 +66,19 @@ typedef BOOL(^TYVfunction)(TYVEmployee *employee, Class class);
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF isKindOfClass: %@ && SELF.isFree == YES", class];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ([evaluatedObject isKindOfClass:class]
+                && [[bindings valueForKey:@"_free"] isEqualToValue:(NSValue *)YES]);
+    }];
+    
     return [self.employeesSet filteredSetUsingPredicate:predicate];
 }
 
 - (NSSet *)employeesWithClass:(Class)class {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF isKindOfClass: %@", class];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return ([evaluatedObject isKindOfClass:class]);
+    }];
+    
     return [self.employeesSet filteredSetUsingPredicate:predicate];
 }
 

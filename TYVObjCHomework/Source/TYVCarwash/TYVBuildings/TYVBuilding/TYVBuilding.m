@@ -10,7 +10,7 @@
 #import "TYVRoom.h"
 
 @interface TYVBuilding ()
-@property (nonatomic, copy)   NSMutableSet *mutableRoomsSet;
+@property (nonatomic, retain)   NSMutableSet *mutableRoomsSet;
 
 @end
 

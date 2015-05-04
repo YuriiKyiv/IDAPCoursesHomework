@@ -32,7 +32,8 @@ describe(@"TYVEmployeesPool", ^{
     
     __block TYVEmployeesPool *employeesPool = nil;
     __block TYVEmployee *employee = nil;
-    __block NSArray *filteredArray = nil;
+    __block TYVWasher *washer = nil;
+    __block NSSet *filteredSet = nil;
     
     context(@"when creating object of TYVEmployeesPool", ^{
         
@@ -50,52 +51,26 @@ describe(@"TYVEmployeesPool", ^{
         
     });
     
-    context(@"when adding one object", ^{
+    context(@"when adding object of TYVEmployee with ", ^{
         
         beforeAll(^{
             employeesPool = [[TYVEmployeesPool alloc] init];
-            employee = [[TYVEmployee alloc] init];
+            employee = [[TYVEmployee alloc] initWithDuty:@"work1"
+                                                  salary:[NSDecimalNumber decimalNumberWithString:@"100"]
+                                                   money:[NSDecimalNumber decimalNumberWithString:@"100"]];
             [employeesPool addEmployee:employee];
         });
         
-        it(@"should contains object", ^{
+        it(@"should contains employee", ^{
             [[theValue([employeesPool containsEmployee:employee]) should] beYes];
         });
         
-        it(@"should have count equls 1", ^{
+        it(@"should have count equls 0", ^{
             [[theValue([employeesPool count]) should] equal:theValue(1)];
         });
         
     });
-    
-    context(@"when filtering array", ^{
-        
-        beforeAll(^{
-            employeesPool = [[TYVEmployeesPool alloc] init];
-            for (int i = 0; i < 100; i++) {
-                employee = [[TYVEmployee alloc] init];
-                if (i % 2 == 0) {
-                    employee = [[TYVEmployee alloc] init];
-                    employee.free = NO;
-                } else if (i % 3 == 0) {
-                    employee = [[TYVWasher alloc] init];
-                }
-                
-                [employeesPool addEmployee:employee];
-            }
-            
-            filteredArray = [[employeesPool freeEmployeesWithClass:[TYVEmployee class]] copy];
-        });
-        
-        it(@"should have count equls 100", ^{
-            [[theValue([employeesPool count]) should] equal:theValue(100)];
-        });
-        
-        it(@"should have count equls 50", ^{
-            [[theValue([filteredArray count]) should] equal:theValue(50)];
-        });
-        
-    });
+
 });
 
 SPEC_END
