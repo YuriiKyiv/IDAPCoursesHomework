@@ -119,7 +119,6 @@ describe(@"TYVEmployeesPool", ^{
         it(@"should contains 500 washers", ^{
             NSSet *set = [employeesPool employeesWithClass:[TYVWasher class]];
             [[theValue([set count]) should] equal:theValue(500)];
-            
         });
         
         it(@"should have count equls 1000", ^{
@@ -129,13 +128,8 @@ describe(@"TYVEmployeesPool", ^{
         it(@"should contains 500 free washers", ^{
             NSSet *set = [employeesPool freeEmployeesWithClass:[TYVWasher class]];
             [[theValue([set count]) should] equal:theValue(500)];
-            
         });
-        
     });
-
-
-
 });
 
 SPEC_END
