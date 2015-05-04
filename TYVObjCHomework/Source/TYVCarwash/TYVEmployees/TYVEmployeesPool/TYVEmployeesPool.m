@@ -66,9 +66,9 @@
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
         return ([evaluatedObject isKindOfClass:class]
-                && [[bindings valueForKey:@"_free"] isEqualToValue:(NSValue *)YES]);
+                && evaluatedObject.isFree);
     }];
     
     return [self.employeesSet filteredSetUsingPredicate:predicate];

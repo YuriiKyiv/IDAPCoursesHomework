@@ -11,7 +11,7 @@
 @interface TYVEmployee ()
 @property (nonatomic, copy)     NSString           *duty;
 @property (nonatomic, copy)     NSDecimalNumber    *salary;
-@property (nonatomic, assign)   NSUInteger         experience;
+//@property (nonatomic, assign)   NSUInteger         experience;
 
 @end
 
@@ -61,9 +61,9 @@
 }
 
 - (BOOL)isEqualToEqualityObject:(TYVEmployee *)object {
-    return ([self.duty isEqual:object.duty]
+    return (self == object || ([self.duty isEqual:object.duty]
             && [self.salary isEqual:object.salary]
-            && self.experience == object.experience);
+            && self.experience == object.experience));
 }
 
 #pragma mark -
