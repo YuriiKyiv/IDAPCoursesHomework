@@ -10,7 +10,7 @@
 
 @interface TYVEmployee ()
 @property (nonatomic, copy)     NSString           *duty;
-@property (nonatomic, copy)     NSDecimalNumber    *salary;
+@property (nonatomic, retain)   NSDecimalNumber    *salary;
 //@property (nonatomic, assign)   NSUInteger         experience;
 
 @end
