@@ -967,11 +967,8 @@
 				5AAB27FE1AEAB1080014D965 /* TYVWasher.m in Sources */,
 				5AACA13E1AD6804700DEE7EF /* main.m in Sources */,
 				5AAB280A1AEAB1080014D965 /* NSDecimalNumber+TYVNSDecimalNumberExtensions.m in Sources */,
-<<<<<<< HEAD
 				5ACB6C6F1AF23CB000A622C4 /* NSString+TYVExtensions.m in Sources */,
 				5AAB27F21AEAB1080014D965 /* TYVCarwashBuilding.m in Sources */,
-=======
->>>>>>> feature/Сarwash
 				5AAB27EE1AEAB1080014D965 /* TYVBeing.m in Sources */,
 				5AAB27FA1AEAB1080014D965 /* TYVAccountant.m in Sources */,
 				5A6691A81AEBCE110082F749 /* TYVEmployeesPool.m in Sources */,
