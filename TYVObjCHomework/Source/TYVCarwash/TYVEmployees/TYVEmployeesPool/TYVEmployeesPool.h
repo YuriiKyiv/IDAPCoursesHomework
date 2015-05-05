@@ -10,6 +10,11 @@
 
 @class TYVEmployee;
 
+@protocol TYVDelegatingEmployee <NSObject>
+@property (nonatomic, assign)   id  delegate;
+
+@end
+
 @interface TYVEmployeesPool : NSObject
 
 + (TYVEmployeesPool *) pool;

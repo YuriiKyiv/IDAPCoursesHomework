@@ -57,10 +57,10 @@
 
 - (BOOL)isEqual:(id)object {
     return ([object isMemberOfClass:[self class]]
-            && [self isEqualToEqualityObject:object]);
+            && [self isEqualToObject:object]);
 }
 
-- (BOOL)isEqualToEqualityObject:(TYVEmployee *)object {
+- (BOOL)isEqualToObject:(TYVEmployee *)object {
     return (self == object || ([self.duty isEqual:object.duty]
             && [self.salary isEqual:object.salary]
             && self.experience == object.experience));

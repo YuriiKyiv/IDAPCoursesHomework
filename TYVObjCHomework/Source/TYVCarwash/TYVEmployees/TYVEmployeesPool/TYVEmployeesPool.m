@@ -46,7 +46,7 @@
 #pragma mark Public Methods
 
 - (void)addEmployee:(TYVEmployee *)anEmployee {
-        [self.employeesSet addObject:anEmployee];
+    [self.employeesSet addObject:anEmployee];
 }
 
 - (void)removeEmployee:(TYVEmployee *)anEmployee {

@@ -24,6 +24,10 @@
 
 @property (nonatomic, retain)    TYVDirector         *director;
 
+- (void)hireStaffForAdminBuildingWithRoom;
+
+- (void)hireStaffForCarwashBuildingWithRoom;
+
 @end
 
 @implementation TYVCarwashEnterprise
@@ -32,7 +36,7 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.MutableBuildings = nil;
+    self.mutableBuildings = nil;
     self.employees = nil;
     self.director = nil;
     
@@ -64,26 +68,8 @@
 
 - (void)hireStaff {
     self.employees = [TYVEmployeesPool pool];
-    
-    TYVWasher *washer = [TYVWasher object];
-    TYVAccountant *accountant = [TYVAccountant object];
-    TYVDirector *director = [TYVDirector object];
-    
-    [self.employees addEmployee:washer];
-    [self.employees addEmployee:accountant];
-    self.director = director;
-    
-    TYVRoom *adminRoom = [[[TYVRoom alloc] initWithHumanCapacity:2] autorelease];
-    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCapacity:1 carCapacity:1] autorelease];
-    
-    [adminRoom addHuman:director];
-    [adminRoom addHuman:accountant];
-    
-    [carwashRoom addHuman:washer];
-    
-    NSMutableArray *buildings = self.mutableBuildings;
-    [buildings[0] addRoom:adminRoom];
-    [buildings[1] addRoom:carwashRoom];
+    [self hireStaffForAdminBuildingWithRoom];
+    [self hireStaffForCarwashBuildingWithRoom];
 }
 
 - (void)work {
@@ -100,6 +86,45 @@
 }
 
 #pragma mark -
+#pragma mark TYVWasherDelegate
+
+- (void)washer:(TYVWasher *)washer didWashCar:(TYVCar *)car {
+    
+}
+
+- (void)washer:(TYVWasher *)washer didTakeMoney:(NSDecimalNumber *)money fromMoneyKeeper:(TYVMoneyKeeper *)moneykeeper {
+    
+}
+
+- (void)washer:(TYVWasher *)washer didPerfomWorkWithObject:(TYVCar *)car {
+    
+}
+
+#pragma mark -
 #pragma mark Private Methods
+
+- (void)hireStaffForAdminBuildingWithRoom {
+    TYVAccountant *accountant = [TYVAccountant object];
+    TYVDirector *director = [TYVDirector object];
+    
+    [self.employees addEmployee:accountant];
+    self.director = director;
+    
+    TYVRoom *adminRoom = [[[TYVRoom alloc] initWithHumanCapacity:2] autorelease];
+    [adminRoom addHuman:director];
+    [adminRoom addHuman:accountant];
+    
+    [self.mutableBuildings[0] addRoom:adminRoom];
+}
+
+- (void)hireStaffForCarwashBuildingWithRoom {
+    TYVWasher *washer = [TYVWasher object];
+    [self.employees addEmployee:washer];
+    
+    TYVCarwashRoom *carwashRoom = [[[TYVCarwashRoom alloc] initWithHumanCapacity:1 carCapacity:1] autorelease];
+    [carwashRoom addHuman:washer];
+    
+    [self.mutableBuildings[1] addRoom:carwashRoom];
+}
 
 @end
