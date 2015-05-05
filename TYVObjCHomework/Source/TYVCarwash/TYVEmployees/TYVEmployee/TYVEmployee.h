@@ -26,6 +26,6 @@
 // the method should be overriden
 - (void)perfomWorkWithObject:(id)anObject;
 
-- (BOOL)isEqualToEqualityObject:(TYVEmployee *)object;
+- (BOOL)isEqualToObject:(TYVEmployee *)object;
 
 @end

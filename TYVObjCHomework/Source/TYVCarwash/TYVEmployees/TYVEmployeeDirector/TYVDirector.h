@@ -18,6 +18,4 @@
                        money:(NSDecimalNumber *)money
                      capital:(NSDecimalNumber *)capital;
 
-- (void)perfomWorkWithObject:(TYVAccountant *)anAccountant;
-
 @end
