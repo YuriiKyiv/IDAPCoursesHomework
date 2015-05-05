@@ -16,7 +16,7 @@
 
 - (void)washer:(TYVWasher *)washer didWashCar:(TYVCar *)car;
 
-- (void)washer:(TYVWasher *)washer didTakeMoney:(NSDecimalNumber *)money FromMoneyKeeper:(TYVMoneyKeeper *)moneykeeper;
+- (void)washer:(TYVWasher *)washer didTakeMoney:(NSDecimalNumber *)money fromMoneyKeeper:(TYVMoneyKeeper *)moneykeeper;
 
 @optional
 - (void)washer:(TYVWasher *)washer didPerfomWorkWithObject:(TYVCar *)car;
