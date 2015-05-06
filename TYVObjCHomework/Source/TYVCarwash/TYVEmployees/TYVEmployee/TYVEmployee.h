@@ -15,9 +15,10 @@
 
 @protocol TYVEmployeeDelegate <NSObject>
 
-- (void)employeeIsFree:(TYVEmployee *)employee;
-
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
+
+@optional
+- (void)employeeIsFree:(TYVEmployee *)employee;
 
 @end
 

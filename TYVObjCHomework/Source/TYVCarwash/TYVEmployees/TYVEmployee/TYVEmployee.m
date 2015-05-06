@@ -65,7 +65,9 @@
 
 -(void)setFree:(BOOL)free {
     _free = free;
-    [self.delegate employeeIsFree:self];
+    if (free && [self.delegate respondsToSelector:@selector(employeeIsFree:)]) {
+        [self.delegate employeeIsFree:self];
+    }
 }
 
 #pragma mark -
