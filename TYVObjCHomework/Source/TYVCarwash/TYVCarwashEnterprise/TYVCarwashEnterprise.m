@@ -86,8 +86,15 @@
 }
 
 #pragma mark -
-#pragma mark TYVWasherDelegate
+#pragma mark TYVEmployeeDelegate
 
+- (BOOL)employeeIsReady:(TYVEmployee *)employee {
+    return false;
+}
+
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
+    
+}
 
 #pragma mark -
 #pragma mark Private Methods

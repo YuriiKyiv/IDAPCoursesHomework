@@ -11,6 +11,16 @@
 
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
+@class TYVEmployee;
+
+@protocol TYVEmployeeDelegate <NSObject>
+
+- (BOOL)employeeIsReady:(TYVEmployee *)employee;
+
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
+
+@end
+
 @interface TYVEmployee : TYVMoneyKeeper
 @property (nonatomic, readonly)               NSString           *duty;
 

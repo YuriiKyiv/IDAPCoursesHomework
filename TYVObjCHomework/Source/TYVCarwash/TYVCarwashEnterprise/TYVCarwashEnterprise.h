@@ -10,7 +10,7 @@
 
 #import "TYVWasher.h"
 
-@interface TYVCarwashEnterprise : NSObject
+@interface TYVCarwashEnterprise : NSObject <TYVEmployeeDelegate>
 //@property (nonatomic, readonly)    NSArray             *Buildings;
 //@property (nonatomic, readonly)    TYVEmployeesPool    *employees;
 
