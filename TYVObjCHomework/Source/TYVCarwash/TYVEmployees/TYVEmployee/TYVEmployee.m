@@ -75,7 +75,7 @@
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
     [self takeMoney:employee.money fromMoneykeeper:employee];
-    employee.free = true;
+    employee.free = YES;
     [self perfomWorkWithObject:employee];
 }
 

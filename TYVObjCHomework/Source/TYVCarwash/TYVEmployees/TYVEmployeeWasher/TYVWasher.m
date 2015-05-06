@@ -33,6 +33,7 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVCar *)aCar {
+    self.free = NO;
     [self takeMoney:self.price fromMoneykeeper:aCar];
     [self washCar:aCar];
 }
@@ -41,7 +42,6 @@
 #pragma mark Private Methods
 
 - (void)washCar:(TYVCar *)aCar {
-    self.free = NO;
     aCar.clean = YES;
 }
 
