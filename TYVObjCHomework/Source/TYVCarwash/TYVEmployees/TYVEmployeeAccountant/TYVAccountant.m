@@ -51,15 +51,6 @@
 }
 
 #pragma mark -
-#pragma mark TYVEmployeeDelegate
-
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    [self takeMoney:employee.money fromMoneykeeper:employee];
-    employee.free = true;
-    [self perfomWorkWithObject:employee];
-}
-
-#pragma mark -
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVWasher *)aWasher {

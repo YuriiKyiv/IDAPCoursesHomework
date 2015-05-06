@@ -22,7 +22,7 @@
 
 @end
 
-@interface TYVEmployee : TYVMoneyKeeper
+@interface TYVEmployee : TYVMoneyKeeper <TYVEmployeeDelegate>
 @property (nonatomic, readonly)               NSString                  *duty;
 
 @property (nonatomic, readonly)               NSDecimalNumber           *salary;
