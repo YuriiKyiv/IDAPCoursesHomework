@@ -8,19 +8,6 @@
 
 #import "TYVEmployee.h"
 
-@class TYVAccountant;
-@class TYVDirector;
-
-@protocol TYVDirectorDelegate <NSObject>
-
-- (void)director:(TYVDirector *)director
-      didTakeMoney:(NSDecimalNumber *)money
-   fromMoneyKeeper:(TYVMoneyKeeper *)moneykeeper;
-
-- (void)director:(TYVDirector *)director didProfitMoney:(NSDecimalNumber *)money;
-
-@end
-
 @interface TYVDirector : TYVEmployee
 @property (nonatomic, readonly)    NSDecimalNumber    *capital;
 

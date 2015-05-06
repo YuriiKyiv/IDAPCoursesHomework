@@ -8,24 +8,7 @@
 
 #import "TYVEmployee.h"
 
-@class TYVCar;
-@class TYVWasher;
-@class TYVMoneyKeeper;
-
-@protocol TYVWasherDelegate <NSObject>
-
-- (void)washer:(TYVWasher *)washer didWashCar:(TYVCar *)car;
-
-- (void)washer:(TYVWasher *)washer didTakeMoney:(NSDecimalNumber *)money fromMoneyKeeper:(TYVMoneyKeeper *)moneykeeper;
-
-@optional
-- (void)washer:(TYVWasher *)washer didPerfomWorkWithObject:(TYVCar *)car;
-
-@end
-
 @interface TYVWasher : TYVEmployee
-@property (nonatomic, readonly) NSDecimalNumber         *price;
-
-@property (nonatomic, assign)   id<TYVWasherDelegate>   *delegate;
+@property (nonatomic, readonly) NSDecimalNumber *price;
 
 @end

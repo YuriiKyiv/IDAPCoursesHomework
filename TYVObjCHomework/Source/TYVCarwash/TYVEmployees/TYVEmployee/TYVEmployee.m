@@ -9,9 +9,8 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, copy)     NSString           *duty;
-@property (nonatomic, retain)   NSDecimalNumber    *salary;
-//@property (nonatomic, assign)   NSUInteger         experience;
+@property (nonatomic, copy)     NSString                *duty;
+@property (nonatomic, retain)   NSDecimalNumber         *salary;
 
 @end
 
@@ -23,6 +22,8 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
+    self.delegate = nil;
+    self.delegatingObject = nil;
     
     [super dealloc];
 }
@@ -49,6 +50,36 @@
 }
 
 #pragma mark -
+#pragma mark Accessors
+
+- (void)setDelegatingObject:(id)object {
+    if (_delegatingObject != object) {
+        _delegatingObject.delegate = nil;
+        
+        [_delegatingObject release];
+        _delegatingObject = [object retain];
+        
+        _delegatingObject.delegate = self;
+    }
+}
+
+-(void)setFree:(BOOL)free {
+    _free = free;
+    if (free && [self.delegate respondsToSelector:@selector(employeeIsFree:)]) {
+        [self.delegate employeeIsFree:self];
+    }
+}
+
+#pragma mark -
+#pragma mark TYVEmployeeDelegate
+
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
+    [self takeMoney:employee.money fromMoneykeeper:employee];
+    employee.free = YES;
+    [self perfomWorkWithObject:employee];
+}
+
+#pragma mark -
 #pragma mark Comparison
 
 - (NSUInteger)hash {
@@ -71,6 +102,7 @@
 
 - (void)perfomWorkWithObject:(id)anObject {
     [self doesNotRecognizeSelector:_cmd];
+    [self.delegate employee:self didPerfomWorkWithObject:anObject];
 }
 
 @end

@@ -11,13 +11,27 @@
 
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
-@interface TYVEmployee : TYVMoneyKeeper
-@property (nonatomic, readonly)               NSString           *duty;
+@class TYVEmployee;
 
-@property (nonatomic, readonly)               NSDecimalNumber    *salary;
-@property (nonatomic, assign)                 NSUInteger         experience;
+@protocol TYVEmployeeDelegate <NSObject>
 
-@property (nonatomic, assign, getter=isFree)  BOOL               free;
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
+
+@optional
+- (void)employeeIsFree:(TYVEmployee *)employee;
+
+@end
+
+@interface TYVEmployee : TYVMoneyKeeper <TYVEmployeeDelegate>
+@property (nonatomic, readonly)               NSString                  *duty;
+
+@property (nonatomic, readonly)               NSDecimalNumber           *salary;
+@property (nonatomic, assign)                 NSUInteger                experience;
+
+@property (nonatomic, assign, getter=isFree)  BOOL                      free;
+
+@property (nonatomic, assign)                 id<TYVEmployeeDelegate>   delegate;
+@property (nonatomic, retain)                 TYVEmployee               *delegatingObject;
 
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary

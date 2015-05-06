@@ -22,13 +22,6 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (void)dealloc
-{
-    self.delegate = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark -
 #pragma mark Accessors
 
@@ -40,7 +33,8 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVCar *)aCar {
-    [self takeMoney:aCar.money fromMoneykeeper:aCar];
+    self.free = NO;
+    [self takeMoney:self.price fromMoneykeeper:aCar];
     [self washCar:aCar];
 }
 
@@ -48,9 +42,7 @@
 #pragma mark Private Methods
 
 - (void)washCar:(TYVCar *)aCar {
-    self.free = NO;
-    aCar.isClear = YES;
-    self.free = YES;
+    aCar.clean = YES;
 }
 
 @end

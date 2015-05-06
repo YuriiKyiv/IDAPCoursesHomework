@@ -54,6 +54,7 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVWasher *)aWasher {
+    self.free = NO;
     [self takeMoney:aWasher.money fromMoneykeeper:aWasher];
     [self count];
 }
@@ -62,9 +63,7 @@
 #pragma mark Private Methods
 
 - (void)count {
-    self.free = NO;
     self.capital = [self.capital decimalNumberByAdding:self.money];
-    self.free = YES;
 }
 
 @end
