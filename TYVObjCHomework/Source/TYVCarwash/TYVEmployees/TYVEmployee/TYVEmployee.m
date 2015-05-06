@@ -63,6 +63,11 @@
     }
 }
 
+-(void)setFree:(BOOL)free {
+    _free = free;
+    [self.delegate employeeIsFree:self];
+}
+
 #pragma mark -
 #pragma mark Comparison
 
@@ -86,6 +91,7 @@
 
 - (void)perfomWorkWithObject:(id)anObject {
     [self doesNotRecognizeSelector:_cmd];
+    [self.delegate employee:self didPerfomWorkWithObject:anObject];
 }
 
 @end

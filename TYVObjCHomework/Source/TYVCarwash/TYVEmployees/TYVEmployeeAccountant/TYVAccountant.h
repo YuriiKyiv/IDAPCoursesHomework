@@ -8,7 +8,7 @@
 
 #import "TYVEmployee.h"
 
-@interface TYVAccountant : TYVEmployee
+@interface TYVAccountant : TYVEmployee <TYVEmployeeDelegate>
 @property (nonatomic, readonly)    NSDecimalNumber    *capital;
 
 - (instancetype)initWithDuty:(NSString *)duty
