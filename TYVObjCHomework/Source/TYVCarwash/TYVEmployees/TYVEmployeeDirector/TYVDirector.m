@@ -53,6 +53,7 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
+    [self takeMoney:anAccountant.capital fromMoneykeeper:anAccountant];
     [self profit];
 }
 

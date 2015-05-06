@@ -54,6 +54,8 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVWasher *)aWasher {
+    [self takeMoney:aWasher.money fromMoneykeeper:aWasher];
+    aWasher.free = YES;
     [self count];
 }
 

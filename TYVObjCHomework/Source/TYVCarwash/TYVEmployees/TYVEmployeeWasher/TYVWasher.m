@@ -33,7 +33,7 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVCar *)aCar {
-    [self takeMoney:aCar.money fromMoneykeeper:aCar];
+    [self takeMoney:self.price fromMoneykeeper:aCar];
     [self washCar:aCar];
 }
 
@@ -43,7 +43,6 @@
 - (void)washCar:(TYVCar *)aCar {
     self.free = NO;
     aCar.clean = YES;
-    self.free = YES;
 }
 
 @end
