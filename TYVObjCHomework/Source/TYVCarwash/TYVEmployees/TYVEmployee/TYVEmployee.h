@@ -22,12 +22,15 @@
 @end
 
 @interface TYVEmployee : TYVMoneyKeeper
-@property (nonatomic, readonly)               NSString           *duty;
+@property (nonatomic, readonly)               NSString          *duty;
 
-@property (nonatomic, readonly)               NSDecimalNumber    *salary;
-@property (nonatomic, assign)                 NSUInteger         experience;
+@property (nonatomic, readonly)               NSDecimalNumber   *salary;
+@property (nonatomic, assign)                 NSUInteger        experience;
 
-@property (nonatomic, assign, getter=isFree)  BOOL               free;
+@property (nonatomic, assign, getter=isFree)  BOOL              free;
+
+@property (nonatomic, assign)                 TYVEmployee       *delegate;
+@property (nonatomic, retain)                 TYVEmployee       *delegatingObject;
 
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary

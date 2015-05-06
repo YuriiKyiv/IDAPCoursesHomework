@@ -9,9 +9,8 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, copy)     NSString           *duty;
-@property (nonatomic, retain)   NSDecimalNumber    *salary;
-//@property (nonatomic, assign)   NSUInteger         experience;
+@property (nonatomic, copy)     NSString                *duty;
+@property (nonatomic, retain)   NSDecimalNumber         *salary;
 
 @end
 
@@ -23,6 +22,8 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
+    self.delegate = nil;
+    self.delegatingObject = nil;
     
     [super dealloc];
 }
@@ -46,6 +47,20 @@
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Accessors
+
+- (void)setDelegatingObject:(id)object {
+    if (_delegatingObject != object) {
+        _delegatingObject.delegate = nil;
+        
+        [_delegatingObject release];
+        _delegatingObject = [object retain];
+        
+        _delegatingObject.delegate = self;
+    }
 }
 
 #pragma mark -
