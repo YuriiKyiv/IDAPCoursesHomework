@@ -88,17 +88,6 @@
 #pragma mark -
 #pragma mark TYVWasherDelegate
 
-- (void)washer:(TYVWasher *)washer didWashCar:(TYVCar *)car {
-    
-}
-
-- (void)washer:(TYVWasher *)washer didTakeMoney:(NSDecimalNumber *)money fromMoneyKeeper:(TYVMoneyKeeper *)moneykeeper {
-    
-}
-
-- (void)washer:(TYVWasher *)washer didPerfomWorkWithObject:(TYVCar *)car {
-    
-}
 
 #pragma mark -
 #pragma mark Private Methods

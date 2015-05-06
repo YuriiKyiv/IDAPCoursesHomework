@@ -22,13 +22,6 @@
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
-- (void)dealloc
-{
-    self.delegate = nil;
-    
-    [super dealloc];
-}
-
 #pragma mark -
 #pragma mark Accessors
 
@@ -49,7 +42,7 @@
 
 - (void)washCar:(TYVCar *)aCar {
     self.free = NO;
-    aCar.isClear = YES;
+    aCar.clean = YES;
     self.free = YES;
 }
 
