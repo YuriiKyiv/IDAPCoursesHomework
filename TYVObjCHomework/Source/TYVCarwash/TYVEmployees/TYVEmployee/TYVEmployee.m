@@ -98,9 +98,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(id)anObject {
-    [self doesNotRecognizeSelector:_cmd];
-    [self.delegate employee:self didPerfomWorkWithObject:anObject];
+- (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
+    self.free = NO;
+    [self takeMoney:anObject.money fromMoneykeeper:anObject];
 }
 
 @end

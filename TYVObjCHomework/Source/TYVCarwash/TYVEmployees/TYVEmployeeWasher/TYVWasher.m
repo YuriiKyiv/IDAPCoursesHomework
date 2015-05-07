@@ -36,6 +36,7 @@
     self.free = NO;
     [self takeMoney:self.price fromMoneykeeper:aCar];
     [self washCar:aCar];
+    [self.delegate employee:self didPerfomWorkWithObject:aCar];
 }
 
 #pragma mark -

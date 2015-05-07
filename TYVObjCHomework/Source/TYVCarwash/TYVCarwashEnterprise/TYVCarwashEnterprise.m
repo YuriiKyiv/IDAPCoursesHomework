@@ -81,11 +81,6 @@
     TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
     [washer perfomWorkWithObject:car];
     
-    TYVAccountant *accountant = [self.employees freeEmployeeWithClass:[TYVAccountant class]];
-    [accountant perfomWorkWithObject:washer];
-    
-    TYVDirector *director = self.director;
-    [director perfomWorkWithObject:accountant];
 }
 
 #pragma mark -
@@ -105,16 +100,11 @@
 - (void)hireWashers {
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
-    TYVWasher *washer = nil;
-    
-    NSUInteger count = arc4random_uniform(1000);
-    for (NSUInteger iter = 0; iter < count; iter++) {
-        washer = [TYVWasher object];
-        washer.experience = iter;
-        washer.delegate = accountant;
-        accountant.delegatingObject = washer;
-        [pool addEmployee:washer];
-    }
+    TYVWasher *washer = [TYVWasher object];
+    washer.delegate = accountant;
+    accountant.delegatingObject = washer;
+    [pool addEmployee:washer];
+
 }
 
 @end

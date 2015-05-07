@@ -53,9 +53,10 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
-    [self takeMoney:anAccountant.capital fromMoneykeeper:anAccountant];
+    [super perfomWorkWithObject:anAccountant];
     anAccountant.free = YES;
     [self profit];
+    self.free = YES;
 }
 
 #pragma mark -
@@ -63,6 +64,7 @@
 
 - (void)profit {
     self.capital = [self.capital decimalNumberByAdding:self.money];
+    NSLog(@"Director capital = %@", self.capital);
 }
 
 @end

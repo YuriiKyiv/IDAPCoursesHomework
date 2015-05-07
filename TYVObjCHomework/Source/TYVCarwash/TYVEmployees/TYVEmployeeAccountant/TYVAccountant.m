@@ -54,10 +54,10 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVWasher *)aWasher {
-    self.free = NO;
-    [self takeMoney:aWasher.money fromMoneykeeper:aWasher];
+    [super perfomWorkWithObject:aWasher];
     aWasher.free = YES;
     [self count];
+    [self.delegate employee:self didPerfomWorkWithObject:aWasher];
 }
 
 #pragma mark -
@@ -65,6 +65,7 @@
 
 - (void)count {
     self.capital = [self.capital decimalNumberByAdding:self.money];
+    NSLog(@"Accountant capital = %@", self.capital);
 }
 
 @end
