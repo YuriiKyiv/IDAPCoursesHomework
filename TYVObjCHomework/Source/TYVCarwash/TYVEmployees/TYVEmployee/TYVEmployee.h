@@ -22,6 +22,14 @@
 
 @end
 
+@protocol TYVEmployeeObserver <NSObject>
+
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
+
+- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee;
+
+@end
+
 @interface TYVEmployee : TYVMoneyKeeper <TYVEmployeeDelegate>
 @property (nonatomic, readonly)               NSString                  *duty;
 

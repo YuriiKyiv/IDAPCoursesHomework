@@ -9,6 +9,6 @@
 #import "TYVEmployee.h"
 
 @interface TYVWasher : TYVEmployee
-@property (nonatomic, readonly) NSDecimalNumber         *price;
+@property (nonatomic, readonly) NSDecimalNumber *price;
 
 @end
