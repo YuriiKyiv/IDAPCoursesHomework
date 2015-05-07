@@ -74,8 +74,6 @@
 #pragma mark TYVEmployeeDelegate
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    [self takeMoney:employee.money fromMoneykeeper:employee];
-    employee.free = YES;
     [self perfomWorkWithObject:employee];
 }
 

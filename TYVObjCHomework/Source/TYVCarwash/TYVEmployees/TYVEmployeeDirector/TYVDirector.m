@@ -54,6 +54,7 @@
 
 - (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
     [self takeMoney:anAccountant.capital fromMoneykeeper:anAccountant];
+    anAccountant.free = YES;
     [self profit];
 }
 

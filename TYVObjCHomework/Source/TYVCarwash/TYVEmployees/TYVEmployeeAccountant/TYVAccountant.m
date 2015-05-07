@@ -56,6 +56,7 @@
 - (void)perfomWorkWithObject:(TYVWasher *)aWasher {
     self.free = NO;
     [self takeMoney:aWasher.money fromMoneykeeper:aWasher];
+    aWasher.free = YES;
     [self count];
 }
 
