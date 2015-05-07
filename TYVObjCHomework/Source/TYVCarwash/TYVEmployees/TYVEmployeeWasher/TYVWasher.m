@@ -44,6 +44,7 @@
 
 - (void)washCar:(TYVCar *)aCar {
     aCar.clean = YES;
+    NSLog(@"Washer has cleaned a car");
 }
 
 @end

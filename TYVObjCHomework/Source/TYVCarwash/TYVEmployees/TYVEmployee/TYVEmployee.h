@@ -33,6 +33,8 @@
 @property (nonatomic, assign)                 id<TYVEmployeeDelegate>   delegate;
 @property (nonatomic, retain)                 TYVEmployee               *delegatingObject;
 
+@property (nonatomic, assign)                 id<TYVEmployeeDelegate>   delegateOfState;
+
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;

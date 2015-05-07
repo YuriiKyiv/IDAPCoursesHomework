@@ -11,6 +11,4 @@
 @interface TYVWasher : TYVEmployee
 @property (nonatomic, readonly) NSDecimalNumber         *price;
 
-@property (nonatomic, assign)   id<TYVEmployeeDelegate> delegateOfState;
-
 @end

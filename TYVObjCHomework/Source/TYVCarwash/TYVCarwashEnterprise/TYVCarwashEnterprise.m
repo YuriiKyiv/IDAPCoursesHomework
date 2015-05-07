@@ -44,6 +44,7 @@
     self.mutableBuildings = nil;
     self.employees = nil;
     self.director = nil;
+    self.cars = nil;
     
     [super dealloc];
 }
@@ -81,6 +82,7 @@
 
 - (void)employeeIsFree:(TYVEmployee *)employee {
     TYVQueue *cars = self.cars;
+    NSLog(@"Cars count = %lu", (unsigned long)[cars count]);
     if (!cars.isEmpty) {
         [employee perfomWorkWithObject:[cars dequeueObject]];
     }
@@ -106,10 +108,14 @@
 }
 
 - (void)work {
-    TYVCar *car = [TYVCar object];
+    self.cars = [[[TYVQueue alloc] init] autorelease];
+    TYVQueue *queue = self.cars;
+    for (NSUInteger i = 0; i < 10; i++) {
+        [queue enqueueObject:[TYVCar object]];
+    }
     
     TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-    [washer perfomWorkWithObject:car];
+    [washer perfomWorkWithObject:[queue dequeueObject]];
     
 }
 

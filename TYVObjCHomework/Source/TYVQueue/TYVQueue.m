@@ -39,7 +39,7 @@
 #pragma mark Accessors
 
 - (BOOL)isEmpty {
-    return [self.queue count];
+    return ([self.queue count] == 0);
 }
 
 #pragma mark -
@@ -55,6 +55,10 @@
     [array removeObjectAtIndex:0];
     
     return result;
+}
+
+- (NSUInteger)count {
+    return [self.queue count];
 }
 
 @end
