@@ -65,8 +65,13 @@
 
 -(void)setFree:(BOOL)free {
     _free = free;
-    if (free && [self.delegate respondsToSelector:@selector(employeeIsFree:)]) {
-        [self.delegate employeeIsFree:self];
+    if (_free && [self.delegate respondsToSelector:@selector(employeeDidBecomeFree:)]) {
+        [self.delegate employeeDidBecomeFree:self];
+        
+    }
+
+    if (_free && [self.delegateOfState respondsToSelector:@selector(employeeDidBecomeFree:)]) {
+        [self.delegateOfState employeeDidBecomeFree:self];
     }
 }
 
@@ -74,8 +79,6 @@
 #pragma mark TYVEmployeeDelegate
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    [self takeMoney:employee.money fromMoneykeeper:employee];
-    employee.free = YES;
     [self perfomWorkWithObject:employee];
 }
 
@@ -100,9 +103,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(id)anObject {
-    [self doesNotRecognizeSelector:_cmd];
-    [self.delegate employee:self didPerfomWorkWithObject:anObject];
+- (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
+    self.free = NO;
+    [self takeMoney:anObject.money fromMoneykeeper:anObject];
 }
 
 @end

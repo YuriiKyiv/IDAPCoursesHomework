@@ -18,7 +18,15 @@
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
 
 @optional
-- (void)employeeIsFree:(TYVEmployee *)employee;
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
+
+@end
+
+@protocol TYVEmployeeObserver <NSObject>
+
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
+
+- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee;
 
 @end
 
@@ -33,11 +41,12 @@
 @property (nonatomic, assign)                 id<TYVEmployeeDelegate>   delegate;
 @property (nonatomic, retain)                 TYVEmployee               *delegatingObject;
 
+@property (nonatomic, assign)                 id<TYVEmployeeDelegate>   delegateOfState;
+
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
 
-// the method should be overriden
 - (void)perfomWorkWithObject:(id)anObject;
 
 - (BOOL)isEqualToObject:(TYVEmployee *)object;

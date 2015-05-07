@@ -36,6 +36,7 @@
     self.free = NO;
     [self takeMoney:self.price fromMoneykeeper:aCar];
     [self washCar:aCar];
+    [self.delegate employee:self didPerfomWorkWithObject:aCar];
 }
 
 #pragma mark -
@@ -43,6 +44,7 @@
 
 - (void)washCar:(TYVCar *)aCar {
     aCar.clean = YES;
+    NSLog(@"Washer has cleaned a car");
 }
 
 @end

@@ -27,9 +27,11 @@
 
 @property (nonatomic, retain)   TYVDirector         *director;
 
+@property (nonatomic, retain)   TYVEmployee         *delegatingObject;
+
 - (void)hireAdminStaff;
 
-- (void)hireWashers;
+- (void)hireWasher;
 
 @end
 
@@ -42,6 +44,7 @@
     self.mutableBuildings = nil;
     self.employees = nil;
     self.director = nil;
+    self.cars = nil;
     
     [super dealloc];
 }
@@ -54,6 +57,35 @@
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Accessors
+
+- (void)setDelegatingObject:(id)object {
+    if (_delegatingObject != object) {
+        _delegatingObject.delegate = nil;
+        
+        [_delegatingObject release];
+        _delegatingObject = [object retain];
+        
+        _delegatingObject.delegate = self;
+    }
+}
+
+#pragma mark -
+#pragma mark TYVEmployeeDelegate
+
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
+    
+}
+
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    TYVQueue *cars = self.cars;
+    NSLog(@"Cars count = %lu", (unsigned long)[cars count]);
+    if (!cars.isEmpty) {
+        [employee perfomWorkWithObject:[cars dequeueObject]];
+    }
 }
 
 #pragma mark -
@@ -72,20 +104,19 @@
 - (void)hireStaff {
     self.employees = [TYVEmployeesPool pool];
     [self hireAdminStaff];
-    [self hireWashers];
+    [self hireWasher];
 }
 
 - (void)work {
-    TYVCar *car = [TYVCar object];
+    self.cars = [[[TYVQueue alloc] init] autorelease];
+    TYVQueue *queue = self.cars;
+    for (NSUInteger i = 0; i < 10; i++) {
+        [queue enqueueObject:[TYVCar object]];
+    }
     
     TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-    [washer perfomWorkWithObject:car];
+    [washer perfomWorkWithObject:[queue dequeueObject]];
     
-    TYVAccountant *accountant = [self.employees freeEmployeeWithClass:[TYVAccountant class]];
-    [accountant perfomWorkWithObject:washer];
-    
-    TYVDirector *director = self.director;
-    [director perfomWorkWithObject:accountant];
 }
 
 #pragma mark -
@@ -102,19 +133,16 @@
     director.delegatingObject = accountant;
 }
 
-- (void)hireWashers {
+- (void)hireWasher {
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
-    TYVWasher *washer = nil;
-    
-    NSUInteger count = arc4random_uniform(1000);
-    for (NSUInteger iter = 0; iter < count; iter++) {
-        washer = [TYVWasher object];
-        washer.experience = iter;
-        washer.delegate = accountant;
-        accountant.delegatingObject = washer;
-        [pool addEmployee:washer];
-    }
+    TYVWasher *washer = [TYVWasher object];
+    washer.delegate = accountant;
+    washer.delegateOfState = self;
+    self.delegatingObject = washer;
+    accountant.delegatingObject = washer;
+    [pool addEmployee:washer];
+
 }
 
 @end
