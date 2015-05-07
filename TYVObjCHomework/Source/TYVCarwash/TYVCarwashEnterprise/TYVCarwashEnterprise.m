@@ -80,7 +80,7 @@
     
 }
 
-- (void)employeeIsFree:(TYVEmployee *)employee {
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
     TYVQueue *cars = self.cars;
     NSLog(@"Cars count = %lu", (unsigned long)[cars count]);
     if (!cars.isEmpty) {

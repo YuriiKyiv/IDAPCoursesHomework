@@ -18,7 +18,7 @@
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
 
 @optional
-- (void)employeeIsFree:(TYVEmployee *)employee;
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
 
 @end
 

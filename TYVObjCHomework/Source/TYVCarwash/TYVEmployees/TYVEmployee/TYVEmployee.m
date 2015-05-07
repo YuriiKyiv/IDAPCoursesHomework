@@ -65,13 +65,13 @@
 
 -(void)setFree:(BOOL)free {
     _free = free;
-    if (_free && [self.delegate respondsToSelector:@selector(employeeIsFree:)]) {
-        [self.delegate employeeIsFree:self];
+    if (_free && [self.delegate respondsToSelector:@selector(employeeDidBecomeFree:)]) {
+        [self.delegate employeeDidBecomeFree:self];
         
     }
 
-    if (_free && [self.delegateOfState respondsToSelector:@selector(employeeIsFree:)]) {
-        [self.delegateOfState employeeIsFree:self];
+    if (_free && [self.delegateOfState respondsToSelector:@selector(employeeDidBecomeFree:)]) {
+        [self.delegateOfState employeeDidBecomeFree:self];
     }
 }
 
