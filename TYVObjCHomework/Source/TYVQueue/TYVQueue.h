@@ -9,5 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface TYVQueue : NSObject
+@property (nonatomic, readonly, getter=isEmpty) BOOL    empty;
+
+- (void)enqueueObject:(id)object;
+
+- (id)dequeueObject;
 
 @end

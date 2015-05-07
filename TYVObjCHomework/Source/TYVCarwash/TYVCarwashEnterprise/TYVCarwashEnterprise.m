@@ -27,9 +27,11 @@
 
 @property (nonatomic, retain)   TYVDirector         *director;
 
+@property (nonatomic, retain)   TYVEmployee         *delegatingObject;
+
 - (void)hireAdminStaff;
 
-- (void)hireWashers;
+- (void)hireWasher;
 
 @end
 
@@ -57,6 +59,34 @@
 }
 
 #pragma mark -
+#pragma mark Accessors
+
+- (void)setDelegatingObject:(id)object {
+    if (_delegatingObject != object) {
+        _delegatingObject.delegate = nil;
+        
+        [_delegatingObject release];
+        _delegatingObject = [object retain];
+        
+        _delegatingObject.delegate = self;
+    }
+}
+
+#pragma mark -
+#pragma mark TYVEmployeeDelegate
+
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
+    
+}
+
+- (void)employeeIsFree:(TYVEmployee *)employee {
+    TYVQueue *cars = self.cars;
+    if (!cars.isEmpty) {
+        [employee perfomWorkWithObject:[cars dequeueObject]];
+    }
+}
+
+#pragma mark -
 #pragma mark Public Methods
 
 - (void)prepareBuildings {
@@ -72,7 +102,7 @@
 - (void)hireStaff {
     self.employees = [TYVEmployeesPool pool];
     [self hireAdminStaff];
-    [self hireWashers];
+    [self hireWasher];
 }
 
 - (void)work {
@@ -97,11 +127,13 @@
     director.delegatingObject = accountant;
 }
 
-- (void)hireWashers {
+- (void)hireWasher {
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
     TYVWasher *washer = [TYVWasher object];
     washer.delegate = accountant;
+    washer.delegateOfState = self;
+    self.delegatingObject = washer;
     accountant.delegatingObject = washer;
     [pool addEmployee:washer];
 
