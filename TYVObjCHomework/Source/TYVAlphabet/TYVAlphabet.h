@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TYVAlphabet : NSObject
+@class TYVRange;
+
+@interface TYVAlphabet : NSObject <NSFastEnumeration>
+
++ (instancetype)alphabetWithRange:(TYVRange *)range;
++ (instancetype)alphabetWithStrings:(NSArray *)strings;
++ (instancetype)alphabetWithAlphabets:(TYVRange *)alphabets;
++ (instancetype)alphabetWithSimbols:(NSString *)string;
 
 @end

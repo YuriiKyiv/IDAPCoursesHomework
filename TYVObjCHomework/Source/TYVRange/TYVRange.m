@@ -42,11 +42,11 @@
 #pragma mark -
 #pragma mark Public Methods
 
-+ (TYVRange *)rangeWithOrigin:(NSUInteger)origin length:(NSUInteger)length {
++ (instancetype)rangeWithOrigin:(NSUInteger)origin length:(NSUInteger)length {
     return [[[TYVRange alloc] initWithOrigin:origin length:length] autorelease];
 }
 
-+ (TYVRange *)rangeWithOrigin:(NSUInteger)origin end:(NSUInteger)end {
++ (instancetype)rangeWithOrigin:(NSUInteger)origin end:(NSUInteger)end {
     return [[[TYVRange alloc] initWithOrigin:origin end:end] autorelease];
 }
 

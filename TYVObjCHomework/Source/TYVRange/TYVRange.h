@@ -13,8 +13,8 @@
 @property (nonatomic, readonly) NSUInteger  end;
 @property (nonatomic, readonly) NSUInteger  length;
 
-+ (TYVRange *)rangeWithOrigin:(NSUInteger)origin length:(NSUInteger)length;
-+ (TYVRange *)rangeWithOrigin:(NSUInteger)origin end:(NSUInteger)end;
++ (instancetype)rangeWithOrigin:(NSUInteger)origin length:(NSUInteger)length;
++ (instancetype)rangeWithOrigin:(NSUInteger)origin end:(NSUInteger)end;
 
 - (instancetype)initWithOrigin:(NSUInteger)origin length:(NSUInteger)length;
 - (instancetype)initWithOrigin:(NSUInteger)origin end:(NSUInteger)end;

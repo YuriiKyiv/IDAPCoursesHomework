@@ -7,7 +7,18 @@
 //
 
 #import "TYVAlphabet.h"
+#import "TYVRangeAlphabet.h"
+#import "TYVClasterAlphabet.h"
+#import "TYVStringsAlphabet.h"
 
 @implementation TYVAlphabet
+
+#pragma mark -
+#pragma mark Class methods
+
++ (instancetype)alphabetWithRange:(TYVRange *)range;
++ (instancetype)alphabetWithStrings:(NSArray *)strings;
++ (instancetype)alphabetWithAlphabets:(TYVRange *)alphabets;
++ (instancetype)alphabetWithSimbols:(NSString *)string;
 
 @end
