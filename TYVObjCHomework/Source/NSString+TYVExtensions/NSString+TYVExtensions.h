@@ -12,8 +12,6 @@
 
 @interface NSString (TYVExtensions)
 
-+ (instancetype)alphabetWithUnicodeRange:(TYVRange *)range;
-
 + (instancetype)capitalizedLetterAlphabet;
 
 + (instancetype)lowercaseLetterAlphabet;
@@ -29,5 +27,7 @@
 + (instancetype)randomString;
 
 + (instancetype)randomStringWithLength:(NSUInteger)length;
+
++ (instancetype)alphabetWithUnicodeRange:(TYVRange *)range;
 
 @end
