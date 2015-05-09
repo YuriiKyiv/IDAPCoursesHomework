@@ -7,14 +7,15 @@
 //
 
 #import "NSString+TYVExtensions.h"
+#import "TYVRange.h"
 
 static const NSUInteger kNSStringDefaultRandomStringLength  = 25;
 
 @implementation NSString (TYVExtensions)
 
-+ (instancetype)alphabetWithUnicodeRange:(NSRange)range {
++ (instancetype)alphabetWithUnicodeRange:(TYVRange *)range {
     NSMutableString *result = [NSMutableString string];
-    for (unichar character = range.location; character < NSMaxRange(range); character++) {
+    for (unichar character = range.origin; character < range.end; character++) {
         [result appendFormat:@"%c",character];
     }
     
@@ -22,17 +23,17 @@ static const NSUInteger kNSStringDefaultRandomStringLength  = 25;
 }
 
 + (instancetype)capitalizedLetterAlphabet {
-    NSRange range = {'A', 26};
+    TYVRange *range = [TYVRange rangeWithOrigin:'A' end:'Z'];
     return [self alphabetWithUnicodeRange:range];
 }
 
 + (instancetype)lowercaseLetterAlphabet {
-    NSRange range = {'a', 26};
+    TYVRange *range = [TYVRange rangeWithOrigin:'a' end:'z'];
     return [self alphabetWithUnicodeRange:range];
 }
 
 + (instancetype)numericAlphabet {
-    NSRange range = {'0', 10};
+    TYVRange *range = [TYVRange rangeWithOrigin:'0' end:'10'];
     return [self alphabetWithUnicodeRange:range];
 }
 
@@ -45,7 +46,7 @@ static const NSUInteger kNSStringDefaultRandomStringLength  = 25;
 }
 
 + (instancetype)сyrillicSymbols {
-    NSRange range = {0x0400, 0x04FF - 0x0400 + 1};
+    TYVRange *range = [TYVRange rangeWithOrigin:0x0400 end:0x04FF];
     return [self alphabetWithUnicodeRange:range];
 }
 

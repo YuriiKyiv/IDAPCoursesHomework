@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class TYVRange;
+
 @interface NSString (TYVExtensions)
 
-+ (instancetype)alphabetWithUnicodeRange:(NSRange)range;
++ (instancetype)alphabetWithUnicodeRange:(TYVRange *)range;
 
 + (instancetype)capitalizedLetterAlphabet;
 
