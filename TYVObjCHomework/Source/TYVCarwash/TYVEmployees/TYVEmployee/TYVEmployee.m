@@ -14,8 +14,6 @@
 
 @property (nonatomic, retain)   NSHashTable     *observersHashTable;
 
-- (void)notifyWithSelector:(SEL)selector;
-
 @end
 
 @implementation TYVEmployee
@@ -28,8 +26,6 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
-    self.delegate = nil;
-    self.subordinate = nil;
     self.observersHashTable = nil;
     
     [super dealloc];
@@ -64,30 +60,25 @@
     return self.observersHashTable.setRepresentation;
 }
 
-- (void)setSubordinate:(id)object {
-    if (_subordinate != object) {
-        _subordinate.delegate = nil;
-        
-        [_subordinate release];
-        _subordinate = [object retain];
-        
-        _subordinate.delegate = self;
-    }
-}
-
 -(void)setFree:(BOOL)free {
     if  (_free != free) {
         _free = free;
-        if (_free && [self.delegate respondsToSelector:@selector(employeeDidBecomeFree:)]) {
-            [self.delegate employeeDidBecomeFree:self];
-        }
-
-        [self notifyWithSelector:[self selectorForState:free]];
+        TYVEmployeeState state = (_free) ? TYVEmployeeDidBecomeFree : TYVEmployeeDidBecomeBusy;
+        [self notifyWithSelector:[self selectorForState:state]];
     }
 }
 
 #pragma mark -
 #pragma mark Public Methods
+
+- (void)notifyWithSelector:(SEL)selector {
+    NSHashTable *observers = self.observersHashTable;
+    for (id observer in observers) {
+        if ([observer respondsToSelector:selector]) {
+            [observer performSelector:selector withObject:self];
+        }
+    }
+}
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
@@ -120,18 +111,6 @@
 
 - (BOOL)containsObserver:(id)observer {
     return [self.observersHashTable containsObject:observer];
-}
-
-#pragma mark -
-#pragma mark Private Methods
-
-- (void)notifyWithSelector:(SEL)selector {
-    NSHashTable *observers = self.observersHashTable;
-    for (id observer in observers) {
-        if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector withObject:self];
-        }
-    }
 }
 
 #pragma mark -

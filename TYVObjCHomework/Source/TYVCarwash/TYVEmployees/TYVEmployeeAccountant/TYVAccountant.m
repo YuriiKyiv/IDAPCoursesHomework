@@ -57,7 +57,7 @@
     [super perfomWorkWithObject:aWasher];
     aWasher.free = YES;
     [self count];
-    [self.delegate employee:self didPerfomWorkWithObject:aWasher];
+    [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
 }
 
 #pragma mark -

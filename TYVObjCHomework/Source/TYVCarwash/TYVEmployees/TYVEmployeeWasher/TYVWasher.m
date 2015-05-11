@@ -36,7 +36,7 @@
     self.free = NO;
     [self takeMoney:self.price fromMoneykeeper:aCar];
     [self washCar:aCar];
-    [self.delegate employee:self didPerfomWorkWithObject:aCar];
+    [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
 }
 
 #pragma mark -

@@ -44,9 +44,6 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 @property (nonatomic, assign, getter=isFree)    BOOL                    free;
 
-@property (nonatomic, assign)                   id<TYVEmployeeDelegate> delegate;
-@property (nonatomic, retain)                   TYVEmployee             *subordinate;
-
 @property (nonatomic, readonly)                 NSSet                   *observersSet;
 
 - (instancetype)initWithDuty:(NSString *)duty
@@ -62,5 +59,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 - (BOOL)containsObserver:(id)observer;
 
 - (SEL)selectorForState:(NSUInteger)state;
+
+- (void)notifyWithSelector:(SEL)selector;
 
 @end
