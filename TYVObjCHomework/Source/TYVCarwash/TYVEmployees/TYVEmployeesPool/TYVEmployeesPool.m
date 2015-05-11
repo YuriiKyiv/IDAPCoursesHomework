@@ -59,7 +59,7 @@
 }
 
 - (void)removeObservableEmployee:(TYVEmployee *)employee withObserver:(id)observer{
-    [employee removeObserver:self];
+    [employee removeObserver:observer];
     [self removeEmployee:employee];
 }
 

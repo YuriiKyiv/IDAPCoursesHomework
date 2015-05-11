@@ -114,7 +114,6 @@
 
 - (void)notifyWithSelector:(SEL)selector {
     NSHashTable *observers = self.observersHashTable;
-    NSLog(@"Count = %lu", (unsigned long)[observers count]);
     for (id observer in observers) {
         if ([observer respondsToSelector:selector]) {
             [observer performSelector:selector withObject:self];
