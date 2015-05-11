@@ -31,26 +31,29 @@
 }
 
 + (instancetype)alphabetWithSimbols:(NSString *)string {
-    return [[[TYVStringsAlphabet alloc] initWithStrings:[string symbols]] autorelease];
+    return [self alphabetWithStrings:[string symbols]];
 }
 
 #pragma mark -
-#pragma mark Public Methods
+#pragma mark Initializations and Deallocations
 
 - (instancetype)initWithRange:(TYVRange *)range {
-    return nil;
+    [self release];
+    return [[TYVRangeAlphabet alloc] initWithRange:range];
 }
 
 - (instancetype)initWithStrings:(NSArray *)strings {
-    return nil;
+    [self release];
+    return [[TYVStringsAlphabet alloc] initWithStrings:strings];
 }
 
 - (instancetype)initWithAlphabets:(TYVRange *)alphabets {
-    return nil;
+    [self release];
+    return [[TYVClasterAlphabet alloc] initWithAlphabets:alphabets];
 }
 
 - (instancetype)initWithSimbols:(NSString *)string {
-    return nil;
+    return [self initWithSimbols:string];
 }
 
 #pragma mark -
