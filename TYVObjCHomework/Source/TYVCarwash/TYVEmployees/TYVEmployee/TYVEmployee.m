@@ -64,7 +64,7 @@
     return self.observersHashTable.setRepresentation;
 }
 
-- (void)setsubordinate:(id)object {
+- (void)setSubordinate:(id)object {
     if (_subordinate != object) {
         _subordinate.delegate = nil;
         
