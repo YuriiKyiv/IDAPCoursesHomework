@@ -12,7 +12,7 @@
 @property (nonatomic, copy)     NSString        *duty;
 @property (nonatomic, retain)   NSDecimalNumber *salary;
 
-@property (nonatomic, retain) NSMutableSet    *mutableObserversSet;
+@property (nonatomic, retain)   NSMutableSet    *mutableObserversSet;
 
 @end
 
@@ -28,6 +28,7 @@
     self.salary = nil;
     self.delegate = nil;
     self.delegatingObject = nil;
+    self.mutableObserversSet = nil;
     
     [super dealloc];
 }
@@ -48,6 +49,7 @@
         self.duty = duty;
         self.salary = salary;
         self.free = YES;
+        self.mutableObserversSet = [NSMutableSet set];
     }
     
     return self;
@@ -81,6 +83,19 @@
     if (_free && [self.delegateOfState respondsToSelector:@selector(employeeDidBecomeFree:)]) {
         [self.delegateOfState employeeDidBecomeFree:self];
     }
+    
+    SEL selector = @selector(employeeDidBecomeNotFree:);
+    if (free) {
+        selector = @selector(employeeDidBecomeFree:);
+    }
+    
+    NSMutableSet *mutableObservers = self.mutableObserversSet;
+    for (id observer in mutableObservers) {
+        if ([observer respondsToSelector:selector]) {
+            [observer performSelector:selector];
+        }
+    }
+    
 }
 
 #pragma mark -
