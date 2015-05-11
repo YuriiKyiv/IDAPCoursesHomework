@@ -98,7 +98,7 @@
     [self.employees addEmployee:accountant];
     self.director = director;
     
-    director.delegatingObject = accountant;
+    director.subordinate = accountant;
 }
 
 - (void)hireWasher {
@@ -106,7 +106,7 @@
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
     TYVWasher *washer = [TYVWasher object];
     [pool addObservableEmployee:washer withObserver:self];
-    accountant.delegatingObject = washer;
+    accountant.subordinate = washer;
 }
 
 #pragma mark -

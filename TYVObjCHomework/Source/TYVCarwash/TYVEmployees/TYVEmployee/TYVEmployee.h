@@ -39,7 +39,7 @@
 @property (nonatomic, assign, getter=isFree)    BOOL                    free;
 
 @property (nonatomic, assign)                   id<TYVEmployeeDelegate> delegate;
-@property (nonatomic, retain)                   TYVEmployee             *delegatingObject;
+@property (nonatomic, retain)                   TYVEmployee             *subordinate;
 
 @property (nonatomic, readonly)                 NSSet                   *observersSet;
 

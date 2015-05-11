@@ -29,8 +29,8 @@
     self.duty = nil;
     self.salary = nil;
     self.delegate = nil;
-    self.delegatingObject = nil;
-    self.ObserversHashTable = nil;
+    self.subordinate = nil;
+    self.observersHashTable = nil;
     
     [super dealloc];
 }
@@ -51,7 +51,7 @@
         self.duty = duty;
         self.salary = salary;
         self.free = YES;
-        self.ObserversHashTable = [NSHashTable weakObjectsHashTable];
+        self.observersHashTable = [NSHashTable weakObjectsHashTable];
     }
     
     return self;
@@ -64,14 +64,14 @@
     return self.observersHashTable.setRepresentation;
 }
 
-- (void)setDelegatingObject:(id)object {
-    if (_delegatingObject != object) {
-        _delegatingObject.delegate = nil;
+- (void)setsubordinate:(id)object {
+    if (_subordinate != object) {
+        _subordinate.delegate = nil;
         
-        [_delegatingObject release];
-        _delegatingObject = [object retain];
+        [_subordinate release];
+        _subordinate = [object retain];
         
-        _delegatingObject.delegate = self;
+        _subordinate.delegate = self;
     }
 }
 
