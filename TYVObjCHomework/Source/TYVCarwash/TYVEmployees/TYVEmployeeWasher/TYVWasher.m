@@ -44,7 +44,7 @@
 
 - (void)washCar:(TYVCar *)aCar {
     aCar.clean = YES;
-    NSLog(@"Washer has cleaned a car");
+    NSLog(@"Washer has cleaned a car with experience %lu", (unsigned long)self.experience);
 }
 
 @end

@@ -79,7 +79,7 @@
 - (void)work {
     self.cars = [[[TYVQueue alloc] init] autorelease];
     TYVQueue *queue = self.cars;
-    for (NSUInteger i = 0; i < 10; i++) {
+    for (NSUInteger i = 0; i < 100; i++) {
         [queue enqueueObject:[TYVCar object]];
     }
     
@@ -103,10 +103,13 @@
 - (void)hireWasher {
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
-    TYVWasher *washer = [TYVWasher object];
-    [washer addObserver:accountant];
-    [washer addObserver:self];
-    [pool addEmployee:washer];
+    for (NSUInteger index = 0; index < 10; index++) {
+        TYVWasher *washer = [TYVWasher object];
+        [washer addObserver:accountant];
+        [washer addObserver:self];
+        [pool addEmployee:washer];
+        washer.experience = index;
+    }
 }
 
 #pragma mark -
