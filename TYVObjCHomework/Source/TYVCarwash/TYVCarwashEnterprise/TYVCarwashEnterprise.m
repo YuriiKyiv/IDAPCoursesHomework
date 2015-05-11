@@ -105,7 +105,8 @@
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
     TYVWasher *washer = [TYVWasher object];
     [washer addObserver:accountant];
-    [pool addObservableEmployee:washer withObserver:self];
+    [washer addObserver:self];
+    [pool addEmployee:washer];
 }
 
 #pragma mark -

@@ -53,16 +53,6 @@
     [self.employeesSet removeObject:employee];
 }
 
-- (void)addObservableEmployee:(TYVEmployee *)employee withObserver:(id)observer {
-    [employee addObserver:observer];
-    [self addEmployee:employee];
-}
-
-- (void)removeObservableEmployee:(TYVEmployee *)employee withObserver:(id)observer{
-    [employee removeObserver:observer];
-    [self removeEmployee:employee];
-}
-
 - (id)freeEmployeeWithClass:(Class)class {
     __block TYVEmployee *employee = nil;
     [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
