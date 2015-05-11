@@ -76,20 +76,33 @@
 }
 
 -(void)setFree:(BOOL)free {
-    _free = free;
-    if (_free && [self.delegate respondsToSelector:@selector(employeeDidBecomeFree:)]) {
-        [self.delegate employeeDidBecomeFree:self];
-        
-    }
+    if  (_free != free) {
+        _free = free;
+        if (_free && [self.delegate respondsToSelector:@selector(employeeDidBecomeFree:)]) {
+            [self.delegate employeeDidBecomeFree:self];
+        }
 
-    [self notifyWithSelector:[self selectorForState:free]];
+        [self notifyWithSelector:[self selectorForState:free]];
+    }
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (SEL)selectorForState:(BOOL)state {
-    return (state) ? @selector(employeeDidBecomeFree:) : @selector(employeeDidBecomeNotFree:);
+- (SEL)selectorForState:(NSUInteger)state {
+    switch (state) {
+        case TYVEmployeeDidBecomeFree:
+            return @selector(employeeDidBecomeFree:);
+            
+        case TYVEmployeeDidBecomeBusy:
+            return @selector(employeeDidBecomeBusy:);
+            
+        case TYVEmployeeDidPerfomWorkWithObject:
+            return @selector(employee:didPerfomWorkWithObject:);
+            
+        default:
+            return nil;
+    }
 }
 
 - (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {

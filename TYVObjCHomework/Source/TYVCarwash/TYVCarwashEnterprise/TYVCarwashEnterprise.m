@@ -119,7 +119,7 @@
     }
 }
 
-- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee {
+- (void)employeeDidBecomeBusy:(TYVEmployee *)employee {
     NSLog(@"Employee is starting to work");
 }
 
