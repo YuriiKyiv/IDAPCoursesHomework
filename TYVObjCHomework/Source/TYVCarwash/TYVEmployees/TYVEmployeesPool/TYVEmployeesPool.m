@@ -45,12 +45,12 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)addEmployee:(TYVEmployee *)anEmployee {
-    [self.employeesSet addObject:anEmployee];
+- (void)addEmployee:(TYVEmployee *)employee {
+    [self.employeesSet addObject:employee];
 }
 
-- (void)removeEmployee:(TYVEmployee *)anEmployee {
-    [self.employeesSet removeObject:anEmployee];
+- (void)removeEmployee:(TYVEmployee *)employee {
+    [self.employeesSet removeObject:employee];
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
@@ -82,8 +82,8 @@
     return [self.employeesSet filteredSetUsingPredicate:predicate];
 }
 
-- (BOOL)containsEmployee:(TYVEmployee *)anEmployee {
-    return [self.employeesSet containsObject:anEmployee];
+- (BOOL)containsEmployee:(TYVEmployee *)employee {
+    return [self.employeesSet containsObject:employee];
 }
 
 - (NSUInteger)count {

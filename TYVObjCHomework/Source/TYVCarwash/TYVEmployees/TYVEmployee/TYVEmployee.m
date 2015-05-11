@@ -12,7 +12,7 @@
 @property (nonatomic, copy)     NSString        *duty;
 @property (nonatomic, retain)   NSDecimalNumber *salary;
 
-@property (nonatomic, retain)   NSMutableSet    *mutableObserversSet;
+@property (nonatomic, retain)   NSHashTable     *ObserversHashTable;
 
 - (void)notifyWithSelector:(SEL)selector;
 
@@ -30,7 +30,7 @@
     self.salary = nil;
     self.delegate = nil;
     self.delegatingObject = nil;
-    self.mutableObserversSet = nil;
+    self.ObserversHashTable = nil;
     
     [super dealloc];
 }
@@ -51,7 +51,7 @@
         self.duty = duty;
         self.salary = salary;
         self.free = YES;
-        self.mutableObserversSet = [NSMutableSet set];
+        self.ObserversHashTable = [NSHashTable weakObjectsHashTable];
     }
     
     return self;
@@ -61,7 +61,7 @@
 #pragma mark Accessors
 
 - (NSSet *)observersSet {
-    return [[self.mutableObserversSet copy] autorelease];
+    return self.ObserversHashTable.setRepresentation;
 }
 
 - (void)setDelegatingObject:(id)object {
@@ -102,23 +102,23 @@
 }
 
 - (void)addObserver:(id)observer {
-    [self.mutableObserversSet addObject:observer];
+    [self.ObserversHashTable addObject:observer];
 }
 
 - (void)removeObserver:(id)observer {
-    [self.mutableObserversSet removeObject:observer];
+    [self.ObserversHashTable removeObject:observer];
 }
 
 - (BOOL)containsObserver:(id)observer {
-    return [self.mutableObserversSet containsObject:observer];
+    return [self.ObserversHashTable containsObject:observer];
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)notifyWithSelector:(SEL)selector {
-    NSMutableSet *mutableObservers = self.mutableObserversSet;
-    for (id observer in mutableObservers) {
+    NSHashTable *observers = self.ObserversHashTable;
+    for (id observer in observers) {
         if ([observer respondsToSelector:selector]) {
             [observer performSelector:selector];
         }

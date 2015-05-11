@@ -17,11 +17,11 @@
 
 @interface TYVEmployeesPool : NSObject
 
-+ (TYVEmployeesPool *) pool;
++ (TYVEmployeesPool *)pool;
 
-- (void)addEmployee:(TYVEmployee *)anEmployee;
+- (void)addEmployee:(TYVEmployee *)employee;
 
-- (void)removeEmployee:(TYVEmployee *)anEmployee;
+- (void)removeEmployee:(TYVEmployee *)employee;
 
 - (id)freeEmployeeWithClass:(Class)class;
 
@@ -29,7 +29,7 @@
 
 - (NSSet *)employeesWithClass:(Class)class;
 
-- (BOOL)containsEmployee:(TYVEmployee *)anEmployee;
+- (BOOL)containsEmployee:(TYVEmployee *)employee;
 
 - (NSUInteger)count;
 
