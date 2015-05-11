@@ -13,21 +13,15 @@
 @interface NSString (TYVExtensions)
 
 + (instancetype)capitalizedLetterAlphabet;
-
 + (instancetype)lowercaseLetterAlphabet;
-
 + (instancetype)numericAlphabet;
-
 + (instancetype)letterAlphabet;
-
 + (instancetype)сyrillicSymbols;
-
 + (instancetype)randomStringWithLength:(NSUInteger)length alphabet:(NSString *)alphabet;
-
 + (instancetype)randomString;
-
 + (instancetype)randomStringWithLength:(NSUInteger)length;
-
 + (instancetype)alphabetWithUnicodeRange:(TYVRange *)range;
+
+- (NSArray *)symbols;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface TYVRangeAlphabet : TYVAlphabet
 
+- (instancetype)initWithRange:(TYVRange *)range;
+
 @end

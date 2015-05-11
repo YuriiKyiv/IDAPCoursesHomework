@@ -17,4 +17,9 @@
 + (instancetype)alphabetWithAlphabets:(TYVRange *)alphabets;
 + (instancetype)alphabetWithSimbols:(NSString *)string;
 
+- (instancetype)initWithRange:(TYVRange *)range;
+- (instancetype)initWithStrings:(NSArray *)strings;
+- (instancetype)initWithAlphabets:(TYVRange *)alphabets;
+- (instancetype)initWithSimbols:(NSString *)string;
+
 @end

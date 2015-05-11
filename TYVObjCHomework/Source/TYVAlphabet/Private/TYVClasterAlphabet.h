@@ -10,4 +10,6 @@
 
 @interface TYVClasterAlphabet : TYVAlphabet
 
+- (instancetype)initWithStrings:(NSArray *)strings;
+
 @end
