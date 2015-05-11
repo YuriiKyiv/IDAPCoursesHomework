@@ -23,9 +23,9 @@
 
 - (void)removeEmployee:(TYVEmployee *)employee;
 
-- (void)addObservableEmployee:(TYVEmployee *)employee;
+- (void)addObservableEmployee:(TYVEmployee *)employee withObserver:(id)observer;
 
-- (void)removeObservableEmployee:(TYVEmployee *)employee;
+- (void)removeObservableEmployee:(TYVEmployee *)employee withObserver:(id)observer;
 
 - (id)freeEmployeeWithClass:(Class)class;
 

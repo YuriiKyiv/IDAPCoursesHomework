@@ -10,7 +10,7 @@
 
 #import "TYVWasher.h"
 
-@interface TYVCarwashEnterprise : NSObject <TYVEmployeeDelegate>
+@interface TYVCarwashEnterprise : NSObject <TYVEmployeeObserver>
 
 - (void)hireStaff;
 

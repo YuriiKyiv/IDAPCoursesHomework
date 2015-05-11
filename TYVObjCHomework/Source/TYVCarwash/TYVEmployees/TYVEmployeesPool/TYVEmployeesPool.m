@@ -53,12 +53,12 @@
     [self.employeesSet removeObject:employee];
 }
 
-- (void)addObservableEmployee:(TYVEmployee *)employee {
-    [employee addObserver:self];
+- (void)addObservableEmployee:(TYVEmployee *)employee withObserver:(id)observer {
+    [employee addObserver:observer];
     [self addEmployee:employee];
 }
 
-- (void)removeObservableEmployee:(TYVEmployee *)employee {
+- (void)removeObservableEmployee:(TYVEmployee *)employee withObserver:(id)observer{
     [employee removeObserver:self];
     [self removeEmployee:employee];
 }

@@ -41,8 +41,6 @@
 @property (nonatomic, assign)                   id<TYVEmployeeDelegate> delegate;
 @property (nonatomic, retain)                   TYVEmployee             *delegatingObject;
 
-@property (nonatomic, assign)                   id<TYVEmployeeDelegate> delegateOfState;
-
 @property (nonatomic, readonly)                 NSSet                   *observersSet;
 
 - (instancetype)initWithDuty:(NSString *)duty
