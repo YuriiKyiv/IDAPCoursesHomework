@@ -27,8 +27,6 @@
 
 @property (nonatomic, retain)   TYVDirector         *director;
 
-@property (nonatomic, retain)   TYVEmployee         *delegatingObject;
-
 - (void)hireAdminStaff;
 
 - (void)hireWasher;
@@ -57,35 +55,6 @@
     }
     
     return self;
-}
-
-#pragma mark -
-#pragma mark Accessors
-
-- (void)setDelegatingObject:(id)object {
-    if (_delegatingObject != object) {
-        _delegatingObject.delegate = nil;
-        
-        [_delegatingObject release];
-        _delegatingObject = [object retain];
-        
-        _delegatingObject.delegate = self;
-    }
-}
-
-#pragma mark -
-#pragma mark TYVEmployeeDelegate
-
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    
-}
-
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
-    TYVQueue *cars = self.cars;
-    NSLog(@"Cars count = %lu", (unsigned long)[cars count]);
-    if (!cars.isEmpty) {
-        [employee perfomWorkWithObject:[cars dequeueObject]];
-    }
 }
 
 #pragma mark -
@@ -129,7 +98,6 @@
     [self.employees addEmployee:accountant];
     self.director = director;
     
-    accountant.delegate = director;
     director.delegatingObject = accountant;
 }
 
@@ -137,12 +105,22 @@
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
     TYVWasher *washer = [TYVWasher object];
-    washer.delegate = accountant;
-    washer.delegateOfState = self;
-    self.delegatingObject = washer;
+    [pool addObservableEmployee:washer withObserver:self];
     accountant.delegatingObject = washer;
-    [pool addEmployee:washer];
+}
 
+#pragma mark -
+#pragma mark TYVEmployeeObserver
+
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    TYVQueue *cars = self.cars;
+    if (!cars.isEmpty) {
+        [employee perfomWorkWithObject:[cars dequeueObject]];
+    }
+}
+
+- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee {
+    NSLog(@"Employee is starting to work");
 }
 
 @end

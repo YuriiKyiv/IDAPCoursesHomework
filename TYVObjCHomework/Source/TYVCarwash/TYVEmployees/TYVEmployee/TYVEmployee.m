@@ -9,12 +9,18 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, copy)     NSString                *duty;
-@property (nonatomic, retain)   NSDecimalNumber         *salary;
+@property (nonatomic, copy)     NSString        *duty;
+@property (nonatomic, retain)   NSDecimalNumber *salary;
+
+@property (nonatomic, retain)   NSHashTable     *observersHashTable;
+
+- (void)notifyWithSelector:(SEL)selector;
 
 @end
 
 @implementation TYVEmployee
+
+@dynamic observersSet;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -24,6 +30,7 @@
     self.salary = nil;
     self.delegate = nil;
     self.delegatingObject = nil;
+    self.ObserversHashTable = nil;
     
     [super dealloc];
 }
@@ -44,6 +51,7 @@
         self.duty = duty;
         self.salary = salary;
         self.free = YES;
+        self.ObserversHashTable = [NSHashTable weakObjectsHashTable];
     }
     
     return self;
@@ -51,6 +59,10 @@
 
 #pragma mark -
 #pragma mark Accessors
+
+- (NSSet *)observersSet {
+    return self.observersHashTable.setRepresentation;
+}
 
 - (void)setDelegatingObject:(id)object {
     if (_delegatingObject != object) {
@@ -70,8 +82,42 @@
         
     }
 
-    if (_free && [self.delegateOfState respondsToSelector:@selector(employeeDidBecomeFree:)]) {
-        [self.delegateOfState employeeDidBecomeFree:self];
+    [self notifyWithSelector:[self selectorForState:free]];
+}
+
+#pragma mark -
+#pragma mark Public Methods
+
+- (SEL)selectorForState:(BOOL)state {
+    return (state) ? @selector(employeeDidBecomeFree:) : @selector(employeeDidBecomeNotFree:);
+}
+
+- (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
+    self.free = NO;
+    [self takeMoney:anObject.money fromMoneykeeper:anObject];
+}
+
+- (void)addObserver:(id)observer {
+    [self.observersHashTable addObject:observer];
+}
+
+- (void)removeObserver:(id)observer {
+    [self.observersHashTable removeObject:observer];
+}
+
+- (BOOL)containsObserver:(id)observer {
+    return [self.observersHashTable containsObject:observer];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)notifyWithSelector:(SEL)selector {
+    NSHashTable *observers = self.observersHashTable;
+    for (id observer in observers) {
+        if ([observer respondsToSelector:selector]) {
+            [observer performSelector:selector withObject:self];
+        }
     }
 }
 
@@ -80,32 +126,6 @@
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
     [self perfomWorkWithObject:employee];
-}
-
-#pragma mark -
-#pragma mark Comparison
-
-- (NSUInteger)hash {
-    return [self.duty hash] ^ [self.salary hash] ^ self.experience;
-}
-
-- (BOOL)isEqual:(id)object {
-    return ([object isMemberOfClass:[self class]]
-            && [self isEqualToObject:object]);
-}
-
-- (BOOL)isEqualToObject:(TYVEmployee *)object {
-    return (self == object || ([self.duty isEqual:object.duty]
-            && [self.salary isEqual:object.salary]
-            && self.experience == object.experience));
-}
-
-#pragma mark -
-#pragma mark Public Methods
-
-- (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
-    self.free = NO;
-    [self takeMoney:anObject.money fromMoneykeeper:anObject];
 }
 
 @end

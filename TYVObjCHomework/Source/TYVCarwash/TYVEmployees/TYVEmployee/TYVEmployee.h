@@ -31,17 +31,17 @@
 @end
 
 @interface TYVEmployee : TYVMoneyKeeper <TYVEmployeeDelegate>
-@property (nonatomic, readonly)               NSString                  *duty;
+@property (nonatomic, readonly)                 NSString                *duty;
 
-@property (nonatomic, readonly)               NSDecimalNumber           *salary;
-@property (nonatomic, assign)                 NSUInteger                experience;
+@property (nonatomic, readonly)                 NSDecimalNumber         *salary;
+@property (nonatomic, assign)                   NSUInteger              experience;
 
-@property (nonatomic, assign, getter=isFree)  BOOL                      free;
+@property (nonatomic, assign, getter=isFree)    BOOL                    free;
 
-@property (nonatomic, assign)                 id<TYVEmployeeDelegate>   delegate;
-@property (nonatomic, retain)                 TYVEmployee               *delegatingObject;
+@property (nonatomic, assign)                   id<TYVEmployeeDelegate> delegate;
+@property (nonatomic, retain)                   TYVEmployee             *delegatingObject;
 
-@property (nonatomic, assign)                 id<TYVEmployeeDelegate>   delegateOfState;
+@property (nonatomic, readonly)                 NSSet                   *observersSet;
 
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
@@ -49,6 +49,12 @@
 
 - (void)perfomWorkWithObject:(id)anObject;
 
-- (BOOL)isEqualToObject:(TYVEmployee *)object;
+- (void)addObserver:(id)observer;
+
+- (void)removeObserver:(id)observer;
+
+- (BOOL)containsObserver:(id)observer;
+
+- (SEL)selectorForState:(BOOL)state;
 
 @end
