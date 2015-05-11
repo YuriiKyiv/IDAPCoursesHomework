@@ -78,14 +78,22 @@
 
 - (void)work {
     self.cars = [[[TYVQueue alloc] init] autorelease];
-    TYVQueue *queue = self.cars;
+    TYVQueue *carsQueue = self.cars;
     for (NSUInteger i = 0; i < 100; i++) {
-        [queue enqueueObject:[TYVCar object]];
+        [carsQueue enqueueObject:[TYVCar object]];
     }
     
-    TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-    [washer perfomWorkWithObject:[queue dequeueObject]];
+//    TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
+//    [washer perfomWorkWithObject:[carsQueue dequeueObject]];
     
+    TYVWasher *washer = nil;
+    while ((washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
+        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[carsQueue dequeueObject]];
+    }
+    
+    while (true) {
+    
+    }
 }
 
 #pragma mark -
@@ -115,10 +123,13 @@
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+- (void)employeeDidBecomeFree:(TYVWasher *)washer {
     TYVQueue *cars = self.cars;
     if (!cars.isEmpty) {
-        [employee perfomWorkWithObject:[cars dequeueObject]];
+        [washer perfomWorkWithObject:[cars dequeueObject]];
+//        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[cars dequeueObject]];
+    } else {
+        NSLog(@"Cars queue is empty");
     }
 }
 
