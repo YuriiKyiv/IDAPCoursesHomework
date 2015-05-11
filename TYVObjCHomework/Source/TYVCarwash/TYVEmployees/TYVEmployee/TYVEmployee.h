@@ -57,4 +57,6 @@
 
 - (BOOL)containsObserver:(id)observer;
 
+- (SEL)selectorForState:(BOOL)state;
+
 @end

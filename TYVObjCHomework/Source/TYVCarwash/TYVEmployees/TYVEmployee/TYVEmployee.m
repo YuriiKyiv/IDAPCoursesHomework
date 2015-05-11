@@ -14,6 +14,8 @@
 
 @property (nonatomic, retain)   NSMutableSet    *mutableObserversSet;
 
+- (void)notifyWithSelector:(SEL)selector;
+
 @end
 
 @implementation TYVEmployee
@@ -83,23 +85,16 @@
     if (_free && [self.delegateOfState respondsToSelector:@selector(employeeDidBecomeFree:)]) {
         [self.delegateOfState employeeDidBecomeFree:self];
     }
-    
-    SEL selector = @selector(employeeDidBecomeNotFree:);
-    if (free) {
-        selector = @selector(employeeDidBecomeFree:);
-    }
-    
-    NSMutableSet *mutableObservers = self.mutableObserversSet;
-    for (id observer in mutableObservers) {
-        if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector];
-        }
-    }
-    
+
+    [self notifyWithSelector:[self selectorForState:free]];
 }
 
 #pragma mark -
 #pragma mark Public Methods
+
+- (SEL)selectorForState:(BOOL)state {
+    return (state) ? @selector(employeeDidBecomeNotFree:) : @selector(employeeDidBecomeFree:);
+}
 
 - (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
     self.free = NO;
@@ -116,6 +111,18 @@
 
 - (BOOL)containsObserver:(id)observer {
     return [self.mutableObserversSet containsObject:observer];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)notifyWithSelector:(SEL)selector {
+    NSMutableSet *mutableObservers = self.mutableObserversSet;
+    for (id observer in mutableObservers) {
+        if ([observer respondsToSelector:selector]) {
+            [observer performSelector:selector];
+        }
+    }
 }
 
 #pragma mark -
