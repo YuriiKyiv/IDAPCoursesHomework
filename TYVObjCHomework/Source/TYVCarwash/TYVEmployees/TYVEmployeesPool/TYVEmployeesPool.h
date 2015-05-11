@@ -23,6 +23,10 @@
 
 - (void)removeEmployee:(TYVEmployee *)employee;
 
+- (void)addObservableEmployee:(TYVEmployee *)employee;
+
+- (void)removeObservableEmployee:(TYVEmployee *)employee;
+
 - (id)freeEmployeeWithClass:(Class)class;
 
 - (NSSet *)freeEmployeesWithClass:(Class)class;
