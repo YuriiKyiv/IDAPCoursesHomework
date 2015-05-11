@@ -58,20 +58,6 @@
 }
 
 #pragma mark -
-#pragma mark TYVEmployeeObserver
-
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
-    TYVQueue *cars = self.cars;
-    if (!cars.isEmpty) {
-        [employee perfomWorkWithObject:[cars dequeueObject]];
-    }
-}
-
-- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee {
-    NSLog(@"Employee is starting to work");
-}
-
-#pragma mark -
 #pragma mark Public Methods
 
 - (void)prepareBuildings {
@@ -112,7 +98,6 @@
     [self.employees addEmployee:accountant];
     self.director = director;
     
-    accountant.delegate = director;
     director.delegatingObject = accountant;
 }
 
@@ -120,9 +105,22 @@
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
     TYVWasher *washer = [TYVWasher object];
-    washer.experience = 1;
     [pool addObservableEmployee:washer withObserver:self];
     accountant.delegatingObject = washer;
+}
+
+#pragma mark -
+#pragma mark TYVEmployeeObserver
+
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    TYVQueue *cars = self.cars;
+    if (!cars.isEmpty) {
+        [employee perfomWorkWithObject:[cars dequeueObject]];
+    }
+}
+
+- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee {
+    NSLog(@"Employee is starting to work");
 }
 
 @end
