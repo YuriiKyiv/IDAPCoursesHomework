@@ -9,12 +9,16 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, copy)     NSString                *duty;
-@property (nonatomic, retain)   NSDecimalNumber         *salary;
+@property (nonatomic, copy)     NSString        *duty;
+@property (nonatomic, retain)   NSDecimalNumber *salary;
+
+@property (nonatomic, retain) NSMutableSet    *mutableObserversSet;
 
 @end
 
 @implementation TYVEmployee
+
+@dynamic observersSet;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -52,6 +56,10 @@
 #pragma mark -
 #pragma mark Accessors
 
+- (NSSet *)observersSet {
+    return [[self.mutableObserversSet copy] autorelease];
+}
+
 - (void)setDelegatingObject:(id)object {
     if (_delegatingObject != object) {
         _delegatingObject.delegate = nil;
@@ -76,36 +84,30 @@
 }
 
 #pragma mark -
-#pragma mark TYVEmployeeDelegate
-
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    [self perfomWorkWithObject:employee];
-}
-
-#pragma mark -
-#pragma mark Comparison
-
-- (NSUInteger)hash {
-    return [self.duty hash] ^ [self.salary hash] ^ self.experience;
-}
-
-- (BOOL)isEqual:(id)object {
-    return ([object isMemberOfClass:[self class]]
-            && [self isEqualToObject:object]);
-}
-
-- (BOOL)isEqualToObject:(TYVEmployee *)object {
-    return (self == object || ([self.duty isEqual:object.duty]
-            && [self.salary isEqual:object.salary]
-            && self.experience == object.experience));
-}
-
-#pragma mark -
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
     self.free = NO;
     [self takeMoney:anObject.money fromMoneykeeper:anObject];
+}
+
+- (void)addObserver:(id)observer {
+    [self.mutableObserversSet addObject:observer];
+}
+
+- (void)removeObserver:(id)observer {
+    [self.mutableObserversSet removeObject:observer];
+}
+
+- (BOOL)containsObserver:(id)observer {
+    return [self.mutableObserversSet containsObject:observer];
+}
+
+#pragma mark -
+#pragma mark TYVEmployeeDelegate
+
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
+    [self perfomWorkWithObject:employee];
 }
 
 @end
