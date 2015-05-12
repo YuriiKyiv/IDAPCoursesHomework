@@ -21,7 +21,9 @@ typedef void(^TYVStateChangeHandler)(void);
 - (BOOL)containsObserver:(id)observer;
 
 - (void)addObserver:(id)observer withHendler:(TYVStateChangeHandler)handler;
-- (void)removeObserver:(id)observer withHendler:(TYVStateChangeHandler)handler;
+
+- (void)addObserver:(id)observer withHendler:(TYVStateChangeHandler)handler forState:(NSUInteger)state;
+- (void)removeObserver:(id)observer forState:(NSUInteger)state;
 
 - (SEL)selectorForState:(NSUInteger)state;
 
