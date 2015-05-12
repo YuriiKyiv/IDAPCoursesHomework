@@ -32,10 +32,10 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(TYVCar *)aCar {
+- (void)perfomWorkWithObject:(TYVCar *)car {
     self.free = NO;
-    [self takeMoney:self.price fromMoneykeeper:aCar];
-    [self washCar:aCar];
+    [self takeMoney:self.price fromMoneykeeper:car];
+    [self washCar:car];
     [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
 }
 
@@ -43,6 +43,7 @@
 #pragma mark Private Methods
 
 - (void)washCar:(TYVCar *)aCar {
+    sleep(arc4random_uniform(5));
     aCar.clean = YES;
     NSLog(@"Washer has cleaned a car with experience %lu", (unsigned long)self.experience);
 }

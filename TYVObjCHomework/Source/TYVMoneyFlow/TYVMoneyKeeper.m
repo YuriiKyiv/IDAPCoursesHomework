@@ -40,15 +40,15 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(TYVMoneyKeeper *)aMoneykeeper {
+- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(TYVMoneyKeeper *)moneykeeper {
     self.money = [self.money decimalNumberByAdding:money];
-    aMoneykeeper.money = [aMoneykeeper.money decimalNumberBySubtracting:money];
+    moneykeeper.money = [moneykeeper.money decimalNumberBySubtracting:money];
 }
 
 
-- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(TYVMoneyKeeper *)aMoneykeeper {
+- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(TYVMoneyKeeper *)moneykeeper {
     self.money = [self.money decimalNumberBySubtracting:money];
-    aMoneykeeper.money = [aMoneykeeper.money decimalNumberByAdding:money];
+    moneykeeper.money = [moneykeeper.money decimalNumberByAdding:money];
 }
 
 @end
