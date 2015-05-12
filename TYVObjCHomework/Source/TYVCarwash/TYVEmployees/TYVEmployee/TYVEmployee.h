@@ -13,6 +13,12 @@
 
 @class TYVEmployee;
 
+typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
+    TYVEmployeeDidBecomeFree,
+    TYVEmployeeDidBecomeBusy,
+    TYVEmployeeDidPerfomWorkWithObject
+};
+
 @protocol TYVEmployeeDelegate <NSObject>
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
@@ -26,7 +32,7 @@
 
 - (void)employeeDidBecomeFree:(TYVEmployee *)employee;
 
-- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee;
+- (void)employeeDidBecomeBusy:(TYVEmployee *)employee;
 
 @end
 
@@ -37,9 +43,6 @@
 @property (nonatomic, assign)                   NSUInteger              experience;
 
 @property (nonatomic, assign, getter=isFree)    BOOL                    free;
-
-@property (nonatomic, assign)                   id<TYVEmployeeDelegate> delegate;
-@property (nonatomic, retain)                   TYVEmployee             *delegatingObject;
 
 @property (nonatomic, readonly)                 NSSet                   *observersSet;
 
@@ -55,6 +58,8 @@
 
 - (BOOL)containsObserver:(id)observer;
 
-- (SEL)selectorForState:(BOOL)state;
+- (SEL)selectorForState:(NSUInteger)state;
+
+- (void)notifyWithSelector:(SEL)selector;
 
 @end

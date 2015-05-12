@@ -14,8 +14,6 @@
 
 @property (nonatomic, retain)   NSHashTable     *observersHashTable;
 
-- (void)notifyWithSelector:(SEL)selector;
-
 @end
 
 @implementation TYVEmployee
@@ -28,9 +26,7 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
-    self.delegate = nil;
-    self.delegatingObject = nil;
-    self.ObserversHashTable = nil;
+    self.observersHashTable = nil;
     
     [super dealloc];
 }
@@ -51,7 +47,7 @@
         self.duty = duty;
         self.salary = salary;
         self.free = YES;
-        self.ObserversHashTable = [NSHashTable weakObjectsHashTable];
+        self.observersHashTable = [NSHashTable weakObjectsHashTable];
     }
     
     return self;
@@ -64,32 +60,40 @@
     return self.observersHashTable.setRepresentation;
 }
 
-- (void)setDelegatingObject:(id)object {
-    if (_delegatingObject != object) {
-        _delegatingObject.delegate = nil;
-        
-        [_delegatingObject release];
-        _delegatingObject = [object retain];
-        
-        _delegatingObject.delegate = self;
-    }
-}
-
 -(void)setFree:(BOOL)free {
-    _free = free;
-    if (_free && [self.delegate respondsToSelector:@selector(employeeDidBecomeFree:)]) {
-        [self.delegate employeeDidBecomeFree:self];
-        
+    if  (_free != free) {
+        _free = free;
+        TYVEmployeeState state = (_free) ? TYVEmployeeDidBecomeFree : TYVEmployeeDidBecomeBusy;
+        [self notifyWithSelector:[self selectorForState:state]];
     }
-
-    [self notifyWithSelector:[self selectorForState:free]];
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (SEL)selectorForState:(BOOL)state {
-    return (state) ? @selector(employeeDidBecomeFree:) : @selector(employeeDidBecomeNotFree:);
+- (void)notifyWithSelector:(SEL)selector {
+    NSHashTable *observers = self.observersHashTable;
+    for (id observer in observers) {
+        if ([observer respondsToSelector:selector]) {
+            [observer performSelector:selector withObject:self];
+        }
+    }
+}
+
+- (SEL)selectorForState:(NSUInteger)state {
+    switch (state) {
+        case TYVEmployeeDidBecomeFree:
+            return @selector(employeeDidBecomeFree:);
+            
+        case TYVEmployeeDidBecomeBusy:
+            return @selector(employeeDidBecomeBusy:);
+            
+        case TYVEmployeeDidPerfomWorkWithObject:
+            return @selector(employee:didPerfomWorkWithObject:);
+            
+        default:
+            return nil;
+    }
 }
 
 - (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
@@ -107,18 +111,6 @@
 
 - (BOOL)containsObserver:(id)observer {
     return [self.observersHashTable containsObject:observer];
-}
-
-#pragma mark -
-#pragma mark Private Methods
-
-- (void)notifyWithSelector:(SEL)selector {
-    NSHashTable *observers = self.observersHashTable;
-    for (id observer in observers) {
-        if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector withObject:self];
-        }
-    }
 }
 
 #pragma mark -

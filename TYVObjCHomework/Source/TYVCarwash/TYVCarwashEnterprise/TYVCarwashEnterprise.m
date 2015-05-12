@@ -19,6 +19,9 @@
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
+static const NSUInteger kTYVMaxWasharsCount = 50;
+static const NSUInteger kTYVMaxCarsCount = 1000;
+
 @interface TYVCarwashEnterprise ()
 @property (nonatomic, retain)   TYVQueue            *cars;
 
@@ -78,14 +81,22 @@
 
 - (void)work {
     self.cars = [[[TYVQueue alloc] init] autorelease];
-    TYVQueue *queue = self.cars;
-    for (NSUInteger i = 0; i < 10; i++) {
-        [queue enqueueObject:[TYVCar object]];
+    TYVQueue *carsQueue = self.cars;
+    for (NSUInteger i = 0; i < kTYVMaxCarsCount; i++) {
+        [carsQueue enqueueObject:[TYVCar object]];
     }
     
-    TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-    [washer perfomWorkWithObject:[queue dequeueObject]];
+//    TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
+//    [washer perfomWorkWithObject:[carsQueue dequeueObject]];
     
+    TYVWasher *washer = nil;
+    while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
+        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[carsQueue dequeueObject]];
+    }
+    
+    while (true) {
+    
+    }
 }
 
 #pragma mark -
@@ -97,29 +108,36 @@
     
     [self.employees addEmployee:accountant];
     self.director = director;
-    
-    director.delegatingObject = accountant;
+    [accountant addObserver:director];
 }
 
 - (void)hireWasher {
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
-    TYVWasher *washer = [TYVWasher object];
-    [pool addObservableEmployee:washer withObserver:self];
-    accountant.delegatingObject = washer;
+    NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
+    for (NSUInteger index = 0; index < randomWashersCount; index++) {
+        TYVWasher *washer = [TYVWasher object];
+        [washer addObserver:accountant];
+        [washer addObserver:self];
+        [pool addEmployee:washer];
+        washer.experience = index;
+    }
 }
 
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+- (void)employeeDidBecomeFree:(TYVWasher *)washer {
     TYVQueue *cars = self.cars;
     if (!cars.isEmpty) {
-        [employee perfomWorkWithObject:[cars dequeueObject]];
+//        [washer perfomWorkWithObject:[cars dequeueObject]];
+        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[cars dequeueObject]];
+    } else {
+        NSLog(@"Cars queue is empty");
     }
 }
 
-- (void)employeeDidBecomeNotFree:(TYVEmployee *)employee {
+- (void)employeeDidBecomeBusy:(TYVEmployee *)employee {
     NSLog(@"Employee is starting to work");
 }
 

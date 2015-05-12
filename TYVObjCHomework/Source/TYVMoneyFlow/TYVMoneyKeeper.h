@@ -14,8 +14,8 @@
 
 - (instancetype)initWithMoney:(NSDecimalNumber *)money;
 
-- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(TYVMoneyKeeper *)aMoneykeeper;
+- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(TYVMoneyKeeper *)moneykeeper;
 
-- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(TYVMoneyKeeper *)aMoneykeeper;
+- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(TYVMoneyKeeper *)moneykeeper;
 
 @end
