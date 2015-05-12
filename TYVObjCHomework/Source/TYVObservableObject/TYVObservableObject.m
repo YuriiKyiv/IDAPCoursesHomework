@@ -8,9 +8,15 @@
 
 #import "TYVObservableObject.h"
 
+typedef void(^TYVNotificationHandler)(id observer);
+
 @interface TYVObservableObject ()
 
 @property (nonatomic, retain) NSHashTable   *observersHashTable;
+
+- (void)notifyWithSelector:(SEL)selector;
+- (void)notifyWithSelector:(SEL)selector withObject:(id)object;
+- (void)notifyWithSelector:(SEL)selector notificationHandler:(TYVNotificationHandler)handler;
 
 @end
 
@@ -43,6 +49,10 @@
     return self.observersHashTable.setRepresentation;
 }
 
+- (void)setState:(NSUInteger)state withObject:(id)object {
+    
+}
+
 #pragma mark -
 #pragma mark Public Methods
 
@@ -65,14 +75,37 @@
     return nil;
 }
 
+- (void)addObserver:(id)observer withHendler:(TYVStateChangeHandler)handler {
+    
+}
+- (void)removeObserver:(id)observer withHendler:(TYVStateChangeHandler)handler {
+    
+}
+
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)notifyWithSelector:(SEL)selector {
+    [self notifyWithSelector:selector notificationHandler:^(id observer) {
+        [observer performSelector:selector withObject:self];
+    }];
+}
+
+- (void)notifyWithSelector:(SEL)selector withObject:(id)object {
+    [self notifyWithSelector:selector notificationHandler:^(id observer) {
+        [observer performSelector:selector withObject:self withObject:object];
+    }];
+}
+
+- (void)notifyWithSelector:(SEL)selector notificationHandler:(TYVNotificationHandler)handler {
+    if (!handler) {
+        return;
+    }
+    
     NSHashTable *observers = self.observersHashTable;
     for (id observer in observers) {
         if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector withObject:self];
+            handler(observer);
         }
     }
 }

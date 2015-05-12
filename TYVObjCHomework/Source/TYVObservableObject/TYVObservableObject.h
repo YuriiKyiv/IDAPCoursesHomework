@@ -8,15 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TYVObservableObject : NSObject
+typedef void(^TYVStateChangeHandler)(void);
 
-@property (nonatomic, readonly) NSSet   *observersSet;
+@interface TYVObservableObject : NSObject
+@property (nonatomic, readonly) NSSet       *observersSet;
+@property (nonatomic, assign) NSUInteger  state;
+
+- (void)setState:(NSUInteger)state withObject:(id)object;
 
 - (void)addObserver:(id)observer;
-
 - (void)removeObserver:(id)observer;
-
 - (BOOL)containsObserver:(id)observer;
+
+- (void)addObserver:(id)observer withHendler:(TYVStateChangeHandler)handler;
+- (void)removeObserver:(id)observer withHendler:(TYVStateChangeHandler)handler;
 
 - (SEL)selectorForState:(NSUInteger)state;
 
