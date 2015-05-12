@@ -49,8 +49,18 @@ typedef void(^TYVNotificationHandler)(id observer);
     return self.observersHashTable.setRepresentation;
 }
 
+- (void)setState:(NSUInteger)state {
+    if (_state != state) {
+        [self notifyWithSelector:[self selectorForState:state]];
+        _state = state;
+    }
+}
+
 - (void)setState:(NSUInteger)state withObject:(id)object {
-    
+    if (_state != state) {
+        [self notifyWithSelector:[self selectorForState:state] withObject:object];
+        _state = state;
+    }
 }
 
 #pragma mark -
