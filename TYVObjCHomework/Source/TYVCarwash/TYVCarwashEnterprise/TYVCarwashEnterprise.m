@@ -19,6 +19,9 @@
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
+static const NSUInteger kTYVMaxWasharsCount = 50;
+static const NSUInteger kTYVMaxCarsCount = 1000;
+
 @interface TYVCarwashEnterprise ()
 @property (nonatomic, retain)   TYVQueue            *cars;
 
@@ -79,7 +82,7 @@
 - (void)work {
     self.cars = [[[TYVQueue alloc] init] autorelease];
     TYVQueue *carsQueue = self.cars;
-    for (NSUInteger i = 0; i < 100; i++) {
+    for (NSUInteger i = 0; i < kTYVMaxCarsCount; i++) {
         [carsQueue enqueueObject:[TYVCar object]];
     }
     
@@ -87,7 +90,7 @@
 //    [washer perfomWorkWithObject:[carsQueue dequeueObject]];
     
     TYVWasher *washer = nil;
-    while ((washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
+    while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
         [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[carsQueue dequeueObject]];
     }
     
@@ -111,7 +114,8 @@
 - (void)hireWasher {
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
-    for (NSUInteger index = 0; index < 10; index++) {
+    NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
+    for (NSUInteger index = 0; index < randomWashersCount; index++) {
         TYVWasher *washer = [TYVWasher object];
         [washer addObserver:accountant];
         [washer addObserver:self];
@@ -126,8 +130,8 @@
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
     TYVQueue *cars = self.cars;
     if (!cars.isEmpty) {
-        [washer perfomWorkWithObject:[cars dequeueObject]];
-//        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[cars dequeueObject]];
+//        [washer perfomWorkWithObject:[cars dequeueObject]];
+        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[cars dequeueObject]];
     } else {
         NSLog(@"Cars queue is empty");
     }
