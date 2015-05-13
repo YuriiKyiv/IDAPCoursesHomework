@@ -8,6 +8,7 @@
 
 #import "TYVAccountant.h"
 #import "TYVWasher.h"
+#import "TYVSelectorWrapper.h"
 
 @interface TYVAccountant ()
 @property (nonatomic, retain)   NSDecimalNumber    *capital;
@@ -58,7 +59,10 @@
         [super perfomWorkWithObject:washer];
         washer.free = YES;
         [self count];
-        [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+        TYVSelectorWrapper *selectorWrapper = [TYVSelectorWrapper selectorWrapperWithselector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+        [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                               withObject:selectorWrapper
+                            waitUntilDone:NO];
     }
 }
 

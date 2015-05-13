@@ -62,6 +62,6 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 - (SEL)selectorForState:(NSUInteger)state;
 
-- (void)notifyWithSelector:(SEL)selector;
+- (void)notifyWithSelector:(id)selectorWrapper;
 
 @end

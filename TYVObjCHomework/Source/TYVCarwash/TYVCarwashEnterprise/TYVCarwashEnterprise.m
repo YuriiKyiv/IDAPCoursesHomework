@@ -86,9 +86,6 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
         [carsQueue enqueueObject:[TYVCar object]];
     }
     
-//    TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-//    [washer perfomWorkWithObject:[carsQueue dequeueObject]];
-    
     TYVWasher *washer = nil;
     while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
         [washer perfomWorkWithObjectInBackground:[carsQueue dequeueObject]];

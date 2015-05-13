@@ -7,6 +7,7 @@
 //
 
 #import "TYVEmployee.h"
+#import "TYVSelectorWrapper.h"
 
 @interface TYVEmployee ()
 @property (nonatomic, copy)     NSString        *duty;
@@ -64,14 +65,19 @@
     if  (_free != free) {
         _free = free;
         TYVEmployeeState state = (_free) ? TYVEmployeeDidBecomeFree : TYVEmployeeDidBecomeBusy;
-        [self notifyWithSelector:[self selectorForState:state]];
+        SEL selector = [self selectorForState:state];
+        TYVSelectorWrapper *selectorWrapper = [TYVSelectorWrapper selectorWrapperWithselector:selector];
+        [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                               withObject:selectorWrapper
+                            waitUntilDone:NO];
     }
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)notifyWithSelector:(SEL)selector {
+- (void)notifyWithSelector:(TYVSelectorWrapper *)selectorWrapper {
+    SEL selector = NSSelectorFromString(selectorWrapper.selector);
     NSHashTable *observers = self.observersHashTable;
     for (id observer in observers) {
         if ([observer respondsToSelector:selector]) {

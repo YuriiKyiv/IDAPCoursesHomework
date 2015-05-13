@@ -8,6 +8,7 @@
 
 #import "TYVWasher.h"
 #import "TYVCar.h"
+#import "TYVSelectorWrapper.h"
 
 @interface TYVWasher ()
 
@@ -36,7 +37,10 @@
     self.free = NO;
     [self takeMoney:self.price fromMoneykeeper:car];
     [self washCar:car];
-    [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+    TYVSelectorWrapper *selectorWrapper = [TYVSelectorWrapper selectorWrapperWithselector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+    [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                           withObject:selectorWrapper
+                        waitUntilDone:NO];
 }
 
 #pragma mark -
