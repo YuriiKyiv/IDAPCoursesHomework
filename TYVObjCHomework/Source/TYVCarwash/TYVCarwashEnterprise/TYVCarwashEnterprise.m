@@ -91,7 +91,7 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
     
     TYVWasher *washer = nil;
     while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
-        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[carsQueue dequeueObject]];
+        [washer perfomWorkWithObjectInBackground:[carsQueue dequeueObject]];
     }
     
     while (true) {
@@ -130,8 +130,7 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
     TYVQueue *cars = self.cars;
     if (!cars.isEmpty) {
-//        [washer perfomWorkWithObject:[cars dequeueObject]];
-        [washer performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:[cars dequeueObject]];
+        [washer perfomWorkWithObjectInBackground:[cars dequeueObject]];
     } else {
         NSLog(@"Cars queue is empty");
     }
