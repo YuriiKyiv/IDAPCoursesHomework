@@ -60,6 +60,8 @@
         employee = obj;
         if ([employee isMemberOfClass:class] && employee.isFree == YES) {
             *stop = YES;
+        } else {
+            employee = nil;
         }
     }];
     
