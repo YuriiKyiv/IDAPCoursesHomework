@@ -34,20 +34,23 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVCar *)car {
-    self.free = NO;
-    [self takeMoney:self.price fromMoneykeeper:car];
-    [self washCar:car];
-    TYVSelectorWrapper *selectorWrapper = [TYVSelectorWrapper selectorWrapperWithselector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
-    [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                           withObject:selectorWrapper
-                        waitUntilDone:NO];
+    @synchronized(self) {
+        self.free = NO;
+        NSLog(@"Washer starts to workwith experience %lu", (unsigned long)self.experience);
+        [self takeMoney:self.price fromMoneykeeper:car];
+        [self washCar:car];
+        NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
+        [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                               withObject:stringSelector
+                            waitUntilDone:NO];
+    }
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)washCar:(TYVCar *)aCar {
-    sleep(arc4random_uniform(5));
+    usleep(arc4random_uniform(500));
     aCar.clean = YES;
     NSLog(@"Washer has cleaned a car with experience %lu", (unsigned long)self.experience);
 }

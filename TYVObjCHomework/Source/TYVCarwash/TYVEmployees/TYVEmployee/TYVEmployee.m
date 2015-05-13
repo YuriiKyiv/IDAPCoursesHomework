@@ -62,26 +62,29 @@
 }
 
 -(void)setFree:(BOOL)free {
-    if  (_free != free) {
-        _free = free;
-        TYVEmployeeState state = (_free) ? TYVEmployeeDidBecomeFree : TYVEmployeeDidBecomeBusy;
-        SEL selector = [self selectorForState:state];
-        TYVSelectorWrapper *selectorWrapper = [TYVSelectorWrapper selectorWrapperWithselector:selector];
-        [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                               withObject:selectorWrapper
-                            waitUntilDone:NO];
+    @synchronized(self) {
+        if  (_free != free) {
+            _free = free;
+            TYVEmployeeState state = (_free) ? TYVEmployeeDidBecomeFree : TYVEmployeeDidBecomeBusy;
+            NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
+            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                                   withObject:stringSelector
+                                waitUntilDone:NO];
+        }
     }
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)notifyWithSelector:(TYVSelectorWrapper *)selectorWrapper {
-    SEL selector = NSSelectorFromString(selectorWrapper.selector);
-    NSHashTable *observers = self.observersHashTable;
-    for (id observer in observers) {
-        if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector withObject:self];
+- (void)notifyWithSelector:(NSString *)stringSelector {
+    @synchronized(self) {
+        SEL selector = NSSelectorFromString(stringSelector);
+        NSHashTable *observers = self.observersHashTable;
+        for (id observer in observers) {
+            if ([observer respondsToSelector:selector]) {
+                [observer performSelector:selector withObject:self];
+            }
         }
     }
 }

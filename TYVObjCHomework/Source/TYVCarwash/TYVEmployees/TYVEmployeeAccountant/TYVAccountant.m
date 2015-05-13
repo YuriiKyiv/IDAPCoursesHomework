@@ -59,9 +59,9 @@
         [super perfomWorkWithObject:washer];
         washer.free = YES;
         [self count];
-        TYVSelectorWrapper *selectorWrapper = [TYVSelectorWrapper selectorWrapperWithselector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+        NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
         [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                               withObject:selectorWrapper
+                               withObject:stringSelector
                             waitUntilDone:NO];
     }
 }

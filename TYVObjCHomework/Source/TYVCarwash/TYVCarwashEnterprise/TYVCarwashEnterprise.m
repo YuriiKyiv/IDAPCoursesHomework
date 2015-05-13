@@ -19,7 +19,7 @@
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
-static const NSUInteger kTYVMaxWasharsCount = 50;
+static const NSUInteger kTYVMaxWasharsCount = 25;
 static const NSUInteger kTYVMaxCarsCount = 1000;
 
 @interface TYVCarwashEnterprise ()
@@ -88,7 +88,7 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
     
     TYVWasher *washer = nil;
     while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
-        [washer perfomWorkWithObjectInBackground:[carsQueue dequeueObject]];
+            [washer perfomWorkWithObjectInBackground:[carsQueue dequeueObject]];
     }
     
     while (true) {
@@ -125,11 +125,13 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    TYVQueue *cars = self.cars;
-    if (!cars.isEmpty) {
-        [washer perfomWorkWithObjectInBackground:[cars dequeueObject]];
-    } else {
-        NSLog(@"Cars queue is empty");
+    @synchronized(washer) {
+        TYVQueue *cars = self.cars;
+        if (!cars.isEmpty) {
+            [washer perfomWorkWithObjectInBackground:[cars dequeueObject]];
+        } else {
+            NSLog(@"Cars queue is empty");
+        }
     }
 }
 
