@@ -58,7 +58,7 @@
         @synchronized(self) {
             [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
                 employee = obj;
-                if ([employee isMemberOfClass:class] && employee.isFree == YES) {
+                if ([employee isMemberOfClass:class] && employee.state == TYVEmployeeDidBecomeFree) {
                     *stop = YES;
                 } else {
                     employee = nil;
@@ -72,7 +72,7 @@
 - (NSSet *)freeEmployeesWithClass:(Class)class {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
         return ([evaluatedObject isMemberOfClass:class]
-                && evaluatedObject.isFree);
+                && evaluatedObject.state == TYVEmployeeDidBecomeFree);
     }];
     
     return [self.employeesSet filteredSetUsingPredicate:predicate];

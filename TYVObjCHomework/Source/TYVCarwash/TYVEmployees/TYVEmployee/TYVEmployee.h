@@ -37,14 +37,14 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 @end
 
 @interface TYVEmployee : TYVMoneyKeeper <TYVEmployeeDelegate>
-@property (nonatomic, readonly)                 NSString                *duty;
+@property (nonatomic, readonly)                 NSString             *duty;
 
-@property (nonatomic, readonly)                 NSDecimalNumber         *salary;
-@property (nonatomic, assign)                   NSUInteger              experience;
+@property (nonatomic, readonly)                 NSDecimalNumber     *salary;
+@property (nonatomic, assign)                   NSUInteger          experience;
 
-@property (nonatomic, assign, getter=isFree)    BOOL                    free;
+@property (nonatomic, assign)                 TYVEmployeeState    state;
 
-@property (nonatomic, readonly)                 NSSet                   *observersSet;
+@property (nonatomic, readonly)                 NSSet               *observersSet;
 
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary

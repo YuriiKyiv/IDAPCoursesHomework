@@ -10,10 +10,10 @@
 #import "TYVSelectorWrapper.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, copy)     NSString        *duty;
-@property (nonatomic, retain)   NSDecimalNumber *salary;
+@property (nonatomic, copy)     NSString            *duty;
+@property (nonatomic, retain)   NSDecimalNumber     *salary;
 
-@property (nonatomic, retain)   NSHashTable     *observersHashTable;
+@property (nonatomic, retain)   NSHashTable         *observersHashTable;
 
 @end
 
@@ -47,8 +47,8 @@
     if (self) {
         self.duty = duty;
         self.salary = salary;
-        self.free = YES;
         self.observersHashTable = [NSHashTable weakObjectsHashTable];
+        self.state = TYVEmployeeDidBecomeFree;
     }
     
     return self;
@@ -61,11 +61,10 @@
     return self.observersHashTable.setRepresentation;
 }
 
--(void)setFree:(BOOL)free {
+- (void)setState:(TYVEmployeeState)state {
     @synchronized(self) {
-        if  (_free != free) {
-            _free = free;
-            TYVEmployeeState state = (_free) ? TYVEmployeeDidBecomeFree : TYVEmployeeDidBecomeBusy;
+        if (_state != state) {
+            _state = state;
             NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
             [self performSelectorOnMainThread:@selector(notifyWithSelector:)
                                    withObject:stringSelector
@@ -118,7 +117,7 @@
 }
 
 - (void)perfomWorkWithObject:(TYVMoneyKeeper *)object {
-    self.free = NO;
+    self.state = TYVEmployeeDidBecomeBusy;
     [self takeMoney:object.money fromMoneykeeper:object];
 }
 

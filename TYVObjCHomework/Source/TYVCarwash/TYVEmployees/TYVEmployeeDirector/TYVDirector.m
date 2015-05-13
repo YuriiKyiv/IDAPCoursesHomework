@@ -55,9 +55,9 @@
 - (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
     @synchronized(self) {
         [super perfomWorkWithObject:anAccountant];
-        anAccountant.free = YES;
+        anAccountant.state = TYVEmployeeDidBecomeFree;
         [self profit];
-        self.free = YES;
+        self.state = TYVEmployeeDidBecomeFree;
     }
 }
 

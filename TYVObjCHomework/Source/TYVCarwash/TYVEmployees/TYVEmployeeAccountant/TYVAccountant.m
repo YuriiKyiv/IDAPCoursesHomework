@@ -57,7 +57,7 @@
 - (void)perfomWorkWithObject:(TYVWasher *)washer {
     @synchronized(self) {
         [super perfomWorkWithObject:washer];
-        washer.free = YES;
+        washer.state = TYVEmployeeDidBecomeFree;
         [self count];
         NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
         [self performSelectorOnMainThread:@selector(notifyWithSelector:)

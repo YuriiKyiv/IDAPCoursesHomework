@@ -35,7 +35,7 @@
 
 - (void)perfomWorkWithObject:(TYVCar *)car {
     @synchronized(self) {
-        self.free = NO;
+        self.state = TYVEmployeeDidBecomeBusy;
         NSLog(@"Washer starts to workwith experience %lu and money %@", (unsigned long)self.experience, self.money);
         [self takeMoney:self.price fromMoneykeeper:car];
         [self washCar:car];
