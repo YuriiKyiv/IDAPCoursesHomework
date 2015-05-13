@@ -54,20 +54,23 @@
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
+    @synchronized(self) {
     __block TYVEmployee *employee = nil;
     [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
         employee = obj;
-        if ([employee isKindOfClass:class] && employee.isFree == YES) {
+        if ([employee isMemberOfClass:class] && employee.isFree == YES) {
             *stop = YES;
         }
     }];
     
     return employee;
+        
+    }
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
-        return ([evaluatedObject isKindOfClass:class]
+        return ([evaluatedObject isMemberOfClass:class]
                 && evaluatedObject.isFree);
     }];
     
@@ -76,7 +79,7 @@
 
 - (NSSet *)employeesWithClass:(Class)class {
     NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return ([evaluatedObject isKindOfClass:class]);
+        return ([evaluatedObject isMemberOfClass:class]);
     }];
     
     return [self.employeesSet filteredSetUsingPredicate:predicate];
