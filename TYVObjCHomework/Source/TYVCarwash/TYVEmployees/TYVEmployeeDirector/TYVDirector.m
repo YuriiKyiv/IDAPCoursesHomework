@@ -66,7 +66,7 @@
 
 - (void)profit {
     self.capital = [self.capital decimalNumberByAdding:self.money];
-    NSLog(@"Director capital = %@", self.capital);
+    NSLog(@"Director capital = %@", self.money);
 }
 
 @end

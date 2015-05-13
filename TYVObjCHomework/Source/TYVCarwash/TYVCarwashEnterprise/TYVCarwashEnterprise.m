@@ -131,8 +131,6 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
         TYVQueue *cars = self.cars;
         if (!cars.isEmpty) {
             [washer perfomWorkWithObjectInBackground:[cars dequeueObject]];
-        } else {
-            NSLog(@"Cars queue is empty");
         }
     }
 }

@@ -27,7 +27,7 @@
 #pragma mark Accessors
 
 - (NSDecimalNumber *)price {
-    return [NSDecimalNumber number:@"100"];
+    return [NSDecimalNumber number:@"1000"];
 }
 
 #pragma mark -
@@ -36,7 +36,7 @@
 - (void)perfomWorkWithObject:(TYVCar *)car {
     @synchronized(self) {
         self.free = NO;
-        NSLog(@"Washer starts to workwith experience %lu", (unsigned long)self.experience);
+        NSLog(@"Washer starts to workwith experience %lu and money %@", (unsigned long)self.experience, self.money);
         [self takeMoney:self.price fromMoneykeeper:car];
         [self washCar:car];
         NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
@@ -50,9 +50,9 @@
 #pragma mark Private Methods
 
 - (void)washCar:(TYVCar *)aCar {
-    usleep(arc4random_uniform(500));
+    usleep(arc4random_uniform(1000));
     aCar.clean = YES;
-    NSLog(@"Washer has cleaned a car with experience %lu", (unsigned long)self.experience);
+    NSLog(@"Washer has cleaned a car with experience %lu and money %@", (unsigned long)self.experience, self.money);
 }
 
 @end
