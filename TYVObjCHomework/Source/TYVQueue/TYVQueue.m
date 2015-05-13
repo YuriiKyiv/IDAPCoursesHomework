@@ -39,11 +39,7 @@
 #pragma mark Accessors
 
 - (BOOL)isEmpty {
-    @synchronized(self) {
-        
     return ([self.queue count] == 0);
-        
-    }
 }
 
 #pragma mark -
@@ -53,6 +49,7 @@
     [self.queue addObject:object];
 }
 
+#warning fix synchronized
 - (id)dequeueObject {
     @synchronized(self) {
         NSMutableArray *array = self.queue;

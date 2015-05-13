@@ -54,20 +54,19 @@
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
-    @synchronized(self) {
     __block TYVEmployee *employee = nil;
-    [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-        employee = obj;
-        if ([employee isMemberOfClass:class] && employee.isFree == YES) {
-            *stop = YES;
-        } else {
-            employee = nil;
+        @synchronized(self) {
+            [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+                employee = obj;
+                if ([employee isMemberOfClass:class] && employee.isFree == YES) {
+                    *stop = YES;
+                } else {
+                    employee = nil;
+                }
+            }];
         }
-    }];
     
     return employee;
-        
-    }
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
