@@ -96,11 +96,6 @@
     }
 }
 
-- (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
-    self.free = NO;
-    [self takeMoney:anObject.money fromMoneykeeper:anObject];
-}
-
 - (void)addObserver:(id)observer {
     [self.observersHashTable addObject:observer];
 }
@@ -111,6 +106,15 @@
 
 - (BOOL)containsObserver:(id)observer {
     return [self.observersHashTable containsObject:observer];
+}
+
+- (void)perfomWorkWithObject:(TYVMoneyKeeper *)object {
+    self.free = NO;
+    [self takeMoney:object.money fromMoneykeeper:object];
+}
+
+- (void)perfomWorkWithObjectInBackground:(TYVMoneyKeeper *)object {
+    [self performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:object];
 }
 
 #pragma mark -
