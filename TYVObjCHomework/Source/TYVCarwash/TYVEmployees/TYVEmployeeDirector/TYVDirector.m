@@ -53,10 +53,12 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
-    [super perfomWorkWithObject:anAccountant];
-    anAccountant.free = YES;
-    [self profit];
-    self.free = YES;
+    @synchronized(self) {
+        [super perfomWorkWithObject:anAccountant];
+        anAccountant.free = YES;
+        [self profit];
+        self.free = YES;
+    }
 }
 
 #pragma mark -

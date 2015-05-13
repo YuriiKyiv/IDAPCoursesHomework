@@ -54,10 +54,12 @@
 #pragma mark Public Methods
 
 - (void)perfomWorkWithObject:(TYVWasher *)washer {
-    [super perfomWorkWithObject:washer];
-    washer.free = YES;
-    [self count];
-    [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+    @synchronized(self) {
+        [super perfomWorkWithObject:washer];
+        washer.free = YES;
+        [self count];
+        [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+    }
 }
 
 #pragma mark -
