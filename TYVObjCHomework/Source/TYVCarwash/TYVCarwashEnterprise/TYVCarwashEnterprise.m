@@ -94,9 +94,8 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
     NSLog(@"----------------------------");
     NSLog(@"Cars Queue is Empty");
     
-    while (true) {
-
-    }
+    NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
+    [runLoop run];
 }
 
 #pragma mark -
