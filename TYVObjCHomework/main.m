@@ -38,7 +38,6 @@ int main(int argc, const char * argv[]) {
         
         TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
         [enterprise work];
-
     }
     
     return 0;

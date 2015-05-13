@@ -39,7 +39,11 @@
 #pragma mark Accessors
 
 - (BOOL)isEmpty {
+    @synchronized(self) {
+        
     return ([self.queue count] == 0);
+        
+    }
 }
 
 #pragma mark -
@@ -50,11 +54,13 @@
 }
 
 - (id)dequeueObject {
-    NSMutableArray *array = self.queue;
-    id result = array[0];
-    [array removeObjectAtIndex:0];
+    @synchronized(self) {
+        NSMutableArray *array = self.queue;
+        id result = array[0];
+        [array removeObjectAtIndex:0];
     
-    return result;
+        return result;
+    }
 }
 
 - (NSUInteger)count {

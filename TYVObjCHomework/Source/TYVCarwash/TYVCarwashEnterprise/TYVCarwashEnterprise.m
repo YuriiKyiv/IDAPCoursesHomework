@@ -85,14 +85,23 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
     for (NSUInteger i = 0; i < kTYVMaxCarsCount; i++) {
         [carsQueue enqueueObject:[TYVCar object]];
     }
-    
+
     TYVWasher *washer = nil;
     while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
-            [washer perfomWorkWithObjectInBackground:[carsQueue dequeueObject]];
+        NSLog(@"// washers expiriance is %lu", (unsigned long)washer.experience);
+        if  (![washer isMemberOfClass:[TYVWasher class]]) {
+            NSLog(@"Error");
+        }
+        
+        [washer perfomWorkWithObjectInBackground:[carsQueue dequeueObject]];
+
     }
     
-    while (true) {
+    NSLog(@"----------------------------");
+    NSLog(@"Cars Queue is Empty");
     
+    while (true) {
+
     }
 }
 
@@ -125,13 +134,15 @@ static const NSUInteger kTYVMaxCarsCount = 1000;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    @synchronized(washer) {
-        TYVQueue *cars = self.cars;
-        if (!cars.isEmpty) {
-            [washer perfomWorkWithObjectInBackground:[cars dequeueObject]];
-        } else {
-            NSLog(@"Cars queue is empty");
-        }
+        @synchronized(washer) {
+            if  ([washer isMemberOfClass:[TYVWasher class]]) {
+                TYVQueue *cars = self.cars;
+                if (!cars.isEmpty) {
+                    [washer perfomWorkWithObjectInBackground:[cars dequeueObject]];
+                } else {
+                    NSLog(@"Cars queue is empty");
+                }
+            }
     }
 }
 
