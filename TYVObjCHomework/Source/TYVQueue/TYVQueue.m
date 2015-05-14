@@ -46,15 +46,19 @@
 #pragma mark Public Methods
 
 - (void)enqueueObject:(id)object {
-    [self.queue addObject:object];
+    @synchronized(self) {
+        [self.queue addObject:object];
+    }
 }
 
-#warning fix synchronized
 - (id)dequeueObject {
     @synchronized(self) {
-        NSMutableArray *array = self.queue;
-        id result = array[0];
-        [array removeObjectAtIndex:0];
+        id result = nil;
+        if (!self.isEmpty) {
+            NSMutableArray *array = self.queue;
+            result = array[0];
+            [array removeObjectAtIndex:0];
+        }
     
         return result;
     }
