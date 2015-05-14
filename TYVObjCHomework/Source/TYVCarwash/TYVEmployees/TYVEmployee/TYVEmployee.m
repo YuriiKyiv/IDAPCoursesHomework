@@ -129,7 +129,7 @@
 #pragma mark TYVEmployeeDelegate
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    [self perfomWorkWithObject:employee];
+    [self perfomWorkWithObjectInBackground:employee];
 }
 
 @end
