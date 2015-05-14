@@ -116,9 +116,15 @@
     return [self.observersHashTable containsObject:observer];
 }
 
+#warning add synchronized in moneykeeper
+#warning fix synchronized here
 - (void)workWithObject:(TYVMoneyKeeper *)object {
-    self.state = TYVEmployeeDidBecomeBusy;
-    [self takeMoney:object.money fromMoneykeeper:object];
+    @autoreleasepool {
+        @synchronized (object) {
+            self.state = TYVEmployeeDidBecomeBusy;
+            [self takeMoney:object.money fromMoneykeeper:object];
+        }
+    }
 }
 
 - (void)perfomWorkWithObject:(TYVMoneyKeeper *)object {

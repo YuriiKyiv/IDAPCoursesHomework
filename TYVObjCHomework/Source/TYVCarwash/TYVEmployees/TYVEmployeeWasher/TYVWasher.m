@@ -34,15 +34,17 @@
 #pragma mark Public Methods
 
 - (void)workWithObject:(TYVCar *)car {
-    @synchronized(self) {
-        self.state = TYVEmployeeDidBecomeBusy;
-        NSLog(@"Washer starts to workwith experience %lu and money %@", (unsigned long)self.experience, self.money);
-        [self takeMoney:self.price fromMoneykeeper:car];
-        [self washCar:car];
-        NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
-        [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                               withObject:stringSelector
-                            waitUntilDone:NO];
+    @autoreleasepool {
+        @synchronized(self) {
+            self.state = TYVEmployeeDidBecomeBusy;
+            NSLog(@"Washer starts to workwith experience %lu and money %@", (unsigned long)self.experience, self.money);
+            [self takeMoney:self.price fromMoneykeeper:car];
+            [self washCar:car];
+            NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
+            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                                   withObject:stringSelector
+                                waitUntilDone:NO];
+        }
     }
 }
 

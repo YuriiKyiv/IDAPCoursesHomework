@@ -53,11 +53,13 @@
 #pragma mark Public Methods
 
 - (void)workWithObject:(TYVAccountant *)anAccountant {
-    @synchronized(self) {
-        [super workWithObject:anAccountant];
-        anAccountant.state = TYVEmployeeDidBecomeFree;
-        [self profit];
-        self.state = TYVEmployeeDidBecomeFree;
+    @autoreleasepool {
+        @synchronized(self) {
+            [super workWithObject:anAccountant];
+            anAccountant.state = TYVEmployeeDidBecomeFree;
+            [self profit];
+            self.state = TYVEmployeeDidBecomeFree;
+        }
     }
 }
 

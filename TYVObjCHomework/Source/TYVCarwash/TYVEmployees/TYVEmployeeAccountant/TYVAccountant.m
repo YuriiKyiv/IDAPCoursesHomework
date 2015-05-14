@@ -55,14 +55,16 @@
 #pragma mark Public Methods
 
 - (void)workWithObject:(TYVWasher *)washer {
-    @synchronized(self) {
-        [super workWithObject:washer];
-        washer.state = TYVEmployeeDidBecomeFree;
-        [self count];
-        NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
-        [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                               withObject:stringSelector
-                            waitUntilDone:NO];
+    @autoreleasepool {
+        @synchronized(self) {
+            [super workWithObject:washer];
+            washer.state = TYVEmployeeDidBecomeFree;
+            [self count];
+            NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
+            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                                   withObject:stringSelector
+                                waitUntilDone:NO];
+        }
     }
 }
 
