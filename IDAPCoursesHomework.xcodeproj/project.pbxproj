@@ -18,6 +18,8 @@
 		5A3D0DE91AFE1EA700B5A059 /* TYVQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3D0DE71AFE1EA700B5A059 /* TYVQueue.m */; };
 		5A45A7E21AC41FDF007FAB8F /* TYVLinkedListNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A45A7E01AC41FDF007FAB8F /* TYVLinkedListNode.c */; };
 		5A45A7E61AC42B9A007FAB8F /* TYVLinkedList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */; };
+		5A49B3291B05100600876256 /* TYVProtocolObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A49B3281B05100600876256 /* TYVProtocolObservableObject.m */; };
+		5A49B32A1B05100600876256 /* TYVProtocolObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A49B3281B05100600876256 /* TYVProtocolObservableObject.m */; };
 		5A51A9C71AA095F3003CC905 /* TYVObject.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A51A9C51AA095F3003CC905 /* TYVObject.c */; };
 		5A5201DE1AB3259B00D2C6EE /* TYVUniversalSetters.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5201DC1AB3259B00D2C6EE /* TYVUniversalSetters.c */; };
 		5A5647BA1ACD49C400177C10 /* TYVAutoreleasePool.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A5647B81ACD49C400177C10 /* TYVAutoreleasePool.c */; };
@@ -131,6 +133,8 @@
 		5A45A7E11AC41FDF007FAB8F /* TYVLinkedListNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedListNode.h; path = task6/TYVLinkedListNode/TYVLinkedListNode.h; sourceTree = "<group>"; };
 		5A45A7E41AC42B9A007FAB8F /* TYVLinkedList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVLinkedList.c; path = task6/TYVLinkedList/TYVLinkedList.c; sourceTree = "<group>"; };
 		5A45A7E51AC42B9A007FAB8F /* TYVLinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVLinkedList.h; path = task6/TYVLinkedList/TYVLinkedList.h; sourceTree = "<group>"; };
+		5A49B3271B05100600876256 /* TYVProtocolObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVProtocolObservableObject.h; sourceTree = "<group>"; };
+		5A49B3281B05100600876256 /* TYVProtocolObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYVProtocolObservableObject.m; sourceTree = "<group>"; };
 		5A51A9C51AA095F3003CC905 /* TYVObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVObject.c; path = TYVObject/TYVObject.c; sourceTree = "<group>"; };
 		5A51A9C61AA095F3003CC905 /* TYVObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVObject.h; path = TYVObject/TYVObject.h; sourceTree = "<group>"; };
 		5A5201DC1AB3259B00D2C6EE /* TYVUniversalSetters.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVUniversalSetters.c; path = TYVUniversalSetters/TYVUniversalSetters.c; sourceTree = "<group>"; };
@@ -336,6 +340,15 @@
 			name = TYVLinkedList;
 			sourceTree = "<group>";
 		};
+		5A49B3261B05100600876256 /* TYVProtocolObservableObject */ = {
+			isa = PBXGroup;
+			children = (
+				5A49B3271B05100600876256 /* TYVProtocolObservableObject.h */,
+				5A49B3281B05100600876256 /* TYVProtocolObservableObject.m */,
+			);
+			path = TYVProtocolObservableObject;
+			sourceTree = "<group>";
+		};
 		5A51A9C81AA095F9003CC905 /* TYVObject */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +443,7 @@
 		5AAB27B91AEAB1080014D965 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5A49B3261B05100600876256 /* TYVProtocolObservableObject */,
 				5A3D0DE51AFE1EA700B5A059 /* TYVQueue */,
 				5AAB27BA1AEAB1080014D965 /* TYVBeing */,
 				5AAB27BD1AEAB1080014D965 /* TYVCarwash */,
@@ -977,6 +991,7 @@
 				5ABFC2901B0367CF008845D3 /* TYVSelectorWrapper.m in Sources */,
 				5A66D3641B013E7C00CACA57 /* TYVObservableObject.m in Sources */,
 				5AAB28011AEAB1080014D965 /* TYVCarwashRoom.m in Sources */,
+				5A49B32A1B05100600876256 /* TYVProtocolObservableObject.m in Sources */,
 				5AAB27F51AEAB1080014D965 /* TYVCar.m in Sources */,
 				5AAB27FD1AEAB1080014D965 /* TYVDirector.m in Sources */,
 				5A3D0DE91AFE1EA700B5A059 /* TYVQueue.m in Sources */,
@@ -1022,6 +1037,7 @@
 				5AAB28041AEAB1080014D965 /* TYVFemaleBeing.m in Sources */,
 				5AAB27F01AEAB1080014D965 /* TYVBuilding.m in Sources */,
 				5AAB27F81AEAB1080014D965 /* TYVEmployee.m in Sources */,
+				5A49B3291B05100600876256 /* TYVProtocolObservableObject.m in Sources */,
 				5AAB280C1AEAB1080014D965 /* NSObject+TYVNSObjectExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
