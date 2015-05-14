@@ -70,6 +70,7 @@
 #pragma mark Private Methods
 
 - (void)count {
+    usleep(arc4random_uniform(1000));
     self.capital = [self.capital decimalNumberByAdding:self.money];
     NSLog(@"Accountant capital = %@", self.capital);
 }

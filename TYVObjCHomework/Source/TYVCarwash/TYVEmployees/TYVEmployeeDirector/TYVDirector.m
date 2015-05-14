@@ -65,6 +65,7 @@
 #pragma mark Private Methods
 
 - (void)profit {
+    usleep(arc4random_uniform(1000));
     self.capital = [self.capital decimalNumberByAdding:self.money];
     NSLog(@"Director capital = %@", self.money);
 }
