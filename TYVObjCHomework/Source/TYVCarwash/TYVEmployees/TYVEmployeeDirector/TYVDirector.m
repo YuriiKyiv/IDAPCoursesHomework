@@ -52,9 +52,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
+- (void)workWithObject:(TYVAccountant *)anAccountant {
     @synchronized(self) {
-        [super perfomWorkWithObject:anAccountant];
+        [super workWithObject:anAccountant];
         anAccountant.state = TYVEmployeeDidBecomeFree;
         [self profit];
         self.state = TYVEmployeeDidBecomeFree;

@@ -54,9 +54,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(TYVWasher *)washer {
+- (void)workWithObject:(TYVWasher *)washer {
     @synchronized(self) {
-        [super perfomWorkWithObject:washer];
+        [super workWithObject:washer];
         washer.state = TYVEmployeeDidBecomeFree;
         [self count];
         NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);

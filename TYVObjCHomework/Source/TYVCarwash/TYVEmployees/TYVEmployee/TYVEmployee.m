@@ -116,13 +116,13 @@
     return [self.observersHashTable containsObject:observer];
 }
 
-- (void)perfomWorkWithObject:(TYVMoneyKeeper *)object {
+- (void)workWithObject:(TYVMoneyKeeper *)object {
     self.state = TYVEmployeeDidBecomeBusy;
     [self takeMoney:object.money fromMoneykeeper:object];
 }
 
 - (void)perfomWorkWithObjectInBackground:(TYVMoneyKeeper *)object {
-    [self performSelectorInBackground:@selector(perfomWorkWithObject:) withObject:object];
+    [self performSelectorInBackground:@selector(workWithObject:) withObject:object];
 }
 
 #pragma mark -

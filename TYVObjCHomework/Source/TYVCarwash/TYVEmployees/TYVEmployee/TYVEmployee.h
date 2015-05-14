@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
 
-- (void)perfomWorkWithObject:(id)object;
+- (void)workWithObject:(id)object;
 
 - (void)perfomWorkWithObjectInBackground:(TYVMoneyKeeper *)object;
 

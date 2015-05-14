@@ -19,8 +19,8 @@
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
-static const NSUInteger kTYVMaxWasharsCount = 25;
-static const NSUInteger kTYVMaxCarsCount = 1000;
+static const NSUInteger kTYVMaxWasharsCount = 17;
+static const NSUInteger kTYVMaxCarsCount = 333;
 
 @interface TYVCarwashEnterprise ()
 @property (nonatomic, retain)   TYVQueue            *cars;

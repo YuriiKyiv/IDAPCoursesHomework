@@ -33,7 +33,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(TYVCar *)car {
+- (void)workWithObject:(TYVCar *)car {
     @synchronized(self) {
         self.state = TYVEmployeeDidBecomeBusy;
         NSLog(@"Washer starts to workwith experience %lu and money %@", (unsigned long)self.experience, self.money);
