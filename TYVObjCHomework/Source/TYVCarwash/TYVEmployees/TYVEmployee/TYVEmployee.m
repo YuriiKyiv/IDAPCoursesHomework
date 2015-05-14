@@ -121,7 +121,7 @@
     [self takeMoney:object.money fromMoneykeeper:object];
 }
 
-- (void)perfomWorkWithObjectInBackground:(TYVMoneyKeeper *)object {
+- (void)perfomWorkWithObject:(TYVMoneyKeeper *)object {
     [self performSelectorInBackground:@selector(workWithObject:) withObject:object];
 }
 
@@ -129,7 +129,7 @@
 #pragma mark TYVEmployeeDelegate
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    [self perfomWorkWithObjectInBackground:employee];
+    [self perfomWorkWithObject:employee];
 }
 
 @end

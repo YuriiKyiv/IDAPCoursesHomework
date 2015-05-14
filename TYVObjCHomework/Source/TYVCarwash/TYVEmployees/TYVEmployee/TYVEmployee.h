@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 - (void)workWithObject:(id)object;
 
-- (void)perfomWorkWithObjectInBackground:(TYVMoneyKeeper *)object;
+- (void)perfomWorkWithObject:(TYVMoneyKeeper *)object;
 
 - (void)addObserver:(id)observer;
 
