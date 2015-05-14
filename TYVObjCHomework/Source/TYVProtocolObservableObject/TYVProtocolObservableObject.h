@@ -20,4 +20,6 @@
 
 - (SEL)selectorForState:(NSUInteger)state;
 
+- (void)notifyWithSelector:(SEL)selector;
+
 @end
