@@ -153,6 +153,7 @@
 		5A73B5A51AEAB3B9002B31AF /* TYVMoneyKeeperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVMoneyKeeperSpec.m; path = TYVMoneyKeeperSpec/TYVMoneyKeeperSpec.m; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
+		5AA809D51B064D7B00309221 /* TYVMoneyTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVMoneyTransfer.h; sourceTree = "<group>"; };
 		5AAB27B01AEAAAE60014D965 /* ObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AAB27B31AEAAAE60014D965 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AAB27BB1AEAB1080014D965 /* TYVBeing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVBeing.h; sourceTree = "<group>"; };
@@ -449,7 +450,7 @@
 				5AAB27BD1AEAB1080014D965 /* TYVCarwash */,
 				5AAB27DF1AEAB1080014D965 /* TYVFemaleBeing */,
 				5AAB27E21AEAB1080014D965 /* TYVMaleBeing */,
-				5AAB27E51AEAB1080014D965 /* TYVMoneyKeeper */,
+				5AAB27E51AEAB1080014D965 /* TYVMoneyFlow */,
 				5AAB27E81AEAB1080014D965 /* TYVNSDecimalNumberExtensions */,
 				5AAB27EB1AEAB1080014D965 /* TYVNSObjectExtensions */,
 				5ACB6C711AF23CC100A622C4 /* NSString+TYVExtensions */,
@@ -609,13 +610,13 @@
 			path = TYVMaleBeing;
 			sourceTree = "<group>";
 		};
-		5AAB27E51AEAB1080014D965 /* TYVMoneyKeeper */ = {
+		5AAB27E51AEAB1080014D965 /* TYVMoneyFlow */ = {
 			isa = PBXGroup;
 			children = (
 				5AAB27E61AEAB1080014D965 /* TYVMoneyKeeper.h */,
 				5AAB27E71AEAB1080014D965 /* TYVMoneyKeeper.m */,
+				5AA809D51B064D7B00309221 /* TYVMoneyTransfer.h */,
 			);
-			name = TYVMoneyKeeper;
 			path = TYVMoneyFlow;
 			sourceTree = "<group>";
 		};
