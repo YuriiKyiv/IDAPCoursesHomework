@@ -18,6 +18,7 @@
 @end
 
 @implementation TYVEmployee
+@synthesize money = _money;
 
 @dynamic observersSet;
 
@@ -43,12 +44,13 @@
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money
 {
-    self = [super initWithMoney:money];
+    self = [super init];
     if (self) {
         self.duty = duty;
         self.salary = salary;
         self.observersHashTable = [NSHashTable weakObjectsHashTable];
         self.state = TYVEmployeeDidBecomeFree;
+        self.money = [NSDecimalNumber decimalNumberWithString:@"0"];
     }
     
     return self;
@@ -118,11 +120,11 @@
 
 #warning add synchronized in moneykeeper
 #warning fix synchronized here
-- (void)workWithObject:(TYVMoneyKeeper *)object {
+- (void)workWithObject:(id<TYVMoneyTransfer> )object {
     @autoreleasepool {
         @synchronized (object) {
             self.state = TYVEmployeeDidBecomeBusy;
-            [self takeMoney:object.money fromMoneykeeper:object];
+            [self takeMoney:object.money fromObject:object];
         }
     }
 }
@@ -136,6 +138,20 @@
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
     [self perfomWorkWithObject:employee];
+}
+
+#pragma mark -
+#pragma mark TYVMoneyTransfer
+
+- (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransfer>)object {
+    self.money = [self.money decimalNumberByAdding:money];
+    object.money = [object.money decimalNumberBySubtracting:money];
+}
+
+
+- (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransfer>)object {
+    self.money = [self.money decimalNumberBySubtracting:money];
+    object.money = [object.money decimalNumberByAdding:money];
 }
 
 @end

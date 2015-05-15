@@ -38,7 +38,7 @@
         @synchronized(self) {
             self.state = TYVEmployeeDidBecomeBusy;
             NSLog(@"Washer starts to workwith experience %lu and money %@", (unsigned long)self.experience, self.money);
-            [self takeMoney:self.price fromMoneykeeper:car];
+            [self takeMoney:self.price fromObject:car];
             [self washCar:car];
             NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
             [self performSelectorOnMainThread:@selector(notifyWithSelector:)
