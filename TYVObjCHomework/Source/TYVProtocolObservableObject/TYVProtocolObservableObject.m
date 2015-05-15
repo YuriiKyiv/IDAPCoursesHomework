@@ -9,7 +9,6 @@
 #import "TYVProtocolObservableObject.h"
 
 @interface TYVProtocolObservableObject ()
-
 @property (nonatomic, retain) NSHashTable   *observersHashTable;
 
 @end
@@ -76,8 +75,5 @@
         }
     }
 }
-
-#pragma mark -
-#pragma mark Private Methods
 
 @end
