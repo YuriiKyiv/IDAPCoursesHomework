@@ -50,7 +50,7 @@
         self.salary = salary;
         self.observersHashTable = [NSHashTable weakObjectsHashTable];
         self.state = TYVEmployeeDidBecomeFree;
-        self.money = [NSDecimalNumber decimalNumberWithString:@"0"];
+        self.money = money;
     }
     
     return self;
@@ -134,7 +134,7 @@
 }
 
 #pragma mark -
-#pragma mark TYVEmployeeDelegate
+#pragma mark TYVEmployeeObserver
 
 - (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
     [self perfomWorkWithObject:employee];

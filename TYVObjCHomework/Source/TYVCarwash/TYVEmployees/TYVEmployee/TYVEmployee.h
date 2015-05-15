@@ -20,24 +20,18 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
     TYVEmployeeDidPerfomWorkWithObject
 };
 
-@protocol TYVEmployeeDelegate <NSObject>
-
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
+@protocol TYVEmployeeObserver <NSObject>
 
 @optional
 - (void)employeeDidBecomeFree:(TYVEmployee *)employee;
 
-@end
-
-@protocol TYVEmployeeObserver <NSObject>
-
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
-
 - (void)employeeDidBecomeBusy:(TYVEmployee *)employee;
 
+- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
+
 @end
 
-@interface TYVEmployee : NSObject <TYVEmployeeDelegate, TYVMoneyTransfer>
+@interface TYVEmployee : NSObject <TYVEmployeeObserver, TYVMoneyTransfer>
 @property (nonatomic, readonly) NSString            *duty;
 
 @property (nonatomic, readonly) NSDecimalNumber     *salary;
