@@ -8,6 +8,7 @@
 
 #import "TYVEmployee.h"
 #import "TYVSelectorWrapper.h"
+#import "TYVMoneyTransfer.h"
 
 @interface TYVEmployee ()
 @property (nonatomic, copy)     NSString            *duty;
@@ -78,18 +79,6 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)notifyWithSelector:(NSString *)stringSelector {
-    @synchronized(self) {
-        SEL selector = NSSelectorFromString(stringSelector);
-        NSHashTable *observers = self.observersHashTable;
-        for (id observer in observers) {
-            if ([observer respondsToSelector:selector]) {
-                [observer performSelector:selector withObject:self];
-            }
-        }
-    }
-}
-
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
         case TYVEmployeeDidBecomeFree:
@@ -106,18 +95,6 @@
     }
 }
 
-- (void)addObserver:(id)observer {
-    [self.observersHashTable addObject:observer];
-}
-
-- (void)removeObserver:(id)observer {
-    [self.observersHashTable removeObject:observer];
-}
-
-- (BOOL)containsObserver:(id)observer {
-    return [self.observersHashTable containsObject:observer];
-}
-
 #warning add synchronized in moneykeeper
 #warning fix synchronized here
 - (void)workWithObject:(id<TYVMoneyTransfer> )object {
@@ -129,7 +106,7 @@
     }
 }
 
-- (void)perfomWorkWithObject:(TYVMoneyKeeper *)object {
+- (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object {
     [self performSelectorInBackground:@selector(workWithObject:) withObject:object];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYVMoneyKeeper.h"
+#import "TYVProtocolObservableObject.h"
 #import "TYVMoneyTransfer.h"
 
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 @end
 
-@interface TYVEmployee : NSObject <TYVEmployeeObserver, TYVMoneyTransfer>
+@interface TYVEmployee : TYVProtocolObservableObject <TYVEmployeeObserver, TYVMoneyTransfer>
 @property (nonatomic, readonly) NSString            *duty;
 
 @property (nonatomic, readonly) NSDecimalNumber     *salary;
@@ -48,15 +48,5 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 - (void)workWithObject:(id)object;
 
 - (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object;
-
-- (void)addObserver:(id)observer;
-
-- (void)removeObserver:(id)observer;
-
-- (BOOL)containsObserver:(id)observer;
-
-- (SEL)selectorForState:(NSUInteger)state;
-
-- (void)notifyWithSelector:(NSString *)stringSelector;
 
 @end

@@ -65,16 +65,19 @@
     return nil;
 }
 
-#pragma mark -
-#pragma mark Private Methods
-
-- (void)notifyWithSelector:(SEL)selector {
-    NSHashTable *observers = self.observersHashTable;
-    for (id observer in observers) {
-        if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector withObject:self];
+- (void)notifyWithSelector:(NSString *)stringSelector {
+    @synchronized(self) {
+        SEL selector = NSSelectorFromString(stringSelector);
+        NSHashTable *observers = self.observersHashTable;
+        for (id observer in observers) {
+            if ([observer respondsToSelector:selector]) {
+                [observer performSelector:selector withObject:self];
+            }
         }
     }
 }
+
+#pragma mark -
+#pragma mark Private Methods
 
 @end
