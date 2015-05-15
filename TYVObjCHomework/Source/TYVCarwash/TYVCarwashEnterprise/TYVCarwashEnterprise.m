@@ -127,11 +127,9 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    @synchronized(washer) {
-        TYVQueue *cars = self.cars;
-        if (!cars.isEmpty) {
-            [washer perfomWorkWithObject:[cars dequeueObject]];
-        }
+    TYVQueue *cars = self.cars;
+    if (!cars.isEmpty) {
+        [washer perfomWorkWithObject:[cars dequeueObject]];
     }
 }
 

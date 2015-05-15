@@ -65,13 +65,11 @@
 }
 
 - (void)notifyWithSelector:(NSString *)stringSelector {
-    @synchronized(self) {
-        SEL selector = NSSelectorFromString(stringSelector);
-        NSHashTable *observers = self.observersHashTable;
-        for (id observer in observers) {
-            if ([observer respondsToSelector:selector]) {
-                [observer performSelector:selector withObject:self];
-            }
+    SEL selector = NSSelectorFromString(stringSelector);
+    NSHashTable *observers = self.observersHashTable;
+    for (id observer in observers) {
+        if ([observer respondsToSelector:selector]) {
+            [observer performSelector:selector withObject:self];
         }
     }
 }

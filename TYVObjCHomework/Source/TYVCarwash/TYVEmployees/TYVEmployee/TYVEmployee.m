@@ -95,8 +95,6 @@
     }
 }
 
-#warning add synchronized in moneykeeper
-#warning fix synchronized here
 - (void)workWithObject:(id<TYVMoneyTransfer> )object {
     @autoreleasepool {
         @synchronized (object) {

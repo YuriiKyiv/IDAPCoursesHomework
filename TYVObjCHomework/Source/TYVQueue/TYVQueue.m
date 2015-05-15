@@ -39,7 +39,9 @@
 #pragma mark Accessors
 
 - (BOOL)isEmpty {
-    return ([self.queue count] == 0);
+    @synchronized(self) {
+        return ([self.queue count] == 0);
+    }
 }
 
 #pragma mark -
