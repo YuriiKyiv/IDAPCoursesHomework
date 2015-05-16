@@ -14,8 +14,6 @@
 @property (nonatomic, copy)     NSString            *duty;
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
-@property (nonatomic, retain)   NSHashTable         *observersHashTable;
-
 @end
 
 @implementation TYVEmployee
@@ -29,7 +27,6 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
-    self.observersHashTable = nil;
     
     [super dealloc];
 }
@@ -49,7 +46,6 @@
     if (self) {
         self.duty = duty;
         self.salary = salary;
-        self.observersHashTable = [NSHashTable weakObjectsHashTable];
         self.state = TYVEmployeeDidBecomeFree;
         self.money = money;
     }
@@ -59,10 +55,6 @@
 
 #pragma mark -
 #pragma mark Accessors
-
-- (NSSet *)observersSet {
-    return self.observersHashTable.setRepresentation;
-}
 
 - (void)setState:(TYVEmployeeState)state {
     @synchronized(self) {

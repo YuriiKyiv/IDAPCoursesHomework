@@ -39,8 +39,6 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 @property (nonatomic, assign)   TYVEmployeeState    state;
 
-@property (nonatomic, readonly) NSSet               *observersSet;
-
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
