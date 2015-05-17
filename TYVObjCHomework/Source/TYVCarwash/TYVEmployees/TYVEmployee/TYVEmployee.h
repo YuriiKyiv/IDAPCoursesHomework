@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
 
-- (void)workWithObject:(id)object;
+- (void)workWithObject:(id<TYVMoneyTransfer>)object;
 
 - (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object;
 
