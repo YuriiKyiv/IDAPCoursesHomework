@@ -19,7 +19,7 @@
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
-static const NSUInteger kTYVMaxWasharsCount = 17;
+static const NSUInteger kTYVMaxWasharsCount = 23;
 static const NSUInteger kTYVMaxCarsCount = 333;
 
 @interface TYVCarwashEnterprise ()
@@ -82,13 +82,21 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 - (void)work {
     self.cars = [[[TYVQueue alloc] init] autorelease];
     TYVQueue *carsQueue = self.cars;
+    TYVCar *car = nil;
     for (NSUInteger i = 0; i < kTYVMaxCarsCount; i++) {
-        [carsQueue enqueueObject:[TYVCar object]];
+        car = [TYVCar object];
+        car.money = [NSDecimalNumber decimalNumberWithString:@"100000"];
+        [carsQueue enqueueObject:car];
     }
-
-    TYVWasher *washer = nil;
-    while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
-        [washer perfomWorkWithObject:[carsQueue dequeueObject]];
+    
+//    TYVWasher *washer = nil;
+//    while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
+//        [washer perfomWorkWithObject:[carsQueue dequeueObject]];
+//    }
+    
+    NSSet *freeWashersSet = [self.employees freeEmployeesWithClass:[TYVWasher class]];
+    for (TYVWasher *washer in freeWashersSet) {
+        [self employeeDidBecomeFree:washer];
     }
     
     NSLog(@"----------------------------");
@@ -131,10 +139,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     if (!cars.isEmpty) {
         [washer perfomWorkWithObject:[cars dequeueObject]];
     }
-}
-
-- (void)employeeDidBecomeBusy:(TYVEmployee *)employee {
-    NSLog(@"Employee is starting to work");
 }
 
 @end
