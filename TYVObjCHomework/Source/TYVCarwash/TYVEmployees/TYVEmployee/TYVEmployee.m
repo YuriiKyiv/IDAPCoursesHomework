@@ -34,8 +34,7 @@
     [super dealloc];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     return [self initWithDuty:@""
                        salary:[NSDecimalNumber zero]
                         money:[NSDecimalNumber zero]];
@@ -62,18 +61,18 @@
 
 - (void)setState:(TYVEmployeeState)state {
     NSLock *lock = self.lock;
+    if (_state != state) {
+        [lock lock];
         if (_state != state) {
-            [lock lock];
-            if (_state != state) {
-                _state = state;
-                NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
-                [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                                       withObject:stringSelector
+            _state = state;
+            NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
+            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                                   withObject:stringSelector
                                     waitUntilDone:NO];
-            }
-            
-            [lock unlock];
         }
+            
+        [lock unlock];
+    }
 }
 
 #pragma mark -

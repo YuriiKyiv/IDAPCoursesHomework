@@ -10,7 +10,7 @@
 #import "TYVAccountant.h"
 
 @interface TYVDirector ()
-@property (nonatomic, retain)    NSDecimalNumber    *capital;
+@property (nonatomic, retain)   NSDecimalNumber *capital;
 
 - (void)profit;
 
@@ -56,6 +56,7 @@
     @autoreleasepool {
         @synchronized(self) {
             [super workWithObject:anAccountant];
+            NSLog(@"Director money = %@", self.money);
             anAccountant.state = TYVEmployeeDidBecomeFree;
             [self profit];
             self.state = TYVEmployeeDidBecomeFree;
@@ -69,7 +70,6 @@
 - (void)profit {
     usleep(arc4random_uniform(1000));
     self.capital = [self.capital decimalNumberByAdding:self.money];
-    NSLog(@"Director capital = %@", self.money);
 }
 
 @end
