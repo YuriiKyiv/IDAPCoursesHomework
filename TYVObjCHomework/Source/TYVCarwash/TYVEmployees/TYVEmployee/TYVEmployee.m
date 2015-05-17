@@ -14,6 +14,8 @@
 @property (nonatomic, copy)     NSString            *duty;
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
+@property (nonatomic, retain)   NSLock              *lock;
+
 @end
 
 @implementation TYVEmployee
@@ -27,6 +29,7 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
+    self.lock = nil;
     
     [super dealloc];
 }
@@ -48,6 +51,7 @@
         self.salary = salary;
         self.state = TYVEmployeeDidBecomeFree;
         self.money = money;
+        self.lock = [[NSLock new] autorelease];
     }
     
     return self;
@@ -57,15 +61,19 @@
 #pragma mark Accessors
 
 - (void)setState:(TYVEmployeeState)state {
-    @synchronized(self) {
+    NSLock *lock = self.lock;
         if (_state != state) {
-            _state = state;
-            NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
-            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                                   withObject:stringSelector
-                                waitUntilDone:NO];
+            [lock lock];
+            if (_state != state) {
+                _state = state;
+                NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
+                [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                                       withObject:stringSelector
+                                    waitUntilDone:NO];
+            }
+            
+            [lock unlock];
         }
-    }
 }
 
 #pragma mark -
@@ -89,10 +97,8 @@
 
 - (void)workWithObject:(id<TYVMoneyTransfer> )object {
     @autoreleasepool {
-        @synchronized (object) {
             self.state = TYVEmployeeDidBecomeBusy;
             [self takeMoney:object.money fromObject:object];
-        }
     }
 }
 

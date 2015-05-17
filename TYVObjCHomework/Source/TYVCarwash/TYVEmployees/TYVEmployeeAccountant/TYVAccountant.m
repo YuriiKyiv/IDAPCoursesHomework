@@ -60,10 +60,7 @@
             [super workWithObject:washer];
             washer.state = TYVEmployeeDidBecomeFree;
             [self count];
-            NSString *stringSelector = NSStringFromSelector([self selectorForState:TYVEmployeeDidPerfomWorkWithObject]);
-            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                                   withObject:stringSelector
-                                waitUntilDone:NO];
+            self.state = TYVEmployeeDidPerfomWorkWithObject;
         }
     }
 }
@@ -77,4 +74,4 @@
     NSLog(@"Accountant capital = %@", self.capital);
 }
 
-@end
+@end;
