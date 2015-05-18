@@ -19,6 +19,7 @@
 @end
 
 @implementation TYVEmployee
+
 @synthesize money = _money;
 
 @dynamic observersSet;
@@ -59,12 +60,13 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (void)setState:(TYVEmployeeState)state {
+- (void)setState:(NSUInteger)state {
+    NSUInteger currentState = super.state;
     NSLock *lock = self.lock;
-    if (_state != state) {
+    if (currentState != state) {
         [lock lock];
-        if (_state != state) {
-            _state = state;
+        if (currentState != state) {
+            currentState = state;
             NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
             [self performSelectorOnMainThread:@selector(notifyWithSelector:)
                                    withObject:stringSelector

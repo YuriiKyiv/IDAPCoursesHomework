@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface TYVProtocolObservableObject : NSObject
-
-@property (nonatomic, readonly) NSSet   *observersSet;
+@property (nonatomic, assign)   NSUInteger  state;
+@property (nonatomic, readonly) NSSet       *observersSet;
 
 - (void)addObserver:(id)observer;
 

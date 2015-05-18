@@ -37,8 +37,6 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 @property (nonatomic, readonly) NSDecimalNumber     *salary;
 @property (nonatomic, assign)   NSUInteger          experience;
 
-@property (nonatomic, assign)   TYVEmployeeState    state;
-
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
