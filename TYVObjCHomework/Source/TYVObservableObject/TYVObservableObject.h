@@ -12,7 +12,7 @@ typedef void(^TYVStateChangeHandler)(void);
 
 @interface TYVObservableObject : NSObject
 @property (nonatomic, readonly) NSSet       *observersSet;
-@property (nonatomic, assign) NSUInteger    state;
+@property (nonatomic, assign)   NSUInteger  state;
 
 - (void)setState:(NSUInteger)state withObject:(id)object;
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVObservableObject.h"
 
 typedef NS_ENUM(NSUInteger, TYVObservationType) {
     TYVProtocolObservation,
@@ -15,7 +16,18 @@ typedef NS_ENUM(NSUInteger, TYVObservationType) {
 
 @interface _TYVObserverableState : NSObject
 @property (nonatomic, readonly) id                  observer;
+@property (nonatomic, readonly) TYVObservableObject *observableObject;
 @property (nonatomic, readonly) TYVObservationType  observationType;
 @property (nonatomic, readonly) NSMapTable          *handlers;
+
+- (instancetype)initWithObserver:(id)obsrver;
+
+- (void)setHandler:(TYVStateChangeHandler)handler forState:(NSUInteger)state;
+- (void)removeHendlerForState:(NSUInteger)state;
+- (TYVStateChangeHandler)handlerForState:(NSUInteger)state;
+- (BOOL)containsHandlerForState:(NSUInteger)state;
+
+- (void)notifyWithState:(NSUInteger)state;
+- (void)notifyWithState:(NSUInteger)state withObject:(id)object;
 
 @end
