@@ -89,7 +89,7 @@
             return @selector(employeeDidBecomeBusy:);
             
         case TYVEmployeeDidPerfomWorkWithObject:
-            return @selector(employee:didPerfomWorkWithObject:);
+            return @selector(employeeDidPerfomWork:);
             
         default:
             return nil;
@@ -110,7 +110,7 @@
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
+- (void)employeeDidPerfomWork:(TYVEmployee *)employee{
     [self perfomWorkWithObject:employee];
 }
 

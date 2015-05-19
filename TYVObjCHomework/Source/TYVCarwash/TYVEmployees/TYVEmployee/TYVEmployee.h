@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 - (void)employeeDidBecomeBusy:(TYVEmployee *)employee;
 
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
+- (void)employeeDidPerfomWork:(TYVEmployee *)employee;
 
 @end
 
