@@ -42,6 +42,20 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
+    NSSet *washersSet = [self.employees freeEmployeesWithClass:[TYVWasher class]];
+    NSSet *accountantsSet = [self.employees freeEmployeesWithClass:[TYVAccountant class]];
+    for (TYVEmployee *employee in washersSet) {
+        [employee removeObserver:self];
+        for (TYVAccountant *accountant in accountantsSet) {
+            [employee removeObserver:accountant];
+        }
+    }
+    
+    for (TYVEmployee *employee in accountantsSet) {
+        [employee removeObserver:self.director];
+    }
+    
+    
     self.mutableBuildings = nil;
     self.employees = nil;
     self.director = nil;
