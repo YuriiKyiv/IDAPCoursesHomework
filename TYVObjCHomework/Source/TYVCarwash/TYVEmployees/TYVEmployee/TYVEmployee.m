@@ -14,7 +14,7 @@
 @property (nonatomic, copy)     NSString            *duty;
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
-@property (nonatomic, retain)   NSLock              *lock;
+@property (nonatomic, retain)   NSRecursiveLock     *lock;
 
 @end
 
@@ -51,7 +51,7 @@
         self.salary = salary;
         self.state = TYVEmployeeDidBecomeFree;
         self.money = money;
-        self.lock = [[NSLock new] autorelease];
+        self.lock = [[NSRecursiveLock new] autorelease];
     }
     
     return self;
@@ -62,7 +62,7 @@
 
 - (void)setState:(NSUInteger)state {
     NSUInteger currentState = super.state;
-    NSLock *lock = self.lock;
+    NSRecursiveLock *lock = self.lock;
     if (currentState != state) {
         [lock lock];
         if (currentState != state) {
@@ -98,12 +98,12 @@
 
 - (void)workWithObject:(id<TYVMoneyTransfer> )object {
     @autoreleasepool {
-            self.state = TYVEmployeeDidBecomeBusy;
             [self takeMoney:object.money fromObject:object];
     }
 }
 
 - (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object {
+    self.state = TYVEmployeeDidBecomeBusy;
     [self performSelectorInBackground:@selector(workWithObject:) withObject:object];
 }
 
