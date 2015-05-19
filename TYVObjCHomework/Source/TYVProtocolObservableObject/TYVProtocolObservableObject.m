@@ -46,15 +46,21 @@
 #pragma mark Public Methods
 
 - (void)addObserver:(id)observer {
-    [self.observersHashTable addObject:observer];
+    @synchronized(self) {
+        [self.observersHashTable addObject:observer];
+    }
 }
 
 - (void)removeObserver:(id)observer {
-    [self.observersHashTable removeObject:observer];
+    @synchronized(self) {
+        [self.observersHashTable removeObject:observer];
+    }
 }
 
 - (BOOL)containsObserver:(id)observer {
-    return [self.observersHashTable containsObject:observer];
+    @synchronized(self) {
+        return [self.observersHashTable containsObject:observer];
+    }
     
 }
 
@@ -65,11 +71,13 @@
 }
 
 - (void)notifyWithSelector:(NSString *)stringSelector {
-    SEL selector = NSSelectorFromString(stringSelector);
-    NSHashTable *observers = self.observersHashTable;
-    for (id observer in observers) {
-        if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector withObject:self];
+    @synchronized(self) {
+        SEL selector = NSSelectorFromString(stringSelector);
+        NSHashTable *observers = self.observersHashTable;
+        for (id observer in observers) {
+            if ([observer respondsToSelector:selector]) {
+                [observer performSelector:selector withObject:self];
+            }
         }
     }
 }
