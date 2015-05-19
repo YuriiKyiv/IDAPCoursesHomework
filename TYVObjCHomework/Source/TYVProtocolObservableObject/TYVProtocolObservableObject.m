@@ -39,7 +39,9 @@
 #pragma mark Accessors
 
 - (NSSet *)observersSet {
-    return self.observersHashTable.setRepresentation;
+    @synchronized(self) {
+        return self.observersHashTable.setRepresentation;
+    }
 }
 
 #pragma mark -

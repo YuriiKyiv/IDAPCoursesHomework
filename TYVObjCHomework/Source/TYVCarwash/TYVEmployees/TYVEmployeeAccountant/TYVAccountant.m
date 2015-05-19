@@ -52,23 +52,6 @@
 }
 
 #pragma mark -
-#pragma mark Accessors
-
-//- (void)setState:(NSUInteger)state {
-//    if (super.state != state) {
-//        @synchronized(self) {
-//            if (state == TYVEmployeeDidBecomeBusy) {
-//                [self.accountantLock lock];
-//            } else {
-//                [self.accountantLock unlock];
-//            }
-//            
-//            super.state = state;
-//        }
-//    }
-//}
-
-#pragma mark -
 #pragma mark Public Methods
 
 - (void)workWithObject:(TYVWasher *)washer {

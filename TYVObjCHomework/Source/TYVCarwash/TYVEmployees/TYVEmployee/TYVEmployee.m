@@ -14,9 +14,6 @@
 @property (nonatomic, copy)     NSString            *duty;
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
-@property (nonatomic, retain)   NSRecursiveLock     *lock;
-@property (nonatomic, retain)   NSRecursiveLock     *moneylock;
-
 @end
 
 @implementation TYVEmployee
@@ -31,8 +28,6 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
-    self.lock = nil;
-    self.moneylock = nil;
     
     [super dealloc];
 }
@@ -53,8 +48,6 @@
         self.salary = salary;
         self.state = TYVEmployeeDidBecomeFree;
         self.money = money;
-        self.lock = [[NSRecursiveLock new] autorelease];
-        self.moneylock = [[NSRecursiveLock new] autorelease];
     }
     
     return self;
@@ -64,17 +57,15 @@
 #pragma mark Accessors
 
 - (void)setState:(NSUInteger)state {
-    NSRecursiveLock *lock = self.lock;
     if (super.state != state) {
-        [lock lock];
-        if (super.state != state) {
-            super.state = state;
-            [self performSelectorOnMainThread:@selector(notify)
-                                   withObject:nil
+        @synchronized(self) {
+            if (super.state != state) {
+                super.state = state;
+                [self performSelectorOnMainThread:@selector(notify)
+                                       withObject:nil
                                     waitUntilDone:NO];
+            }
         }
-            
-        [lock unlock];
     }
 }
 
@@ -97,7 +88,7 @@
             return @selector(employeeDidPerfomWork:);
             
         default:
-            return nil;
+            return NULL;
     }
 }
 
@@ -123,17 +114,18 @@
 #pragma mark TYVMoneyTransfer
 
 - (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransfer>)object {
-    NSRecursiveLock *lock = self.lock;
-    [lock lock];
-    self.money = [self.money decimalNumberByAdding:money];
-    object.money = [object.money decimalNumberBySubtracting:money];
-    [lock unlock];
+    @synchronized(object) {
+        self.money = [self.money decimalNumberByAdding:money];
+        object.money = [object.money decimalNumberBySubtracting:money];
+    }
 }
 
 
 - (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransfer>)object {
-    self.money = [self.money decimalNumberBySubtracting:money];
-    object.money = [object.money decimalNumberByAdding:money];
+    @synchronized(object) {
+        self.money = [self.money decimalNumberBySubtracting:money];
+        object.money = [object.money decimalNumberByAdding:money];
+    }
 }
 
 @end

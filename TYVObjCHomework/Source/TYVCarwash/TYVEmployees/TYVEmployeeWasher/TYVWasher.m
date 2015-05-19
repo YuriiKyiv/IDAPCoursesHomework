@@ -35,9 +35,11 @@
 
 - (void)workWithObject:(id<TYVMoneyTransfer>)car {
     @autoreleasepool {
-        [self takeMoney:self.price fromObject:car];
-        [self washCar:car];
-        self.state = TYVEmployeeDidPerfomWorkWithObject;
+        @synchronized(self) {
+            [self takeMoney:self.price fromObject:car];
+            [self washCar:car];
+            self.state = TYVEmployeeDidPerfomWorkWithObject;
+        }
     }
 }
 
