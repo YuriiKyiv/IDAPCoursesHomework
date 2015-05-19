@@ -35,7 +35,6 @@
 
 - (void)workWithObject:(id<TYVMoneyTransfer>)car {
     @autoreleasepool {
-        self.state = TYVEmployeeDidBecomeBusy;
         [self takeMoney:self.price fromObject:car];
         [self washCar:car];
         self.state = TYVEmployeeDidPerfomWorkWithObject;
