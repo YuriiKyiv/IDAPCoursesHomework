@@ -70,9 +70,8 @@
     return nil;
 }
 
-- (void)notifyWithSelector:(NSString *)stringSelector {
+- (void)notifyWithSelector:(SEL)selector {
     @synchronized(self) {
-        SEL selector = NSSelectorFromString(stringSelector);
         NSHashTable *observers = self.observersHashTable;
         for (id observer in observers) {
             if ([observer respondsToSelector:selector]) {
