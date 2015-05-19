@@ -45,4 +45,6 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 - (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object;
 
+- (void)notify;
+
 @end

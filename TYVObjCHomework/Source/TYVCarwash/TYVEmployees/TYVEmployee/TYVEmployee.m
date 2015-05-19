@@ -15,6 +15,7 @@
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
 @property (nonatomic, retain)   NSRecursiveLock     *lock;
+@property (nonatomic, retain)   NSRecursiveLock     *moneylock;
 
 @end
 
@@ -31,6 +32,7 @@
     self.duty = nil;
     self.salary = nil;
     self.lock = nil;
+    self.moneylock = nil;
     
     [super dealloc];
 }
@@ -52,6 +54,7 @@
         self.state = TYVEmployeeDidBecomeFree;
         self.money = money;
         self.lock = [[NSRecursiveLock new] autorelease];
+        self.moneylock = [[NSRecursiveLock new] autorelease];
     }
     
     return self;
@@ -61,15 +64,13 @@
 #pragma mark Accessors
 
 - (void)setState:(NSUInteger)state {
-    NSUInteger currentState = super.state;
     NSRecursiveLock *lock = self.lock;
-    if (currentState != state) {
+    if (super.state != state) {
         [lock lock];
-        if (currentState != state) {
-            currentState = state;
-            NSString *stringSelector = NSStringFromSelector([self selectorForState:state]);
-            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                                   withObject:stringSelector
+        if (super.state != state) {
+            super.state = state;
+            [self performSelectorOnMainThread:@selector(notify)
+                                   withObject:nil
                                     waitUntilDone:NO];
         }
             
@@ -79,6 +80,10 @@
 
 #pragma mark -
 #pragma mark Public Methods
+
+- (void)notify {
+    [self notifyWithSelector:[self selectorForState:self.state]];
+}
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
@@ -110,7 +115,7 @@
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employeeDidPerfomWork:(TYVEmployee *)employee{
+- (void)employeeDidPerfomWork:(TYVEmployee *)employee {
     [self perfomWorkWithObject:employee];
 }
 
@@ -118,8 +123,11 @@
 #pragma mark TYVMoneyTransfer
 
 - (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransfer>)object {
+    NSRecursiveLock *lock = self.lock;
+    [lock lock];
     self.money = [self.money decimalNumberByAdding:money];
     object.money = [object.money decimalNumberBySubtracting:money];
+    [lock unlock];
 }
 
 
