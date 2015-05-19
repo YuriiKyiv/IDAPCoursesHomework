@@ -21,7 +21,9 @@
 #pragma mark Class Methods
 
 + (TYVEmployeesPool *)pool {
-    return [[[TYVEmployeesPool alloc] init] autorelease];
+    @synchronized(self) {
+        return [[[TYVEmployeesPool alloc] init] autorelease];
+    }
 }
 
 #pragma mark -
@@ -46,11 +48,15 @@
 #pragma mark Public Methods
 
 - (void)addEmployee:(TYVEmployee *)employee {
-    [self.employeesSet addObject:employee];
+    @synchronized(self) {
+        [self.employeesSet addObject:employee];
+    }
 }
 
 - (void)removeEmployee:(TYVEmployee *)employee {
-    [self.employeesSet removeObject:employee];
+    @synchronized(self) {
+        [self.employeesSet removeObject:employee];
+    }
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
@@ -70,28 +76,38 @@
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
+    @synchronized(self) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
         return ([evaluatedObject isMemberOfClass:class]
                 && evaluatedObject.state == TYVEmployeeDidBecomeFree);
-    }];
+        }];
     
-    return [self.employeesSet filteredSetUsingPredicate:predicate];
+        return [self.employeesSet filteredSetUsingPredicate:predicate];
+        
+    }
 }
 
 - (NSSet *)employeesWithClass:(Class)class {
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return ([evaluatedObject isMemberOfClass:class]);
-    }];
+    @synchronized(self) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+            return ([evaluatedObject isMemberOfClass:class]);
+        }];
     
-    return [self.employeesSet filteredSetUsingPredicate:predicate];
+        return [self.employeesSet filteredSetUsingPredicate:predicate];
+        
+    }
 }
 
 - (BOOL)containsEmployee:(TYVEmployee *)employee {
-    return [self.employeesSet containsObject:employee];
+    @synchronized(self) {
+        return [self.employeesSet containsObject:employee];
+    }
 }
 
 - (NSUInteger)count {
-    return [self.employeesSet count];
+    @synchronized(self) {
+        return [self.employeesSet count];
+    }
 }
 
 @end
