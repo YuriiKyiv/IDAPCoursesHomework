@@ -38,7 +38,6 @@
         [self takeMoney:self.price fromObject:car];
         [self washCar:car];
         self.state = TYVEmployeeDidPerfomWorkWithObject;
-        NSLog(@"Washer with exp %lu MONEY = %@",(unsigned long)self.experience ,self.money);
     }
 }
 

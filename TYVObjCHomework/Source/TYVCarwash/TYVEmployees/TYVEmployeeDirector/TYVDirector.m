@@ -52,12 +52,12 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)workWithObject:(TYVAccountant *)anAccountant {
+- (void)workWithObject:(TYVAccountant *)accountant {
     @autoreleasepool {
         @synchronized(self) {
-            [super workWithObject:anAccountant];
+            [super workWithObject:accountant];
             NSLog(@"Director money = %@", self.money);
-            anAccountant.state = TYVEmployeeDidBecomeFree;
+            accountant.state = TYVEmployeeDidBecomeFree;
             [self profit];
             self.state = TYVEmployeeDidBecomeFree;
         }
