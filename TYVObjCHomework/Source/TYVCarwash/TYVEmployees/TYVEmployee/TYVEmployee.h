@@ -17,7 +17,7 @@
 typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
     TYVEmployeeDidBecomeFree,
     TYVEmployeeDidBecomeBusy,
-    TYVEmployeeDidPerfomWorkWithObject
+    TYVEmployeeDidPerformWorkWithObject
 };
 
 @protocol TYVEmployeeObserver <NSObject>
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 - (void)employeeDidBecomeBusy:(TYVEmployee *)employee;
 
-- (void)employeeDidPerfomWork:(TYVEmployee *)employee;
+- (void)employeeDidPerformWork:(TYVEmployee *)employee;
 
 @end
 
@@ -43,6 +43,6 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 - (void)workWithObject:(id<TYVMoneyTransfer>)object;
 
-- (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object;
+- (void)performWorkWithObject:(id<TYVMoneyTransfer>)object;
 
 @end

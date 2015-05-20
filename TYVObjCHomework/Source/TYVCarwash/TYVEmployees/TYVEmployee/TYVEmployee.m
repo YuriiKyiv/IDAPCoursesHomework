@@ -14,7 +14,7 @@
 @property (nonatomic, copy)     NSString            *duty;
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
-- (void)perfomWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object;
+- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object;
 - (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
 
 @end
@@ -67,8 +67,8 @@
         case TYVEmployeeDidBecomeBusy:
             return @selector(employeeDidBecomeBusy:);
             
-        case TYVEmployeeDidPerfomWorkWithObject:
-            return @selector(employeeDidPerfomWork:);
+        case TYVEmployeeDidPerformWorkWithObject:
+            return @selector(employeeDidPerformWork:);
             
         default:
             return NULL;
@@ -79,14 +79,14 @@
     [self takeMoney:object.money fromObject:object];
 }
 
-- (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object {
+- (void)performWorkWithObject:(id<TYVMoneyTransfer>)object {
     @synchronized (self) {
         self.state = TYVEmployeeDidBecomeBusy;
-        [self performSelectorInBackground:@selector(perfomWorkWithObjectInBackground:) withObject:object];
+        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:) withObject:object];
     }
 }
 
-- (void)perfomWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object {
+- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object {
     @autoreleasepool {
         @synchronized (self) {
             [self workWithObject:object];
@@ -96,14 +96,14 @@
 }
 
 - (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
-    self.state = TYVEmployeeDidPerfomWorkWithObject;
+    self.state = TYVEmployeeDidPerformWorkWithObject;
 }
 
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employeeDidPerfomWork:(TYVEmployee *)employee {
-    [self perfomWorkWithObject:employee];
+- (void)employeeDidPerformWork:(TYVEmployee *)employee {
+    [self performWorkWithObject:employee];
 }
 
 #pragma mark -

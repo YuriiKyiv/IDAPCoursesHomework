@@ -36,7 +36,7 @@
 - (void)workWithObject:(id<TYVMoneyTransfer>)car {
     [self takeMoney:self.price fromObject:car];
     [self washCar:car];
-    self.state = TYVEmployeeDidPerfomWorkWithObject;
+    self.state = TYVEmployeeDidPerformWorkWithObject;
 }
 
 #pragma mark -

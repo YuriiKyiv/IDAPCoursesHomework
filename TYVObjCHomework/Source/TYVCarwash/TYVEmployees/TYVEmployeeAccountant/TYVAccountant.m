@@ -60,7 +60,7 @@
             [super workWithObject:washer];
             washer.state = TYVEmployeeDidBecomeFree;
             [self count];
-            self.state = TYVEmployeeDidPerfomWorkWithObject;
+            self.state = TYVEmployeeDidPerformWorkWithObject;
         }
     }
 }
