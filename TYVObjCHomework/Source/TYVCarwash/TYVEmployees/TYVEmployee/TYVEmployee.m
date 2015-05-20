@@ -14,6 +14,9 @@
 @property (nonatomic, copy)     NSString            *duty;
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
+- (void)perfomWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object;
+- (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
+
 @end
 
 @implementation TYVEmployee
@@ -73,14 +76,27 @@
 }
 
 - (void)workWithObject:(id<TYVMoneyTransfer> )object {
-    @autoreleasepool {
-            [self takeMoney:object.money fromObject:object];
-    }
+    [self takeMoney:object.money fromObject:object];
 }
 
 - (void)perfomWorkWithObject:(id<TYVMoneyTransfer>)object {
-    self.state = TYVEmployeeDidBecomeBusy;
-    [self performSelectorInBackground:@selector(workWithObject:) withObject:object];
+    @synchronized (self) {
+        self.state = TYVEmployeeDidBecomeBusy;
+        [self performSelectorInBackground:@selector(perfomWorkWithObjectInBackground:) withObject:object];
+    }
+}
+
+- (void)perfomWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object {
+    @autoreleasepool {
+        @synchronized (self) {
+            [self workWithObject:object];
+#warning add method of notification on main thread
+        }
+    }
+}
+
+- (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
+    self.state = TYVEmployeeDidPerfomWorkWithObject;
 }
 
 #pragma mark -
