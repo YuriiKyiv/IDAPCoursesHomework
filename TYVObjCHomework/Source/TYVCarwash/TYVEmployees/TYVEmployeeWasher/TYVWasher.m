@@ -34,13 +34,9 @@
 #pragma mark Public Methods
 
 - (void)workWithObject:(id<TYVMoneyTransfer>)car {
-    @autoreleasepool {
-        @synchronized(self) {
-            [self takeMoney:self.price fromObject:car];
-            [self washCar:car];
-            self.state = TYVEmployeeDidPerfomWorkWithObject;
-        }
-    }
+    [self takeMoney:self.price fromObject:car];
+    [self washCar:car];
+    self.state = TYVEmployeeDidPerfomWorkWithObject;
 }
 
 #pragma mark -
