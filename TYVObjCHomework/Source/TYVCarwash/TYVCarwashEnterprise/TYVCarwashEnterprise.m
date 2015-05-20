@@ -108,6 +108,17 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     [runLoop run];
 }
 
+- (void)addCar:(TYVCar *)car {
+    @synchronized (self) {
+        TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
+        if (washer) {
+            [washer perfomWorkWithObject:car];
+        } else {
+            [self.cars enqueueObject:car];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark Private Methods
 

@@ -10,6 +10,8 @@
 
 #import "TYVWasher.h"
 
+@class TYVCar;
+
 @interface TYVCarwashEnterprise : NSObject <TYVEmployeeObserver>
 
 - (void)hireStaff;
@@ -17,5 +19,7 @@
 - (void)prepareBuildings;
 
 - (void)work;
+
+- (void)addCar:(TYVCar *)car;
 
 @end
