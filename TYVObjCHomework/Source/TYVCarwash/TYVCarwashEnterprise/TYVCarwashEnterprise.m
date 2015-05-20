@@ -34,6 +34,8 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 
 - (void)hireWasher;
 
+- (void)killEmployeesConnections;
+
 @end
 
 @implementation TYVCarwashEnterprise
@@ -42,19 +44,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    NSSet *washersSet = [self.employees freeEmployeesWithClass:[TYVWasher class]];
-    NSSet *accountantsSet = [self.employees freeEmployeesWithClass:[TYVAccountant class]];
-    for (TYVEmployee *employee in washersSet) {
-        [employee removeObserver:self];
-        for (TYVAccountant *accountant in accountantsSet) {
-            [employee removeObserver:accountant];
-        }
-    }
-    
-    for (TYVEmployee *employee in accountantsSet) {
-        [employee removeObserver:self.director];
-    }
-    
+    [self killEmployeesConnections];
     
     self.mutableBuildings = nil;
     self.employees = nil;
@@ -139,6 +129,21 @@ static const NSUInteger kTYVMaxCarsCount = 333;
         [washer addObserver:self];
         [pool addEmployee:washer];
         washer.experience = index;
+    }
+}
+
+- (void)killEmployeesConnections {
+    NSSet *washersSet = [self.employees freeEmployeesWithClass:[TYVWasher class]];
+    NSSet *accountantsSet = [self.employees freeEmployeesWithClass:[TYVAccountant class]];
+    for (TYVEmployee *employee in washersSet) {
+        [employee removeObserver:self];
+        for (TYVAccountant *accountant in accountantsSet) {
+            [employee removeObserver:accountant];
+        }
+    }
+    
+    for (TYVEmployee *employee in accountantsSet) {
+        [employee removeObserver:self.director];
     }
 }
 
