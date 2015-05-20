@@ -44,6 +44,19 @@
     }
 }
 
+- (void)setState:(NSUInteger)state {
+    if (_state != state) {
+        @synchronized(self) {
+            if (_state != state) {
+                _state = state;
+                [self performSelectorOnMainThread:@selector(notify)
+                                       withObject:nil
+                                    waitUntilDone:NO];
+            }
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark Public Methods
 
@@ -81,6 +94,10 @@
             }
         }
     }
+}
+
+- (void)notify {
+    [self notifyWithSelector:[self selectorForState:self.state]];
 }
 
 @end

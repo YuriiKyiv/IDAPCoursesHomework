@@ -54,27 +54,7 @@
 }
 
 #pragma mark -
-#pragma mark Accessors
-
-- (void)setState:(NSUInteger)state {
-    if (super.state != state) {
-        @synchronized(self) {
-            if (super.state != state) {
-                super.state = state;
-                [self performSelectorOnMainThread:@selector(notify)
-                                       withObject:nil
-                                    waitUntilDone:NO];
-            }
-        }
-    }
-}
-
-#pragma mark -
 #pragma mark Public Methods
-
-- (void)notify {
-    [self notifyWithSelector:[self selectorForState:self.state]];
-}
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
