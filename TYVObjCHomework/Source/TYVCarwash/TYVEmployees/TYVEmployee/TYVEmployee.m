@@ -15,7 +15,7 @@
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object;
-- (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
+- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
 
 @end
 
@@ -76,19 +76,24 @@
 }
 
 - (void)workWithObject:(id<TYVMoneyTransfer> )object {
-    [self takeMoney:object.money fromObject:object];
+
+}
+
+- (void)workWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
+    
 }
 
 - (void)performWorkWithObject:(id<TYVMoneyTransfer>)object {
     @synchronized (self) {
         self.state = TYVEmployeeDidBecomeBusy;
-        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:) withObject:object];
+        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+                               withObject:object];
+        [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
+                               withObject:object
+                            waitUntilDone:NO];
     }
 }
 
-- (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
-    self.state = TYVEmployeeDidPerformWorkWithObject;
-}
 
 #pragma mark -
 #pragma mark Private Methods
@@ -97,7 +102,14 @@
     @autoreleasepool {
         @synchronized (self) {
             [self workWithObject:object];
-#warning add method of notification on main thread
+        }
+    }
+}
+
+- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
+    @autoreleasepool {
+        @synchronized (self) {
+            [self workWithObjectOnMainThread:object];
         }
     }
 }
