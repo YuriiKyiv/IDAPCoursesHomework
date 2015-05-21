@@ -13,6 +13,7 @@
 #import "TYVCarwashEnterprise.h"
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
+#import "TYVCarManager.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -38,6 +39,14 @@ int main(int argc, const char * argv[]) {
         
         TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
         [enterprise work];
+        
+        TYVCarManager *carManager = [[[TYVCarManager alloc] initWithEnterprise:enterprise
+                                                                   carCapacity:10
+                                                                         delay:1] autorelease];
+        [carManager performSelectorInBackground:@selector(start) withObject:nil];
+        
+        NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
+        [runLoop run];
     }
     
     return 0;

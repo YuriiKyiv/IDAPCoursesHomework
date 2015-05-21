@@ -32,9 +32,11 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 
 - (void)hireAdminStaff;
 
-- (void)hireWasher;
+- (void)hireWashers;
 
 - (void)killEmployeesConnections;
+
+- (void)giveWorkForWasher:(TYVWasher *)washer;
 
 @end
 
@@ -80,7 +82,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 - (void)hireStaff {
     self.employees = [TYVEmployeesPool pool];
     [self hireAdminStaff];
-    [self hireWasher];
+    [self hireWashers];
 }
 
 - (void)work {
@@ -96,16 +98,14 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     TYVWasher *washer = nil;
     @synchronized(self) {
         while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
-            [washer performWorkWithObject:[carsQueue dequeueObject]];
+            [self giveWorkForWasher:washer];
             NSLog(@"First step");
         }
     }
     
     NSLog(@"----------------------------");
     NSLog(@"Cars Queue is Empty");
-    
-    NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
-    [runLoop run];
+
 }
 
 - (void)addCar:(TYVCar *)car {
@@ -131,7 +131,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     [accountant addObserver:director];
 }
 
-- (void)hireWasher {
+- (void)hireWashers {
     TYVEmployeesPool *pool = self.employees;
     TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
     NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
@@ -145,8 +145,8 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 }
 
 - (void)killEmployeesConnections {
-    NSSet *washersSet = [self.employees freeEmployeesWithClass:[TYVWasher class]];
-    NSSet *accountantsSet = [self.employees freeEmployeesWithClass:[TYVAccountant class]];
+    NSSet *washersSet = [self.employees employeesWithClass:[TYVWasher class]];
+    NSSet *accountantsSet = [self.employees employeesWithClass:[TYVAccountant class]];
     for (TYVEmployee *employee in washersSet) {
         [employee removeObserver:self];
         for (TYVAccountant *accountant in accountantsSet) {
@@ -159,16 +159,21 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     }
 }
 
+- (void)giveWorkForWasher:(TYVWasher *)washer {
+    TYVQueue *cars = self.cars;
+    if (!cars.isEmpty) {
+        [washer performWorkWithObject:[cars dequeueObject]];
+        NSLog(@"employeeDidBecomeFree:");
+    }
+
+}
+
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
     @synchronized(self) {
-        TYVQueue *cars = self.cars;
-            if (!cars.isEmpty) {
-                [washer performWorkWithObject:[cars dequeueObject]];
-                NSLog(@"employeeDidBecomeFree:");
-            }
+        [self giveWorkForWasher:washer];
     }
 }
 
