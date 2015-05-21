@@ -15,6 +15,8 @@
 
 @implementation TYVProtocolObservableObject
 
+@synthesize state = _state;
+
 @dynamic observersSet;
 
 #pragma mark -
@@ -54,6 +56,12 @@
                                     waitUntilDone:NO];
             }
         }
+    }
+}
+
+- (NSUInteger)state {
+    @synchronized (self) {
+        return _state;
     }
 }
 
