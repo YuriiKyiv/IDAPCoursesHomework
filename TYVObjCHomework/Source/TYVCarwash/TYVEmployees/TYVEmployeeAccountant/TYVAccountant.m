@@ -54,11 +54,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)workWithObject:(TYVWasher *)washer {
+- (void)proccesWithObject:(TYVWasher *)washer {
     [self takeMoney:washer.money fromObject:washer];
-    washer.state = TYVEmployeeDidBecomeFree;
     [self count];
-    self.state = TYVEmployeeDidPerformWorkWithObject;
 }
 
 #pragma mark -

@@ -52,11 +52,9 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)workWithObject:(TYVAccountant *)accountant {
+- (void)proccesWithObject:(TYVAccountant *)accountant {
     [self takeMoney:accountant.money fromObject:accountant];
-    accountant.state = TYVEmployeeDidBecomeFree;
     [self profit];
-    self.state = TYVEmployeeDidBecomeFree;
 }
 
 #pragma mark -

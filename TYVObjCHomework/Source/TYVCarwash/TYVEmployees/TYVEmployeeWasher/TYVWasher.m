@@ -33,10 +33,14 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)workWithObject:(id<TYVMoneyTransfer> )object {
+- (void)proccesWithObject:(id<TYVMoneyTransfer> )object {
     [self takeMoney:self.price fromObject:object];
     [self washCar:object];
     self.state = TYVEmployeeDidPerformWorkWithObject;
+}
+
+- (void)finalizeProccesingWithObjectOnMainThread:(TYVCar *)object {
+    
 }
 
 #pragma mark -

@@ -75,22 +75,21 @@
     }
 }
 
-- (void)workWithObject:(id<TYVMoneyTransfer> )object {
+- (void)proccesWithObject:(id<TYVMoneyTransfer> )object {
 
 }
 
-- (void)workWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
+- (void)finalizeProccesingWithObjectOnMainThread:(TYVEmployee *)object {
+    object.state = TYVEmployeeDidBecomeFree;
     
 }
 
 - (void)performWorkWithObject:(id<TYVMoneyTransfer>)object {
     @synchronized (self) {
         self.state = TYVEmployeeDidBecomeBusy;
+        
         [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
                                withObject:object];
-        [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
-                               withObject:object
-                            waitUntilDone:NO];
     }
 }
 
@@ -101,7 +100,11 @@
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object {
     @autoreleasepool {
         @synchronized (self) {
-            [self workWithObject:object];
+            [self proccesWithObject:object];
+            
+            [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
+                                   withObject:object
+                                waitUntilDone:NO];
         }
     }
 }
@@ -109,7 +112,9 @@
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
     @autoreleasepool {
         @synchronized (self) {
-            [self workWithObjectOnMainThread:object];
+            self.state = TYVEmployeeDidPerformWorkWithObject;
+            
+            [self finalizeProccesingWithObjectOnMainThread:object];
         }
     }
 }

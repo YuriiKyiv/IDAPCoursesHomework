@@ -32,10 +32,10 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
                        money:(NSDecimalNumber *)money;
 
 // For overriding method
-- (void)workWithObject:(id<TYVMoneyTransfer>)object;
+- (void)proccesWithObject:(id<TYVMoneyTransfer>)object;
 
 // For overriding method
-- (void)workWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
+- (void)finalizeProccesingWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
 
 - (void)performWorkWithObject:(id<TYVMoneyTransfer>)object;
 
