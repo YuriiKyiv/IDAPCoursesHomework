@@ -15,6 +15,4 @@
 
 - (id)dequeueObject;
 
-- (NSUInteger)count;
-
 @end

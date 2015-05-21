@@ -55,19 +55,12 @@
 
 - (id)dequeueObject {
     @synchronized(self) {
-        id result = nil;
-        if (!self.isEmpty) {
-            NSMutableArray *array = self.queue;
-            result = array[0];
-            [array removeObjectAtIndex:0];
-        }
+        NSMutableArray *array = self.queue;
+        id result = [[[array firstObject] retain] autorelease];
+        [array removeObject:result];
     
         return result;
     }
-}
-
-- (NSUInteger)count {
-    return [self.queue count];
 }
 
 @end
