@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TYVWasher.h"
+#import "TYVEmployeeObserverProtocol.h"
 
 @class TYVCar;
 
-@interface TYVCarwashEnterprise : NSObject <TYVEmployeeObserver>
+@interface TYVCarwashEnterprise : NSObject <TYVEmployeeObserverProtocol>
 
 - (void)hireStaff;
 

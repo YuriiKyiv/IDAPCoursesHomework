@@ -153,6 +153,7 @@
 		5A73B5A51AEAB3B9002B31AF /* TYVMoneyKeeperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVMoneyKeeperSpec.m; path = TYVMoneyKeeperSpec/TYVMoneyKeeperSpec.m; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
+		5A9BF8A11B0DE5C200009AB0 /* TYVEmployeeObserverProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVEmployeeObserverProtocol.h; sourceTree = "<group>"; };
 		5AA809D51B064D7B00309221 /* TYVMoneyTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVMoneyTransfer.h; sourceTree = "<group>"; };
 		5AAB27B01AEAAAE60014D965 /* ObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AAB27B31AEAAAE60014D965 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -534,6 +535,7 @@
 			children = (
 				5AAB27CD1AEAB1080014D965 /* TYVEmployee.h */,
 				5AAB27CE1AEAB1080014D965 /* TYVEmployee.m */,
+				5A9BF8A11B0DE5C200009AB0 /* TYVEmployeeObserverProtocol.h */,
 			);
 			path = TYVEmployee;
 			sourceTree = "<group>";

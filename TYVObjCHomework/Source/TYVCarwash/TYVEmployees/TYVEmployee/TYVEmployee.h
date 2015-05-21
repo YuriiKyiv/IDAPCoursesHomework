@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TYVProtocolObservableObject.h"
 #import "TYVMoneyTransfer.h"
+#import "TYVEmployeeObserverProtocol.h"
 
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
@@ -20,18 +21,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
     TYVEmployeeDidPerformWorkWithObject
 };
 
-@protocol TYVEmployeeObserver <NSObject>
-
-@optional
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
-
-- (void)employeeDidBecomeBusy:(TYVEmployee *)employee;
-
-- (void)employeeDidPerformWork:(TYVEmployee *)employee;
-
-@end
-
-@interface TYVEmployee : TYVProtocolObservableObject <TYVEmployeeObserver, TYVMoneyTransfer>
+@interface TYVEmployee : TYVProtocolObservableObject <TYVEmployeeObserverProtocol, TYVMoneyTransfer>
 @property (nonatomic, readonly) NSString            *duty;
 
 @property (nonatomic, readonly) NSDecimalNumber     *salary;
