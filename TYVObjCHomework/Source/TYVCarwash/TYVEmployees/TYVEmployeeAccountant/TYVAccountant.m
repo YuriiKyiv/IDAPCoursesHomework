@@ -55,14 +55,10 @@
 #pragma mark Public Methods
 
 - (void)workWithObject:(TYVWasher *)washer {
-    @autoreleasepool {
-        @synchronized(self) {
-            [super workWithObject:washer];
-            washer.state = TYVEmployeeDidBecomeFree;
-            [self count];
-            self.state = TYVEmployeeDidPerformWorkWithObject;
-        }
-    }
+    [self takeMoney:washer.money fromObject:washer];
+    washer.state = TYVEmployeeDidBecomeFree;
+    [self count];
+    self.state = TYVEmployeeDidPerformWorkWithObject;
 }
 
 #pragma mark -
