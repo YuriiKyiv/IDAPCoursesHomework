@@ -99,7 +99,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     @synchronized(self) {
         while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
             [self giveWorkForWasher:washer];
-            NSLog(@"First step");
         }
     }
     
@@ -163,7 +162,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     TYVQueue *cars = self.cars;
     if (!cars.isEmpty) {
         [washer performWorkWithObject:[cars dequeueObject]];
-        NSLog(@"employeeDidBecomeFree:");
     }
 
 }
