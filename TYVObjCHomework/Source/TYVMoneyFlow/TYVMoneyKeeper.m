@@ -9,6 +9,7 @@
 #import "TYVMoneyKeeper.h"
 
 @implementation TYVMoneyKeeper
+
 @synthesize money = _money;
 
 #pragma mark -
@@ -45,6 +46,18 @@
 - (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransfer>)object {
     self.money = [self.money decimalNumberBySubtracting:money];
     object.money = [object.money decimalNumberByAdding:money];
+}
+
+- (void)takeMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
+        self.money = [self.money decimalNumberByAdding:money];
+    }
+}
+
+- (void)giveMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
+        self.money = [self.money decimalNumberBySubtracting:money];
+    }
 }
 
 @end

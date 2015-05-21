@@ -86,6 +86,13 @@
     }
 }
 
+- (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
+    self.state = TYVEmployeeDidPerformWorkWithObject;
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object {
     @autoreleasepool {
         @synchronized (self) {
@@ -93,10 +100,6 @@
 #warning add method of notification on main thread
         }
     }
-}
-
-- (void)finishWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
-    self.state = TYVEmployeeDidPerformWorkWithObject;
 }
 
 #pragma mark -
@@ -110,17 +113,25 @@
 #pragma mark TYVMoneyTransfer
 
 - (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransfer>)object {
-    @synchronized(object) {
-        self.money = [self.money decimalNumberByAdding:money];
-        object.money = [object.money decimalNumberBySubtracting:money];
-    }
+    [self takeMoney:money];
+    [object giveMoney:money];
 }
 
 
 - (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransfer>)object {
-    @synchronized(object) {
+    [self giveMoney:money];
+    [object takeMoney:money];
+}
+
+- (void)takeMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
+        self.money = [self.money decimalNumberByAdding:money];
+    }
+}
+
+- (void)giveMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
         self.money = [self.money decimalNumberBySubtracting:money];
-        object.money = [object.money decimalNumberByAdding:money];
     }
 }
 

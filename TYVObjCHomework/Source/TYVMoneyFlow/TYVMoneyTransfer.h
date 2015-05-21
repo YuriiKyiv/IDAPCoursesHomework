@@ -12,10 +12,12 @@
 
 @protocol TYVMoneyTransfer <NSObject>
 
-@property (nonatomic, retain)   NSDecimalNumber *money;
+@property (atomic, retain)   NSDecimalNumber *money;
 
 - (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransfer>)object;
-
 - (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransfer>)object;
+
+- (void)takeMoney:(NSDecimalNumber *)money;
+- (void)giveMoney:(NSDecimalNumber *)money;
 
 @end
