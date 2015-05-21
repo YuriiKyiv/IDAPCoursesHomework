@@ -12,7 +12,7 @@
 
 @interface TYVWasher ()
 
-- (void)washCar:(TYVCar *)aCar;
+- (void)washCar:(TYVCar *)car;
 
 @end
 
@@ -33,18 +33,18 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)workWithObject:(id<TYVMoneyTransfer>)car {
-    [self takeMoney:self.price fromObject:car];
-    [self washCar:car];
+- (void)workWithObject:(id<TYVMoneyTransfer> )object {
+    [self takeMoney:self.price fromObject:object];
+    [self washCar:object];
     self.state = TYVEmployeeDidPerformWorkWithObject;
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
-- (void)washCar:(TYVCar *)aCar {
+- (void)washCar:(TYVCar *)car {
     usleep(arc4random_uniform(1000 * 10));
-    aCar.clean = YES;
+    car.clean = YES;
 }
 
 @end
