@@ -57,12 +57,17 @@
     [self profit];
 }
 
+- (void)finalizeProccesingWithObjectOnMainThread:(TYVAccountant *)object {
+    self.state = TYVEmployeeDidBecomeFree;
+}
+
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)profit {
     usleep(arc4random_uniform(1000));
     self.capital = [self.capital decimalNumberByAdding:self.money];
+    NSLog(@"Director capital is %@", self.money);
 }
 
 @end

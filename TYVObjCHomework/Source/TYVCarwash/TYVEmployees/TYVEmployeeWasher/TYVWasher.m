@@ -36,7 +36,6 @@
 - (void)proccesWithObject:(id<TYVMoneyTransfer> )object {
     [self takeMoney:self.price fromObject:object];
     [self washCar:object];
-    self.state = TYVEmployeeDidPerformWorkWithObject;
 }
 
 - (void)finalizeProccesingWithObjectOnMainThread:(TYVCar *)object {

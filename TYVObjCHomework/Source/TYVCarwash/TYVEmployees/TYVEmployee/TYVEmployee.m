@@ -112,9 +112,9 @@
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
     @autoreleasepool {
         @synchronized (self) {
-            self.state = TYVEmployeeDidPerformWorkWithObject;
-            
             [self finalizeProccesingWithObjectOnMainThread:object];
+            
+            self.state = TYVEmployeeDidPerformWorkWithObject;
         }
     }
 }
