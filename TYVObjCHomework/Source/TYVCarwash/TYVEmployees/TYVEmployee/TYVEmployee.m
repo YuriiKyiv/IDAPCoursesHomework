@@ -81,7 +81,6 @@
 
 - (void)finalizeProccesingWithObjectOnMainThread:(TYVEmployee *)object {
     object.state = TYVEmployeeDidBecomeFree;
-    
 }
 
 - (void)performWorkWithObject:(id<TYVMoneyTransfer>)object {
