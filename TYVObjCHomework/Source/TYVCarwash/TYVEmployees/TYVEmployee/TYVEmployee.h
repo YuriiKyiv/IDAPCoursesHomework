@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TYVProtocolObservableObject.h"
-#import "TYVMoneyTransfer.h"
+#import "TYVMoneyTransferProtocol.h"
 #import "TYVEmployeeObserverProtocol.h"
 
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
     TYVEmployeeDidPerformWorkWithObject
 };
 
-@interface TYVEmployee : TYVProtocolObservableObject <TYVEmployeeObserverProtocol, TYVMoneyTransfer>
+@interface TYVEmployee : TYVProtocolObservableObject <TYVEmployeeObserverProtocol, TYVMoneyTransferProtocol>
 @property (nonatomic, readonly) NSString            *duty;
 
 @property (nonatomic, readonly) NSDecimalNumber     *salary;
@@ -32,11 +32,11 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
                        money:(NSDecimalNumber *)money;
 
 // For overriding method
-- (void)proccesWithObject:(id<TYVMoneyTransfer>)object;
+- (void)proccesWithObject:(id<TYVMoneyTransferProtocol>)object;
 
 // For overriding method
-- (void)finalizeProccesingWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
+- (void)finalizeProccesingWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
 
-- (void)performWorkWithObject:(id<TYVMoneyTransfer>)object;
+- (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object;
 
 @end

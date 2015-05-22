@@ -37,13 +37,13 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransfer>)object {
+- (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransferProtocol>)object {
     self.money = [self.money decimalNumberByAdding:money];
     object.money = [object.money decimalNumberBySubtracting:money];
 }
 
 
-- (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransfer>)object {
+- (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransferProtocol>)object {
     self.money = [self.money decimalNumberBySubtracting:money];
     object.money = [object.money decimalNumberByAdding:money];
 }

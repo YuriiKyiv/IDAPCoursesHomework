@@ -8,14 +8,14 @@
 
 #import "TYVEmployee.h"
 #import "TYVSelector.h"
-#import "TYVMoneyTransfer.h"
+#import "TYVMoneyTransferProtocol.h"
 
 @interface TYVEmployee ()
 @property (nonatomic, copy)     NSString            *duty;
 @property (nonatomic, retain)   NSDecimalNumber     *salary;
 
-- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object;
-- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object;
+- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object;
+- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
 
 @end
 
@@ -75,7 +75,7 @@
     }
 }
 
-- (void)proccesWithObject:(id<TYVMoneyTransfer> )object {
+- (void)proccesWithObject:(id<TYVMoneyTransferProtocol> )object {
 
 }
 
@@ -83,7 +83,7 @@
     object.state = TYVEmployeeDidBecomeFree;
 }
 
-- (void)performWorkWithObject:(id<TYVMoneyTransfer>)object {
+- (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     @synchronized (self) {
         self.state = TYVEmployeeDidBecomeBusy;
         
@@ -96,7 +96,7 @@
 #pragma mark -
 #pragma mark Private Methods
 
-- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransfer>)object {
+- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
         @synchronized (self) {
             [self proccesWithObject:object];
@@ -108,7 +108,7 @@
     }
 }
 
-- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransfer>)object {
+- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
         @synchronized (self) {
             [self finalizeProccesingWithObjectOnMainThread:object];
@@ -128,13 +128,13 @@
 #pragma mark -
 #pragma mark TYVMoneyTransfer
 
-- (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransfer>)object {
+- (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransferProtocol>)object {
     [self takeMoney:money];
     [object giveMoney:money];
 }
 
 
-- (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransfer>)object {
+- (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransferProtocol>)object {
     [self giveMoney:money];
     [object takeMoney:money];
 }

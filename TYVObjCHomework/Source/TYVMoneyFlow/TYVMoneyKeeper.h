@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYVMoneyTransfer.h"
+#import "TYVMoneyTransferProtocol.h"
 
-@interface TYVMoneyKeeper : NSObject <TYVMoneyTransfer>
+@interface TYVMoneyKeeper : NSObject <TYVMoneyTransferProtocol>
 
 - (instancetype)initWithMoney:(NSDecimalNumber *)money;
 
