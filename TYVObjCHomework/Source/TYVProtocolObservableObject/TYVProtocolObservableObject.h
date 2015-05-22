@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class TYVSelector;
+
 @interface TYVProtocolObservableObject : NSObject
 @property (atomic, assign)      NSUInteger  state;
 @property (nonatomic, readonly) NSSet       *observersSet;
@@ -20,8 +22,6 @@
 
 - (SEL)selectorForState:(NSUInteger)state;
 
-- (void)notifyWithSelector:(SEL)selector;
-
-- (void)notify;
+- (void)notifyWithSelector:(TYVSelector *)selector;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "TYVEmployee.h"
-#import "TYVSelectorWrapper.h"
+#import "TYVSelector.h"
 #import "TYVMoneyTransfer.h"
 
 @interface TYVEmployee ()

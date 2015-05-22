@@ -8,7 +8,7 @@
 
 #import "TYVWasher.h"
 #import "TYVCar.h"
-#import "TYVSelectorWrapper.h"
+#import "TYVSelector.h"
 
 @interface TYVWasher ()
 

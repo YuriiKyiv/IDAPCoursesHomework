@@ -8,7 +8,7 @@
 
 #import "TYVAccountant.h"
 #import "TYVWasher.h"
-#import "TYVSelectorWrapper.h"
+#import "TYVSelector.h"
 
 @interface TYVAccountant ()
 @property (nonatomic, retain)   NSDecimalNumber    *capital;

@@ -7,6 +7,7 @@
 //
 
 #import "TYVProtocolObservableObject.h"
+#import "TYVSelector.h"
 
 @interface TYVProtocolObservableObject ()
 @property (nonatomic, retain) NSHashTable   *observersHashTable;
@@ -51,8 +52,9 @@
         @synchronized(self) {
             if (_state != state) {
                 _state = state;
-                [self performSelectorOnMainThread:@selector(notify)
-                                       withObject:nil
+                TYVSelector *selector = [TYVSelector selectorWithSelector:[self selectorForState:_state]];
+                [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                                       withObject:selector
                                     waitUntilDone:NO];
             }
         }
@@ -93,19 +95,16 @@
     return nil;
 }
 
-- (void)notifyWithSelector:(SEL)selector {
+- (void)notifyWithSelector:(TYVSelector *)selector {
     @synchronized(self) {
+        SEL stateSelector = selector.selector;
         NSHashTable *observers = self.observersHashTable;
         for (id observer in observers) {
-            if ([observer respondsToSelector:selector]) {
-                [observer performSelector:selector withObject:self];
+            if ([observer respondsToSelector:stateSelector]) {
+                [observer performSelector:stateSelector withObject:self];
             }
         }
     }
-}
-
-- (void)notify {
-    [self notifyWithSelector:[self selectorForState:self.state]];
 }
 
 @end
