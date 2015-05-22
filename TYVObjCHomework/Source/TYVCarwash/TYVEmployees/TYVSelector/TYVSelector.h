@@ -1,5 +1,5 @@
 //
-//  TYVSelectorWrapper.h
+//  TYVSelector.h
 //  IDAPCoursesHomework
 //
 //  Created by YURII on 13.05.15.
@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TYVSelectorWrapper : NSObject
-@property (nonatomic, readonly) NSString *selector;
+@interface TYVSelector : NSObject
+@property (nonatomic, readonly) SEL selector;
 
-+ (instancetype)selectorWrapperWithselector:(SEL)selector;
++ (instancetype)selectorWithSelector:(SEL)selector;
 
 - (instancetype)initWithSelector:(SEL)selector;
 
