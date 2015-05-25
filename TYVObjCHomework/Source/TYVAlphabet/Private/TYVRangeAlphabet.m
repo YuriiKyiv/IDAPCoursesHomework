@@ -19,6 +19,12 @@
 #pragma mark - 
 #pragma mark Initializations and Deallocations
 
+- (void)dealloc {
+    self.range = nil;
+    
+    [super dealloc];
+}
+
 - (instancetype)initWithRange:(TYVRange *)range {
     self = [super init];
     if (self) {

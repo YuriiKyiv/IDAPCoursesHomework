@@ -10,6 +10,6 @@
 
 @interface TYVStringsAlphabet : TYVAlphabet
 
-- (instancetype)initWithAlphabets:(TYVRange *)alphabets;
+- (instancetype)initWithStrings:(NSArray *)strings;
 
 @end

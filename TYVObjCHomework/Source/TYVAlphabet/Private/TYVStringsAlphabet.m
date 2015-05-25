@@ -8,6 +8,29 @@
 
 #import "TYVStringsAlphabet.h"
 
+@interface TYVStringsAlphabet ()
+@property (nonatomic, retain)   NSArray *strings;
+
+@end
+
 @implementation TYVStringsAlphabet
+
+#pragma mark -
+#pragma mark Initializations and Deallocations
+
+- (void)dealloc {
+    self.strings = nil;
+    
+    [super dealloc];
+}
+
+- (instancetype)initWithStrings:(NSArray *)strings {
+    self = [super init];
+    if (self) {
+        self.strings = strings;
+    }
+    
+    return self;
+}
 
 @end
