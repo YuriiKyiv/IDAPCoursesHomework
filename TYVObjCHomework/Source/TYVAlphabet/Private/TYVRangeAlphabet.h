@@ -9,6 +9,7 @@
 #import "TYVAlphabet.h"
 
 @interface TYVRangeAlphabet : TYVAlphabet
+@property (nonatomic, readonly) TYVRange    *range;
 
 - (instancetype)initWithRange:(TYVRange *)range;
 
