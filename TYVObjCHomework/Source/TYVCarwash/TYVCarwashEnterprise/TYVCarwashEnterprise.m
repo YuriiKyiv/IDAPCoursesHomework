@@ -36,7 +36,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 
 - (void)killEmployeesConnections;
 
-- (void)giveWorkForWasher:(TYVWasher *)washer;
+- (void)giveWorkToWasher:(TYVWasher *)washer;
 
 @end
 
@@ -61,6 +61,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     if (self) {
         [self prepareBuildings];
         [self hireStaff];
+        [self prepareCars];
     }
     
     return self;
@@ -85,7 +86,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     [self hireWashers];
 }
 
-- (void)work {
+- (void)prepareCars {
     self.cars = [[[TYVQueue alloc] init] autorelease];
     TYVQueue *carsQueue = self.cars;
     TYVCar *car = nil;
@@ -94,17 +95,16 @@ static const NSUInteger kTYVMaxCarsCount = 333;
         car.money = [NSDecimalNumber decimalNumberWithString:@"100000"];
         [carsQueue enqueueObject:car];
     }
-    
+}
+
+- (void)work {
     TYVWasher *washer = nil;
+    TYVQueue *carsQueue = self.cars;
     @synchronized(self) {
         while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
-            [self giveWorkForWasher:washer];
+            [self giveWorkToWasher:washer];
         }
     }
-    
-    NSLog(@"----------------------------");
-    NSLog(@"Cars Queue is Empty");
-
 }
 
 - (void)addCar:(TYVCar *)car {
@@ -158,7 +158,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     }
 }
 
-- (void)giveWorkForWasher:(TYVWasher *)washer {
+- (void)giveWorkToWasher:(TYVWasher *)washer {
     TYVQueue *cars = self.cars;
     if (!cars.isEmpty) {
         [washer performWorkWithObject:[cars dequeueObject]];
@@ -171,7 +171,7 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
     @synchronized(self) {
-        [self giveWorkForWasher:washer];
+        [self giveWorkToWasher:washer];
     }
 }
 

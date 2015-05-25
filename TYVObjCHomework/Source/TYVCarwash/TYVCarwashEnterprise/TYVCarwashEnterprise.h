@@ -18,6 +18,8 @@
 
 - (void)prepareBuildings;
 
+- (void)prepareCars;
+
 - (void)work;
 
 - (void)addCar:(TYVCar *)car;
