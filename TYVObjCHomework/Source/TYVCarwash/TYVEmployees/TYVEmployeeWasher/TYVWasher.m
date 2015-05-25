@@ -33,7 +33,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)proccesWithObject:(id<TYVMoneyTransfer> )object {
+- (void)proccesWithObject:(id<TYVMoneyTransferProtocol> )object {
     [self takeMoney:self.price fromObject:object];
     [self washCar:object];
 }
