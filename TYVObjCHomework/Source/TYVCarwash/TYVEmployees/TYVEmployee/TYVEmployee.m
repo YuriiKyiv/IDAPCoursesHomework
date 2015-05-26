@@ -103,12 +103,9 @@
 
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
-        @synchronized (self) {
-            id<TYVMoneyTransferProtocol> proceesingObject = nil;
-            while (![self.objectsQueue isEmpty]) {
-                proceesingObject = [self.objectsQueue dequeueObject];
-                [self proccesWithObject:proceesingObject];
-            }
+        id<TYVMoneyTransferProtocol> proceesingObject = nil;
+        while ((proceesingObject = [self.objectsQueue dequeueObject])) {
+            [self proccesWithObject:proceesingObject];
             
             [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
                                    withObject:proceesingObject
