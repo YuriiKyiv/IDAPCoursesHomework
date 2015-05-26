@@ -43,8 +43,7 @@
     return self;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     return [self initWithDuty:@""
                        salary:[NSDecimalNumber zero]
                         money:[NSDecimalNumber zero]
