@@ -31,6 +31,8 @@
 		5A66D3631B013E7C00CACA57 /* TYVObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A66D3621B013E7C00CACA57 /* TYVObservableObject.m */; };
 		5A66D3641B013E7C00CACA57 /* TYVObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A66D3621B013E7C00CACA57 /* TYVObservableObject.m */; };
 		5A73B5A61AEAB3B9002B31AF /* TYVMoneyKeeperSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A73B5A51AEAB3B9002B31AF /* TYVMoneyKeeperSpec.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5A855F141B1486630032DAB5 /* TYVDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A855F131B1486630032DAB5 /* TYVDispatcher.m */; };
+		5A855F151B1486630032DAB5 /* TYVDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A855F131B1486630032DAB5 /* TYVDispatcher.m */; };
 		5A90177E1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */; };
 		5A9BF8A41B0DE80B00009AB0 /* TYVCarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BF8A31B0DE80B00009AB0 /* TYVCarManager.m */; };
 		5A9BF8A51B0DE80B00009AB0 /* TYVCarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9BF8A31B0DE80B00009AB0 /* TYVCarManager.m */; };
@@ -153,6 +155,8 @@
 		5A66D3611B013E7C00CACA57 /* TYVObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVObservableObject.h; path = TYVObservableObject/TYVObservableObject.h; sourceTree = "<group>"; };
 		5A66D3621B013E7C00CACA57 /* TYVObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVObservableObject.m; path = TYVObservableObject/TYVObservableObject.m; sourceTree = "<group>"; };
 		5A73B5A51AEAB3B9002B31AF /* TYVMoneyKeeperSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVMoneyKeeperSpec.m; path = TYVMoneyKeeperSpec/TYVMoneyKeeperSpec.m; sourceTree = "<group>"; };
+		5A855F121B1486630032DAB5 /* TYVDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVDispatcher.h; path = TYVDispatcher/TYVDispatcher.h; sourceTree = "<group>"; };
+		5A855F131B1486630032DAB5 /* TYVDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TYVDispatcher.m; path = TYVDispatcher/TYVDispatcher.m; sourceTree = "<group>"; };
 		5A90177C1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TYVAutoreleasePoolTests.c; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.c; sourceTree = "<group>"; };
 		5A90177D1AD066AF009DBFE9 /* TYVAutoreleasePoolTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TYVAutoreleasePoolTests.h; path = task6/TYVAutoreleasePool/TYVAutoreleasePoolTests.h; sourceTree = "<group>"; };
 		5A9BF8A11B0DE5C200009AB0 /* TYVEmployeeObserverProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVEmployeeObserverProtocol.h; sourceTree = "<group>"; };
@@ -429,6 +433,15 @@
 			name = TYVMoneyKeeperSpec;
 			sourceTree = "<group>";
 		};
+		5A855F161B1486680032DAB5 /* TYVDispatcher */ = {
+			isa = PBXGroup;
+			children = (
+				5A855F121B1486630032DAB5 /* TYVDispatcher.h */,
+				5A855F131B1486630032DAB5 /* TYVDispatcher.m */,
+			);
+			name = TYVDispatcher;
+			sourceTree = "<group>";
+		};
 		5A9BF8A61B0DE80E00009AB0 /* TYVCarManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,6 +505,7 @@
 				5AAB27CB1AEAB1080014D965 /* TYVEmployees */,
 				5AAB27D81AEAB1080014D965 /* TYVRooms */,
 				5A9BF8A61B0DE80E00009AB0 /* TYVCarManager */,
+				5A855F161B1486680032DAB5 /* TYVDispatcher */,
 			);
 			path = TYVCarwash;
 			sourceTree = "<group>";
@@ -1004,6 +1018,7 @@
 				5AAB27F71AEAB1080014D965 /* TYVCarwashEnterprise.m in Sources */,
 				5A365D801AF7940E00DEAAE3 /* TYVRange.m in Sources */,
 				5ACB6C701AF23CB000A622C4 /* NSString+TYVExtensions.m in Sources */,
+				5A855F151B1486630032DAB5 /* TYVDispatcher.m in Sources */,
 				5AAB28091AEAB1080014D965 /* TYVMoneyKeeper.m in Sources */,
 				5A66D3641B013E7C00CACA57 /* TYVObservableObject.m in Sources */,
 				5AAB28011AEAB1080014D965 /* TYVCarwashRoom.m in Sources */,
@@ -1035,6 +1050,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AAB27F61AEAB1080014D965 /* TYVCarwashEnterprise.m in Sources */,
+				5A855F141B1486630032DAB5 /* TYVDispatcher.m in Sources */,
 				5AAB28081AEAB1080014D965 /* TYVMoneyKeeper.m in Sources */,
 				5AAB28001AEAB1080014D965 /* TYVCarwashRoom.m in Sources */,
 				5AAB27F41AEAB1080014D965 /* TYVCar.m in Sources */,
