@@ -16,6 +16,7 @@
 @end
 
 @interface TYVEmployeesPool : NSObject
+@property (nonatomic, readonly)   NSSet    *employeesSet;
 
 + (TYVEmployeesPool *)pool;
 

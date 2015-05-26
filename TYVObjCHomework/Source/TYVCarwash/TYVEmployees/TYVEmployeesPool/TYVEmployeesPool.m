@@ -10,12 +10,13 @@
 #import "TYVEmployee.h"
 
 @interface TYVEmployeesPool ()
-@property (nonatomic, retain)   NSMutableSet    *employeesSet;
+@property (nonatomic, retain)   NSMutableSet    *mutableEmployeesSet;
 
 @end
 
 @implementation TYVEmployeesPool
 
+@dynamic employeesSet;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -30,7 +31,7 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.employeesSet = nil;
+    self.mutableEmployeesSet = nil;
     
     [super dealloc];
 }
@@ -38,10 +39,19 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.employeesSet = [NSMutableSet set];
+        self.mutableEmployeesSet = [NSMutableSet set];
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Accessors
+
+- (NSSet *)employeesSet {
+    @synchronized (self) {
+        return [[self.mutableEmployeesSet copy] autorelease];
+    }
 }
 
 #pragma mark -
@@ -49,20 +59,20 @@
 
 - (void)addEmployee:(TYVEmployee *)employee {
     @synchronized(self) {
-        [self.employeesSet addObject:employee];
+        [self.mutableEmployeesSet addObject:employee];
     }
 }
 
 - (void)removeEmployee:(TYVEmployee *)employee {
     @synchronized(self) {
-        [self.employeesSet removeObject:employee];
+        [self.mutableEmployeesSet removeObject:employee];
     }
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
     @synchronized(self) {
         __block TYVEmployee *employee = nil;
-        [self.employeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        [self.mutableEmployeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
             employee = obj;
             if ([employee isMemberOfClass:class] && employee.state == TYVEmployeeDidBecomeFree) {
                 *stop = YES;
@@ -82,7 +92,7 @@
                 && evaluatedObject.state == TYVEmployeeDidBecomeFree);
         }];
     
-        return [self.employeesSet filteredSetUsingPredicate:predicate];
+        return [self.mutableEmployeesSet filteredSetUsingPredicate:predicate];
         
     }
 }
@@ -93,20 +103,20 @@
             return ([evaluatedObject isMemberOfClass:class]);
         }];
     
-        return [self.employeesSet filteredSetUsingPredicate:predicate];
+        return [self.mutableEmployeesSet filteredSetUsingPredicate:predicate];
         
     }
 }
 
 - (BOOL)containsEmployee:(TYVEmployee *)employee {
     @synchronized(self) {
-        return [self.employeesSet containsObject:employee];
+        return [self.mutableEmployeesSet containsObject:employee];
     }
 }
 
 - (NSUInteger)count {
     @synchronized(self) {
-        return [self.employeesSet count];
+        return [self.mutableEmployeesSet count];
     }
 }
 
