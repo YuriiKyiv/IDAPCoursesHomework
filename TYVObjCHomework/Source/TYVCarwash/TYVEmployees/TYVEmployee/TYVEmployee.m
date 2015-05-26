@@ -9,10 +9,13 @@
 #import "TYVEmployee.h"
 #import "TYVSelector.h"
 #import "TYVMoneyTransferProtocol.h"
+#import "TYVQueue.h"
 
 @interface TYVEmployee ()
-@property (nonatomic, copy)     NSString            *duty;
-@property (nonatomic, retain)   NSDecimalNumber     *salary;
+@property (nonatomic, copy)     NSString        *duty;
+@property (nonatomic, retain)   NSDecimalNumber *salary;
+
+@property (nonatomic, retain)   TYVQueue        *objectsQueue;
 
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object;
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
@@ -31,6 +34,7 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
+    self.objectsQueue = nil;
     
     [super dealloc];
 }
@@ -51,6 +55,7 @@
         self.salary = salary;
         self.state = TYVEmployeeDidBecomeFree;
         self.money = money;
+        self.objectsQueue = [[[TYVQueue alloc] init] autorelease];
     }
     
     return self;
@@ -85,10 +90,10 @@
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     @synchronized (self) {
-        self.state = TYVEmployeeDidBecomeBusy;
-        
-        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
-                               withObject:object];
+            [self.objectsQueue enqueueObject:object];
+            self.state = TYVEmployeeDidBecomeBusy;
+            [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+                               withObject:nil];
     }
 }
 
@@ -99,10 +104,14 @@
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
         @synchronized (self) {
-            [self proccesWithObject:object];
+            id<TYVMoneyTransferProtocol> proceesingObject = nil;
+            while (![self.objectsQueue isEmpty]) {
+                proceesingObject = [self.objectsQueue dequeueObject];
+                [self proccesWithObject:proceesingObject];
+            }
             
             [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
-                                   withObject:object
+                                   withObject:proceesingObject
                                 waitUntilDone:NO];
         }
     }
@@ -110,11 +119,8 @@
 
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
-        @synchronized (self) {
-            [self finalizeProccesingWithObjectOnMainThread:object];
-            
-            self.state = TYVEmployeeDidPerformWorkWithObject;
-        }
+        [self finalizeProccesingWithObjectOnMainThread:object];            
+        self.state = TYVEmployeeDidPerformWorkWithObject;
     }
 }
 
