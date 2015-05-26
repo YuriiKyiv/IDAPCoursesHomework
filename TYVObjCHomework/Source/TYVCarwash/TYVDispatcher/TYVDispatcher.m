@@ -47,7 +47,7 @@
 #pragma mark Accessors
 
 - (NSSet *)handlersSet {
-    return [self.handlersPool employeesWithClass:[TYVWasher class]];
+    return self.handlersPool.employeesSet;
 }
 
 - (TYVQueue *)proccesingObjects {
