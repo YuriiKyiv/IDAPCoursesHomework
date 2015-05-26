@@ -90,8 +90,8 @@
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     if (object) {
-        [self.objectsQueue enqueueObject:object];
         self.state = TYVEmployeeDidBecomeBusy;
+        [self.objectsQueue enqueueObject:object];
         [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
                                withObject:nil];
     }
@@ -116,8 +116,12 @@
 
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
-        [self finalizeProccesingWithObjectOnMainThread:object];            
-        self.state = TYVEmployeeDidPerformWorkWithObject;
+        [self finalizeProccesingWithObjectOnMainThread:object];
+        @synchronized (self) {
+            if ([self.objectsQueue isEmpty]) {
+                self.state = TYVEmployeeDidPerformWorkWithObject;
+            }
+        }
     }
 }
 
