@@ -8,19 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TYVEmployeeObserverProtocol.h"
+
 @class TYVQueue;
 @class TYVEmployeesPool;
+@class TYVEmployee;
 
-@protocol TYVEmployeeObserverProtocol;
-
-@interface TYVDispatcher : NSObject
-@property (nonatomic, readonly) TYVQueue            *proccesingObjectsQueue;
-@property (nonatomic, readonly) TYVEmployeesPool    *handlersSet;
+@interface TYVDispatcher : NSObject <TYVEmployeeObserverProtocol>
+@property (nonatomic, readonly) TYVQueue    *proccesingObjects;
+@property (nonatomic, readonly) NSSet       *handlersSet;
 
 - (void)addProccesingObject:(id)object;
-- (void)removeProccesingObject:(id)object;
 
-- (void)addHandler:(id<TYVEmployeeObserverProtocol>)handler;
-- (void)removeHandler:(id<TYVEmployeeObserverProtocol>)handler;
+- (void)addHandler:(TYVEmployee *)handler;
+- (void)removeHandler:(TYVEmployee *)handler;
 
 @end
