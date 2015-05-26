@@ -89,10 +89,12 @@
 }
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
-            [self.objectsQueue enqueueObject:object];
-            self.state = TYVEmployeeDidBecomeBusy;
-            [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+    if (object) {
+        [self.objectsQueue enqueueObject:object];
+        self.state = TYVEmployeeDidBecomeBusy;
+        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
                                withObject:nil];
+    }
 }
 
 
