@@ -89,12 +89,10 @@
 }
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
-    @synchronized (self) {
             [self.objectsQueue enqueueObject:object];
             self.state = TYVEmployeeDidBecomeBusy;
             [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
                                withObject:nil];
-    }
 }
 
 

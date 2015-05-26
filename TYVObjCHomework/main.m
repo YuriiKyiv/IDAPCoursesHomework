@@ -41,7 +41,7 @@ int main(int argc, const char * argv[]) {
         [enterprise work];
         
         TYVCarManager *carManager = [[[TYVCarManager alloc] initWithEnterprise:enterprise
-                                                                   carCapacity:10
+                                                                   carCapacity:5
                                                                          delay:1] autorelease];
         [carManager performSelectorInBackground:@selector(start) withObject:nil];
         
