@@ -18,6 +18,13 @@
 @dynamic empty;
 
 #pragma mark -
+#pragma mark Class Methods
+
++ (instancetype)queue {
+    return [[[TYVQueue alloc] init] autorelease];
+}
+
+#pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
