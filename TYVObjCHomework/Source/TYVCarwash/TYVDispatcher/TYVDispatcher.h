@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @class TYVQueue;
+@class TYVEmployeesPool;
+
 @protocol TYVEmployeeObserverProtocol;
 
 @interface TYVDispatcher : NSObject
-@property (nonatomic, readonly) TYVQueue    *proccesingObjectsQueue;
-@property (nonatomic, readonly) NSSet       *handlersSet;
+@property (nonatomic, readonly) TYVQueue            *proccesingObjectsQueue;
+@property (nonatomic, readonly) TYVEmployeesPool    *handlersSet;
 
 - (void)addProccesingObject:(id)object;
 - (void)removeProccesingObject:(id)object;
