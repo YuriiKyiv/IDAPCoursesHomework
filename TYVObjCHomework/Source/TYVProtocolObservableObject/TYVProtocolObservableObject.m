@@ -48,15 +48,13 @@
 }
 
 - (void)setState:(NSUInteger)state {
-    if (_state != state) {
-        @synchronized(self) {
-            if (_state != state) {
-                _state = state;
-                TYVSelector *selector = [TYVSelector selectorWithSelector:[self selectorForState:_state]];
-                [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                                       withObject:selector
-                                    waitUntilDone:NO];
-            }
+    @synchronized(self) {
+        if (_state != state) {
+            _state = state;
+            TYVSelector *selector = [TYVSelector selectorWithSelector:[self selectorForState:_state]];
+            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
+                                   withObject:selector
+                                waitUntilDone:NO];
         }
     }
 }
