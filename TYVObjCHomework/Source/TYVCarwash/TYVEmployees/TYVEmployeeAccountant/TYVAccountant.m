@@ -64,8 +64,10 @@
 
 - (void)count {
     usleep(arc4random_uniform(1000));
-    self.capital = [self.capital decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:@"1000"]];
-    NSLog(@"Account capital is %@", self.capital);
+    @synchronized (self) {
+        self.capital = [self.capital decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:@"1000"]];
+        NSLog(@"Account capital is %@", self.capital);
+    }
 }
 
 @end;
