@@ -40,7 +40,6 @@ int main(int argc, const char * argv[]) {
 //        }
         
         TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
-        [enterprise work];
         
         TYVCarManager *carManager = [[[TYVCarManager alloc] initWithEnterprise:enterprise
                                                                    carCapacity:5

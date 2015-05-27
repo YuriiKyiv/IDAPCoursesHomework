@@ -58,7 +58,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     self = [super init];
     if (self) {
         [self hireStaff];
-        [self prepareCars];
     }
     
     return self;
@@ -71,27 +70,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
     self.employees = [TYVEmployeesPool pool];
     [self hireAdminStaff];
     [self hireWashers];
-}
-
-- (void)prepareCars {
-    self.cars = [[[TYVQueue alloc] init] autorelease];
-    TYVQueue *carsQueue = self.cars;
-    TYVCar *car = nil;
-    for (NSUInteger i = 0; i < kTYVMaxCarsCount; i++) {
-        car = [TYVCar object];
-        car.money = [NSDecimalNumber decimalNumberWithString:@"100000"];
-        [carsQueue enqueueObject:car];
-    }
-}
-
-- (void)work {
-    TYVWasher *washer = nil;
-    TYVQueue *carsQueue = self.cars;
-    @synchronized(self) {
-        while (!carsQueue.isEmpty && (washer = [self.employees freeEmployeeWithClass:[TYVWasher class]])) {
-            [self giveWorkToWasher:washer];
-        }
-    }
 }
 
 - (void)addCar:(TYVCar *)car {

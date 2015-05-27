@@ -16,10 +16,6 @@
 
 - (void)hireStaff;
 
-- (void)prepareCars;
-
-- (void)work;
-
 - (void)addCar:(TYVCar *)car;
 
 @end
