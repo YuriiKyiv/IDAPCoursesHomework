@@ -91,9 +91,10 @@
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     if (object) {
         self.state = TYVEmployeeDidBecomeBusy;
-        [self.objectsQueue enqueueObject:object];
+        TYVQueue *queue = self.objectsQueue;
+        [queue enqueueObject:object];
         [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
-                               withObject:nil];
+                               withObject:[queue dequeueObject]];
     }
 }
 
@@ -103,12 +104,10 @@
 
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
-        id<TYVMoneyTransferProtocol> proceesingObject = nil;
-        while ((proceesingObject = [self.objectsQueue dequeueObject])) {
-            [self proccesWithObject:proceesingObject];
-            
+        if (object) {
+            [self proccesWithObject:object];
             [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
-                                   withObject:proceesingObject
+                                   withObject:object
                                 waitUntilDone:NO];
         }
     }
@@ -117,9 +116,13 @@
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
         [self finalizeProccesingWithObjectOnMainThread:object];
+        TYVQueue *queue = self.objectsQueue;
         @synchronized (self) {
-            if ([self.objectsQueue isEmpty]) {
+            if ([queue isEmpty]) {
                 self.state = TYVEmployeeDidPerformWorkWithObject;
+            } else {
+                [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+                                       withObject:[queue dequeueObject]];
             }
         }
     }
