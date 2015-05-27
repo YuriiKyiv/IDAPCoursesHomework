@@ -139,6 +139,15 @@
     [self performWorkWithObject:employee];
 }
 
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    TYVQueue *queue = self.objectsQueue;
+    @synchronized (self) {
+        if (![queue isEmpty]) {
+            [self performWorkWithObjectInBackground:[queue dequeueObject]];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark TYVMoneyTransfer
 
