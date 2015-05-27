@@ -68,9 +68,7 @@
 - (void)profit {
     usleep(arc4random_uniform(1000));
     NSDecimalNumber *capital = self.capital;
-    @synchronized (capital) {
-        capital = [capital decimalNumberByAdding:self.money];
-    }
+    capital = [capital decimalNumberByAdding:self.money];
     
     NSLog(@"Director capital is %@", self.money);
 }
