@@ -20,7 +20,6 @@
 #import "NSObject+TYVNSObjectExtensions.h"
 
 static const NSUInteger kTYVMaxWasharsCount = 23;
-static const NSUInteger kTYVMaxCarsCount = 333;
 
 @interface TYVCarwashEnterprise ()
 @property (nonatomic, retain)   TYVQueue            *cars;
@@ -136,7 +135,9 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
     @synchronized(self) {
-        [self giveWorkToWasher:washer];
+        if (TYVEmployeeDidBecomeFree == washer.state) {
+            [self giveWorkToWasher:washer];
+        }
     }
 }
 
