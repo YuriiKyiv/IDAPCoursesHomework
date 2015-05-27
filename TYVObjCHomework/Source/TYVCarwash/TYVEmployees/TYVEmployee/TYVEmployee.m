@@ -90,14 +90,16 @@
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     if (object) {
-        TYVQueue *queue = self.objectsQueue;
         @synchronized (self) {
-            self.state = TYVEmployeeDidBecomeBusy;
-            [queue enqueueObject:object];
+            TYVQueue *queue = self.objectsQueue;
+            if (TYVEmployeeDidBecomeFree == self.state) {
+                self.state = TYVEmployeeDidBecomeBusy;
+                [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+                                       withObject:[queue dequeueObject]];
+            } else {
+                [queue enqueueObject:object];
         }
-        
-        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
-                               withObject:[queue dequeueObject]];
+        }
     }
 }
 
