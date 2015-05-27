@@ -14,6 +14,8 @@
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
 #import "TYVCarManager.h"
+#import "TYVWasher.h"
+#import "TYVCar.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -44,6 +46,18 @@ int main(int argc, const char * argv[]) {
                                                                    carCapacity:5
                                                                          delay:1] autorelease];
         [carManager performSelectorInBackground:@selector(start) withObject:nil];
+        
+//        TYVWasher *washer = [TYVWasher object];
+//        
+//        [washer performWorkWithObject:[TYVCar object]];
+//        
+//        TYVCarManager *carWasher = [[[TYVCarManager alloc] initWithWasher:washer carCapacity:1000 delay:1] autorelease];
+//        
+//        [carWasher performSelectorInBackground:@selector(startWithWasher) withObject:nil];
+        
+//        sleep(10);
+//        
+//        carManager.cancel = YES;
         
         NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
         [runLoop run];
