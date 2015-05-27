@@ -11,7 +11,7 @@
 #import "TYVSelector.h"
 
 @interface TYVAccountant ()
-@property (nonatomic, retain)   NSDecimalNumber    *capital;
+@property (atomic, retain)   NSDecimalNumber    *capital;
 
 - (void)count;
 
@@ -63,11 +63,10 @@
 
 - (void)count {
     usleep(arc4random_uniform(1000));
-    @synchronized (self) {
-        self.capital = [self.capital decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:@"1000"]];
+    NSDecimalNumber *capital = self.capital;
+    @synchronized (capital) {
+        capital = [capital decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:@"1000"]];
     }
-    
-    NSLog(@"Account capital is %@", self.capital);
 }
 
 @end;
