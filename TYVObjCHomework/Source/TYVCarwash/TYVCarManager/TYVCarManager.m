@@ -9,14 +9,17 @@
 #import "TYVCarManager.h"
 #import "TYVCarwashEnterprise.h"
 #import "TYVCar.h"
+#import "TYVWasher.h"
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
 @interface TYVCarManager ()
 @property (nonatomic, retain)   TYVCarwashEnterprise    *enterprise;
-@property (atomic, assign, getter=isCancel)      BOOL    cancel;
+@property (nonatomic, retain)   TYVWasher               *washer;
 
 - (void)work;
+
+- (void)workWithWasher;
 
 @end
 
@@ -27,6 +30,7 @@
 
 - (void)dealloc {
     self.enterprise = nil;
+    self.washer = nil;
     
     [super dealloc];
 }
@@ -37,6 +41,20 @@
     self = [super init];
     if (self) {
         self.enterprise = enterprise;
+        self.carCapacity = carCapacity;
+        self.delay = delay;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithWasher:(TYVWasher *)washer carCapacity:(NSUInteger)carCapacity
+                         delay:(uint)delay
+{
+    self = [super init];
+    if (self) {
+        self.washer = washer;
+        self.enterprise = nil;
         self.carCapacity = carCapacity;
         self.delay = delay;
     }
@@ -61,6 +79,13 @@
     
 }
 
+- (void)startWithWasher {
+    while (!self.isCancel) {
+    [self performSelectorInBackground:@selector(workWithWasher) withObject:nil];
+        sleep(self.delay);
+    }
+}
+
 #pragma mark -
 #pragma mark Private Methods
 
@@ -68,6 +93,13 @@
     TYVCarwashEnterprise *enterprise = self.enterprise;
     for (int i = 0; i < self.carCapacity; i++) {
         [enterprise addCar:[TYVCar object]];
+    }
+}
+
+- (void)workWithWasher {
+    TYVWasher *washer = self.washer;
+    for (int i = 0; i < self.carCapacity; i++) {
+        [washer performWorkWithObject:[TYVCar object]];
     }
 }
 
