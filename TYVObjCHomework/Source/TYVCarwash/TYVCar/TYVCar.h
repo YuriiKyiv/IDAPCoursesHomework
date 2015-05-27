@@ -10,6 +10,6 @@
 #import "TYVMoneyKeeper.h"
 
 @interface TYVCar : TYVMoneyKeeper
-@property (nonatomic, assign, getter=isClean)   BOOL    clean;
+@property (atomic, assign, getter=isClean)   BOOL    clean;
 
 @end
