@@ -25,7 +25,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 @interface TYVCarwashEnterprise ()
 @property (nonatomic, retain)   TYVQueue            *cars;
 
-@property (nonatomic, retain)   NSMutableArray      *mutableBuildings;
 @property (nonatomic, retain)   TYVEmployeesPool    *employees;
 
 @property (nonatomic, retain)   TYVDirector         *director;
@@ -48,7 +47,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 - (void)dealloc {
     [self killEmployeesConnections];
     
-    self.mutableBuildings = nil;
     self.employees = nil;
     self.director = nil;
     self.cars = nil;
@@ -59,7 +57,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self prepareBuildings];
         [self hireStaff];
         [self prepareCars];
     }
@@ -69,16 +66,6 @@ static const NSUInteger kTYVMaxCarsCount = 333;
 
 #pragma mark -
 #pragma mark Public Methods
-
-- (void)prepareBuildings {
-    NSMutableArray *buildings = [NSMutableArray array];
-    
-    for(int i = 0; i < 2; i++) {
-        [buildings addObject:[TYVBuilding object]];
-    }
-    
-    self.mutableBuildings = buildings;
-}
 
 - (void)hireStaff {
     self.employees = [TYVEmployeesPool pool];

@@ -16,8 +16,6 @@
 
 - (void)hireStaff;
 
-- (void)prepareBuildings;
-
 - (void)prepareCars;
 
 - (void)work;
