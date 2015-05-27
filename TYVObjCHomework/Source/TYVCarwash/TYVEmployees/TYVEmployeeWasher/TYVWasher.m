@@ -48,7 +48,6 @@
 - (void)washCar:(TYVCar *)car {
     usleep(arc4random_uniform(1000 * 10));
     car.clean = YES;
-    NSLog(@"Clean a car");
 }
 
 @end
