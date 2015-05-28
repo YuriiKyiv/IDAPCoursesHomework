@@ -51,10 +51,10 @@
     @synchronized(self) {
         if (_state != state) {
             _state = state;
-            TYVSelector *selector = [TYVSelector selectorWithSelector:[self selectorForState:_state]];
-            [self performSelectorOnMainThread:@selector(notifyWithSelector:)
-                                   withObject:selector
-                                waitUntilDone:NO];
+            BOOL isNoMainThread = ([NSThread isMainThread]) ? YES : NO;
+            [self performSelectorOnMainThread:@selector(notify)
+                                   withObject:nil
+                                waitUntilDone:isNoMainThread];
         }
     }
 }
@@ -93,16 +93,19 @@
     return nil;
 }
 
-- (void)notifyWithSelector:(TYVSelector *)selector {
+- (void)notifyWithSelector:(SEL)selector {
     @synchronized(self) {
-        SEL stateSelector = selector.selector;
         NSHashTable *observers = self.observersHashTable;
         for (id observer in observers) {
-            if ([observer respondsToSelector:stateSelector]) {
-                [observer performSelector:stateSelector withObject:self];
+            if ([observer respondsToSelector:selector]) {
+                [observer performSelector:selector withObject:self];
             }
         }
     }
+}
+
+- (void)notify {
+    [self notifyWithSelector:[self selectorForState:self.state]];
 }
 
 @end

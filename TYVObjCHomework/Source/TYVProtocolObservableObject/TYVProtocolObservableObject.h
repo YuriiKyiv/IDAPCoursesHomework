@@ -22,6 +22,8 @@
 
 - (SEL)selectorForState:(NSUInteger)state;
 
-- (void)notifyWithSelector:(TYVSelector *)selector;
+- (void)notifyWithSelector:(SEL)selector;
+
+- (void)notify;
 
 @end
