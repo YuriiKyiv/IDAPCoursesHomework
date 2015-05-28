@@ -51,10 +51,11 @@
     @synchronized(self) {
         if (_state != state) {
             _state = state;
-            BOOL isNoMainThread = ([NSThread isMainThread]) ? YES : NO;
+            BOOL mainThread = [NSThread isMainThread];
+#warning doesnt work if use !mainThread
             [self performSelectorOnMainThread:@selector(notify)
                                    withObject:nil
-                                waitUntilDone:isNoMainThread];
+                                waitUntilDone:mainThread];
         }
     }
 }
