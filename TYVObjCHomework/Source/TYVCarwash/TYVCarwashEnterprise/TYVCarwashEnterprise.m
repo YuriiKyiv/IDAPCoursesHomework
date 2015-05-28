@@ -92,6 +92,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     [self.employees addEmployee:accountant];
     self.director = director;
     [accountant addObserver:director];
+    [accountant addObserver:accountant];
 }
 
 - (void)hireWashers {
@@ -123,9 +124,11 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 }
 
 - (void)giveWorkToWasher:(TYVWasher *)washer {
-    TYVQueue *cars = self.cars;
-    if (!cars.isEmpty) {
-        [washer performWorkWithObject:[cars dequeueObject]];
+    @synchronized (self) {
+        TYVQueue *cars = self.cars;
+        if (!cars.isEmpty && TYVEmployeeDidBecomeFree == washer.state) {
+            [washer performWorkWithObject:[cars dequeueObject]];
+        }
     }
 
 }
@@ -134,11 +137,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    @synchronized(self) {
-        if (TYVEmployeeDidBecomeFree == washer.state) {
-            [self giveWorkToWasher:washer];
-        }
-    }
+    [self giveWorkToWasher:washer];
 }
 
 @end
