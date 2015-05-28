@@ -119,7 +119,6 @@
 
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
-
         @synchronized (self) {
             TYVQueue *queue = self.objectsQueue;
             id proccesingObject = [queue dequeueObject];
