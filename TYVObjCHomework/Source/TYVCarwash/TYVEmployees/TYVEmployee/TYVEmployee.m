@@ -76,7 +76,7 @@
             return @selector(employeeDidPerformWork:);
             
         default:
-            return NULL;
+            return [super selectorForState:state];
     }
 }
 

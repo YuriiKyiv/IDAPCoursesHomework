@@ -88,9 +88,7 @@
 }
 
 - (SEL)selectorForState:(NSUInteger)state {
-    [self doesNotRecognizeSelector:_cmd];
-    
-    return nil;
+    return NULL;
 }
 
 - (void)notifyWithSelector:(SEL)selector {
