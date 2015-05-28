@@ -146,8 +146,9 @@
 - (void)employeeDidBecomeFree:(TYVEmployee *)employee {
     @synchronized (self) {
         TYVQueue *queue = self.objectsQueue;
-        if (TYVEmployeeDidBecomeFree == self.state) {
-            [self performWorkWithObject:[queue dequeueObject]];
+        id proccesingObject = [queue dequeueObject];
+        if (TYVEmployeeDidBecomeFree == self.state && proccesingObject) {
+            [self performWorkWithObject:proccesingObject];
         }
     }
 }
