@@ -144,11 +144,13 @@
 }
 
 - (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    if (self != employee) {
+        return;
+    }
+    
     @synchronized (self) {
-        TYVQueue *queue = self.objectsQueue;
-        id proccesingObject = [queue dequeueObject];
-        if (TYVEmployeeDidBecomeFree == self.state && proccesingObject) {
-            [self performWorkWithObject:proccesingObject];
+        if (TYVEmployeeDidBecomeFree == self.state) {
+            [self performWorkWithObject:[self.objectsQueue dequeueObject]];
         }
     }
 }
