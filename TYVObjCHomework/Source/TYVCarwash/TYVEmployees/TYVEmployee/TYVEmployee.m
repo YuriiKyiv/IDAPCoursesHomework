@@ -85,7 +85,6 @@
 }
 
 - (void)finalizeProccesingWithObjectOnMainThread:(TYVEmployee *)object {
-    NSLog(@"%@ did become free", [object class]);
     object.state = TYVEmployeeDidBecomeFree;
 }
 
@@ -128,7 +127,6 @@
                 [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
                                        withObject:proccesingObject];
             } else {
-                NSLog(@"%@ did perfom work", [self class]);
                 self.state = TYVEmployeeDidPerformWorkWithObject;
             }
         }
@@ -142,14 +140,12 @@
 
 - (void)employeeDidPerformWork:(TYVEmployee *)employee {
     if (self != employee) {
-        NSLog(@" %@ works with %@", [self class], [employee class]);
         [self performWorkWithObject:employee];
     }
 }
 
 - (void)employeeDidBecomeFree:(TYVEmployee *)employee {
     @synchronized (self) {
-        NSLog(@"%@ became free", [employee class]);
         TYVQueue *queue = self.objectsQueue;
         if (TYVEmployeeDidBecomeFree == self.state) {
             [self performWorkWithObject:[queue dequeueObject]];
