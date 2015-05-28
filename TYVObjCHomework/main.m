@@ -16,6 +16,8 @@
 #import "TYVCarManager.h"
 #import "TYVWasher.h"
 #import "TYVCar.h"
+#import "TYVAccountant.h"
+#import "TYVDirector.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -42,15 +44,20 @@ int main(int argc, const char * argv[]) {
         TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
         
         TYVCarManager *carManager = [[[TYVCarManager alloc] initWithEnterprise:enterprise
-                                                                   carCapacity:50
+                                                                   carCapacity:5
                                                                          delay:1] autorelease];
         [carManager performSelectorInBackground:@selector(start) withObject:nil];
         
 //        TYVWasher *washer = [TYVWasher object];
+//        TYVAccountant *accountant = [TYVAccountant object];
+//        TYVDirector *director = [TYVDirector object];
+//        
+//        [washer addObserver:accountant];
+//        [accountant addObserver:director];
 //        
 //        [washer performWorkWithObject:[TYVCar object]];
 //        
-//        TYVCarManager *carWasher = [[[TYVCarManager alloc] initWithWasher:washer carCapacity:1000 delay:1] autorelease];
+//        TYVCarManager *carWasher = [[[TYVCarManager alloc] initWithWasher:washer carCapacity:10 delay:1] autorelease];
 //        
 //        [carWasher performSelectorInBackground:@selector(startWithWasher) withObject:nil];
         
