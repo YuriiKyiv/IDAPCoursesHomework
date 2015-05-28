@@ -12,6 +12,9 @@
 @interface TYVProtocolObservableObject ()
 @property (nonatomic, retain) NSHashTable   *observersHashTable;
 
+- (void)privateNotify;
+- (void)privateNotifyWithSelector:(SEL)selector;
+
 @end
 
 @implementation TYVProtocolObservableObject
@@ -51,11 +54,9 @@
     @synchronized(self) {
         if (_state != state) {
             _state = state;
-            BOOL mainThread = [NSThread isMainThread];
-#warning doesnt work if use !mainThread -> double synchronize when use notify
-            [self performSelectorOnMainThread:@selector(notify)
+            [self performSelectorOnMainThread:@selector(privateNotify)
                                    withObject:nil
-                                waitUntilDone:mainThread];
+                                waitUntilDone:YES];
         }
     }
 }
@@ -94,12 +95,7 @@
 
 - (void)notifyWithSelector:(SEL)selector {
     @synchronized(self) {
-        NSHashTable *observers = self.observersHashTable;
-        for (id observer in observers) {
-            if ([observer respondsToSelector:selector]) {
-                [observer performSelector:selector withObject:self];
-            }
-        }
+        [self privateNotifyWithSelector:selector];
     }
 }
 
@@ -111,6 +107,22 @@
     [self performSelectorOnMainThread:@selector(notify)
                            withObject:nil
                         waitUntilDone:![NSThread isMainThread]];
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)privateNotify {
+    [self privateNotifyWithSelector:[self selectorForState:_state]];
+}
+
+- (void)privateNotifyWithSelector:(SEL)selector {
+    NSHashTable *observers = self.observersHashTable;
+    for (id observer in observers) {
+        if ([observer respondsToSelector:selector]) {
+            [observer performSelector:selector withObject:self];
+        }
+    }
 }
 
 @end
