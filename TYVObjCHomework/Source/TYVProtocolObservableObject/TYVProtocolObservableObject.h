@@ -26,4 +26,6 @@
 
 - (void)notify;
 
+- (void)notifyOnMainThread;
+
 @end

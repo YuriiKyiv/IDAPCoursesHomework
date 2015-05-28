@@ -52,7 +52,7 @@
         if (_state != state) {
             _state = state;
             BOOL mainThread = [NSThread isMainThread];
-#warning doesnt work if use !mainThread
+#warning doesnt work if use !mainThread -> double synchronize when use notify
             [self performSelectorOnMainThread:@selector(notify)
                                    withObject:nil
                                 waitUntilDone:mainThread];
@@ -105,6 +105,12 @@
 
 - (void)notify {
     [self notifyWithSelector:[self selectorForState:self.state]];
+}
+
+- (void)notifyOnMainThread {
+    [self performSelectorOnMainThread:@selector(notify)
+                           withObject:nil
+                        waitUntilDone:![NSThread isMainThread]];
 }
 
 @end
