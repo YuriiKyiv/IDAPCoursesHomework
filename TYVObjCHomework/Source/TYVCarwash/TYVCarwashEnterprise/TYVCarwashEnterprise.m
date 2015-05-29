@@ -137,7 +137,8 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    [self giveWorkToWasher:washer];
+    [self performSelectorInBackground:@selector(giveWorkToWasher:)
+                           withObject:washer];
 }
 
 @end
