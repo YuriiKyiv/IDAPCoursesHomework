@@ -51,12 +51,9 @@
 - (instancetype)initWithWasher:(TYVWasher *)washer carCapacity:(NSUInteger)carCapacity
                          delay:(uint)delay
 {
-    self = [super init];
+    self = [self initWithEnterprise:nil carCapacity:carCapacity delay:delay];
     if (self) {
         self.washer = washer;
-        self.enterprise = nil;
-        self.carCapacity = carCapacity;
-        self.delay = delay;
     }
     
     return self;
