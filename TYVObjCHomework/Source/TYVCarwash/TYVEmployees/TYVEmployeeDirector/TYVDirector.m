@@ -10,7 +10,7 @@
 #import "TYVAccountant.h"
 
 @interface TYVDirector ()
-@property (nonatomic, retain)    NSDecimalNumber    *capital;
+@property (atomic, retain)   NSDecimalNumber *capital;
 
 - (void)profit;
 
@@ -52,19 +52,25 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(TYVAccountant *)anAccountant {
-    [super perfomWorkWithObject:anAccountant];
-    anAccountant.free = YES;
+- (void)proccesWithObject:(TYVAccountant *)accountant {
+    [self takeMoney:accountant.money fromObject:accountant];
     [self profit];
-    self.free = YES;
+}
+
+- (void)finalizeProccesingWithObjectOnMainThread:(TYVAccountant *)object {
+    [super finalizeProccesingWithObjectOnMainThread:object];
+    self.state = TYVEmployeeDidBecomeFree;
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)profit {
-    self.capital = [self.capital decimalNumberByAdding:self.money];
-    NSLog(@"Director capital = %@", self.capital);
+    usleep(arc4random_uniform(1000));
+    NSDecimalNumber *capital = self.capital;
+    capital = [capital decimalNumberByAdding:self.money];
+    
+    NSLog(@"Director capital is %@", self.money);
 }
 
 @end

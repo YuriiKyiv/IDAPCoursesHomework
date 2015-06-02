@@ -8,9 +8,10 @@
 
 #import "TYVAccountant.h"
 #import "TYVWasher.h"
+#import "TYVSelector.h"
 
 @interface TYVAccountant ()
-@property (nonatomic, retain)   NSDecimalNumber    *capital;
+@property (atomic, retain)   NSDecimalNumber    *capital;
 
 - (void)count;
 
@@ -42,8 +43,7 @@
     return self;
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     return [self initWithDuty:@""
                        salary:[NSDecimalNumber zero]
                         money:[NSDecimalNumber zero]
@@ -53,19 +53,18 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(TYVWasher *)washer {
-    [super perfomWorkWithObject:washer];
-    washer.free = YES;
+- (void)proccesWithObject:(TYVWasher *)washer {
+    [self takeMoney:washer.money fromObject:washer];
     [self count];
-    [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)count {
-    self.capital = [self.capital decimalNumberByAdding:self.money];
-    NSLog(@"Accountant capital = %@", self.capital);
+    usleep(arc4random_uniform(1000));
+    NSDecimalNumber *capital = self.capital;
+    capital = [capital decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:@"1000"]];
 }
 
-@end
+@end;

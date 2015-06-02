@@ -8,10 +8,11 @@
 
 #import "TYVWasher.h"
 #import "TYVCar.h"
+#import "TYVSelector.h"
 
 @interface TYVWasher ()
 
-- (void)washCar:(TYVCar *)aCar;
+- (void)washCar:(TYVCar *)car;
 
 @end
 
@@ -26,26 +27,27 @@
 #pragma mark Accessors
 
 - (NSDecimalNumber *)price {
-    return [NSDecimalNumber number:@"100"];
+    return [NSDecimalNumber number:@"1000"];
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)perfomWorkWithObject:(TYVCar *)car {
-    self.free = NO;
-    [self takeMoney:self.price fromMoneykeeper:car];
-    [self washCar:car];
-    [self notifyWithSelector:[self selectorForState:TYVEmployeeDidPerfomWorkWithObject]];
+- (void)proccesWithObject:(id<TYVMoneyTransferProtocol> )object {
+    [self takeMoney:self.price fromObject:object];
+    [self washCar:object];
+}
+
+- (void)finalizeProccesingWithObjectOnMainThread:(TYVCar *)object {
+    
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
-- (void)washCar:(TYVCar *)aCar {
-    sleep(arc4random_uniform(5));
-    aCar.clean = YES;
-    NSLog(@"Washer has cleaned a car with experience %lu", (unsigned long)self.experience);
+- (void)washCar:(TYVCar *)car {
+    usleep(arc4random_uniform(1000 * 10));
+    car.clean = YES;
 }
 
 @end

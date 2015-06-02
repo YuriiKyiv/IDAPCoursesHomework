@@ -8,12 +8,9 @@
 
 #import "TYVMoneyKeeper.h"
 
-@interface TYVMoneyKeeper ()
-@property (nonatomic, retain)   NSDecimalNumber    *money;
-
-@end
-
 @implementation TYVMoneyKeeper
+
+@synthesize money = _money;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
@@ -40,15 +37,27 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(TYVMoneyKeeper *)moneykeeper {
+- (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransferProtocol>)object {
     self.money = [self.money decimalNumberByAdding:money];
-    moneykeeper.money = [moneykeeper.money decimalNumberBySubtracting:money];
+    object.money = [object.money decimalNumberBySubtracting:money];
 }
 
 
-- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(TYVMoneyKeeper *)moneykeeper {
+- (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransferProtocol>)object {
     self.money = [self.money decimalNumberBySubtracting:money];
-    moneykeeper.money = [moneykeeper.money decimalNumberByAdding:money];
+    object.money = [object.money decimalNumberByAdding:money];
+}
+
+- (void)takeMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
+        self.money = [self.money decimalNumberByAdding:money];
+    }
+}
+
+- (void)giveMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
+        self.money = [self.money decimalNumberBySubtracting:money];
+    }
 }
 
 @end

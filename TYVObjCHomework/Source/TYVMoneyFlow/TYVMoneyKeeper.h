@@ -7,15 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVMoneyTransferProtocol.h"
 
-@interface TYVMoneyKeeper : NSObject
-
-@property (nonatomic, readonly)   NSDecimalNumber    *money;
+@interface TYVMoneyKeeper : NSObject <TYVMoneyTransferProtocol>
 
 - (instancetype)initWithMoney:(NSDecimalNumber *)money;
-
-- (void)takeMoney:(NSDecimalNumber *)money fromMoneykeeper:(TYVMoneyKeeper *)moneykeeper;
-
-- (void)giveMoney:(NSDecimalNumber *)money toMoneykeeper:(TYVMoneyKeeper *)moneykeeper;
 
 @end

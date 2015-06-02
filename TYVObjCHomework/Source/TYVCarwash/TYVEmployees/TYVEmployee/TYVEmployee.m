@@ -7,16 +7,24 @@
 //
 
 #import "TYVEmployee.h"
+#import "TYVSelector.h"
+#import "TYVMoneyTransferProtocol.h"
+#import "TYVQueue.h"
 
 @interface TYVEmployee ()
 @property (nonatomic, copy)     NSString        *duty;
 @property (nonatomic, retain)   NSDecimalNumber *salary;
 
-@property (nonatomic, retain)   NSHashTable     *observersHashTable;
+@property (nonatomic, retain)   TYVQueue        *objectsQueue;
+
+- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object;
+- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
 
 @end
 
 @implementation TYVEmployee
+
+@synthesize money = _money;
 
 @dynamic observersSet;
 
@@ -26,13 +34,12 @@
 - (void)dealloc {
     self.duty = nil;
     self.salary = nil;
-    self.observersHashTable = nil;
+    self.objectsQueue = nil;
     
     [super dealloc];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     return [self initWithDuty:@""
                        salary:[NSDecimalNumber zero]
                         money:[NSDecimalNumber zero]];
@@ -42,43 +49,20 @@
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money
 {
-    self = [super initWithMoney:money];
+    self = [super init];
     if (self) {
         self.duty = duty;
         self.salary = salary;
-        self.free = YES;
-        self.observersHashTable = [NSHashTable weakObjectsHashTable];
+        self.state = TYVEmployeeDidBecomeFree;
+        self.money = money;
+        self.objectsQueue = [[[TYVQueue alloc] init] autorelease];
     }
     
     return self;
 }
 
 #pragma mark -
-#pragma mark Accessors
-
-- (NSSet *)observersSet {
-    return self.observersHashTable.setRepresentation;
-}
-
--(void)setFree:(BOOL)free {
-    if  (_free != free) {
-        _free = free;
-        TYVEmployeeState state = (_free) ? TYVEmployeeDidBecomeFree : TYVEmployeeDidBecomeBusy;
-        [self notifyWithSelector:[self selectorForState:state]];
-    }
-}
-
-#pragma mark -
 #pragma mark Public Methods
-
-- (void)notifyWithSelector:(SEL)selector {
-    NSHashTable *observers = self.observersHashTable;
-    for (id observer in observers) {
-        if ([observer respondsToSelector:selector]) {
-            [observer performSelector:selector withObject:self];
-        }
-    }
-}
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
@@ -88,36 +72,113 @@
         case TYVEmployeeDidBecomeBusy:
             return @selector(employeeDidBecomeBusy:);
             
-        case TYVEmployeeDidPerfomWorkWithObject:
-            return @selector(employee:didPerfomWorkWithObject:);
+        case TYVEmployeeDidPerformWorkWithObject:
+            return @selector(employeeDidPerformWork:);
             
         default:
-            return nil;
+            return [super selectorForState:state];
     }
 }
 
-- (void)perfomWorkWithObject:(TYVMoneyKeeper *)anObject {
-    self.free = NO;
-    [self takeMoney:anObject.money fromMoneykeeper:anObject];
+- (void)proccesWithObject:(id<TYVMoneyTransferProtocol> )object {
+
 }
 
-- (void)addObserver:(id)observer {
-    [self.observersHashTable addObject:observer];
+- (void)finalizeProccesingWithObjectOnMainThread:(TYVEmployee *)object {
+    object.state = TYVEmployeeDidBecomeFree;
 }
 
-- (void)removeObserver:(id)observer {
-    [self.observersHashTable removeObject:observer];
+- (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
+    if (object) {
+        @synchronized (self) {
+            if (TYVEmployeeDidBecomeFree == self.state) {
+                self.state = TYVEmployeeDidBecomeBusy;
+                [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+                                       withObject:object];
+            } else {
+                [self.objectsQueue enqueueObject:object];
+            }
+        }
+    }
 }
 
-- (BOOL)containsObserver:(id)observer {
-    return [self.observersHashTable containsObject:observer];
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
+    @autoreleasepool {
+        if (object) {
+            [self proccesWithObject:object];
+            [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
+                                   withObject:object
+                                waitUntilDone:NO];
+        }
+    }
+}
+
+- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
+    @autoreleasepool {
+        @synchronized (self) {
+            TYVQueue *queue = self.objectsQueue;
+            id proccesingObject = [queue dequeueObject];
+            if (proccesingObject) {
+                [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+                                       withObject:proccesingObject];
+            } else {
+                self.state = TYVEmployeeDidPerformWorkWithObject;
+            }
+        }
+        
+        [self finalizeProccesingWithObjectOnMainThread:object];
+    }
 }
 
 #pragma mark -
-#pragma mark TYVEmployeeDelegate
+#pragma mark TYVEmployeeObserver
 
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object {
-    [self perfomWorkWithObject:employee];
+- (void)employeeDidPerformWork:(TYVEmployee *)employee {
+    if (self != employee) {
+        [self performWorkWithObject:employee];
+    }
+}
+
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    if (self != employee) {
+        return;
+    }
+    
+    @synchronized (self) {
+        if (TYVEmployeeDidBecomeFree == self.state) {
+            [self performWorkWithObject:[self.objectsQueue dequeueObject]];
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark TYVMoneyTransfer
+
+- (void)takeMoney:(NSDecimalNumber *)money fromObject:(id<TYVMoneyTransferProtocol>)object {
+    [self takeMoney:money];
+    [object giveMoney:money];
+}
+
+
+- (void)giveMoney:(NSDecimalNumber *)money toObject:(id<TYVMoneyTransferProtocol>)object {
+    [self giveMoney:money];
+    [object takeMoney:money];
+}
+
+- (void)takeMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
+        self.money = [self.money decimalNumberByAdding:money];
+    }
+}
+
+- (void)giveMoney:(NSDecimalNumber *)money {
+    @synchronized (self) {
+        self.money = [self.money decimalNumberBySubtracting:money];
+    }
 }
 
 @end

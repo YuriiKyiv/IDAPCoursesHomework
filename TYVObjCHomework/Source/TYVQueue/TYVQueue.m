@@ -18,6 +18,13 @@
 @dynamic empty;
 
 #pragma mark -
+#pragma mark Class Methods
+
++ (instancetype)queue {
+    return [[[TYVQueue alloc] init] autorelease];
+}
+
+#pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
@@ -39,26 +46,28 @@
 #pragma mark Accessors
 
 - (BOOL)isEmpty {
-    return ([self.queue count] == 0);
+    @synchronized(self) {
+        return ([self.queue count] == 0);
+    }
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)enqueueObject:(id)object {
-    [self.queue addObject:object];
+    @synchronized(self) {
+        [self.queue addObject:object];
+    }
 }
 
 - (id)dequeueObject {
-    NSMutableArray *array = self.queue;
-    id result = array[0];
-    [array removeObjectAtIndex:0];
+    @synchronized(self) {
+        NSMutableArray *array = self.queue;
+        id result = [[[array firstObject] retain] autorelease];
+        [array removeObject:result];
     
-    return result;
-}
-
-- (NSUInteger)count {
-    return [self.queue count];
+        return result;
+    }
 }
 
 @end

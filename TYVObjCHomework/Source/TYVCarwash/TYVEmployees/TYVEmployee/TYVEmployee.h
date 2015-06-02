@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TYVMoneyKeeper.h"
+#import "TYVProtocolObservableObject.h"
+#import "TYVMoneyTransferProtocol.h"
+#import "TYVEmployeeObserverProtocol.h"
 
 #import "NSDecimalNumber+TYVNSDecimalNumberExtensions.h"
 
@@ -16,50 +18,27 @@
 typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
     TYVEmployeeDidBecomeFree,
     TYVEmployeeDidBecomeBusy,
-    TYVEmployeeDidPerfomWorkWithObject
+    TYVEmployeeDidPerformWorkWithObject
 };
 
-@protocol TYVEmployeeDelegate <NSObject>
+@interface TYVEmployee : TYVProtocolObservableObject <TYVEmployeeObserverProtocol, TYVMoneyTransferProtocol>
+@property (nonatomic, readonly) NSString            *duty;
 
-- (void)employee:(TYVEmployee *)employee didPerfomWorkWithObject:(id)object;
-
-@optional
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
-
-@end
-
-@protocol TYVEmployeeObserver <NSObject>
-
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee;
-
-- (void)employeeDidBecomeBusy:(TYVEmployee *)employee;
-
-@end
-
-@interface TYVEmployee : TYVMoneyKeeper <TYVEmployeeDelegate>
-@property (nonatomic, readonly)                 NSString                *duty;
-
-@property (nonatomic, readonly)                 NSDecimalNumber         *salary;
-@property (nonatomic, assign)                   NSUInteger              experience;
-
-@property (nonatomic, assign, getter=isFree)    BOOL                    free;
-
-@property (nonatomic, readonly)                 NSSet                   *observersSet;
+@property (nonatomic, readonly) NSDecimalNumber     *salary;
+@property (nonatomic, assign)   NSUInteger          experience;
 
 - (instancetype)initWithDuty:(NSString *)duty
                       salary:(NSDecimalNumber *)salary
                        money:(NSDecimalNumber *)money;
 
-- (void)perfomWorkWithObject:(id)anObject;
+// This is the method for overriding
+// Do not call a massage directly
+- (void)proccesWithObject:(id<TYVMoneyTransferProtocol>)object;
 
-- (void)addObserver:(id)observer;
+// This is the method for overriding
+// Do not call a massage directly
+- (void)finalizeProccesingWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
 
-- (void)removeObserver:(id)observer;
-
-- (BOOL)containsObserver:(id)observer;
-
-- (SEL)selectorForState:(NSUInteger)state;
-
-- (void)notifyWithSelector:(SEL)selector;
+- (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object;
 
 @end
