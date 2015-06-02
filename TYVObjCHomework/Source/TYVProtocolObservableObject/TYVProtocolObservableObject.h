@@ -22,10 +22,4 @@
 
 - (SEL)selectorForState:(NSUInteger)state;
 
-- (void)notifyWithSelector:(SEL)selector;
-
-- (void)notify;
-
-- (void)notifyOnMainThread;
-
 @end
