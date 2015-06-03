@@ -92,7 +92,6 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     [self.employees addEmployee:accountant];
     self.director = director;
     [accountant addObserver:director];
-    [accountant addObserver:accountant];
 }
 
 - (void)hireWashers {

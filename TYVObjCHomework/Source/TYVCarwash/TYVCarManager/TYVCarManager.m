@@ -89,7 +89,7 @@
 - (void)work {
     TYVCarwashEnterprise *enterprise = self.enterprise;
     for (int i = 0; i < self.carCapacity; i++) {
-        [enterprise addCar:[TYVCar object]];
+        [enterprise washCar:[TYVCar object]];
     }
 }
 

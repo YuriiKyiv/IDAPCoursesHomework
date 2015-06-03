@@ -35,6 +35,9 @@
     self.duty = nil;
     self.salary = nil;
     self.objectsQueue = nil;
+    self.money = nil;
+    
+    [self removeObserver:self];
     
     [super dealloc];
 }
@@ -56,6 +59,8 @@
         self.state = TYVEmployeeDidBecomeFree;
         self.money = money;
         self.objectsQueue = [[[TYVQueue alloc] init] autorelease];
+        
+        [self addObserver:self];
     }
     
     return self;
@@ -80,11 +85,11 @@
     }
 }
 
-- (void)proccesWithObject:(id<TYVMoneyTransferProtocol> )object {
+- (void)processWithObject:(id<TYVMoneyTransferProtocol> )object {
 
 }
 
-- (void)finalizeProccesingWithObjectOnMainThread:(TYVEmployee *)object {
+- (void)finalizeProcessingWithObjectOnMainThread:(TYVEmployee *)object {
     object.state = TYVEmployeeDidBecomeFree;
 }
 
@@ -109,7 +114,7 @@
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
     @autoreleasepool {
         if (object) {
-            [self proccesWithObject:object];
+            [self processWithObject:object];
             [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
                                    withObject:object
                                 waitUntilDone:NO];
@@ -121,16 +126,16 @@
     @autoreleasepool {
         @synchronized (self) {
             TYVQueue *queue = self.objectsQueue;
-            id proccesingObject = [queue dequeueObject];
-            if (proccesingObject) {
+            id ProcessingObject = [queue dequeueObject];
+            if (ProcessingObject) {
                 [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
-                                       withObject:proccesingObject];
+                                       withObject:ProcessingObject];
             } else {
                 self.state = TYVEmployeeDidPerformWorkWithObject;
             }
         }
         
-        [self finalizeProccesingWithObjectOnMainThread:object];
+        [self finalizeProcessingWithObjectOnMainThread:object];
     }
 }
 

@@ -32,12 +32,12 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
                        money:(NSDecimalNumber *)money;
 
 // This is the method for overriding
-// Do not call a massage directly
-- (void)proccesWithObject:(id<TYVMoneyTransferProtocol>)object;
+// Do not call a message directly
+- (void)processWithObject:(id<TYVMoneyTransferProtocol>)object;
 
 // This is the method for overriding
-// Do not call a massage directly
-- (void)finalizeProccesingWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
+// Do not call a message directly
+- (void)finalizeProcessingWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object;
 
