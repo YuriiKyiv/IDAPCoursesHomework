@@ -57,6 +57,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     self = [super init];
     if (self) {
         [self hireStaff];
+        self.cars = [TYVQueue object];
     }
     
     return self;
@@ -136,8 +137,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    [self performSelectorInBackground:@selector(giveWorkToWasher:)
-                           withObject:washer];
+    [self giveWorkToWasher:washer];
 }
 
 @end
