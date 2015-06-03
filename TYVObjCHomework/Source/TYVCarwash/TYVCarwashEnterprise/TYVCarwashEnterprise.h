@@ -16,6 +16,6 @@
 
 - (void)hireStaff;
 
-- (void)addCar:(TYVCar *)car;
+- (void)washCar:(TYVCar *)car;
 
 @end
