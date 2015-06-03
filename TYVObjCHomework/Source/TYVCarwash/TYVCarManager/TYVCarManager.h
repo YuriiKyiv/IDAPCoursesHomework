@@ -12,15 +12,17 @@
 @class TYVWasher;
 
 @interface TYVCarManager : NSObject
-@property (atomic, assign)  NSUInteger  carCapacity;
-@property (atomic, assign)  uint        delay;
+@property (atomic, assign)  NSUInteger      carCapacity;
+@property (atomic, assign)  NSTimeInterval  delay;
 
 @property (atomic, assign, getter=isCancel) BOOL    cancel;
 
-- (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise carCapacity:(NSUInteger)carCapacity
+- (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise
+                       carCapacity:(NSUInteger)carCapacity
                              delay:(uint)delay;
 
-- (instancetype)initWithWasher:(TYVWasher *)washer carCapacity:(NSUInteger)carCapacity
+- (instancetype)initWithWasher:(TYVWasher *)washer
+                   carCapacity:(NSUInteger)carCapacity
                              delay:(uint)delay;
 
 - (void)start;

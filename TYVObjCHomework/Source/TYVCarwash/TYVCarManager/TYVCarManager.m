@@ -35,7 +35,8 @@
     [super dealloc];
 }
 
-- (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise carCapacity:(NSUInteger)carCapacity
+- (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise
+                       carCapacity:(NSUInteger)carCapacity
                               delay:(uint)delay
 {
     self = [super init];
@@ -48,7 +49,8 @@
     return self;
 }
 
-- (instancetype)initWithWasher:(TYVWasher *)washer carCapacity:(NSUInteger)carCapacity
+- (instancetype)initWithWasher:(TYVWasher *)washer
+                   carCapacity:(NSUInteger)carCapacity
                          delay:(uint)delay
 {
     self = [self initWithEnterprise:nil carCapacity:carCapacity delay:delay];
