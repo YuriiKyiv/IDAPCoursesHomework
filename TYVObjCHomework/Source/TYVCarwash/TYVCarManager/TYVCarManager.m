@@ -71,7 +71,8 @@
 #pragma mark Public Methods
 
 - (void)start {
-    while (!self.isCancel) {
+    self.running = YES;
+    while (!self.isRunning) {
         [self performSelectorInBackground:@selector(work) withObject:nil];
         sleep(self.delay);
     }
@@ -79,7 +80,8 @@
 }
 
 - (void)startWithWasher {
-    while (!self.isCancel) {
+    self.running = YES;
+    while (!self.isRunning) {
     [self performSelectorInBackground:@selector(workWithWasher) withObject:nil];
         sleep(self.delay);
     }

@@ -15,7 +15,7 @@
 @property (atomic, assign)  NSUInteger      carCapacity;
 @property (atomic, assign)  NSTimeInterval  delay;
 
-@property (atomic, assign, getter=isCancel) BOOL    cancel;
+@property (atomic, assign, getter=isRunning) BOOL    running;
 
 - (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise
                        carCapacity:(NSUInteger)carCapacity
