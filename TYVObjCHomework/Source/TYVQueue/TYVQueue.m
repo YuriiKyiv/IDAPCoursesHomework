@@ -70,4 +70,10 @@
     }
 }
 
+- (BOOL)containsObject:(id)object {
+    @synchronized (self) {
+        return [self.queue containsObject:object];
+    }
+}
+
 @end
