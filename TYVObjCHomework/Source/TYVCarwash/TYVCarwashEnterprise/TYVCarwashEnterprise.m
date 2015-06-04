@@ -84,7 +84,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark Private Methods
 
 - (void)hireAdminStaff {
-    
+    self.director = [TYVDirector object];
 }
 
 - (void)hireWashers {
@@ -130,6 +130,8 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 - (void)employeeDidPerformWork:(TYVEmployee *)employee {
     if ([employee isMemberOfClass:[TYVWasher class]]) {
         [self.accountantDispatcher addProcessingObject:employee];
+    } else if ([employee isMemberOfClass:[TYVAccountant class]]) {
+        [self.director performWorkWithObject:employee];
     }
 }
 
