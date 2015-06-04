@@ -63,7 +63,6 @@
 
 -(instancetype)init {
     [self doesNotRecognizeSelector:_cmd];
-    [self release];
     
     return nil;
 }
@@ -88,16 +87,14 @@
     }
 }
 
-
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)work {
     TYVCarwashEnterprise *enterprise = self.enterprise;
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.delay target:enterprise
-                                                    selector:@selector(washCar:)
-                                                    userInfo:[TYVCar object] repeats:YES];
-    [timer fire];
+    for (int i = 0; i < self.carCapacity; i++) {
+        [enterprise washCar:[TYVCar object]];
+    }
 }
 
 - (void)workWithWasher {
