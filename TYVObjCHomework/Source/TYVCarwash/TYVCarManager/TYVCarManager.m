@@ -63,6 +63,7 @@
 
 -(instancetype)init {
     [self doesNotRecognizeSelector:_cmd];
+    [self release];
     
     return nil;
 }
@@ -72,7 +73,7 @@
 
 - (void)start {
     self.running = YES;
-    while (!self.isRunning) {
+    while (self.isRunning) {
         [self performSelectorInBackground:@selector(work) withObject:nil];
         sleep(self.delay);
     }
@@ -81,7 +82,7 @@
 
 - (void)startWithWasher {
     self.running = YES;
-    while (!self.isRunning) {
+    while (self.isRunning) {
     [self performSelectorInBackground:@selector(workWithWasher) withObject:nil];
         sleep(self.delay);
     }
