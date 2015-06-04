@@ -35,7 +35,8 @@
     [super dealloc];
 }
 
-- (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise carCapacity:(NSUInteger)carCapacity
+- (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise
+                       carCapacity:(NSUInteger)carCapacity
                               delay:(uint)delay
 {
     self = [super init];
@@ -48,7 +49,8 @@
     return self;
 }
 
-- (instancetype)initWithWasher:(TYVWasher *)washer carCapacity:(NSUInteger)carCapacity
+- (instancetype)initWithWasher:(TYVWasher *)washer
+                   carCapacity:(NSUInteger)carCapacity
                          delay:(uint)delay
 {
     self = [self initWithEnterprise:nil carCapacity:carCapacity delay:delay];
@@ -61,6 +63,7 @@
 
 -(instancetype)init {
     [self doesNotRecognizeSelector:_cmd];
+    [self release];
     
     return nil;
 }
@@ -69,7 +72,8 @@
 #pragma mark Public Methods
 
 - (void)start {
-    while (!self.isCancel) {
+    self.running = YES;
+    while (self.isRunning) {
         [self performSelectorInBackground:@selector(work) withObject:nil];
         sleep(self.delay);
     }
@@ -77,7 +81,8 @@
 }
 
 - (void)startWithWasher {
-    while (!self.isCancel) {
+    self.running = YES;
+    while (self.isRunning) {
     [self performSelectorInBackground:@selector(workWithWasher) withObject:nil];
         sleep(self.delay);
     }
@@ -89,7 +94,7 @@
 - (void)work {
     TYVCarwashEnterprise *enterprise = self.enterprise;
     for (int i = 0; i < self.carCapacity; i++) {
-        [enterprise addCar:[TYVCar object]];
+        [enterprise washCar:[TYVCar object]];
     }
 }
 

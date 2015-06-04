@@ -12,7 +12,7 @@
 #import "TYVWasher.h"
 
 @interface TYVDispatcher ()
-@property (nonatomic, retain) TYVQueue          *proccesingObjectsQueue;
+@property (nonatomic, retain) TYVQueue          *processingObjectsQueue;
 @property (nonatomic, retain) TYVEmployeesPool  *handlersPool;
 
 @end
@@ -20,13 +20,13 @@
 @implementation TYVDispatcher
 
 @dynamic handlersSet;
-@dynamic proccesingObjects;
+@dynamic processingObjects;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    self.proccesingObjectsQueue = nil;
+    self.processingObjectsQueue = nil;
     self.handlersPool = nil;
     
     [super dealloc];
@@ -36,7 +36,7 @@
 {
     self = [super init];
     if (self) {
-        self.proccesingObjectsQueue = [TYVQueue queue];
+        self.processingObjectsQueue = [TYVQueue queue];
         self.handlersPool = [TYVEmployeesPool pool];
     }
     
@@ -50,19 +50,19 @@
     return self.handlersPool.employeesSet;
 }
 
-- (TYVQueue *)proccesingObjects {
-    return [[self.proccesingObjectsQueue copy] autorelease];
+- (TYVQueue *)processingObjects {
+    return [[self.processingObjectsQueue copy] autorelease];
 }
 
 #pragma mark -
 #pragma Public Methods
 
-- (void)addProccesingObject:(id)object {
+- (void)addProcessingObject:(id)object {
     TYVWasher *washer = [self.handlersPool freeEmployeeWithClass:[TYVWasher class]];
     if (washer) {
         [washer performWorkWithObject:object];
     } else {
-        [self.proccesingObjectsQueue enqueueObject:object];
+        [self.processingObjectsQueue enqueueObject:object];
     }
 }
 
@@ -72,7 +72,7 @@
     [handler addObserver:self];
     
     if (TYVEmployeeDidBecomeFree == handler.state) {
-        [handler performWorkWithObject:[self.proccesingObjectsQueue dequeueObject]];
+        [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
     }
 }
 
@@ -84,7 +84,7 @@
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidPerformWork:(TYVEmployee *)employee {
-    [employee performWorkWithObject:[self.proccesingObjectsQueue dequeueObject]];
+    [employee performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
 }
 
 @end

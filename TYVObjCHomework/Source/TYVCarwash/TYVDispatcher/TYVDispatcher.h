@@ -15,10 +15,10 @@
 @class TYVEmployee;
 
 @interface TYVDispatcher : NSObject <TYVEmployeeObserverProtocol>
-@property (nonatomic, readonly) TYVQueue    *proccesingObjects;
+@property (nonatomic, readonly) TYVQueue    *processingObjects;
 @property (nonatomic, readonly) NSSet       *handlersSet;
 
-- (void)addProccesingObject:(id)object;
+- (void)addProcessingObject:(id)object;
 
 - (void)addHandler:(TYVEmployee *)handler;
 - (void)removeHandler:(TYVEmployee *)handler;

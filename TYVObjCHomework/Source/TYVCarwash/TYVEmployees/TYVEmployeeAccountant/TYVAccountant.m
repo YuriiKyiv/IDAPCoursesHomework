@@ -53,7 +53,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)proccesWithObject:(TYVWasher *)washer {
+- (void)processWithObject:(TYVWasher *)washer {
     [self takeMoney:washer.money fromObject:washer];
     [self count];
 }

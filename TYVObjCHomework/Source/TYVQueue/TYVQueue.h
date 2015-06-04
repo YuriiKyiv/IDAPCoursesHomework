@@ -17,4 +17,6 @@
 
 - (id)dequeueObject;
 
+- (BOOL)containsObject:(id)object;
+
 @end

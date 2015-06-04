@@ -32,7 +32,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 
 - (void)hireWashers;
 
-- (void)killEmployeesConnections;
+- (void)removeEmployeesConnections;
 
 - (void)giveWorkToWasher:(TYVWasher *)washer;
 
@@ -44,7 +44,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [self killEmployeesConnections];
+    [self removeEmployeesConnections];
     
     self.employees = nil;
     self.director = nil;
@@ -57,6 +57,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     self = [super init];
     if (self) {
         [self hireStaff];
+        self.cars = [TYVQueue object];
     }
     
     return self;
@@ -71,13 +72,13 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     [self hireWashers];
 }
 
-- (void)addCar:(TYVCar *)car {
+- (void)washCar:(TYVCar *)car {
     @synchronized (self) {
+        TYVQueue *cars = self.cars;
+        [cars enqueueObject:car];
         TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
         if (washer) {
-            [washer performWorkWithObject:car];
-        } else {
-            [self.cars enqueueObject:car];
+            [washer performWorkWithObject:[cars dequeueObject]];
         }
     }
 }
@@ -92,7 +93,6 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     [self.employees addEmployee:accountant];
     self.director = director;
     [accountant addObserver:director];
-    [accountant addObserver:accountant];
 }
 
 - (void)hireWashers {
@@ -108,7 +108,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     }
 }
 
-- (void)killEmployeesConnections {
+- (void)removeEmployeesConnections {
     NSSet *washersSet = [self.employees employeesWithClass:[TYVWasher class]];
     NSSet *accountantsSet = [self.employees employeesWithClass:[TYVAccountant class]];
     for (TYVEmployee *employee in washersSet) {
@@ -137,8 +137,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    [self performSelectorInBackground:@selector(giveWorkToWasher:)
-                           withObject:washer];
+    [self giveWorkToWasher:washer];
 }
 
 @end
