@@ -26,10 +26,13 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 @property (nonatomic, retain)   TYVDirector         *director;
 
 @property (nonatomic, retain)   TYVDispatcher       *washerDispatcher;
+@property (nonatomic, retain)   TYVDispatcher       *accountantDispatcher;
 
 - (void)hireAdminStaff;
 
 - (void)hireWashers;
+
+- (void)hireAccountants;
 
 - (void)removeEmployeesConnections;
 
@@ -47,6 +50,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     self.director = nil;
     
     self.washerDispatcher = nil;
+    self.accountantDispatcher = nil;
     
     [super dealloc];
 }
@@ -55,6 +59,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     self = [super init];
     if (self) {
         self.washerDispatcher = [TYVDispatcher object];
+        self.accountantDispatcher = [TYVDispatcher object];
         
         [self hireStaff];
     }
@@ -68,6 +73,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 - (void)hireStaff {
     [self hireAdminStaff];
     [self hireWashers];
+    [self hireAccountants];
 }
 
 - (void)washCar:(TYVCar *)car {
@@ -94,6 +100,18 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
     }
 }
 
+- (void)hireAccountants {
+    NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
+    NSLog(@"Accoutantscount = %lu", (unsigned long)randomWashersCount);
+    TYVDispatcher *dispatcher = self.accountantDispatcher;
+    for (NSUInteger index = 0; index < randomWashersCount; index++) {
+        TYVAccountant *accountant = [TYVAccountant object];
+        accountant.experience = index;
+        [accountant addObserver:self];
+        [dispatcher addHandler:accountant];
+    }
+}
+
 - (void)removeEmployeesConnections {
 
 }
@@ -106,6 +124,13 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
+    
+}
+
+- (void)employeeDidPerformWork:(TYVEmployee *)employee {
+    if ([employee isMemberOfClass:[TYVWasher class]]) {
+        [self.accountantDispatcher addProcessingObject:employee];
+    }
 }
 
 @end
