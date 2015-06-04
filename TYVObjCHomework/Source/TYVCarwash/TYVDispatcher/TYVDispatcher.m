@@ -19,9 +19,6 @@
 
 @implementation TYVDispatcher
 
-@dynamic handlersSet;
-@dynamic processingObjects;
-
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
@@ -32,8 +29,7 @@
     [super dealloc];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.processingObjectsQueue = [TYVQueue queue];
@@ -46,33 +42,29 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (NSSet *)handlersSet {
-    return self.handlersPool.employeesSet;
-}
-
-- (TYVQueue *)processingObjects {
-    return [[self.processingObjectsQueue copy] autorelease];
-}
-
 #pragma mark -
 #pragma Public Methods
 
 - (void)addProcessingObject:(id)object {
-    TYVWasher *washer = [self.handlersPool freeEmployeeWithClass:[TYVWasher class]];
-    if (washer) {
-        [washer performWorkWithObject:object];
-    } else {
-        [self.processingObjectsQueue enqueueObject:object];
+    @synchronized (self) {
+        TYVQueue *queue = self.processingObjectsQueue;
+        [queue enqueueObject:object];
+        id handler = [self.handlersPool freeEmployee];
+        if (handler) {
+            [handler performWorkWithObject:[queue dequeueObject]];
+        }
     }
 }
 
 
 - (void)addHandler:(TYVEmployee *)handler {
-    [self.handlersPool addEmployee:handler];
-    [handler addObserver:self];
-    
-    if (TYVEmployeeDidBecomeFree == handler.state) {
-        [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+    @synchronized (self) {
+        [self.handlersPool addEmployee:handler];
+        [handler addObserver:self];
+        TYVQueue *queue = self.processingObjectsQueue;
+        if (TYVEmployeeDidBecomeFree == handler.state && !queue.isEmpty) {
+            [handler performWorkWithObject:[queue dequeueObject]];
+        }
     }
 }
 
@@ -84,7 +76,11 @@
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidPerformWork:(TYVEmployee *)employee {
-    [employee performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+    @synchronized (self) {
+        if (TYVEmployeeDidBecomeFree == employee) {
+            [employee performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+        }
+    }
 }
 
 @end
