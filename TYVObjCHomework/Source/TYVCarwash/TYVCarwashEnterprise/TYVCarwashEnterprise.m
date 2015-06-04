@@ -20,7 +20,7 @@
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
-static const NSUInteger kTYVMaxWasharsCount = 23;
+static const NSUInteger kTYVMaxEmployeeCount = 23;
 
 @interface TYVCarwashEnterprise ()
 @property (nonatomic, retain)   TYVDirector         *director;
@@ -34,9 +34,9 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 
 - (void)hireAccountants;
 
-- (void)removeEmployeesConnections;
-
 - (void)giveWorkToWasher:(TYVWasher *)washer;
+
+- (void)hireEmployeesWithClass:(Class)class dispatcher:(TYVDispatcher *)dispatcher;
 
 @end
 
@@ -46,7 +46,6 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    [self removeEmployeesConnections];
     self.director = nil;
     
     self.washerDispatcher = nil;
@@ -88,32 +87,24 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 }
 
 - (void)hireWashers {
-    NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
-    NSLog(@"Washers count = %lu", (unsigned long)randomWashersCount);
-    TYVDispatcher *dispatcher = self.washerDispatcher;
-    for (NSUInteger index = 0; index < randomWashersCount; index++) {
-        TYVWasher *washer = [TYVWasher object];
-        washer.experience = index;
-        [washer addObserver:self];
-        [dispatcher addHandler:washer];
-        
-    }
+    [self hireEmployeesWithClass:[TYVWasher class]
+                      dispatcher:self.washerDispatcher];
 }
 
 - (void)hireAccountants {
-    NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
-    NSLog(@"Accoutantscount = %lu", (unsigned long)randomWashersCount);
-    TYVDispatcher *dispatcher = self.accountantDispatcher;
-    for (NSUInteger index = 0; index < randomWashersCount; index++) {
-        TYVAccountant *accountant = [TYVAccountant object];
-        accountant.experience = index;
-        [accountant addObserver:self];
-        [dispatcher addHandler:accountant];
-    }
+    [self hireEmployeesWithClass:[TYVAccountant class]
+                      dispatcher:self.accountantDispatcher];
 }
 
-- (void)removeEmployeesConnections {
-
+- (void)hireEmployeesWithClass:(Class)class dispatcher:(TYVDispatcher *)dispatcher {
+    NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxEmployeeCount);
+    NSLog(@"Accoutantscount = %lu", (unsigned long)randomWashersCount);
+    for (NSUInteger index = 0; index < randomWashersCount; index++) {
+        TYVEmployee *employee = [class object];
+        employee.experience = index;
+        [employee addObserver:self];
+        [dispatcher addHandler:employee];
+    }
 }
 
 - (void)giveWorkToWasher:(TYVWasher *)washer {
