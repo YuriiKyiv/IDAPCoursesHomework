@@ -96,6 +96,7 @@
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     if (object) {
         @synchronized (self) {
+            NSLog(@"%@ with experience %lu started to work with %@", [self class], (unsigned long)self.experience ,[object class]);
             if (TYVEmployeeDidBecomeFree == self.state) {
                 self.state = TYVEmployeeDidBecomeBusy;
                 [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
