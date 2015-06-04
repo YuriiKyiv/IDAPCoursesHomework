@@ -34,6 +34,8 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 
 - (void)hireAccountants;
 
+- (void)removeConnections;
+
 - (void)giveWorkToWasher:(TYVWasher *)washer;
 
 - (void)hireEmployeesWithClass:(Class)class dispatcher:(TYVDispatcher *)dispatcher;
@@ -46,6 +48,8 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
+    [self removeConnections];
+    
     self.director = nil;
     
     self.washerDispatcher = nil;
@@ -98,12 +102,25 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 
 - (void)hireEmployeesWithClass:(Class)class dispatcher:(TYVDispatcher *)dispatcher {
     NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxEmployeeCount);
-    NSLog(@"Accoutantscount = %lu", (unsigned long)randomWashersCount);
+    NSLog(@"%@ count = %lu", class,(unsigned long)randomWashersCount);
     for (NSUInteger index = 0; index < randomWashersCount; index++) {
         TYVEmployee *employee = [class object];
         employee.experience = index;
         [employee addObserver:self];
         [dispatcher addHandler:employee];
+    }
+}
+
+- (void)removeConnections {
+    NSSet *washersSet = [self.washerDispatcher handlersSet];
+    NSSet *accountantsSet = [self.accountantDispatcher handlersSet];
+    
+    for (TYVEmployee *handler in washersSet) {
+        [handler removeObserver:self];
+    }
+    
+    for (TYVEmployee *handler in accountantsSet) {
+        [handler removeObserver:self];
     }
 }
 
