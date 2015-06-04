@@ -15,6 +15,7 @@
 @class TYVEmployee;
 
 @interface TYVDispatcher : NSObject <TYVEmployeeObserverProtocol>
+@property (nonatomic, readonly) NSSet   *handlersSet;
 
 - (void)addProcessingObject:(id)object;
 

@@ -19,6 +19,8 @@
 
 @implementation TYVDispatcher
 
+@dynamic handlersSet;
+
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
@@ -42,6 +44,9 @@
 #pragma mark -
 #pragma mark Accessors
 
+- (NSSet *)handlersSet {
+    return [self.handlersPool employeesSet];
+}
 #pragma mark -
 #pragma Public Methods
 
