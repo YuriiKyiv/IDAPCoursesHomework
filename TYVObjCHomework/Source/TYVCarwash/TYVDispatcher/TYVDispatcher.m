@@ -46,16 +46,18 @@
 #pragma Public Methods
 
 - (void)addProcessingObject:(id)object {
+    [self.processingObjectsQueue enqueueObject:object];
+    [self performSelectorInBackground:@selector(perfomProcess) withObject:nil];
+}
+
+- (void)perfomProcess{
     @synchronized (self) {
-        TYVQueue *queue = self.processingObjectsQueue;
-        [queue enqueueObject:object];
-        id handler = [self.handlersPool freeEmployee];
+        TYVEmployee  *handler = [self.handlersPool freeEmployee];
         if (handler) {
-            [handler performWorkWithObject:[queue dequeueObject]];
+            [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
         }
     }
 }
-
 
 - (void)addHandler:(TYVEmployee *)handler {
     @synchronized (self) {
@@ -72,15 +74,17 @@
     
 }
 
+- (void)giveWorkForHandler:(id)handler {
+    if (TYVEmployeeDidBecomeFree == handler) {
+        [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+    }
+}
+
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidPerformWork:(TYVEmployee *)employee {
-    @synchronized (self) {
-        if (TYVEmployeeDidBecomeFree == employee) {
-            [employee performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
-        }
-    }
+    [self performSelectorInBackground:@selector(giveWorkForHandler:) withObject:employee];
 }
 
 @end
