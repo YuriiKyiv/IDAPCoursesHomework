@@ -15,6 +15,8 @@
 @property (nonatomic, retain) TYVQueue          *processingObjectsQueue;
 @property (nonatomic, retain) TYVEmployeesPool  *handlersPool;
 
+- (void)removeConnections;
+
 @end
 
 @implementation TYVDispatcher
@@ -25,6 +27,8 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
+    [self removeConnections];
+    
     self.processingObjectsQueue = nil;
     self.handlersPool = nil;
     
@@ -47,6 +51,7 @@
 - (NSSet *)handlersSet {
     return [self.handlersPool employeesSet];
 }
+
 #pragma mark -
 #pragma Public Methods
 
@@ -82,6 +87,16 @@
 - (void)giveWorkForHandler:(id)handler {
     if (TYVEmployeeDidBecomeFree == handler) {
         [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+    }
+}
+
+#pragma mark -
+#pragma Private Methods
+
+- (void)removeConnections {
+    NSSet *handlersSet = self.handlersSet;
+    for (TYVEmployee *handler in handlersSet) {
+        [handler removeObserver:self];
     }
 }
 
