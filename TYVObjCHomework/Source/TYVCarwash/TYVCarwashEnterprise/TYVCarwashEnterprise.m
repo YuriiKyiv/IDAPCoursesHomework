@@ -83,6 +83,7 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 
 - (void)hireWashers {
     NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
+    NSLog(@"Washers count = %lu", (unsigned long)randomWashersCount);
     TYVDispatcher *dispatcher = self.washerDispatcher;
     for (NSUInteger index = 0; index < randomWashersCount; index++) {
         TYVWasher *washer = [TYVWasher object];
