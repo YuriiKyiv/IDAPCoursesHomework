@@ -16,17 +16,16 @@
 #import "TYVBuilding.h"
 #import "TYVEmployeesPool.h"
 #import "TYVQueue.h"
+#import "TYVDispatcher.h"
 
 #import "NSObject+TYVNSObjectExtensions.h"
 
 static const NSUInteger kTYVMaxWasharsCount = 23;
 
 @interface TYVCarwashEnterprise ()
-@property (nonatomic, retain)   TYVQueue            *cars;
-
-@property (nonatomic, retain)   TYVEmployeesPool    *employees;
-
 @property (nonatomic, retain)   TYVDirector         *director;
+
+@property (nonatomic, retain)   TYVDispatcher       *washerDispatcher;
 
 - (void)hireAdminStaff;
 
@@ -45,10 +44,9 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 
 - (void)dealloc {
     [self removeEmployeesConnections];
-    
-    self.employees = nil;
     self.director = nil;
-    self.cars = nil;
+    
+    self.washerDispatcher = nil;
     
     [super dealloc];
 }
@@ -56,8 +54,9 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.washerDispatcher = [TYVDispatcher object];
+        
         [self hireStaff];
-        self.cars = [TYVQueue object];
     }
     
     return self;
@@ -67,69 +66,38 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark Public Methods
 
 - (void)hireStaff {
-    self.employees = [TYVEmployeesPool pool];
     [self hireAdminStaff];
     [self hireWashers];
 }
 
 - (void)washCar:(TYVCar *)car {
-    @synchronized (self) {
-        TYVQueue *cars = self.cars;
-        [cars enqueueObject:car];
-        TYVWasher *washer = [self.employees freeEmployeeWithClass:[TYVWasher class]];
-        if (washer) {
-            [washer performWorkWithObject:[cars dequeueObject]];
-        }
-    }
+    [self.washerDispatcher addProcessingObject:car];
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)hireAdminStaff {
-    TYVAccountant *accountant = [TYVAccountant object];
-    TYVDirector *director = [TYVDirector object];
     
-    [self.employees addEmployee:accountant];
-    self.director = director;
-    [accountant addObserver:director];
 }
 
 - (void)hireWashers {
-    TYVEmployeesPool *pool = self.employees;
-    TYVAccountant *accountant = [pool freeEmployeeWithClass:[TYVAccountant class]];
     NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxWasharsCount);
+    TYVDispatcher *dispatcher = self.washerDispatcher;
     for (NSUInteger index = 0; index < randomWashersCount; index++) {
         TYVWasher *washer = [TYVWasher object];
-        [washer addObserver:accountant];
-        [washer addObserver:self];
-        [pool addEmployee:washer];
         washer.experience = index;
+        [washer addObserver:self];
+        [dispatcher addHandler:washer];
+        
     }
 }
 
 - (void)removeEmployeesConnections {
-    NSSet *washersSet = [self.employees employeesWithClass:[TYVWasher class]];
-    NSSet *accountantsSet = [self.employees employeesWithClass:[TYVAccountant class]];
-    for (TYVEmployee *employee in washersSet) {
-        [employee removeObserver:self];
-        for (TYVAccountant *accountant in accountantsSet) {
-            [employee removeObserver:accountant];
-        }
-    }
-    
-    for (TYVEmployee *employee in accountantsSet) {
-        [employee removeObserver:self.director];
-    }
+
 }
 
 - (void)giveWorkToWasher:(TYVWasher *)washer {
-    @synchronized (self) {
-        TYVQueue *cars = self.cars;
-        if (!cars.isEmpty && TYVEmployeeDidBecomeFree == washer.state) {
-            [washer performWorkWithObject:[cars dequeueObject]];
-        }
-    }
 
 }
 
@@ -137,7 +105,6 @@ static const NSUInteger kTYVMaxWasharsCount = 23;
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    [self giveWorkToWasher:washer];
 }
 
 @end
