@@ -85,9 +85,7 @@
 }
 
 - (void)giveWorkForHandler:(id)handler {
-    if (TYVEmployeeDidBecomeFree == handler) {
-        [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
-    }
+
 }
 
 #pragma mark -
@@ -104,7 +102,11 @@
 #pragma mark TYVEmployeeObserver
 
 - (void)employeeDidPerformWork:(TYVEmployee *)employee {
-    [self performSelectorInBackground:@selector(giveWorkForHandler:) withObject:employee];
+    @synchronized (employee) {
+        if (TYVEmployeeDidBecomeFree == employee) {
+            [employee performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+        }
+    }
 }
 
 @end
