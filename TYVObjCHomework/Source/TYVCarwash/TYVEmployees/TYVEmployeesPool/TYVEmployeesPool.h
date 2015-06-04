@@ -26,6 +26,8 @@
 
 - (id)freeEmployeeWithClass:(Class)class;
 
+- (id)freeEmployee;
+
 - (NSSet *)freeEmployeesWithClass:(Class)class;
 
 - (NSSet *)employeesWithClass:(Class)class;

@@ -85,6 +85,22 @@
     }
 }
 
+- (id)freeEmployee {
+    @synchronized(self) {
+        __block TYVEmployee *employee = nil;
+        [self.mutableEmployeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+            employee = obj;
+            if (employee.state == TYVEmployeeDidBecomeFree) {
+                *stop = YES;
+            } else {
+                employee = nil;
+            }
+        }];
+        
+        return employee;
+    }
+}
+
 - (NSSet *)freeEmployeesWithClass:(Class)class {
     @synchronized(self) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
