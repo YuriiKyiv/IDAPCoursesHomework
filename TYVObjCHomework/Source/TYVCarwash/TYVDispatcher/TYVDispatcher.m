@@ -61,7 +61,6 @@
 }
 
 - (void)addHandler:(TYVEmployee *)handler {
-#warning synchronized?
     @synchronized (handler) {
         [self.handlersPool addEmployee:handler];
         [handler addObserver:self];
