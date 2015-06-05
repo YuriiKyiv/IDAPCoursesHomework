@@ -23,12 +23,11 @@
 static const NSUInteger kTYVMaxEmployeeCount = 23;
 
 @interface TYVCarwashEnterprise ()
-@property (nonatomic, retain)   TYVDirector         *director;
-
 @property (nonatomic, retain)   TYVDispatcher       *washerDispatcher;
 @property (nonatomic, retain)   TYVDispatcher       *accountantDispatcher;
+@property (nonatomic, retain)   TYVDispatcher       *directorDispatcher;
 
-- (void)hireAdminStaff;
+- (void)hireDirector;
 
 - (void)hireWashers;
 
@@ -36,7 +35,7 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 
 - (void)removeConnections;
 
-- (void)giveWorkToWasher:(TYVWasher *)washer;
+- (void)removeConnectionsWithDispatcher:(TYVDispatcher *)dispathcer;
 
 - (void)hireEmployeesWithClass:(Class)class dispatcher:(TYVDispatcher *)dispatcher;
 
@@ -50,10 +49,9 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 - (void)dealloc {
     [self removeConnections];
     
-    self.director = nil;
-    
     self.washerDispatcher = nil;
     self.accountantDispatcher = nil;
+    self.directorDispatcher = nil;
     
     [super dealloc];
 }
@@ -63,6 +61,7 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
     if (self) {
         self.washerDispatcher = [TYVDispatcher object];
         self.accountantDispatcher = [TYVDispatcher object];
+        self.directorDispatcher = [TYVDispatcher object];
         
         [self hireStaff];
     }
@@ -74,7 +73,7 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 #pragma mark Public Methods
 
 - (void)hireStaff {
-    [self hireAdminStaff];
+    [self hireDirector];
     [self hireWashers];
     [self hireAccountants];
 }
@@ -86,8 +85,8 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 #pragma mark -
 #pragma mark Private Methods
 
-- (void)hireAdminStaff {
-    self.director = [TYVDirector object];
+- (void)hireDirector {
+    [self.directorDispatcher addHandler:[TYVDirector object]];
 }
 
 - (void)hireWashers {
@@ -112,20 +111,16 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 }
 
 - (void)removeConnections {
-    NSSet *washersSet = [self.washerDispatcher handlersSet];
-    NSSet *accountantsSet = [self.accountantDispatcher handlersSet];
-    
-    for (TYVEmployee *handler in washersSet) {
-        [handler removeObserver:self];
-    }
-    
-    for (TYVEmployee *handler in accountantsSet) {
-        [handler removeObserver:self];
-    }
+    [self removeConnectionsWithDispatcher:self.directorDispatcher];
+    [self removeConnectionsWithDispatcher:self.accountantDispatcher];
+    [self removeConnectionsWithDispatcher:self.washerDispatcher];
 }
 
-- (void)giveWorkToWasher:(TYVWasher *)washer {
-
+- (void)removeConnectionsWithDispatcher:(TYVDispatcher *)dispathcer {
+    NSSet *employeesSet = [dispathcer handlersSet];
+    for (TYVEmployee *handler in employeesSet) {
+        [handler removeObserver:self];
+    }
 }
 
 #pragma mark -
@@ -135,7 +130,7 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
     if ([employee isMemberOfClass:[TYVWasher class]]) {
         [self.accountantDispatcher addProcessingObject:employee];
     } else if ([employee isMemberOfClass:[TYVAccountant class]]) {
-        [self.director performWorkWithObject:employee];
+        [self.directorDispatcher addProcessingObject:employee];
     }
 }
 
