@@ -23,6 +23,8 @@
 
 @implementation TYVCarManager
 
+@dynamic running;
+
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
@@ -65,20 +67,31 @@
 }
 
 #pragma mark -
+#pragma mark Accessors
+
+- (BOOL)isRunning {
+    return [self.timer isValid];
+}
+
+#pragma mark -
 #pragma mark Public Methods
 
 - (void)start {
-    self.running = YES;
-    while (self.isRunning) {
-        [self performSelectorInBackground:@selector(work) withObject:nil];
-        sleep(self.delay);
-    }
+    [self.timer fire];
+}
+
+- (void)stop {
+    [self.timer invalidate];
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)work {
+    [self performSelectorInBackground:@selector(workInBackground) withObject:nil];
+}
+
+- (void)workInBackground {
     TYVCarwashEnterprise *enterprise = self.enterprise;
     for (int i = 0; i < self.carCapacity; i++) {
         [enterprise washCar:[TYVCar object]];

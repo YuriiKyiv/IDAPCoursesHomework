@@ -62,7 +62,7 @@
 #pragma mark Private Methods
 
 - (void)count {
-    usleep(arc4random_uniform(1000));
+    usleep(arc4random_uniform(1000 * 1000));
     NSDecimalNumber *capital = self.capital;
     capital = [capital decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:@"1000"]];
 }

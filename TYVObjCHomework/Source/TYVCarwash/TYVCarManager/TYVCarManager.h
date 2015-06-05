@@ -15,12 +15,14 @@
 @property (atomic, assign)  NSUInteger      carCapacity;
 @property (atomic, assign)  NSTimeInterval  delay;
 
-@property (atomic, assign, getter=isRunning) BOOL   running;
+@property (atomic, readonly, getter=isRunning) BOOL   running;
 
 - (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise
                        carCapacity:(NSUInteger)carCapacity
                              delay:(NSTimeInterval)delay;
 
 - (void)start;
+
+- (void)stop;
 
 @end

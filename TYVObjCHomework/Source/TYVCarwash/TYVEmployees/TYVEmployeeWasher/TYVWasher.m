@@ -46,7 +46,7 @@
 #pragma mark Private Methods
 
 - (void)washCar:(TYVCar *)car {
-    usleep(arc4random_uniform(1000 * 10));
+    usleep(arc4random_uniform(1000 * 1000 * 2));
     car.clean = YES;
 }
 
