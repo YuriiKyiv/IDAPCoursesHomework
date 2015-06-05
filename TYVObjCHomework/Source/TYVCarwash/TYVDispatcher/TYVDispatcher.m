@@ -73,6 +73,7 @@
 - (void)removeHandler:(TYVEmployee *)handler {
     @synchronized (handler) {
         if (TYVEmployeeDidBecomeFree == handler.state) {
+            [handler removeObserver:self];
             [self.handlersPool removeEmployee:handler];
         }
     }
