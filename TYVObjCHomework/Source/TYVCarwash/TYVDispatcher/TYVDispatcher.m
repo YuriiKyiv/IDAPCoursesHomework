@@ -57,35 +57,25 @@
 
 - (void)addProcessingObject:(id)object {
     [self.processingObjectsQueue enqueueObject:object];
-    [self performSelectorInBackground:@selector(perfomProcess) withObject:nil];
-}
-
-- (void)perfomProcess{
-    @synchronized (self) {
-        TYVEmployee  *handler = [self.handlersPool freeEmployee];
-        if (handler) {
-            [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
-        }
-    }
+    [self giveWorkForHandler:[self.handlersPool freeEmployee]];
 }
 
 - (void)addHandler:(TYVEmployee *)handler {
-    @synchronized (self) {
-        [self.handlersPool addEmployee:handler];
-        [handler addObserver:self];
-        TYVQueue *queue = self.processingObjectsQueue;
-        if (TYVEmployeeDidBecomeFree == handler.state && !queue.isEmpty) {
-            [handler performWorkWithObject:[queue dequeueObject]];
-        }
-    }
+    [self.handlersPool addEmployee:handler];
+    [handler addObserver:self];
+    [self giveWorkForHandler:handler];
 }
 
 - (void)removeHandler:(id<TYVEmployeeObserverProtocol>)handler {
     
 }
 
-- (void)giveWorkForHandler:(id)handler {
-
+- (void)giveWorkForHandler:(TYVEmployee *)handler {
+    @synchronized (handler) {
+        if (TYVEmployeeDidBecomeFree == handler.state) {
+            [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+        }
+    }
 }
 
 #pragma mark -
@@ -101,12 +91,8 @@
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employeeDidPerformWork:(TYVEmployee *)employee {
-    @synchronized (employee) {
-        if (TYVEmployeeDidBecomeFree == employee) {
-            [employee performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
-        }
-    }
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    [self giveWorkForHandler:employee];
 }
 
 @end
