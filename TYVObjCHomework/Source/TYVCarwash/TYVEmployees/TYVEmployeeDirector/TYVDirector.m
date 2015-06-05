@@ -57,8 +57,8 @@
     [self profit];
 }
 
-- (void)finalizeProcessingWithObjectOnMainThread:(TYVAccountant *)object {
-    [super finalizeProcessingWithObjectOnMainThread:object];
+- (void)finalizeProcessWithObjectOnMainThread:(TYVAccountant *)object {
+    [super finalizeProcessWithObjectOnMainThread:object];
     self.state = TYVEmployeeDidBecomeFree;
 }
 

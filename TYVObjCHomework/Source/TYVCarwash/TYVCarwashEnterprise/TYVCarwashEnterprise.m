@@ -23,9 +23,9 @@
 static const NSUInteger kTYVMaxEmployeeCount = 23;
 
 @interface TYVCarwashEnterprise ()
-@property (nonatomic, retain)   TYVDispatcher       *washerDispatcher;
-@property (nonatomic, retain)   TYVDispatcher       *accountantDispatcher;
-@property (nonatomic, retain)   TYVDispatcher       *directorDispatcher;
+@property (nonatomic, retain)   TYVDispatcher   *washerDispatcher;
+@property (nonatomic, retain)   TYVDispatcher   *accountantDispatcher;
+@property (nonatomic, retain)   TYVDispatcher   *directorDispatcher;
 
 - (void)hireDirector;
 

@@ -14,8 +14,6 @@
 
 @interface TYVCarwashEnterprise : NSObject <TYVEmployeeObserverProtocol>
 
-- (void)hireStaff;
-
 - (void)washCar:(TYVCar *)car;
 
 @end

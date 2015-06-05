@@ -38,7 +38,7 @@
     [self washCar:object];
 }
 
-- (void)finalizeProcessingWithObjectOnMainThread:(TYVCar *)object {
+- (void)finalizeProcessWithObjectOnMainThread:(TYVCar *)object {
     
 }
 
