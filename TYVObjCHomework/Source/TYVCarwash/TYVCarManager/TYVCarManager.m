@@ -15,6 +15,7 @@
 
 @interface TYVCarManager ()
 @property (nonatomic, retain)   TYVCarwashEnterprise    *enterprise;
+@property (nonatomic, retain)   NSTimer                 *timer;
 
 - (void)work;
 
@@ -26,6 +27,11 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
+    if ([self.timer isValid]) {
+        [self.timer invalidate];
+    }
+    
+    self.timer = nil;
     self.enterprise = nil;
     
     [super dealloc];
@@ -40,6 +46,12 @@
         self.enterprise = enterprise;
         self.carCapacity = carCapacity;
         self.delay = delay;
+        
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:delay
+                                                      target:self
+                                                    selector:@selector(work)
+                                                    userInfo:nil
+                                                     repeats:YES];
     }
     
     return self;
