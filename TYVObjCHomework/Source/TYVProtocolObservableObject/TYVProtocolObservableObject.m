@@ -63,9 +63,7 @@
 }
 
 - (NSUInteger)state {
-    @synchronized (self) {
-        return _state;
-    }
+    return _state;
 }
 
 #pragma mark -
