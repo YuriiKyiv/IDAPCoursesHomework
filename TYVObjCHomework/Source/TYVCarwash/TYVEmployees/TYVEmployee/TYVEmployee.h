@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 // Do not call a message directly
 - (void)finalizeProcessWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
 
+// The unsafe method. Use only with a dispathcer
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object;
 
 @end

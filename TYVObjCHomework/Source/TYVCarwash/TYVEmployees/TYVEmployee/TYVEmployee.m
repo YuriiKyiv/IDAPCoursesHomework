@@ -95,7 +95,10 @@
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     if (object) {
-        NSLog(@"%@ with experience %lu started to work with %@", [self class], (unsigned long)self.experience ,[object class]);
+        NSLog(@"%@ with experience %lu started to work with %@",
+              [self class],
+              (unsigned long)self.experience,
+              [object class]);
         self.state = TYVEmployeeDidBecomeBusy;
         [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
                                withObject:object];
