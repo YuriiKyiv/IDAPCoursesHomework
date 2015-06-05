@@ -89,22 +89,16 @@
 
 }
 
-- (void)finalizeProcessingWithObjectOnMainThread:(TYVEmployee *)object {
+- (void)finalizeProcessWithObjectOnMainThread:(TYVEmployee *)object {
     object.state = TYVEmployeeDidBecomeFree;
 }
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object {
     if (object) {
-        @synchronized (self) {
-            NSLog(@"%@ with experience %lu started to work with %@", [self class], (unsigned long)self.experience ,[object class]);
-            if (TYVEmployeeDidBecomeFree == self.state) {
-                self.state = TYVEmployeeDidBecomeBusy;
-                [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
-                                       withObject:object];
-            } else {
-                [self.objectsQueue enqueueObject:object];
-            }
-        }
+        NSLog(@"%@ with experience %lu started to work with %@", [self class], (unsigned long)self.experience ,[object class]);
+        self.state = TYVEmployeeDidBecomeBusy;
+        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
+                               withObject:object];
     }
 }
 
@@ -113,52 +107,15 @@
 #pragma mark Private Methods
 
 - (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
-    @autoreleasepool {
-        if (object) {
-            [self processWithObject:object];
-            [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
-                                   withObject:object
-                                waitUntilDone:NO];
-        }
-    }
+    [self processWithObject:object];
+    [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
+                           withObject:object
+                        waitUntilDone:NO];
 }
 
 - (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
-    @autoreleasepool {
-        @synchronized (self) {
-            TYVQueue *queue = self.objectsQueue;
-            id ProcessingObject = [queue dequeueObject];
-            if (ProcessingObject) {
-                [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
-                                       withObject:ProcessingObject];
-            } else {
-                self.state = TYVEmployeeDidPerformWorkWithObject;
-            }
-        }
-        
-        [self finalizeProcessingWithObjectOnMainThread:object];
-    }
-}
-
-#pragma mark -
-#pragma mark TYVEmployeeObserver
-
-- (void)employeeDidPerformWork:(TYVEmployee *)employee {
-    if (self != employee) {
-        [self performWorkWithObject:employee];
-    }
-}
-
-- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
-    if (self != employee) {
-        return;
-    }
-    
-    @synchronized (self) {
-        if (TYVEmployeeDidBecomeFree == self.state) {
-            [self performWorkWithObject:[self.objectsQueue dequeueObject]];
-        }
-    }
+    self.state = TYVEmployeeDidPerformWorkWithObject;
+    [self finalizeProcessWithObjectOnMainThread:object];
 }
 
 #pragma mark -

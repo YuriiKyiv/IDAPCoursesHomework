@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
     TYVEmployeeDidPerformWorkWithObject
 };
 
-@interface TYVEmployee : TYVProtocolObservableObject <TYVEmployeeObserverProtocol, TYVMoneyTransferProtocol>
+@interface TYVEmployee : TYVProtocolObservableObject <TYVMoneyTransferProtocol>
 @property (nonatomic, readonly) NSString            *duty;
 
 @property (nonatomic, readonly) NSDecimalNumber     *salary;
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, TYVEmployeeState) {
 
 // This is the method for overriding
 // Do not call a message directly
-- (void)finalizeProcessingWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
+- (void)finalizeProcessWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
 
 - (void)performWorkWithObject:(id<TYVMoneyTransferProtocol>)object;
 
