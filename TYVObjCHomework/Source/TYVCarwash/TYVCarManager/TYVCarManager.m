@@ -15,11 +15,8 @@
 
 @interface TYVCarManager ()
 @property (nonatomic, retain)   TYVCarwashEnterprise    *enterprise;
-@property (nonatomic, retain)   TYVWasher               *washer;
 
 - (void)work;
-
-- (void)workWithWasher;
 
 @end
 
@@ -30,14 +27,13 @@
 
 - (void)dealloc {
     self.enterprise = nil;
-    self.washer = nil;
     
     [super dealloc];
 }
 
 - (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise
                        carCapacity:(NSUInteger)carCapacity
-                              delay:(uint)delay
+                              delay:(NSTimeInterval)delay
 {
     self = [super init];
     if (self) {
@@ -49,19 +45,7 @@
     return self;
 }
 
-- (instancetype)initWithWasher:(TYVWasher *)washer
-                   carCapacity:(NSUInteger)carCapacity
-                         delay:(uint)delay
-{
-    self = [self initWithEnterprise:nil carCapacity:carCapacity delay:delay];
-    if (self) {
-        self.washer = washer;
-    }
-    
-    return self;
-}
-
--(instancetype)init {
+- (instancetype)init {
     [self doesNotRecognizeSelector:_cmd];
     [self release];
     
@@ -77,15 +61,6 @@
         [self performSelectorInBackground:@selector(work) withObject:nil];
         sleep(self.delay);
     }
-    
-}
-
-- (void)startWithWasher {
-    self.running = YES;
-    while (self.isRunning) {
-    [self performSelectorInBackground:@selector(workWithWasher) withObject:nil];
-        sleep(self.delay);
-    }
 }
 
 #pragma mark -
@@ -95,13 +70,6 @@
     TYVCarwashEnterprise *enterprise = self.enterprise;
     for (int i = 0; i < self.carCapacity; i++) {
         [enterprise washCar:[TYVCar object]];
-    }
-}
-
-- (void)workWithWasher {
-    TYVWasher *washer = self.washer;
-    for (int i = 0; i < self.carCapacity; i++) {
-        [washer performWorkWithObject:[TYVCar object]];
     }
 }
 
