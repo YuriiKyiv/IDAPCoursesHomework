@@ -131,10 +131,6 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employeeDidBecomeFree:(TYVWasher *)washer {
-    
-}
-
 - (void)employeeDidPerformWork:(TYVEmployee *)employee {
     if ([employee isMemberOfClass:[TYVWasher class]]) {
         [self.accountantDispatcher addProcessingObject:employee];
