@@ -100,7 +100,7 @@ static const NSUInteger kTYVMaxEmployeeCount = 23;
 }
 
 - (void)hireEmployeesWithClass:(Class)class dispatcher:(TYVDispatcher *)dispatcher {
-    NSUInteger randomWashersCount = arc4random_uniform(kTYVMaxEmployeeCount);
+    NSUInteger randomWashersCount = 1 + arc4random_uniform(kTYVMaxEmployeeCount);
     NSLog(@"%@ count = %lu", class,(unsigned long)randomWashersCount);
     for (NSUInteger index = 0; index < randomWashersCount; index++) {
         TYVEmployee *employee = [class object];

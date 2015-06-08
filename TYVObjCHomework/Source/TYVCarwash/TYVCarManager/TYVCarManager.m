@@ -19,6 +19,8 @@
 
 - (void)work;
 
+- (void)addCarInEnterprise;
+
 @end
 
 @implementation TYVCarManager
@@ -29,10 +31,6 @@
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
-    if ([self.timer isValid]) {
-        [self.timer invalidate];
-    }
-    
     self.timer = nil;
     self.enterprise = nil;
     
@@ -49,11 +47,6 @@
         self.carCapacity = carCapacity;
         self.delay = delay;
         
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:delay
-                                                      target:self
-                                                    selector:@selector(work)
-                                                    userInfo:nil
-                                                     repeats:YES];
     }
     
     return self;
@@ -73,10 +66,29 @@
     return [self.timer isValid];
 }
 
+- (void)setTimer:(NSTimer *)timer {
+    if (timer != _timer) {
+        if ([_timer isValid]) {
+            [_timer invalidate];
+        }
+        
+        [_timer release];
+        _timer = timer;
+        if (timer) {
+            [timer retain];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)start {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.delay
+                                                  target:self
+                                                selector:@selector(work)
+                                                userInfo:nil
+                                                 repeats:YES];
     [self.timer fire];
 }
 
@@ -88,10 +100,10 @@
 #pragma mark Private Methods
 
 - (void)work {
-    [self performSelectorInBackground:@selector(workInBackground) withObject:nil];
+    [self performSelectorInBackground:@selector(addCarInEnterprise) withObject:nil];
 }
 
-- (void)workInBackground {
+- (void)addCarInEnterprise {
     TYVCarwashEnterprise *enterprise = self.enterprise;
     for (int i = 0; i < self.carCapacity; i++) {
         [enterprise washCar:[TYVCar object]];
