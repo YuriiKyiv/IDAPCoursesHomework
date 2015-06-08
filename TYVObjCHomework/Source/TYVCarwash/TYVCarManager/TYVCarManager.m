@@ -100,7 +100,10 @@
 #pragma mark Private Methods
 
 - (void)work {
-    [self performSelectorInBackground:@selector(addCarInEnterprise) withObject:nil];
+//    [self performSelectorInBackground:@selector(addCarInEnterprise) withObject:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self addCarInEnterprise];
+    });
 }
 
 - (void)addCarInEnterprise {
