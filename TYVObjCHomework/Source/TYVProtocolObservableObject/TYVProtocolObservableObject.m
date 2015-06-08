@@ -55,9 +55,12 @@
     @synchronized(self) {
         if (_state != state) {
             _state = state;
-            [self performSelectorOnMainThread:@selector(notify)
-                                   withObject:nil
-                                waitUntilDone:YES];
+//            [self performSelectorOnMainThread:@selector(notify)
+//                                   withObject:nil
+//                                waitUntilDone:YES];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self notify];
+            });
         }
     }
 }

@@ -31,7 +31,6 @@ int main(int argc, const char * argv[]) {
                                                                          delay:1] autorelease];
         [carManager start];
 
-        
         NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
         [runLoop run];
     }
