@@ -9,12 +9,16 @@
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
 
-typedef BOOL(^FindEmployeeBlock)(TYVEmployee *);
+typedef BOOL(^TYVFindEmployeeBlock)(TYVEmployee *);
 
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableSet    *mutableEmployeesSet;
+@property (nonatomic, retain)   NSDictionary    *blocks;
 
 - (id)employeeWithBlock:(BOOL(^)(TYVEmployee *))block;
+- (id)employeesWithBlock:(BOOL(^)(TYVEmployee *))block;
+
+- (void)initBlocks;
 
 @end
 
@@ -44,6 +48,7 @@ typedef BOOL(^FindEmployeeBlock)(TYVEmployee *);
     self = [super init];
     if (self) {
         self.mutableEmployeesSet = [NSMutableSet set];
+        [self initBlocks];
     }
     
     return self;
@@ -87,26 +92,16 @@ typedef BOOL(^FindEmployeeBlock)(TYVEmployee *);
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
-    @synchronized(self) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
-        return ([evaluatedObject isMemberOfClass:class]
-                && evaluatedObject.state == TYVEmployeeDidBecomeFree);
-        }];
-    
-        return [self.mutableEmployeesSet filteredSetUsingPredicate:predicate];
-        
-    }
+    return [self employeesWithBlock:^(TYVEmployee *employee) {
+        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree
+                      && employee.state == TYVEmployeeDidBecomeFree);
+    }];
 }
 
 - (NSSet *)employeesWithClass:(Class)class {
-    @synchronized(self) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return ([evaluatedObject isMemberOfClass:class]);
-        }];
-    
-        return [self.mutableEmployeesSet filteredSetUsingPredicate:predicate];
-        
-    }
+    return [self employeesWithBlock:^(TYVEmployee *employee) {
+        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
+    }];
 }
 
 - (BOOL)containsEmployee:(TYVEmployee *)employee {
@@ -138,6 +133,30 @@ typedef BOOL(^FindEmployeeBlock)(TYVEmployee *);
         
         return employee;
     }
+}
+
+- (id)employeesWithBlock:(BOOL(^)(TYVEmployee *))block {
+    @synchronized (self) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
+            return block(evaluatedObject);
+        }];
+        
+        return [self.mutableEmployeesSet filteredSetUsingPredicate:predicate];
+    }
+}
+
+- (void)initBlocks {
+    TYVFindEmployeeBlock employeeClassBlock = ^(TYVEmployee *employee) {
+        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree
+                      && employee.state == TYVEmployeeDidBecomeFree);
+    };
+    
+    TYVFindEmployeeBlock employeeBlock = ^(TYVEmployee *employee) {
+        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
+    };
+    
+    self.blocks = @{@"employeeWithClass" : employeeClassBlock,
+                    @"employee" : employeeBlock};
 }
 
 @end
