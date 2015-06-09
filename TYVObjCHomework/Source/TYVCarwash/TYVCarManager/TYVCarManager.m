@@ -73,10 +73,7 @@
         }
         
         [_timer release];
-        _timer = timer;
-        if (timer) {
-            [timer retain];
-        }
+        _timer = [timer retain];
     }
 }
 
@@ -89,18 +86,16 @@
                                                 selector:@selector(work)
                                                 userInfo:nil
                                                  repeats:YES];
-    [self.timer fire];
 }
 
 - (void)stop {
-    [self.timer invalidate];
+    self.timer = nil;
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)work {
-//    [self performSelectorInBackground:@selector(addCarInEnterprise) withObject:nil];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self addCarInEnterprise];
     });
@@ -108,7 +103,8 @@
 
 - (void)addCarInEnterprise {
     TYVCarwashEnterprise *enterprise = self.enterprise;
-    for (int i = 0; i < self.carCapacity; i++) {
+    NSUInteger capacity = self.carCapacity;
+    for (int i = 0; i < capacity; i++) {
         [enterprise washCar:[TYVCar object]];
     }
 }
