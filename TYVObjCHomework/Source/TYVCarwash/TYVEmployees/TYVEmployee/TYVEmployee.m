@@ -17,9 +17,6 @@
 
 @property (nonatomic, retain)   TYVQueue        *objectsQueue;
 
-- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object;
-- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object;
-
 @end
 
 @implementation TYVEmployee
@@ -100,32 +97,16 @@
               (unsigned long)self.experience,
               [object class]);
         self.state = TYVEmployeeDidBecomeBusy;
-//        [self performSelectorInBackground:@selector(performWorkWithObjectInBackground:)
-//                               withObject:object];
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [self performWorkWithObjectInBackground:object];
+            [self processWithObject:object];
+            
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                self.state = TYVEmployeeDidPerformWorkWithObject;
+                [self finalizeProcessWithObjectOnMainThread:object];
+            });
         });
     }
-}
-
-
-#pragma mark -
-#pragma mark Private Methods
-
-- (void)performWorkWithObjectInBackground:(id<TYVMoneyTransferProtocol>)object {
-    [self processWithObject:object];
-//    [self performSelectorOnMainThread:@selector(performWorkWithObjectOnMainThread:)
-//                           withObject:object
-//                        waitUntilDone:NO];
-    dispatch_async(dispatch_get_main_queue(), ^ {
-        [self performWorkWithObjectOnMainThread:object];
-    });
-    
-}
-
-- (void)performWorkWithObjectOnMainThread:(id<TYVMoneyTransferProtocol>)object {
-    self.state = TYVEmployeeDidPerformWorkWithObject;
-    [self finalizeProcessWithObjectOnMainThread:object];
 }
 
 #pragma mark -
