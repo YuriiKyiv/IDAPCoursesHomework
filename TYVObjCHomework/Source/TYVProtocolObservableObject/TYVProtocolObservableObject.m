@@ -8,6 +8,7 @@
 
 #import "TYVProtocolObservableObject.h"
 #import "TYVSelector.h"
+#import "TYVDispatch.h"
 
 @interface TYVProtocolObservableObject ()
 @property (nonatomic, retain) NSHashTable   *observersHashTable;
