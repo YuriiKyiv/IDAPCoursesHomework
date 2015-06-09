@@ -9,8 +9,12 @@
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
 
+typedef BOOL(^FindEmployeeBlock)(TYVEmployee *);
+
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableSet    *mutableEmployeesSet;
+
+- (id)employeeWithBlock:(BOOL(^)(TYVEmployee *))block;
 
 @end
 
@@ -70,35 +74,16 @@
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
-    @synchronized(self) {
-        __block TYVEmployee *employee = nil;
-        [self.mutableEmployeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-            employee = obj;
-            if ([employee isMemberOfClass:class] && employee.state == TYVEmployeeDidBecomeFree) {
-                *stop = YES;
-            } else {
-                employee = nil;
-            }
-        }];
-    
-        return employee;
-    }
+    return [self employeeWithBlock:^(TYVEmployee *employee) {
+        return (BOOL)([employee isMemberOfClass:class]
+                      && employee.state == TYVEmployeeDidBecomeFree);
+    }];
 }
 
 - (id)freeEmployee {
-    @synchronized(self) {
-        __block TYVEmployee *employee = nil;
-        [self.mutableEmployeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-            employee = obj;
-            if (employee.state == TYVEmployeeDidBecomeFree) {
-                *stop = YES;
-            } else {
-                employee = nil;
-            }
-        }];
-        
-        return employee;
-    }
+    return [self employeeWithBlock:^(TYVEmployee *employee) {
+        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
+    }];
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
@@ -133,6 +118,25 @@
 - (NSUInteger)count {
     @synchronized(self) {
         return [self.mutableEmployeesSet count];
+    }
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (id)employeeWithBlock:(BOOL(^)(TYVEmployee *))block {
+    @synchronized(self) {
+        __block TYVEmployee *employee = nil;
+        [self.mutableEmployeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+            employee = obj;
+            if (block(employee)) {
+                *stop = YES;
+            } else {
+                employee = nil;
+            }
+        }];
+        
+        return employee;
     }
 }
 
