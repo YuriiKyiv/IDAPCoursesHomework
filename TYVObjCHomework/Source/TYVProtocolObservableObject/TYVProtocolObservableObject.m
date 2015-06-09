@@ -14,7 +14,6 @@
 
 - (void)notifyWithSelector:(SEL)selector;
 - (void)notify;
-- (void)notifyOnMainThread;
 
 @end
 
@@ -55,12 +54,14 @@
     @synchronized(self) {
         if (_state != state) {
             _state = state;
-            [self performSelectorOnMainThread:@selector(notify)
-                                   withObject:nil
-                                waitUntilDone:YES];
-//            dispatch_sync(dispatch_get_main_queue(), ^{
-//                [self notify];
-//            });
+            
+            if ([NSThread isMainThread]) {
+                [self notify];
+            } else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self notify];
+                });
+            }
         }
     }
 }
@@ -111,12 +112,6 @@
             [observer performSelector:selector withObject:self];
         }
     }
-}
-
-- (void)notifyOnMainThread {
-    [self performSelectorOnMainThread:@selector(notify)
-                           withObject:nil
-                        waitUntilDone:YES];
 }
 
 @end
