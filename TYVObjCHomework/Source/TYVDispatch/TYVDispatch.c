@@ -7,7 +7,6 @@
 //
 
 #include "TYVDispatch.h"
-#include ""
 
 #pragma mark -
 #pragma mark Private Declarations
@@ -18,6 +17,5 @@ typedef void(TYVperfomBlockOnMainQueue)(void *self, void *context);
 #pragma mark Public Implementations
 
 void dispatch_sync_onMainQueue(TYVperfomBlockOnMainQueue *block) {
-    if (NSThread isMainThread) {
-    };
+
 }

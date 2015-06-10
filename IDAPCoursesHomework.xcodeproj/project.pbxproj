@@ -499,8 +499,7 @@
 				5A365D811AF7941500DEAAE3 /* TYVRange */,
 				5A66D3651B013E8100CACA57 /* TYVObservableObject */,
 				5A2522C01B2751F50041AAEF /* TYVDispatch */,
-				5AFF5E9C1B284A3E00ABA647 /* NSSet+TYVExtentions.h */,
-				5AFF5E9D1B284A3E00ABA647 /* NSSet+TYVExtentions.m */,
+				5AFF5E9F1B284C8800ABA647 /* NSSet+TYVExtentions */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -871,6 +870,15 @@
 				5AFD2A291A9E0F97007EFFB5 /* TYVStringTests.h */,
 			);
 			path = TYVString;
+			sourceTree = "<group>";
+		};
+		5AFF5E9F1B284C8800ABA647 /* NSSet+TYVExtentions */ = {
+			isa = PBXGroup;
+			children = (
+				5AFF5E9C1B284A3E00ABA647 /* NSSet+TYVExtentions.h */,
+				5AFF5E9D1B284A3E00ABA647 /* NSSet+TYVExtentions.m */,
+			);
+			name = "NSSet+TYVExtentions";
 			sourceTree = "<group>";
 		};
 		931DC55C708058ED564D445D /* Pods */ = {

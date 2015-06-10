@@ -11,6 +11,6 @@
 
 #include <stdio.h>
 
-void dispatch_sync_onMainQueue(&);
+void dispatch_sync_onMainQueue();
 
 #endif /* defined(__IDAPCoursesHomework__TYVDispatch__) */
