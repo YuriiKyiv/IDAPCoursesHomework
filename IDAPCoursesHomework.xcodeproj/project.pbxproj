@@ -91,6 +91,7 @@
 		5AFD2A2D1A9E0F97007EFFB5 /* TYVHumanTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD2A231A9E0F97007EFFB5 /* TYVHumanTests.c */; };
 		5AFD2A2E1A9E0F97007EFFB5 /* TYVString.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD2A261A9E0F97007EFFB5 /* TYVString.c */; };
 		5AFD2A2F1A9E0F97007EFFB5 /* TYVStringTests.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AFD2A281A9E0F97007EFFB5 /* TYVStringTests.c */; };
+		5AFF5E9E1B284A3E00ABA647 /* NSSet+TYVExtentions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF5E9D1B284A3E00ABA647 /* NSSet+TYVExtentions.m */; };
 		D01D203476F540403AE46079 /* libPods-ObjCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E18DF74D88AFA399F59002D /* libPods-ObjCTests.a */; };
 /* End PBXBuildFile section */
 
@@ -241,6 +242,8 @@
 		5AFD2A271A9E0F97007EFFB5 /* TYVString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVString.h; sourceTree = "<group>"; };
 		5AFD2A281A9E0F97007EFFB5 /* TYVStringTests.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TYVStringTests.c; sourceTree = "<group>"; };
 		5AFD2A291A9E0F97007EFFB5 /* TYVStringTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYVStringTests.h; sourceTree = "<group>"; };
+		5AFF5E9C1B284A3E00ABA647 /* NSSet+TYVExtentions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSSet+TYVExtentions.h"; path = "NSSet+TYVExtentions/NSSet+TYVExtentions.h"; sourceTree = "<group>"; };
+		5AFF5E9D1B284A3E00ABA647 /* NSSet+TYVExtentions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSSet+TYVExtentions.m"; path = "NSSet+TYVExtentions/NSSet+TYVExtentions.m"; sourceTree = "<group>"; };
 		72A35046EC6CA2E040DA0BC6 /* Pods-ObjCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ObjCTests/Pods-ObjCTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -496,6 +499,8 @@
 				5A365D811AF7941500DEAAE3 /* TYVRange */,
 				5A66D3651B013E8100CACA57 /* TYVObservableObject */,
 				5A2522C01B2751F50041AAEF /* TYVDispatch */,
+				5AFF5E9C1B284A3E00ABA647 /* NSSet+TYVExtentions.h */,
+				5AFF5E9D1B284A3E00ABA647 /* NSSet+TYVExtentions.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1064,6 +1069,7 @@
 			files = (
 				5AAB27F61AEAB1080014D965 /* TYVCarwashEnterprise.m in Sources */,
 				5A855F141B1486630032DAB5 /* TYVDispatcher.m in Sources */,
+				5AFF5E9E1B284A3E00ABA647 /* NSSet+TYVExtentions.m in Sources */,
 				5AAB28081AEAB1080014D965 /* TYVMoneyKeeper.m in Sources */,
 				5AAB28001AEAB1080014D965 /* TYVCarwashRoom.m in Sources */,
 				5AAB27F41AEAB1080014D965 /* TYVCar.m in Sources */,
