@@ -9,8 +9,8 @@
 #ifndef __IDAPCoursesHomework__TYVDispatch__
 #define __IDAPCoursesHomework__TYVDispatch__
 
-#include <stdio.h>
+typedef void(^TYVBlock)();
 
-void TYVDispatchSyncOnMainQueue(void *target);
+void TYVDispatchSyncOnMainQueueBlock(TYVBlock block);
 
 #endif /* defined(__IDAPCoursesHomework__TYVDispatch__) */

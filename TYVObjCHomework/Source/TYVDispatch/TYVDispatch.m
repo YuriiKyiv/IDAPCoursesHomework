@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TYVDispatch.h"
 #import "TYVProtocolObservableObject.h"
-
-typedef void(^TYVBlock)();
 
 #pragma mark -
 #pragma mark Public Implementations
 
-void TYVDispatchSyncOnMainQueue(TYVBlock block) {
+void TYVDispatchSyncOnMainQueueBlock(TYVBlock block) {
     if ([NSThread isMainThread]) {
         block();
     } else {
