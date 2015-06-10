@@ -11,11 +11,8 @@
 
 #import "NSSet+TYVExtentions.h"
 
-typedef BOOL(^TYVFindEmployeeBlock)(TYVEmployee *);
-
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableSet    *mutableEmployeesSet;
-@property (nonatomic, retain)   NSDictionary    *blocks;
 
 - (void)initBlocks;
 
@@ -119,17 +116,14 @@ typedef BOOL(^TYVFindEmployeeBlock)(TYVEmployee *);
 #pragma mark Private Methods
 
 - (void)initBlocks {
-    TYVFindEmployeeBlock employeeClassBlock = ^(TYVEmployee *employee) {
-        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree
-                      && employee.state == TYVEmployeeDidBecomeFree);
-    };
+//    TYVFindObjectBlock employeeClassBlock = ^(TYVEmployee *employee) {
+//        return (BOOL)([employee isMemberOfClass:class]
+//                      && employee.state == TYVEmployeeDidBecomeFree);
+//    };
     
-    TYVFindEmployeeBlock employeeBlock = ^(TYVEmployee *employee) {
-        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
-    };
-    
-    self.blocks = @{@"employeeWithClass" : employeeClassBlock,
-                    @"employee" : employeeBlock};
+//    TYVFindObjectBlock employeeBlock = ^(TYVEmployee *employee) {
+//        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
+//    };
 }
 
 @end
