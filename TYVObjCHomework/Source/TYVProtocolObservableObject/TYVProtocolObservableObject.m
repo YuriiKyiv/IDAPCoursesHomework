@@ -56,13 +56,7 @@
         if (_state != state) {
             _state = state;
             
-            if ([NSThread isMainThread]) {
-                [self notify];
-            } else {
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self notify];
-                });
-            }
+            TYVDispatchSyncOnMainQueue(^{[self notify];});
         }
     }
 }
