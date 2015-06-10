@@ -17,8 +17,6 @@ void TYVDispatchSyncOnMainQueueBlock(TYVBlock block) {
     if ([NSThread isMainThread]) {
         block();
     } else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            block();
-        });
+        dispatch_sync(dispatch_get_main_queue(), block);
     }
 }
