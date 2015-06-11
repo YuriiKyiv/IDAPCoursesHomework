@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TYVLabelView.h
 //  IOSStuding
 //
 //  Created by YURII on 11.06.15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TYVLabelView : UIView
 
 @end
-
