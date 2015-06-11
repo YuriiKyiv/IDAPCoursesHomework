@@ -8,13 +8,13 @@
 
 #import "TYVProtocolObservableObject.h"
 #import "TYVSelector.h"
+#import "TYVDispatch.h"
 
 @interface TYVProtocolObservableObject ()
 @property (nonatomic, retain) NSHashTable   *observersHashTable;
 
 - (void)notifyWithSelector:(SEL)selector;
 - (void)notify;
-- (void)notifyOnMainThread;
 
 @end
 
@@ -55,9 +55,8 @@
     @synchronized(self) {
         if (_state != state) {
             _state = state;
-            [self performSelectorOnMainThread:@selector(notify)
-                                   withObject:nil
-                                waitUntilDone:YES];
+            
+            TYVDispatchSyncOnMainQueueWithBlock(^{[self notify];});
         }
     }
 }
@@ -108,12 +107,6 @@
             [observer performSelector:selector withObject:self];
         }
     }
-}
-
-- (void)notifyOnMainThread {
-    [self performSelectorOnMainThread:@selector(notify)
-                           withObject:nil
-                        waitUntilDone:YES];
 }
 
 @end

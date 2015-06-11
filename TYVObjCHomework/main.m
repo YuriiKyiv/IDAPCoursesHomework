@@ -24,47 +24,13 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
 
-        
-//        NSMutableArray *array = [NSMutableArray object];
-//        TYVBeing *being = NULL;
-//        for(int i = 0; i < 1000; i++) {
-//            if (i % 2 == 0) {
-//                being = [TYVMaleBeing object];
-//            } else {
-//                being = [TYVFemaleBeing object];
-//            }
-//            
-//            [array addObject:being];
-//        }
-//        
-//        for (TYVBeing *being in array) {
-//            [being performGenderSpecificOperation];
-//        }
-        
         TYVCarwashEnterprise *enterprise = [TYVCarwashEnterprise object];
         
         TYVCarManager *carManager = [[[TYVCarManager alloc] initWithEnterprise:enterprise
                                                                    carCapacity:5
                                                                          delay:1] autorelease];
-        [carManager performSelectorInBackground:@selector(start) withObject:nil];
-        
-//        TYVWasher *washer = [TYVWasher object];
-//        TYVAccountant *accountant = [TYVAccountant object];
-//        TYVDirector *director = [TYVDirector object];
-//        
-//        [washer addObserver:accountant];
-//        [accountant addObserver:director];
-//        
-//        [washer performWorkWithObject:[TYVCar object]];
-//        
-//        TYVCarManager *carWasher = [[[TYVCarManager alloc] initWithWasher:washer carCapacity:10 delay:1] autorelease];
-//        
-//        [carWasher performSelectorInBackground:@selector(startWithWasher) withObject:nil];
-        
-//        sleep(10);
-//        
-//        carManager.cancel = YES;
-        
+        [carManager start];
+
         NSRunLoop *runLoop = [NSRunLoop mainRunLoop];
         [runLoop run];
     }

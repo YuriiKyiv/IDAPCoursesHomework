@@ -8,6 +8,8 @@
 
 #import "TYVQueue.h"
 
+#import "NSObject+TYVNSObjectExtensions.h"
+
 @interface TYVQueue ()
 @property (nonatomic, retain)   NSMutableArray  *queue;
 
@@ -21,7 +23,7 @@
 #pragma mark Class Methods
 
 + (instancetype)queue {
-    return [[[TYVQueue alloc] init] autorelease];
+    return [TYVQueue object];
 }
 
 #pragma mark -

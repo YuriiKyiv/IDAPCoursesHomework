@@ -15,53 +15,44 @@
 
 @interface TYVCarManager ()
 @property (nonatomic, retain)   TYVCarwashEnterprise    *enterprise;
-@property (nonatomic, retain)   TYVWasher               *washer;
+@property (nonatomic, retain)   NSTimer                 *timer;
 
 - (void)work;
 
-- (void)workWithWasher;
+- (void)addCarInEnterprise;
 
 @end
 
 @implementation TYVCarManager
 
+@dynamic running;
+
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
+    self.timer = nil;
     self.enterprise = nil;
-    self.washer = nil;
     
     [super dealloc];
 }
 
 - (instancetype)initWithEnterprise:(TYVCarwashEnterprise *)enterprise
                        carCapacity:(NSUInteger)carCapacity
-                              delay:(uint)delay
+                              delay:(NSTimeInterval)delay
 {
     self = [super init];
     if (self) {
         self.enterprise = enterprise;
         self.carCapacity = carCapacity;
         self.delay = delay;
+        
     }
     
     return self;
 }
 
-- (instancetype)initWithWasher:(TYVWasher *)washer
-                   carCapacity:(NSUInteger)carCapacity
-                         delay:(uint)delay
-{
-    self = [self initWithEnterprise:nil carCapacity:carCapacity delay:delay];
-    if (self) {
-        self.washer = washer;
-    }
-    
-    return self;
-}
-
--(instancetype)init {
+- (instancetype)init {
     [self doesNotRecognizeSelector:_cmd];
     [self release];
     
@@ -69,39 +60,52 @@
 }
 
 #pragma mark -
+#pragma mark Accessors
+
+- (BOOL)isRunning {
+    return [self.timer isValid];
+}
+
+- (void)setTimer:(NSTimer *)timer {
+    if (timer != _timer) {
+        if ([_timer isValid]) {
+            [_timer invalidate];
+        }
+        
+        [_timer release];
+        _timer = [timer retain];
+    }
+}
+
+#pragma mark -
 #pragma mark Public Methods
 
 - (void)start {
-    self.running = YES;
-    while (self.isRunning) {
-        [self performSelectorInBackground:@selector(work) withObject:nil];
-        sleep(self.delay);
-    }
-    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.delay
+                                                  target:self
+                                                selector:@selector(work)
+                                                userInfo:nil
+                                                 repeats:YES];
 }
 
-- (void)startWithWasher {
-    self.running = YES;
-    while (self.isRunning) {
-    [self performSelectorInBackground:@selector(workWithWasher) withObject:nil];
-        sleep(self.delay);
-    }
+- (void)stop {
+    self.timer = nil;
 }
 
 #pragma mark -
 #pragma mark Private Methods
 
 - (void)work {
-    TYVCarwashEnterprise *enterprise = self.enterprise;
-    for (int i = 0; i < self.carCapacity; i++) {
-        [enterprise washCar:[TYVCar object]];
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self addCarInEnterprise];
+    });
 }
 
-- (void)workWithWasher {
-    TYVWasher *washer = self.washer;
-    for (int i = 0; i < self.carCapacity; i++) {
-        [washer performWorkWithObject:[TYVCar object]];
+- (void)addCarInEnterprise {
+    TYVCarwashEnterprise *enterprise = self.enterprise;
+    NSUInteger capacity = self.carCapacity;
+    for (int i = 0; i < capacity; i++) {
+        [enterprise washCar:[TYVCar object]];
     }
 }
 

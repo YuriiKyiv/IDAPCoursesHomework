@@ -9,8 +9,14 @@
 #import "TYVEmployeesPool.h"
 #import "TYVEmployee.h"
 
+#import "NSSet+TYVExtentions.h"
+
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableSet    *mutableEmployeesSet;
+
+- (TYVFindObjectBlock)freeEmployeeBlock;
+- (TYVFindObjectBlock)freeEmployeeBlockWithClass:(Class)class;
+- (TYVFindObjectBlock)employeeBlockWithClass:(Class)class;
 
 @end
 
@@ -70,42 +76,19 @@
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
-    @synchronized(self) {
-        __block TYVEmployee *employee = nil;
-        [self.mutableEmployeesSet enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-            employee = obj;
-            if ([employee isMemberOfClass:class] && employee.state == TYVEmployeeDidBecomeFree) {
-                *stop = YES;
-            } else {
-                employee = nil;
-            }
-        }];
-    
-        return employee;
-    }
+    return [self.mutableEmployeesSet objectWithBlock:[self freeEmployeeBlockWithClass:class]];
+}
+
+- (id)freeEmployee {
+    return [self.mutableEmployeesSet objectWithBlock:[self freeEmployeeBlock]];
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
-    @synchronized(self) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(TYVEmployee *evaluatedObject, NSDictionary *bindings) {
-        return ([evaluatedObject isMemberOfClass:class]
-                && evaluatedObject.state == TYVEmployeeDidBecomeFree);
-        }];
-    
-        return [self.mutableEmployeesSet filteredSetUsingPredicate:predicate];
-        
-    }
+    return [self.mutableEmployeesSet objectsWithBlock:[self freeEmployeeBlockWithClass:class]];
 }
 
 - (NSSet *)employeesWithClass:(Class)class {
-    @synchronized(self) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-            return ([evaluatedObject isMemberOfClass:class]);
-        }];
-    
-        return [self.mutableEmployeesSet filteredSetUsingPredicate:predicate];
-        
-    }
+    return [self.mutableEmployeesSet objectWithBlock:[self employeeBlockWithClass:class]];
 }
 
 - (BOOL)containsEmployee:(TYVEmployee *)employee {
@@ -118,6 +101,32 @@
     @synchronized(self) {
         return [self.mutableEmployeesSet count];
     }
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (TYVFindObjectBlock)freeEmployeeBlock {
+    return ^(TYVEmployee *employee) {
+        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
+    };
+}
+
+- (TYVFindObjectBlock)freeEmployeeBlockWithClass:(Class)class {
+    TYVFindObjectBlock result = ^(TYVEmployee *employee) {
+        return (BOOL)([employee isMemberOfClass:class]
+                      && employee.state == TYVEmployeeDidBecomeFree);
+    };
+    
+    return result;
+}
+
+- (TYVFindObjectBlock)employeeBlockWithClass:(Class)class {
+    TYVFindObjectBlock result = ^(TYVEmployee *employee) {
+        return (BOOL)([employee isMemberOfClass:class]);
+    };
+    
+    return result;
 }
 
 @end

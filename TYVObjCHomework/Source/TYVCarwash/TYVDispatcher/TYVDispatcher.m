@@ -15,25 +15,27 @@
 @property (nonatomic, retain) TYVQueue          *processingObjectsQueue;
 @property (nonatomic, retain) TYVEmployeesPool  *handlersPool;
 
+- (void)removeConnections;
+
 @end
 
 @implementation TYVDispatcher
 
 @dynamic handlersSet;
-@dynamic processingObjects;
 
 #pragma mark -
 #pragma mark Initializations and Deallocations
 
 - (void)dealloc {
+    [self removeConnections];
+    
     self.processingObjectsQueue = nil;
     self.handlersPool = nil;
     
     [super dealloc];
 }
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         self.processingObjectsQueue = [TYVQueue queue];
@@ -47,44 +49,58 @@
 #pragma mark Accessors
 
 - (NSSet *)handlersSet {
-    return self.handlersPool.employeesSet;
-}
-
-- (TYVQueue *)processingObjects {
-    return [[self.processingObjectsQueue copy] autorelease];
+    return [self.handlersPool employeesSet];
 }
 
 #pragma mark -
 #pragma Public Methods
 
 - (void)addProcessingObject:(id)object {
-    TYVWasher *washer = [self.handlersPool freeEmployeeWithClass:[TYVWasher class]];
-    if (washer) {
-        [washer performWorkWithObject:object];
-    } else {
-        [self.processingObjectsQueue enqueueObject:object];
-    }
+    [self.processingObjectsQueue enqueueObject:object];
+    [self giveWorkForHandler:[self.handlersPool freeEmployee]];
 }
-
 
 - (void)addHandler:(TYVEmployee *)handler {
-    [self.handlersPool addEmployee:handler];
-    [handler addObserver:self];
+    @synchronized (handler) {
+        [self.handlersPool addEmployee:handler];
+        [handler addObserver:self];
+    }
     
-    if (TYVEmployeeDidBecomeFree == handler.state) {
-        [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+    [self giveWorkForHandler:handler];
+}
+
+- (void)removeHandler:(TYVEmployee *)handler {
+    @synchronized (handler) {
+        if (TYVEmployeeDidBecomeFree == handler.state) {
+            [handler removeObserver:self];
+            [self.handlersPool removeEmployee:handler];
+        }
     }
 }
 
-- (void)removeHandler:(id<TYVEmployeeObserverProtocol>)handler {
-    
+- (void)giveWorkForHandler:(TYVEmployee *)handler {
+    @synchronized (handler) {
+        if (TYVEmployeeDidBecomeFree == handler.state) {
+            [handler performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+        }
+    }
+}
+
+#pragma mark -
+#pragma Private Methods
+
+- (void)removeConnections {
+    NSSet *handlersSet = self.handlersSet;
+    for (TYVEmployee *handler in handlersSet) {
+        [handler removeObserver:self];
+    }
 }
 
 #pragma mark -
 #pragma mark TYVEmployeeObserver
 
-- (void)employeeDidPerformWork:(TYVEmployee *)employee {
-    [employee performWorkWithObject:[self.processingObjectsQueue dequeueObject]];
+- (void)employeeDidBecomeFree:(TYVEmployee *)employee {
+    [self giveWorkForHandler:employee];
 }
 
 @end
