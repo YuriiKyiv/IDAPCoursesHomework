@@ -14,7 +14,9 @@
 @interface TYVEmployeesPool ()
 @property (nonatomic, retain)   NSMutableSet    *mutableEmployeesSet;
 
-- (void)initBlocks;
+- (TYVFindObjectBlock)freeEmployeeBlock;
+- (TYVFindObjectBlock)freeEmployeeBlockWithClass:(Class)class;
+- (TYVFindObjectBlock)employeeBlockWithClass:(Class)class;
 
 @end
 
@@ -44,7 +46,6 @@
     self = [super init];
     if (self) {
         self.mutableEmployeesSet = [NSMutableSet set];
-        [self initBlocks];
     }
     
     return self;
@@ -75,29 +76,19 @@
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
-    return [self.mutableEmployeesSet objectWithBlock:^(TYVEmployee *employee) {
-        return (BOOL)([employee isMemberOfClass:class]
-                      && employee.state == TYVEmployeeDidBecomeFree);
-    }];
+    return [self.mutableEmployeesSet objectWithBlock:[self freeEmployeeBlockWithClass:class]];
 }
 
 - (id)freeEmployee {
-    return [self.mutableEmployeesSet objectWithBlock:^(TYVEmployee *employee) {
-        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
-    }];
+    return [self.mutableEmployeesSet objectWithBlock:[self freeEmployeeBlock]];
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
-    return [self.mutableEmployeesSet objectsWithBlock:^(TYVEmployee *employee) {
-        return (BOOL)([employee isMemberOfClass:class]
-                      && employee.state == TYVEmployeeDidBecomeFree);
-    }];
+    return [self.mutableEmployeesSet objectsWithBlock:[self freeEmployeeBlockWithClass:class]];
 }
 
 - (NSSet *)employeesWithClass:(Class)class {
-    return [self.mutableEmployeesSet objectWithBlock:^(TYVEmployee *employee) {
-        return (BOOL)([employee isMemberOfClass:class]);
-    }];
+    return [self.mutableEmployeesSet objectWithBlock:[self employeeBlockWithClass:class]];
 }
 
 - (BOOL)containsEmployee:(TYVEmployee *)employee {
@@ -115,21 +106,27 @@
 #pragma mark -
 #pragma mark Private Methods
 
-- (void)initBlocks {
-//    TYVFindObjectBlock employeeClassBlock = ^(TYVEmployee *employee) {
-//        return (BOOL)([employee isMemberOfClass:class]
-//                      && employee.state == TYVEmployeeDidBecomeFree);
-//    };
-    
-//    TYVFindObjectBlock employeeBlock = ^(TYVEmployee *employee) {
-//        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
-//    };
-}
-
 - (TYVFindObjectBlock)freeEmployeeBlock {
     return ^(TYVEmployee *employee) {
         return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
     };
+}
+
+- (TYVFindObjectBlock)freeEmployeeBlockWithClass:(Class)class {
+    TYVFindObjectBlock result = ^(TYVEmployee *employee) {
+        return (BOOL)([employee isMemberOfClass:class]
+                      && employee.state == TYVEmployeeDidBecomeFree);
+    };
+    
+    return result;
+}
+
+- (TYVFindObjectBlock)employeeBlockWithClass:(Class)class {
+    TYVFindObjectBlock result = ^(TYVEmployee *employee) {
+        return (BOOL)([employee isMemberOfClass:class]);
+    };
+    
+    return result;
 }
 
 @end
