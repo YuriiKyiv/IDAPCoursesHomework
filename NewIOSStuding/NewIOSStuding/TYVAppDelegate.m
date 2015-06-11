@@ -1,22 +1,25 @@
 //
-//  AppDelegate.m
+//  TYVAppDelegate.m
 //  NewIOSStuding
 //
 //  Created by YURII on 11.06.15.
 //  Copyright (c) 2015 YURII. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "TYVAppDelegate.h"
 
-@interface AppDelegate ()
+@interface TYVAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation TYVAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window = window;
+    window.backgroundColor = [UIColor yellowColor];
+    
     return YES;
 }
 

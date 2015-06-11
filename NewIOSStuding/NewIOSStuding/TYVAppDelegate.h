@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TYVAppDelegate.h
 //  NewIOSStuding
 //
 //  Created by YURII on 11.06.15.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TYVAppDelegate : UIResponder <UIApplicationDelegate>
+@property (strong, nonatomic) UIWindow *window;
 
 @end
 
