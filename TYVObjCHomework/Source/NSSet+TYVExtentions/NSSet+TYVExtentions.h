@@ -12,8 +12,8 @@ typedef BOOL(^TYVFindObjectBlock)(id);
 
 @interface NSSet (TYVExtentions)
 
-- (id)findObjectWithBlock:(TYVFindObjectBlock)block;
+- (id)objectWithBlock:(TYVFindObjectBlock)block;
 
-- (NSSet *)findObjectsWithBlock:(TYVFindObjectBlock)block;
+- (NSSet *)objectsWithBlock:(TYVFindObjectBlock)block;
 
 @end

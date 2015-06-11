@@ -13,7 +13,7 @@
 #pragma mark -
 #pragma mark Public Methods
 
-- (id)findObjectWithBlock:(TYVFindObjectBlock)block {
+- (id)objectWithBlock:(TYVFindObjectBlock)block {
     @synchronized(self) {
         __block id object = nil;
         [self enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
@@ -29,7 +29,7 @@
     }
 }
 
-- (NSSet *)findObjectsWithBlock:(TYVFindObjectBlock)block {
+- (NSSet *)objectsWithBlock:(TYVFindObjectBlock)block {
     @synchronized (self) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
             return block(evaluatedObject);

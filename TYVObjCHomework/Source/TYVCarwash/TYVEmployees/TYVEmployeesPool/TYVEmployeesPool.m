@@ -75,27 +75,27 @@
 }
 
 - (id)freeEmployeeWithClass:(Class)class {
-    return [self.mutableEmployeesSet findObjectWithBlock:^(TYVEmployee *employee) {
+    return [self.mutableEmployeesSet objectWithBlock:^(TYVEmployee *employee) {
         return (BOOL)([employee isMemberOfClass:class]
                       && employee.state == TYVEmployeeDidBecomeFree);
     }];
 }
 
 - (id)freeEmployee {
-    return [self.mutableEmployeesSet findObjectWithBlock:^(TYVEmployee *employee) {
+    return [self.mutableEmployeesSet objectWithBlock:^(TYVEmployee *employee) {
         return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
     }];
 }
 
 - (NSSet *)freeEmployeesWithClass:(Class)class {
-    return [self.mutableEmployeesSet findObjectsWithBlock:^(TYVEmployee *employee) {
+    return [self.mutableEmployeesSet objectsWithBlock:^(TYVEmployee *employee) {
         return (BOOL)([employee isMemberOfClass:class]
                       && employee.state == TYVEmployeeDidBecomeFree);
     }];
 }
 
 - (NSSet *)employeesWithClass:(Class)class {
-    return [self.mutableEmployeesSet findObjectWithBlock:^(TYVEmployee *employee) {
+    return [self.mutableEmployeesSet objectWithBlock:^(TYVEmployee *employee) {
         return (BOOL)([employee isMemberOfClass:class]);
     }];
 }
@@ -124,6 +124,12 @@
 //    TYVFindObjectBlock employeeBlock = ^(TYVEmployee *employee) {
 //        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
 //    };
+}
+
+- (TYVFindObjectBlock)freeEmployeeBlock {
+    return ^(TYVEmployee *employee) {
+        return (BOOL)(employee.state == TYVEmployeeDidBecomeFree);
+    };
 }
 
 @end
