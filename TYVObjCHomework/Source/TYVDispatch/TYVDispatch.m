@@ -13,7 +13,7 @@
 #pragma mark -
 #pragma mark Public Implementations
 
-void TYVDispatchSyncOnMainQueueBlock(TYVBlock block) {
+void TYVDispatchSyncOnMainQueueWithBlock(TYVBlock block) {
     if ([NSThread isMainThread]) {
         block();
     } else {

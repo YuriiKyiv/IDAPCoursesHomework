@@ -56,7 +56,7 @@
         if (_state != state) {
             _state = state;
             
-            TYVDispatchSyncOnMainQueueBlock(^{[self notify];});
+            TYVDispatchSyncOnMainQueueWithBlock(^{[self notify];});
         }
     }
 }
