@@ -114,8 +114,8 @@
 
 - (TYVFindObjectBlock)freeEmployeeBlockWithClass:(Class)class {
     TYVFindObjectBlock result = ^(TYVEmployee *employee) {
-        return (BOOL)([employee isMemberOfClass:class]
-                      && employee.state == TYVEmployeeDidBecomeFree);
+        return (BOOL)([self employeeBlockWithClass:class]
+                      && [self freeEmployeeBlock]);
     };
     
     return result;
@@ -123,7 +123,7 @@
 
 - (TYVFindObjectBlock)employeeBlockWithClass:(Class)class {
     TYVFindObjectBlock result = ^(TYVEmployee *employee) {
-        return (BOOL)([employee isMemberOfClass:class]);
+        return ([employee isMemberOfClass:class]);
     };
     
     return result;
