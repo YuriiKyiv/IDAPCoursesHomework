@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:NewIOSStuding/NewIOSStuding.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:IOSStuding/IOSStuding.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:IDAPCoursesHomework.xcodeproj">
    </FileRef>
    <FileRef
